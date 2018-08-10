@@ -5,6 +5,7 @@
       <!-- <button @click="download" >Download</button> -->
       <!-- <h2>Wallpapers</h2> -->
       <titlex title="Wallpapers" />
+      <menu-circles :tags="tags" />
       <posts section="vuejs" :posts="posts" />
 
     </div>
@@ -14,35 +15,83 @@
 <script>
 import posts from '../components/posts.vue'
 import titlex from '../components/titlex.vue'
+import menuCircles from '../components/Menucircles.vue'
 import firebase from 'firebase'
-var config = {
-  apiKey: 'AIzaSyBURF6gU0jbqODrtH68DRWhJ1DK0Az_LTU',
-  authDomain: 'lusaxweb-assets.firebaseapp.com',
-  databaseURL: 'https://lusaxweb-assets.firebaseio.com',
-  projectId: 'lusaxweb-assets',
-  storageBucket: 'lusaxweb-assets.appspot.com',
-  messagingSenderId: '591909134078'
-}
-firebase.initializeApp(config)
+
 export default {
   components: {
     posts,
-    titlex
+    titlex,
+    menuCircles
   },
   data: () => ({
     name: 'hola',
     posts: [],
-    srcx: ''
+    tags: [],
+    tagsActive: []
   }),
+  watch: {
+    tagsActive () {
+      console.log('tagsActive', this.tagsActive)
+      let self = this
+      var starCountRef = firebase.database().ref('posts/vuejs')
+      starCountRef.once('value', function (snapshot) {
+        console.log('snapshot.val()>>', snapshot.val())
+        let posts = snapshot.val()
+        if (self.tagsActive.length > 0) {
+          for (const key in posts) {
+            let tags = posts[key].tags.split(',')
+            let valid = 0
+            tags.forEach(item => {
+              console.log('itemmmm', item)
+              console.log('>>>',posts[key].tags, '____________', self.tagsActive.includes(item.trim()))
+              if (self.tagsActive.includes(item.trim())) {
+                valid++
+              }
+            })
+            // console.log(valid, tags.length)
+            if (valid === 0) {
+              // console.log('key>>>>>',key)
+              // posts[key].noDelete = true
+              delete posts[key]
+            }
+          }
+        }
+        console.log(posts)
+        self.posts = posts
+      })
+    }
+  },
+  // computed: {
+
+  // },
   mounted () {
     let self = this
     var starCountRef = firebase.database().ref('posts/vuejs')
     starCountRef.on('value', function (snapshot) {
-      console.log(snapshot.val())
+      console.log('snapshot.val()>>', snapshot.val())
       self.posts = snapshot.val()
+      self.getTags()
     })
   },
   methods: {
+    // filterPosts () {
+    //   this.
+    // },
+    getTags () {
+      let posts = this.posts
+      let tags = []
+      console.log('posts>>',posts)
+      for (const key in posts) {
+        let tagsx = posts[key].tags.split(',')
+        tagsx.forEach(item => {
+          if (!tags.includes(item.trim())) {
+            tags.push(item.trim())
+          }
+        })
+      }
+      this.tags = tags
+    },
     download () {
       // let self = this
       // var storage = firebase.storage()

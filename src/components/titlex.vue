@@ -5,14 +5,14 @@
       opacity: opacityx
     }"
     class="con-title">
-    <span
+    <!-- <span
       :key="index"
       v-for="(effect,index) in 6"
       :style="{
         transform: `translate(${index%2?'+':'-'}${mousex / (index + 1) * 0.03}px, ${index%2?'-':'+'}${mousey / (index + 1) * 0.03}px)`
       }"
       :class="`effect-${index+1}`"
-      class="effect"></span>
+      class="effect"></span> -->
     <h3>{{ title }}</h3>
   </div>
 </template>
@@ -38,7 +38,6 @@ export default {
     moseMove (evt) {
       let x = evt.clientX
       let y = evt.clientY
-      console.log(x)
       this.mousex = x
       this.mousey = y
     },
@@ -60,16 +59,21 @@ export default {
 <style lang="stylus">
 .con-title
   height 18rem;
+  padding-top 3rem
   font-size 2rem
   display flex
   align-items center
-  justify-content center
+  justify-content flex-start
   position relative
   width 100%
   h3
     z-index 100
     position relative
     letter-spacing 2px
+    font-size 9rem
+    color rgba(255,255,255,.02)
+    text-align left
+    transform translate(-5%)
   .effect
     position absolute
     left 0px;

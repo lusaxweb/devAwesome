@@ -13,8 +13,18 @@ export default {
     navx
   },
   mounted () {
-    console.log('hola')
     window.addEventListener('scroll', this.scrollApp)
+  },
+  updated () {
+    this.$firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in.
+        this.$store.state.user = user
+      } else {
+        // No user is signed in.
+        this.$store.state.user = null
+      }
+    })
   },
   methods: {
     scrollApp (evt) {
@@ -33,13 +43,35 @@ export default {
 }
 </script>
 <style lang="stylus">
-* {
+@font-face {
+  font-family: "Poppins-bold";
+  src: url("./assets/fonts/Poppins-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins-semi-bold";
+  src: url("./assets/fonts/Poppins-SemiBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "OpenSans";
+  src: url("./assets/fonts/OpenSans-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+*
   margin 0px;
   padding 0px
   list-style none
   outline none
   text-decoration none
-}
+  font-family OpenSans
+
+h1,h2,h3
+  font-family Poppins-semi-bold !important
+  // font-weight bold !important
 button
   border 0px;
   cursor pointer
