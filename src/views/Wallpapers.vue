@@ -7,6 +7,7 @@
       <titlex title="Wallpapers" />
       <menu-circles :tags="tags" />
       <posts section="vuejs" :posts="posts" />
+      <footerx />
 
     </div>
     <router-view/>
@@ -16,13 +17,15 @@
 import posts from '../components/posts.vue'
 import titlex from '../components/titlex.vue'
 import menuCircles from '../components/Menucircles.vue'
+import footerx from '../components/Footer.vue'
 import firebase from 'firebase'
 
 export default {
   components: {
     posts,
     titlex,
-    menuCircles
+    menuCircles,
+    footerx
   },
   data: () => ({
     name: 'hola',

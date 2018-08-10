@@ -130,6 +130,7 @@ export default {
     .con-logo
       font-size 1rem !important
       padding-top 0px !important
+      padding-right 40px
     a
       padding-top 15px !important
       padding-bottom 15px !important

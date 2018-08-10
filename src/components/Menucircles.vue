@@ -49,11 +49,24 @@ export default {
       this.$parent.tagsActive = this.tagsActive
     }
   },
-  mounted () {
+  updated () {
+    let ul = this.$refs.ulx
     this.$nextTick(()=>{
-      let ul = this.$refs.ulx
       if (ul.scrollWidth > ul.offsetWidth) {
         this.activeArrows = true
+      } else {
+        this.activeArrows = false
+      }
+    })
+  },
+  mounted () {
+    let self = this
+    let ul = self.$refs.ulx
+    window.addEventListener('resize', () => {
+      if (ul.scrollWidth > ul.offsetWidth) {
+        self.activeArrows = true
+      } else {
+        self.activeArrows = false
       }
     })
   },
@@ -170,6 +183,9 @@ export default {
       border-bottom 1px solid $fondo3
       transition all .25s ease
       user-select none
+      text-transform capitalize
+      &:hover
+        color rgba(255,255,255,1)
       &.activeTag
         color rgba(255,255,255,1)
         &:after
@@ -199,6 +215,5 @@ export default {
         position absolute
         transform translate(-50%, 50%)
         transition all .25s ease
-
 
 </style>

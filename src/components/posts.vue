@@ -1,38 +1,40 @@
 <template>
   <div class="con-posts">
-    <div
-      :key="index"
-      v-for="(post,index) in Object.keys(posts)"
-      class="post">
-      <div class="con-img-post">
-        <img class="img-post" :src="posts[post].src" alt="">
-      </div>
-      <header>
-      </header>
-      <footer>
-        <div>
-        <h4>{{ posts[post].title }}</h4>
-        <p>{{ posts[post].description }}</p>
-        <!-- <span> {{ posts[post].tags }} </span> -->
-
+    <transition-group name="posts">
+      <div
+        :key="index"
+        v-for="(post,index) in Object.keys(posts)"
+        class="post">
+        <div class="con-img-post">
+          <img class="img-post" :src="posts[post].src" alt="">
         </div>
-        <div class="con-btns">
-        <button class="btn-download" @click="downloadsAdd(post,posts[post])">
-         <i class="material-icons">
-          get_app
-         </i>
-         <span>{{ posts[post].downloads }}</span>
+        <header>
+        </header>
+        <footer>
+          <div>
+          <h4>{{ posts[post].title }}</h4>
+          <p>{{ posts[post].description }}</p>
+          <!-- <span> {{ posts[post].tags }} </span> -->
 
-         </button>
-         <button class="btn-like" @click="addlike(post,posts[post])">
-            <i class="material-icons">
-              favorite
-            </i>
-          <span>{{ posts[post].likes }}</span>
+          </div>
+          <div class="con-btns">
+          <button class="btn-download" @click="downloadsAdd(post,posts[post])">
+          <i class="material-icons">
+            get_app
+          </i>
+          <span>{{ posts[post].downloads }}</span>
+
           </button>
-        </div>
-      </footer>
-    </div>
+          <button class="btn-like" @click="addlike(post,posts[post])">
+              <i class="material-icons">
+                favorite
+              </i>
+            <span>{{ posts[post].likes }}</span>
+            </button>
+          </div>
+        </footer>
+      </div>
+    </transition-group>
   </div>
 </template>
 <script>
@@ -58,18 +60,26 @@ export default {
 </script>
 <style lang="stylus">
 @require '../config'
+
+.posts-enter-active, .posts-leave-active {
+  transition: all ease .3s;
+}
+.posts-enter, .posts-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform scale(.8) translate(0,30px)
+}
+
 .con-posts
   padding 10px
   overflow hidden
-  height 2000px
+  // height 2000px
   .post
     background $fondo2
     border-radius 8px;
     width 100%;
-    max-width calc(25% - 16px);
+    max-width calc(20% - 20px);
     float left
-    margin 8px;
-    // overflow hidden
+    margin 10px;
     box-shadow 0px 6px 20px 0px rgba(0,0,0,.1)
     color rgb(255,255,255)
     cursor pointer
@@ -108,6 +118,7 @@ export default {
         font-size .6rem
         position relative
         z-index 10
+        text-align left
       .con-btns
         display flex
         align-items center
@@ -170,4 +181,23 @@ export default {
         position relative
         display block
         transform scale(1.3)
+
+@media only screen and (max-width: 1400px)
+  .post
+    max-width calc(25% - 20px) !important
+
+@media only screen and (max-width: 1200px)
+  .post
+    max-width calc(33% - 20px) !important
+
+@media only screen and (max-width: 850px)
+  .post
+    max-width calc(50% - 20px) !important
+
+@media only screen and (max-width: 600px)
+  .post
+    margin-left 20px !important
+    margin-right 20px !important
+    max-width calc(100% - 40px) !important
+
 </style>

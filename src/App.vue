@@ -43,6 +43,20 @@ export default {
 }
 </script>
 <style lang="stylus">
+@require './config'
+
+*::-webkit-scrollbar
+  width: 5px;
+  height: 5px;
+  background: $fondo
+
+*::-webkit-scrollbar-thumb
+  background: alpha($primary, .5)
+  border-radius: 5px;
+
+*::-webkit-scrollbar-thumb:hover
+  background $primary
+
 @font-face {
   font-family: "Poppins-bold";
   src: url("./assets/fonts/Poppins-Bold.ttf") format("truetype");
@@ -69,7 +83,7 @@ export default {
   text-decoration none
   font-family OpenSans
 
-h1,h2,h3
+h1,h2,h3,h4,h5,h6
   font-family Poppins-semi-bold !important
   // font-weight bold !important
 button
@@ -82,4 +96,6 @@ button
   text-align: center;
   color: rgb(255,255,255)
   background rgb(34, 30, 51)
+  width 100%
+  overflow-x hidden
 </style>
