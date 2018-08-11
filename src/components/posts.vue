@@ -4,6 +4,7 @@
       <div
         :key="index"
         v-for="(post,index) in Object.keys(posts)"
+        @click="openPost(posts[post])"
         class="post">
         <div class="con-img-post">
           <img class="img-post" :src="posts[post].src" alt="">
@@ -49,6 +50,10 @@ export default {
     }
   },
   methods: {
+    openPost (post) {
+      this.$store.state.view.post = post
+      this.$store.state.view.active = true
+    },
     downloadsAdd (name, post) {
       this.$firebase.database().ref('posts/' + this.section).child(name + '/downloads').set(post.downloads + 1)
     },

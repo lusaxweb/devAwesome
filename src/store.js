@@ -6,6 +6,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     posts: [],
+    view: {
+      post: {},
+      active: false
+    },
     user: null,
     tags: [
       'Vue.js',

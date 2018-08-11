@@ -37,7 +37,7 @@ export default {
     tagsActive () {
       console.log('tagsActive', this.tagsActive)
       let self = this
-      var starCountRef = firebase.database().ref('posts/vuejs')
+      var starCountRef = firebase.database().ref('posts/wallpapers')
       starCountRef.once('value', function (snapshot) {
         console.log('snapshot.val()>>', snapshot.val())
         let posts = snapshot.val()
@@ -70,7 +70,7 @@ export default {
   // },
   mounted () {
     let self = this
-    var starCountRef = firebase.database().ref('posts/vuejs')
+    var starCountRef = firebase.database().ref('posts/wallpapers')
     starCountRef.on('value', function (snapshot) {
       console.log('snapshot.val()>>', snapshot.val())
       self.posts = snapshot.val()

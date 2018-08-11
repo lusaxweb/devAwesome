@@ -1,16 +1,23 @@
 <template>
-  <div id="app">
+  <div
+    :class="{
+      'hiddenScroll': $store.state.view.active
+    }"
+    id="app">
     <navx />
     <div class="con-app">
       <router-view/>
     </div>
+    <viewx v-if="$store.state.view.active" />
   </div>
 </template>
 <script>
 import navx from './components/nav.vue'
+import viewx from './components/view.vue'
 export default {
   components:{
-    navx
+    navx,
+    viewx
   },
   mounted () {
     window.addEventListener('scroll', this.scrollApp)
@@ -82,6 +89,7 @@ export default {
   outline none
   text-decoration none
   font-family OpenSans
+  box-sizing border-box
 
 h1,h2,h3,h4,h5,h6
   font-family Poppins-semi-bold !important
@@ -89,6 +97,10 @@ h1,h2,h3,h4,h5,h6
 button
   border 0px;
   cursor pointer
+
+body
+  overflow hidden
+
 #app
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -97,5 +109,9 @@ button
   color: rgb(255,255,255)
   background rgb(34, 30, 51)
   width 100%
+  overflow auto
   overflow-x hidden
+  height 100vh
+  &.hiddenScroll
+    overflow hidden !important
 </style>
