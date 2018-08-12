@@ -1,125 +1,152 @@
 <template>
-  <div class="con-view">
-    <header>
-      <h3>{{ post.title }}</h3>
-      <button @click="close()">
-        <i class="material-icons">
-          clear
-        </i>
-      </button>
-    </header>
-    <div class="view">
-      <div class="con-img-view">
-        <div class="img-view">
-          <img :src="post.src" alt="">
-        </div>
-
-        <div class="con-similar-posts">
-          <ul>
-            <li>
-              hola soy similar :)
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="con-description-view">
-        <div class="con-user-view">
-          <div class="text-user">
-            <div class="con-img-user-view">
-              <img :src="post.user.src" alt="">
-            </div>
-            <p>{{ post.user.name }}</p>
+  <transition name="view">
+    <div class="con-view">
+      <header>
+        <h3>{{ post.title }}</h3>
+        <button @click="close()">
+          <i class="material-icons">
+            clear
+          </i>
+        </button>
+      </header>
+      <div class="view">
+        <div class="con-img-view">
+          <div class="img-view">
+            <img :src="post.src" alt="">
           </div>
-          <button class="btn-follow">Follow</button>
+
+          <div class="con-similar-posts">
+            <ul>
+              <li>
+                <!-- hola soy similar :) -->
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div class="con-interaction-view">
-          <button>
-            <i class="material-icons">
-              favorite
-            </i>
-            Like
-          </button>
-          <button>
-            <i class="material-icons">
-              get_app
-            </i>
-            Download
-          </button>
-          <button class="btn-share">
-            <i class="material-icons">
-              share
-            </i>
-          </button>
-          <button class="btn-mark">
-            <i class="material-icons">
-              bookmark_border
-            </i>
-          </button>
-        </div>
+        <div class="con-description-view">
+          <div class="con-user-view">
+            <div class="text-user">
+              <div class="con-img-user-view">
+                <img :src="post.user.src" alt="">
+              </div>
+              <p>{{ post.user.name }}</p>
+            </div>
+            <button class="btn-follow">Follow</button>
+          </div>
 
-        <div class="con-values">
-          <ul>
-            <li>
-              <i class="material-icons">
-                visibility
-              </i>
-              {{ post.views }}
-            </li>
-            <li>
+          <div class="con-interaction-view">
+            <button>
               <i class="material-icons">
                 favorite
               </i>
-              {{ post.likes }}
-            </li>
-            <li>
+              Like
+            </button>
+            <button>
               <i class="material-icons">
                 get_app
               </i>
-              {{ post.downloads }}
-            </li>
-          </ul>
-        </div>
-
-        <div class="con-comments">
-          <h5>Comments</h5>
-          <div class="add-comment">
-            <textarea placeholder="Your comment" name="" id="" cols="30" rows="10"></textarea>
+              Download
+            </button>
+            <button class="btn-share">
+              <i class="material-icons">
+                share
+              </i>
+            </button>
+            <button class="btn-mark">
+              <i class="material-icons">
+                bookmark_border
+              </i>
+            </button>
           </div>
 
-          <ul class="comments">
-            <li
-              :key="index"
-              v-for="(comment, index) in post.comments">
-              <header>
-                <img :src="comment.src" alt="">
-                <div>
-                  <h5>{{ comment.name }}</h5>
-                  <!-- <p>Berlin, alemania</p> -->
-                </div>
-              </header>
-              <p>
-                {{ comment.comment }}
-              </p>
-            </li>
-          </ul>
+          <div class="con-values">
+            <ul>
+              <li>
+                <i class="material-icons">
+                  visibility
+                </i>
+                {{ post.views }}
+              </li>
+              <li>
+                <i class="material-icons">
+                  favorite
+                </i>
+                {{ post.likes }}
+              </li>
+              <li>
+                <i class="material-icons">
+                  get_app
+                </i>
+                {{ post.downloads }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="con-comments">
+            <h5>Comments</h5>
+            <div class="add-comment">
+              <textarea
+                v-model="commentx"
+                @keypress.enter.prevent="sendComment(post)"
+                placeholder="Your comment"></textarea>
+            </div>
+
+            <ul class="comments">
+              <li
+                :key="index"
+                v-for="(comment, index) in post.comments">
+                <header>
+                  <img :src="comment.src" alt="">
+                  <div>
+                    <h5>{{ comment.name }}</h5>
+                    <!-- <p>Berlin, alemania</p> -->
+                  </div>
+                </header>
+                <p>
+                  {{ comment.comment }}
+                </p>
+              </li>
+            </ul>
+          </div>
+          <!-- {{ post }} -->
         </div>
-        <!-- {{ post }} -->
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
+  data: () => ({
+    commentx: ''
+  }),
   computed: {
     post () {
       return this.$store.state.view.post
     }
   },
   methods: {
+    sendComment (post) {
+
+      let self = this
+      console.log('post>>>', this.$store.state.user)
+
+      this.$firebase.database().ref('posts/' + this.$router.currentRoute.name).child(post.namePost + '/comments').push({
+        name: self.$store.state.user.displayName,
+        src: self.$store.state.user.photoURL,
+        comment: self.commentx
+      })
+      this.$firebase.database().ref('posts/' + this.$router.currentRoute.name).child(post.namePost).on('value', (snapshot) => {
+        console.log(snapshot.val())
+        this.$store.state.view.post = {
+          ...snapshot.val(),
+          namePost: post.namePost
+        }
+      })
+      this.commentx = ''
+    },
     close () {
       this.$store.state.view.active = false
       document.querySelector('body').style = 'overflow: auto'
@@ -131,6 +158,17 @@ export default {
 <style lang="stylus">
 @require '../config'
 
+.view-enter-active, .view-leave-active {
+  transition: all .3s;
+}
+.view-enter, .view-leave-to
+  opacity: 0;
+  .img-view
+    transform scale(.7)
+  .con-description-view
+    transform scale(.7)
+  .con-similar-posts
+    transform scale(.7)
 .con-view
   position fixed
   left 0px
@@ -177,6 +215,7 @@ export default {
       background $fondo2
       margin-bottom 20px
       border-radius 8px
+      transition all .3s ease
       img
         border-radius 8px
         min-width 800px
@@ -190,6 +229,7 @@ export default {
       height 160px;
       background $fondo2
       border-radius 8px
+      transition all .3s ease
 
   .con-description-view
     float left
@@ -200,11 +240,19 @@ export default {
     padding 10px
     box-sizing border-box
     margin-top 0px
+    transition all .3s ease
+    overflow auto
+    max-height calc(100% - 80px)
 
     .con-comments
       padding 10px
+      position relative
+      display block
       .comments
         width 100%
+        overflow auto
+        position relative
+        display block
         li
           padding 10px
           border-bottom 1px solid rgba(255,255,255,.05)

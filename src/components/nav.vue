@@ -73,7 +73,7 @@ export default {
         // // The signed-in user info.
         // var user = result.user;
         // // ...
-        console.log(result)
+        console.log('result', result.user.uid)
       }).catch(function (error) {
         // Handle Errors here.
         // var errorCode = error.code;
@@ -84,7 +84,7 @@ export default {
         // var credential = error.credential;
         // ...
         console.log('error', error)
-      });
+      })
     },
     scrollApp () {
       let scrollTopx = document.documentElement.scrollTop

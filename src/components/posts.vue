@@ -4,7 +4,7 @@
       <div
         :key="index"
         v-for="(post,index) in Object.keys(posts)"
-        @click="openPost(posts[post])"
+        @click="openPost(posts[post], post)"
         class="post">
         <div class="con-img-post">
           <img class="img-post" :src="posts[post].src" alt="">
@@ -50,7 +50,8 @@ export default {
     }
   },
   methods: {
-    openPost (post) {
+    openPost (post, namePost) {
+      post.namePost = namePost
       this.$store.state.view.post = post
       this.$store.state.view.active = true
       document.querySelector('body').style = 'overflow: hidden'

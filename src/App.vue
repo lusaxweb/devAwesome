@@ -17,25 +17,44 @@ import navx from './components/nav.vue'
 import viewx from './components/view.vue'
 import footerx from './components/Footer.vue'
 export default {
-  components:{
+  components: {
     navx,
     viewx,
     footerx
   },
   mounted () {
     window.addEventListener('scroll', this.scrollApp)
-  },
-  updated () {
+
     this.$firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in.
+        console.log(user)
         this.$store.state.user = user
+        let userRef = this.$firebase.database().ref('users/' + user.uid)
+        userRef.set({
+          name: user.displayName,
+          email: user.email,
+          uid: user.uid,
+          emailVerified: user.emailVerified,
+          photoURL: user.photoURL
+        })
       } else {
+        console.log('>>>No user>>')
         // No user is signed in.
-        this.$store.state.user = null
       }
     })
   },
+  // updated () {
+  //   this.$firebase.auth().onAuthStateChanged((user) => {
+  //     if (user) {
+  //       // User is signed in.
+  //       this.$store.state.user = user
+  //     } else {
+  //       // No user is signed in.
+  //       this.$store.state.user = null
+  //     }
+  //   })
+  // },
   methods: {
     scrollApp (evt) {
       let posts = document.querySelectorAll('.post')
@@ -61,7 +80,7 @@ export default {
   background: $fondo
 
 *::-webkit-scrollbar-thumb
-  background: alpha($primary, .5)
+  background: $fondo3
   border-radius: 5px;
 
 *::-webkit-scrollbar-thumb:hover
