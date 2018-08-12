@@ -2,7 +2,7 @@
   <div class="con-view">
     <header>
       <h3>{{ post.title }}</h3>
-      <button @click="$store.state.view.active = false">
+      <button @click="close()">
         <i class="material-icons">
           clear
         </i>
@@ -117,6 +117,12 @@ export default {
   computed: {
     post () {
       return this.$store.state.view.post
+    }
+  },
+  methods: {
+    close () {
+      this.$store.state.view.active = false
+      document.querySelector('body').style = 'overflow: auto'
     }
   }
 }

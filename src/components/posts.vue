@@ -9,8 +9,6 @@
         <div class="con-img-post">
           <img class="img-post" :src="posts[post].src" alt="">
         </div>
-        <header>
-        </header>
         <footer>
           <div>
           <h4>{{ posts[post].title }}</h4>
@@ -35,10 +33,12 @@
           </div>
         </footer>
       </div>
+
     </transition-group>
   </div>
 </template>
 <script>
+
 export default {
   props: {
     posts: {
@@ -53,6 +53,7 @@ export default {
     openPost (post) {
       this.$store.state.view.post = post
       this.$store.state.view.active = true
+      document.querySelector('body').style = 'overflow: hidden'
     },
     downloadsAdd (name, post) {
       this.$firebase.database().ref('posts/' + this.section).child(name + '/downloads').set(post.downloads + 1)

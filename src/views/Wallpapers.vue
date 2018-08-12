@@ -7,6 +7,7 @@
       <titlex title="Wallpapers" />
       <menu-circles :tags="tags" />
       <posts section="vuejs" :posts="posts" />
+      <Carbon />
       <footerx />
 
     </div>
@@ -14,6 +15,7 @@
   </div>
 </template>
 <script>
+import Carbon from '../components/Carbon.vue'
 import posts from '../components/posts.vue'
 import titlex from '../components/titlex.vue'
 import menuCircles from '../components/Menucircles.vue'
@@ -25,7 +27,8 @@ export default {
     posts,
     titlex,
     menuCircles,
-    footerx
+    footerx,
+    Carbon
   },
   data: () => ({
     name: 'hola',

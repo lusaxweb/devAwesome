@@ -5,18 +5,12 @@
       opacity: opacityx
     }"
     class="con-title">
-    <!-- <span
-      :key="index"
-      v-for="(effect,index) in 6"
-      :style="{
-        transform: `translate(${index%2?'+':'-'}${mousex / (index + 1) * 0.03}px, ${index%2?'-':'+'}${mousey / (index + 1) * 0.03}px)`
-      }"
-      :class="`effect-${index+1}`"
-      class="effect"></span> -->
     <h3>{{ title }}</h3>
+
   </div>
 </template>
 <script>
+
 export default {
   props: {
     title: {

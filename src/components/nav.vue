@@ -52,6 +52,7 @@ export default {
     setTimeout(() => {
       this.outLink()
     }, 300)
+    let app = document.querySelector('#app')
     window.addEventListener('scroll', this.scrollApp)
   },
   methods: {

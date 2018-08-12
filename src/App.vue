@@ -98,8 +98,8 @@ button
   border 0px;
   cursor pointer
 
-body
-  overflow hidden
+// body
+  // overflow hidden
 
 #app
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -111,7 +111,7 @@ body
   width 100%
   overflow auto
   overflow-x hidden
-  height 100vh
+  // height 100vh
   &.hiddenScroll
     overflow hidden !important
 </style>
