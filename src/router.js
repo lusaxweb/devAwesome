@@ -14,10 +14,32 @@ export default new Router({
     {
       path: '/wallpapers',
       name: 'wallpapers',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Wallpapers.vue')
+      component: () => import('./views/Wallpapers.vue')
+    },
+    {
+      path: '/icons',
+      name: 'icons',
+      component: () => import('./views/Icons.vue')
+    },
+    {
+      path: '/stikers',
+      name: 'Stikers',
+      component: () => import('./views/Stikers.vue')
+    },
+    {
+      path: '/emoji',
+      name: 'emoji',
+      component: () => import('./views/Emoji.vue')
+    },
+    {
+      path: '/more',
+      name: 'more',
+      component: () => import('./views/More.vue')
+    },
+    {
+      path: '/points',
+      name: 'points',
+      component: () => import('./views/Points.vue')
     }
   ]
 })

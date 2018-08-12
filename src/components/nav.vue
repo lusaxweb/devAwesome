@@ -11,10 +11,10 @@
 
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/wallpapers"><span>Wallpapers</span></router-link>
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/Icons"><span>Icons</span></router-link>
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/strikers"><span>Strikers</span></router-link>
+      <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/stikers"><span>Stikers</span></router-link>
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/emoji"><span>Emoji</span></router-link>
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/more"><span>More</span></router-link>
-      <router-link class="icon" @mouseout.native="outLink" @mouseover.native="clickLink" to="/more">
+      <router-link class="icon" @mouseout.native="outLink" @mouseover.native="clickLink" to="/points">
         <span class="material-icons">
           more_horiz
         </span>
@@ -136,7 +136,7 @@ export default {
       padding-top 15px !important
       padding-bottom 15px !important
       &.icon
-        padding-top 10px !important
+        padding-top 12px !important
         padding-bottom 10px !important
       span
        padding-top 0px !important
@@ -153,6 +153,7 @@ export default {
       width 30px !important;
       height 2px !important
       transform translate(-50%)
+      bottom 0px !important
   .nav-right
     display flex
     align-items center
@@ -197,7 +198,7 @@ export default {
       left 0px;
       background $primary
       border-radius 50%;
-      bottom 0px
+      bottom 4px
       transition all .2s ease
     > a
       padding 18px 20px

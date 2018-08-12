@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Layout title="Wallpapers"/>
+    <Layout title="Emoji"/>
   </div>
 </template>
 <script>

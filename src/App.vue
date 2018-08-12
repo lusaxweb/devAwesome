@@ -8,16 +8,19 @@
     <div class="con-app">
       <router-view/>
     </div>
+    <footerx />
     <viewx v-if="$store.state.view.active" />
   </div>
 </template>
 <script>
 import navx from './components/nav.vue'
 import viewx from './components/view.vue'
+import footerx from './components/Footer.vue'
 export default {
   components:{
     navx,
-    viewx
+    viewx,
+    footerx
   },
   mounted () {
     window.addEventListener('scroll', this.scrollApp)
@@ -98,8 +101,8 @@ button
   border 0px;
   cursor pointer
 
-// body
-  // overflow hidden
+body
+  background $fondo
 
 #app
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -107,7 +110,7 @@ button
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: rgb(255,255,255)
-  background rgb(34, 30, 51)
+  background $fondo
   width 100%
   overflow auto
   overflow-x hidden

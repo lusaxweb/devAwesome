@@ -7,17 +7,17 @@
 <script>
 export default {
   mounted () {
-    const script = document.createElement("script");
-    script.setAttribute("type", "text/javascript");
+    const script = document.createElement('script')
+    script.setAttribute('type', 'text/javascript')
     script.setAttribute(
-      "src",
+      'src',
       `//cdn.carbonads.com/carbon.js?serve=CK7DC27J&placement=lusaxwebgithubio`
-    );
+    )
     script.setAttribute(
-      "id",
+      'id',
       `_carbonads_js`
-    );
-    this.$refs.carbon.appendChild(script);
+    )
+    this.$refs.carbon.appendChild(script)
   },
 };
 </script>
@@ -35,9 +35,9 @@ div[id*="carbonads"] {
   overflow: hidden;
   margin-bottom: 20px;
   max-width: 400px;
-  border-radius: 4px;
+  border-radius: 6px;
   text-align: center;
-  box-shadow: 0px 5px 20px 0px rgba(0,0,0,.05);
+  box-shadow: 0px 5px 20px 0px rgba(0,0,0,.1);
   background: $fondo2 !important;
   font-size: var(--font-size);
   line-height: 1.5;
@@ -46,9 +46,9 @@ div[id*="carbonads"] {
   border: 0px;
   margin: 0 auto;
   transition: all .3s ease;
+  margin-bottom 20px
 }
 div[id*="carbonads"]:hover {
-  transform: translate(0,5px);
   box-shadow: 0px 0px 0px 0px rgba(0,0,0,.05);
 }
 div[id*="carbonads"] a {
@@ -78,6 +78,8 @@ div[id*="carbonads"] a:hover {
   max-width: var(--width);
   line-height: 1;
   float: left;
+  margin-left 5px
+  margin-top 5px
 }
 
 .carbon-img img {
@@ -86,6 +88,7 @@ div[id*="carbonads"] a:hover {
   max-width: var(--width) !important;
   width: var(--width);
   height: auto;
+  border-radius 6px
 }
 
 .carbon-text {
