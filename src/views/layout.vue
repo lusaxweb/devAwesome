@@ -5,7 +5,7 @@
       <!-- <h2>Wallpapers</h2> -->
       <titlex :title="title" />
       <menu-circles :tags="tags" />
-      <posts section="vuejs" :posts="posts" />
+      <posts :section="title" :posts="posts" />
       <Carbon />
     <!-- <router-view/> -->
   </div>

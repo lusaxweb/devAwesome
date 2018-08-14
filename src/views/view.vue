@@ -1,6 +1,6 @@
 <template>
   <transition name="view">
-    <div class="con-view">
+    <div v-if="postActive" class="con-view">
       <header>
         <h3>{{ post.title }}</h3>
         <button @click="close()">
@@ -17,8 +17,13 @@
 
           <div class="con-similar-posts">
             <ul>
-              <li>
+              <li
+                :key="index"
+                @click="openPost(morePosts[post], post)"
+                v-for="(post, index) in Object.keys(morePosts)">
                 <!-- hola soy similar :) -->
+                <img :src="morePosts[post].src" alt="">
+                <!-- {{ morePosts[post] }} -->
               </li>
             </ul>
           </div>
@@ -108,58 +113,30 @@
 </template>
 
 <script>
-import CarbonView from './CarbonView.vue'
+import CarbonView from '../components/CarbonView.vue'
 
 export default {
-  name: 'HelloWorld',
+  name: 'view',
   components:{
     CarbonView
   },
   data: () => ({
-    commentx: ''
+    commentx: '',
+    post: {},
+    postActive: false,
+    morePosts: {}
   }),
-  computed: {
-    post () {
-      return this.$store.state.view.post
-    }
+  // computed: {
+  //   post () {
+  //     return this.$store.state.view.post
+  //   }
+  // },
+  mounted () {
+    console.log(this.$router.currentRoute.params)
+    this.getPost()
+    this.getPosts()
   },
   methods: {
-    // download (urlPost) {
-
-
-    //   var storage = this.$firebase.storage()
-
-    //   // Create a storage reference from our storage service
-    //   var storageRef = storage.ref('posts/animals-01_1x.png')
-    //   storageRef.getDownloadURL().then(function (url) {
-    //   // `url` is the download URL for 'images/stars.jpg'
-
-    //   // This can be downloaded directly:
-    //   var xhr = new XMLHttpRequest()
-    //   xhr.responseType = 'blob'
-    //   xhr.onload = function (event) {
-    //     var reader = new FileReader();
-    //     reader.onloadend = function() {
-    //       console.log(reader.result)
-    //       var a = document.createElement("a");
-    //       a.href = reader.result;
-    //       a.setAttribute("download", 'helloWorld.png');
-    //       var b = document.createEvent("MouseEvents");
-    //       b.initEvent("click", false, true);
-    //       a.dispatchEvent(b);
-    //       return false
-    //     }
-    //     reader.readAsDataURL(xhr.response);
-    //   };
-    //   xhr.open('GET', url)
-    //   xhr.send()
-
-    //   console.log(blob)
-    //   // console.log(urlPost)
-    //   }).catch(function (error) {
-    //     console.log('errpr>>', error)
-    //   });
-    // },
     addlike () {
       let post = this.post
       this.$firebase.database().ref('posts/' + this.$router.currentRoute.name).child(post.namePost + '/likes').set(post.likes + 1)
@@ -185,7 +162,39 @@ export default {
         }
       })
     },
+    getPost () {
+      this.$firebase.database().ref('posts/' + this.$router.currentRoute.params.nameSection).child(this.$router.currentRoute.params.namePost).on('value', (snapshot) => {
+        console.log(snapshot.val())
+        this.post = {
+          ...snapshot.val(),
+          namePost: this.$router.currentRoute.params.name
+        }
+        this.postActive = true
+      })
+    },
+
+    getPosts () {
+      this.$firebase.database().ref('posts/' + this.$router.currentRoute.params.nameSection).on('value', (snapshot) => {
+        console.log('>>>Posts>>', snapshot.val())
+        this.morePosts = snapshot.val()
+      })
+    },
+
+    openPost (post, namePost) {
+
+      post.namePost = namePost
+      this.$router.push({
+        path: `/view/${this.$router.currentRoute.params.nameSection}/${namePost}`
+      })
+
+      this.getPost()
+      this.getPosts()
+    },
+
     close () {
+      this.$router.push({
+        path: `/${this.$router.currentRoute.params.nameSection}`
+      })
       this.$store.state.view.active = false
       document.querySelector('body').style = 'overflow: auto'
     }
@@ -268,6 +277,11 @@ export default {
       background $fondo2
       border-radius 8px
       transition all .3s ease
+      li
+        width 25%
+        float left
+        img
+          width 100%
 
   .con-description-view
     float left

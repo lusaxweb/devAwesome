@@ -1,6 +1,6 @@
 <template>
-  <div class="carbon">
-    <div key="carbonx" ref="carbon" id="carbon"></div>
+  <div class="carbonview">
+    <div key="carbonx" ref="carbonview" id="carbon"></div>
   </div>
 </template>
 
@@ -17,37 +17,36 @@ export default {
       'id',
       `_carbonads_js`
     )
-    this.$refs.carbon.appendChild(script)
+    this.$refs.carbonview.appendChild(script)
   }
 }
 </script>
-<style lang="stylus" >
+<style lang="stylus">
 @require '../config'
 /* #-carbonads */
-.carbon div[id*="carbonads"] {
-  --width: 160px;
-  --font-size: 13px;
-}
+.carbonview
+  div[id*="carbonads"]
+    --width: 160px
+    --font-size: 13px
 
-.carbon div[id*="carbonads"] {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  display: block;
-  overflow: hidden;
-  margin-bottom: 20px;
-  max-width: 400px;
-  border-radius: 6px;
-  text-align: center;
-  box-shadow: 0px 5px 20px 0px rgba(0,0,0,.1);
-  background: $fondo2 !important;
-  font-size: var(--font-size);
-  line-height: 1.5;
-  position: relative;
-  z-index: 1000;
-  border: 0px;
-  margin: 0 auto;
-  transition: all .3s ease;
-  margin-bottom 20px
-}
+  div[id*="carbonads"]
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: block;
+    overflow: hidden;
+    margin-bottom: 20px;
+    max-width: 400px;
+    border-radius: 6px;
+    text-align: center;
+    background: $fondo2 !important;
+    font-size: var(--font-size);
+    line-height: 1.5;
+    position: relative;
+    z-index: 1000;
+    border: 0px;
+    margin: 0 auto;
+    transition: all .3s ease;
+    margin-bottom 20px
+
 div[id*="carbonads"]:hover {
   box-shadow: 0px 0px 0px 0px rgba(0,0,0,.05);
 }

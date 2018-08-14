@@ -40,6 +40,12 @@ export default new Router({
       path: '/points',
       name: 'points',
       component: () => import('./views/Points.vue')
+    },
+    {
+      path: '/view/:nameSection/:namePost',
+      name: 'view',
+      component: () => import('./views/view.vue'),
+      props: true
     }
   ]
 })

@@ -9,7 +9,7 @@
       <router-view/>
     </div>
     <footerx />
-    <viewx v-if="$store.state.view.active" />
+    <!-- <viewx v-if="$store.state.view.active" /> -->
   </div>
 </template>
 <script>
