@@ -5,14 +5,18 @@
 
       <div class="con-logo">
         <router-link ref="btn1" to="/" exact>
-          Wall-Space
+          <img src="png/devAwesome.png" alt="">
+          <span>DevAwesome</span>
         </router-link>
       </div>
 
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/wallpapers"><span>Wallpapers</span></router-link>
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/Icons"><span>Icons</span></router-link>
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/stikers"><span>Stikers</span></router-link>
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/emoji"><span>Emoji</span></router-link>
+      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/frontend"><span>Frontend</span></router-link>
+      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/backend"><span>Backend</span></router-link>
+      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/mobile"><span>Mobile app</span></router-link>
+      <!-- <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/wallpapers"><span>Wallpapers</span></router-link> -->
+      <!-- <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/Icons"><span>Icons</span></router-link> -->
+      <!-- <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/stikers"><span>Stikers</span></router-link> -->
+      <!-- <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/emoji"><span>Emoji</span></router-link> -->
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/more"><span>More</span></router-link>
       <router-link class="icon" @mouseout.native="outLink" @mouseover.native="clickLink" to="/points">
         <span class="material-icons">
@@ -130,7 +134,6 @@ export default {
     .con-logo
       font-size 1rem !important
       padding-top 0px !important
-      padding-right 40px
     a
       padding-top 15px !important
       padding-bottom 15px !important
@@ -187,8 +190,19 @@ export default {
       margin-right 30px
       font-size 1.5rem
       transition all .3s ease
+      img
+        width 40px
       a
         color rgb(255,255,255)
+        padding 0px !important
+        display flex
+        align-items center
+        justify-content center
+        span
+          display block
+          padding-left 5px
+          font-size 1.1rem
+          padding-bottom 5px
     .punto
       position absolute
       display block

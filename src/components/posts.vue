@@ -50,14 +50,10 @@ export default {
   },
   methods: {
     openPost (post, namePost) {
-
       post.namePost = namePost
       this.$router.push({
         path: `/view/${this.section.toLowerCase()}/${namePost}`
       })
-      // console.log(post)
-      // this.$store.state.view.post = post
-      // this.$store.state.view.active = true
       document.querySelector('body').style = 'overflow: hidden'
     },
     downloadsAdd (name, post) {

@@ -12,24 +12,19 @@ export default new Router({
       component: Home
     },
     {
-      path: '/wallpapers',
-      name: 'wallpapers',
-      component: () => import('./views/Wallpapers.vue')
+      path: '/frontend',
+      name: 'frontend',
+      component: () => import('./views/Frontend.vue')
     },
     {
-      path: '/icons',
-      name: 'icons',
-      component: () => import('./views/Icons.vue')
+      path: '/backend',
+      name: 'backend',
+      component: () => import('./views/Backend.vue')
     },
     {
-      path: '/stikers',
-      name: 'Stikers',
-      component: () => import('./views/Stikers.vue')
-    },
-    {
-      path: '/emoji',
-      name: 'emoji',
-      component: () => import('./views/Emoji.vue')
+      path: '/mobile',
+      name: 'mobile',
+      component: () => import('./views/Mobile.vue')
     },
     {
       path: '/more',

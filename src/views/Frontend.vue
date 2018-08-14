@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Layout title="Stikers"/>
+    <Layout title="Frontend"/>
   </div>
 </template>
 <script>

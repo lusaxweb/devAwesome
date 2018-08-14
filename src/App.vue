@@ -9,17 +9,14 @@
       <router-view/>
     </div>
     <footerx />
-    <!-- <viewx v-if="$store.state.view.active" /> -->
   </div>
 </template>
 <script>
 import navx from './components/nav.vue'
-import viewx from './components/view.vue'
 import footerx from './components/Footer.vue'
 export default {
   components: {
     navx,
-    viewx,
     footerx
   },
   mounted () {
@@ -44,17 +41,6 @@ export default {
       }
     })
   },
-  // updated () {
-  //   this.$firebase.auth().onAuthStateChanged((user) => {
-  //     if (user) {
-  //       // User is signed in.
-  //       this.$store.state.user = user
-  //     } else {
-  //       // No user is signed in.
-  //       this.$store.state.user = null
-  //     }
-  //   })
-  // },
   methods: {
     scrollApp (evt) {
       let posts = document.querySelectorAll('.post')

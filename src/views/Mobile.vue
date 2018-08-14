@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Layout title="Emoji"/>
+    <Layout title="Mobile-app"/>
   </div>
 </template>
 <script>
