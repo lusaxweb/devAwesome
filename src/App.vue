@@ -4,7 +4,10 @@
       'hiddenScroll': $store.state.view.active
     }"
     id="app">
+    <div v-if="$store.state.openSidebar" @click="$store.state.openSidebar = false" class="dark">
+    </div>
     <navx />
+    <sidebarx />
     <div class="con-app">
       <router-view/>
     </div>
@@ -14,10 +17,12 @@
 <script>
 import navx from './components/nav.vue'
 import footerx from './components/Footer.vue'
+import sidebarx from './components/Sidebar.vue'
 export default {
   components: {
     navx,
-    footerx
+    footerx,
+    sidebarx
   },
   mounted () {
     window.addEventListener('scroll', this.scrollApp)
@@ -122,4 +127,13 @@ body
   // height 100vh
   &.hiddenScroll
     overflow hidden !important
+
+.dark
+  position fixed
+  left 0px
+  top 0px
+  z-index 30000
+  width 100%
+  height 100%
+  background rgba(0,0,0,.5)
 </style>

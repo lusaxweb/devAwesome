@@ -20,21 +20,6 @@ firebase.initializeApp(config)
 
 Vue.prototype.$firebase = firebase
 
-Object.filter = function (obj, predicate) {
-  var result = {}
-  var key
-  // ---------------^---- as noted by @CMS
-  //      always declare variables with the "var" keyword
-
-  for (key in obj) {
-    if (obj.hasOwnProperty(key) && !predicate(obj[key])) {
-      result[key] = obj[key];
-    }
-  }
-
-  return result
-};
-
 new Vue({
   router,
   store,

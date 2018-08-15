@@ -1,6 +1,18 @@
 <template>
   <footer class="footerx">
     <div class="con-uls">
+      <div class="con-suscribe">
+        <h4>Collection of proyects made with</h4>
+        <p>
+          Subscribe to receive emails and notifications of our news and new publications
+        </p>
+        <div class="con-input-suscribe">
+          <input placeholder="Email@gmail.com" type="text">
+          <button>Subscribe</button>
+        </div>
+
+      </div>
+
       <div class="uls">
         <div
         :key="ul.title"
@@ -15,19 +27,6 @@
           </li>
         </ul>
         </div>
-      </div>
-
-
-      <div class="con-suscribe">
-        <h4>Collection of proyects made with</h4>
-        <p>
-          Subscribe to receive emails and notifications of our news and new publications
-        </p>
-        <div class="con-input-suscribe">
-          <input placeholder="Email@gmail.com" type="text">
-          <button>Subscribe</button>
-        </div>
-
       </div>
 
     </div>
@@ -147,6 +146,7 @@ export default {
     align-items flex-start
     justify-content space-between
     .uls
+      order 2
       display flex
       justify-content center
       align-items flex-start
@@ -170,6 +170,7 @@ export default {
   .con-suscribe
     padding 20px
     max-width 350px
+    order 3
     h4
       font-size 1.2rem
       text-align left
@@ -212,4 +213,30 @@ export default {
         border-radius 6px
         background $verde
         color rgb(255,255,255)
+
+@media only screen and (max-width: 1050px)
+  .footerx
+    padding 20px
+    padding-top 40px
+@media only screen and (max-width: 950px)
+  .footerx
+    .con-uls
+      display block
+      .uls
+        width 100%
+      .con-suscribe
+        max-width 100%
+@media only screen and (max-width: 600px)
+  .footerx
+    .con-uls
+      .uls
+        flex-wrap wrap
+        .ulx
+          width 100%
+          padding 10px
+          h5
+            padding-bottom 5px
+          li
+            padding 2px 0px
+
 </style>

@@ -2,6 +2,11 @@
   <nav :class="{'menuActive':menuActive}" class="con-nav">
 
     <div ref="links" class="links">
+      <button class="btn-open-sidebar" @click="$store.state.openSidebar = true">
+        <i class="material-icons">
+        dehaze
+        </i>
+      </button>
 
       <div class="con-logo">
         <router-link ref="btn1" to="/" exact>
@@ -13,10 +18,6 @@
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/frontend"><span>Frontend</span></router-link>
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/backend"><span>Backend</span></router-link>
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/mobile"><span>Mobile app</span></router-link>
-      <!-- <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/wallpapers"><span>Wallpapers</span></router-link> -->
-      <!-- <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/Icons"><span>Icons</span></router-link> -->
-      <!-- <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/stikers"><span>Stikers</span></router-link> -->
-      <!-- <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/emoji"><span>Emoji</span></router-link> -->
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/more"><span>More</span></router-link>
       <router-link class="icon" @mouseout.native="outLink" @mouseover.native="clickLink" to="/points">
         <span class="material-icons">
@@ -170,10 +171,10 @@ export default {
         width 100%
     button
       margin 0px 5px
-      padding 5px 10px
+      padding 7px 15px
       border-radius 5px;
-      color $primary
-      background rgba(255,255,255,.05)
+      background $primary
+      color rgba(255,255,255,1)
       transition all .3s ease
       &:hover
         background rgba(255,255,255,.1)
@@ -183,6 +184,14 @@ export default {
     align-items center
     justify-content flex-start
     padding-left 20px
+    .btn-open-sidebar
+      padding 5px
+      display none
+      align-items center
+      justify-content center
+      background transparent
+      color rgb(255,255,255)
+      margin-right 20px
     .con-logo
       font-weight bold
       padding-top 20px
@@ -250,4 +259,25 @@ export default {
         color $primary
       &.router-link-active:after
         height 100%
+
+@media only screen and (max-width: 800px)
+  .con-nav
+    padding 10px 5px
+    .btn-open-sidebar
+      display flex !important
+    .con-logo
+      padding-top 0px !important
+   .links
+    >a
+      display none !important
+  .punto
+    display none !important
+@media only screen and (max-width: 600px)
+  .nav-right
+    padding-right 0px !important
+
+@media only screen and (max-width: 400px)
+  .con-logo
+    span
+      display none !important
 </style>

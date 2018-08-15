@@ -37,12 +37,12 @@ export default {
     },
     scrollApp () {
       let scrollTopx = document.documentElement.scrollTop
-      let heightx = Math.trunc(250 - scrollTopx * 2.5)
-      if (heightx > 0 && scrollTopx * 3 < 200) {
-        this.heightx = heightx
-      }
+      // let heightx = Math.trunc(250 - scrollTopx * 2.5)
+      // if (heightx > 0 && scrollTopx * 3 < 200) {
+      //   this.heightx = heightx
+      // }
       if (scrollTopx !== 0) {
-        this.opacityx = `${(100 - scrollTopx * 2) * 0.01}`
+        this.opacityx = `${(100 - scrollTopx) * 0.01}`
       } else {
         this.opacityx = 1
       }

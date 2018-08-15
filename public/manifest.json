@@ -1,8 +1,0 @@
-{
-  "name": "devAwesome",
-  "short_name": "devAwesome",
-  "start_url": "/index.html",
-  "display": "standalone",
-  "background_color": "#231f34",
-  "theme_color": "#231f34"
-}

@@ -10,22 +10,11 @@
         </button>
       </header>
       <div class="view">
+        <div class="con-img-des">
+
         <div class="con-img-view">
           <div class="img-view">
             <img :src="post.src" alt="">
-          </div>
-
-          <div class="con-similar-posts">
-            <ul>
-              <li
-                :key="index"
-                @click="openPost(morePosts[post], post)"
-                v-for="(post, index) in Object.keys(morePosts)">
-                <!-- hola soy similar :) -->
-                <img :src="morePosts[post].src" alt="">
-                <!-- {{ morePosts[post] }} -->
-              </li>
-            </ul>
           </div>
         </div>
 
@@ -37,7 +26,9 @@
               </div>
               <p>{{ post.user.name }}</p>
             </div>
-            <button class="btn-follow">WebSite</button>
+            <a target="_blank" :href="`${post.website}?ref=lusaxweb.github.io`" class="btn-follow">
+              WebSite
+            </a>
           </div>
 
           <div class="con-interaction-view">
@@ -47,11 +38,13 @@
               </i>
               Like
             </button>
-            <button @click="download(post.src)">
+            <button class="button-a">
+              <a target="_blank" :href="`${post.github}?ref=lusaxweb.github.io`" class="btn-follow">
               Github
               </a>
             </button>
-            <button @click="download(post.src)">
+            <button class="button-a">
+              <a target="_blank" :href="`${post.github}?ref=lusaxweb.github.io`" class="btn-follow">
               Twitter
               </a>
             </button>
@@ -106,7 +99,20 @@
             </ul>
           </div>
           <!-- {{ post }} -->
+           </div>
         </div>
+        <div class="con-similar-posts">
+            <ul>
+              <li
+                :key="index"
+                @click="openPost(morePosts[post], post)"
+                v-for="(post, index) in Object.keys(morePosts)">
+                <!-- hola soy similar :) -->
+                <img :src="morePosts[post].src" alt="">
+                <!-- {{ morePosts[post] }} -->
+              </li>
+            </ul>
+          </div>
       </div>
     </div>
   </transition>
@@ -117,7 +123,7 @@ import CarbonView from '../components/CarbonView.vue'
 
 export default {
   name: 'view',
-  components:{
+  components: {
     CarbonView
   },
   data: () => ({
@@ -126,11 +132,6 @@ export default {
     postActive: false,
     morePosts: {}
   }),
-  // computed: {
-  //   post () {
-  //     return this.$store.state.view.post
-  //   }
-  // },
   mounted () {
     console.log(this.$router.currentRoute.params)
     this.getPost()
@@ -181,7 +182,6 @@ export default {
     },
 
     openPost (post, namePost) {
-
       post.namePost = namePost
       this.$router.push({
         path: `/view/${this.$router.currentRoute.params.nameSection}/${namePost}`
@@ -224,6 +224,7 @@ export default {
   width 100%
   height 100%
   z-index 20000
+  overflow auto
 
   >header
     padding 10px 40px
@@ -242,14 +243,22 @@ export default {
       color rgb(255,255,255)
   .view
     position relative
-    height 100%
     padding 20px
     box-sizing border-box
     padding-top 0px
+    min-width 100%
+    width 100%
+    .con-img-des
+      display flex
+      align-items flex-start
+      justify-content center
+      width 100%
+      margin 10px 0px
+      overflow hidden
   .con-img-view
     float left
-    height calc(100% - 20px)
-    width calc(100% - 390px)
+    width 100%
+    max-width 600px
     border-radius 8px;
     margin 10px
     margin-top 0px
@@ -260,28 +269,41 @@ export default {
       height calc(100% - 240px)
       overflow hidden
       background $fondo2
-      margin-bottom 20px
       border-radius 8px
       transition all .3s ease
+      padding 20px
       img
         border-radius 8px
-        min-width 800px
+        width 100%
         max-width 100%
         max-height 100%
         left 0px
         top 0px
         right 0px
         bottom 0px
-    .con-similar-posts
-      height 160px;
-      background $fondo2
+  .con-similar-posts
+    position relative
+    height auto;
+    width 100%
+    max-width 970px
+    background $fondo2
+    border-radius 8px
+    transition all .3s ease
+    overflow hidden
+    margin auto
+    padding 5px
+    box-sizing border-box
+    li
+      width 25%
+      float left
       border-radius 8px
-      transition all .3s ease
-      li
-        width 25%
-        float left
-        img
-          width 100%
+      overflow hidden
+      padding 5px
+      cursor pointer
+      img
+        border-radius 8px
+        width 100%
+        display block
 
   .con-description-view
     float left
@@ -387,6 +409,13 @@ export default {
         align-items center
         box-sizing border-box
         justify-content center
+        &.button-a
+          padding 0px
+          a
+            padding 8px 16px
+            display block
+            color rgb(255,255,255)
+
         i
           font-size 1.1rem
           margin-right 4px
@@ -429,5 +458,24 @@ export default {
         align-items center
         justify-content center
         border-radius 10px;
+@media only screen and (max-width: 1050px)
+  .con-img-des
+    display block !important
+  .con-img-view, .con-description-view, .con-similar-posts
+    width calc(100% - 20px) !important
+    max-width calc(100% - 20px) !important
+    margin 5px !important
 
+@media only screen and (max-width: 600px)
+  .img-view
+    padding 5px !important
+  .view
+    padding 0px 5px !important
+  .con-img-view, .con-description-view, .con-similar-posts
+    width 100% !important
+    max-width 100% !important
+    margin 10px 0px !important
+  .con-similar-posts
+    li
+      width 50% !important
 </style>
