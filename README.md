@@ -1,4 +1,4 @@
-# lusaxweb-assets
+# devAwesome
 
 ## Project setup
 ```

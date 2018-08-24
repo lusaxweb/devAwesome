@@ -76,19 +76,24 @@ export default {
     var starCountRef = firebase.database().ref('posts/' + this.title.toLowerCase())
     starCountRef.on('value', function (snapshot) {
       let posts = snapshot.val()
-      let reflikes = self.$firebase.database().ref('users/' + self.$store.state.user.uid).child('likes')
+      if (self.$store.state.user) {
+        let reflikes = self.$firebase.database().ref('users/' + self.$store.state.user.uid).child('likes')
 
-      reflikes.on('value', function (snapshot) {
-        let likes = snapshot.val()
-        self.$store.state.likes = likes
-        for (const key in likes) {
-          if (posts.hasOwnProperty(key)) {
-            posts[key].isLike = true
+        reflikes.on('value', function (snapshot) {
+          let likes = snapshot.val()
+          self.$store.state.likes = likes
+          for (const key in likes) {
+            if (posts.hasOwnProperty(key)) {
+              posts[key].isLike = true
+            }
           }
-        }
+          self.posts = posts
+          self.getTags()
+        })
+      } else {
         self.posts = posts
         self.getTags()
-      })
+      }
     })
     document.querySelector('body').style = 'overflow: auto'
   },

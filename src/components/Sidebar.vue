@@ -9,9 +9,9 @@
         </router-link>
       </div>
       <div class="menu-sidebar">
-        <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/frontend"><span>Frontend</span></router-link>
-        <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/backend"><span>Backend</span></router-link>
-        <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/mobile"><span>Mobile app</span></router-link>
+        <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/front-end"><span>Front-end</span></router-link>
+        <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/back-end"><span>Back-end</span></router-link>
+        <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/mobile-app"><span>Mobile app</span></router-link>
         <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/more"><span>More</span></router-link>
         <router-link class="icon" @mouseout.native="outLink" @mouseover.native="clickLink" to="/points">
           <span class="material-icons">
