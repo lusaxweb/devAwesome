@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Layout title="Backend"/>
+    <Layout title="Back-end"/>
   </div>
 </template>
 <script>

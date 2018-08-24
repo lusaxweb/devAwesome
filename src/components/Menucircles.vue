@@ -51,7 +51,7 @@ export default {
   },
   updated () {
     let ul = this.$refs.ulx
-    this.$nextTick(()=>{
+    this.$nextTick(() => {
       if (ul.scrollWidth > ul.offsetWidth) {
         this.activeArrows = true
       } else {
@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     addTag (tag) {
-      if(this.tagsActive.includes(tag)) {
+      if (this.tagsActive.includes(tag)) {
         let index = this.tagsActive.indexOf(tag)
         this.tagsActive.splice(index, 1)
       } else {

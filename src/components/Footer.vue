@@ -68,7 +68,7 @@ export default {
           {
             text: 'Facebook',
             href: 'www.google.com'
-          },
+          }
         ]
       },
       {
@@ -89,7 +89,7 @@ export default {
           {
             text: 'FAQ',
             href: 'www.google.com'
-          },
+          }
         ]
       },
       {
@@ -118,7 +118,7 @@ export default {
           {
             text: 'Pull Request',
             href: 'www.google.com'
-          },
+          }
         ]
       }
     ]

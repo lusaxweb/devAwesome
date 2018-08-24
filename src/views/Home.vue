@@ -1,24 +1,22 @@
 <template>
   <div class="home">
-    <h1>Wall-Space</h1>
+    <slide />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
+import slide from '../components/Slide'
 export default {
   name: 'home',
+  components: {
+    slide
+  }
 }
 </script>
 
 <style lang="stylus">
 .home
-  height 100vh
-  display flex
-  align-items center
-  justify-content center
-  font-size 7rem
-  color rgba(255,255,255,.02)
-  user-select none
+  width 100%
+  padding-top 100px
+  position relative
 </style>

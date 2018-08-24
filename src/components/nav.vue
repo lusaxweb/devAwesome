@@ -15,27 +15,25 @@
         </router-link>
       </div>
 
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/frontend"><span>Frontend</span></router-link>
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/backend"><span>Backend</span></router-link>
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/mobile"><span>Mobile app</span></router-link>
+      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/front-end"><span>Front-end</span></router-link>
+      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/back-end"><span>Back-end</span></router-link>
+      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/mobile-app"><span>Mobile app</span></router-link>
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/more"><span>More</span></router-link>
       <router-link class="icon" @mouseout.native="outLink" @mouseover.native="clickLink" to="/points">
         <span class="material-icons">
           more_horiz
         </span>
       </router-link>
-      <span
-        :style="{
-          left: `${this.leftPoint}px`
-        }"
-        class="punto"></span>
     </div>
     <div class="nav-right">
-      <button v-if="!$store.state.user" @click="logIn">Log In</button>
-      <button v-else @click="signOut">Sign Out</button>
+      <vs-button @click="openUploadView" vs-color="success" vs-type="filled" vs-icon="add">Upload</vs-button>
+      <vs-button v-if="!$store.state.user" @click="logIn" vs-color="#603AFF" vs-type="filled">Log In</vs-button>
 
       <div v-if="$store.state.user" class="con-img-user">
         <img :src="$store.state.user.photoURL" alt="">
+        <div class="con-menu-user">
+          <vs-button @click="signOut" vs-color="primary" vs-type="flat">Sign Out</vs-button>
+        </div>
       </div>
     </div>
   </nav>
@@ -60,10 +58,14 @@ export default {
     window.addEventListener('scroll', this.scrollApp)
   },
   methods: {
+    openUploadView () {
+      this.$router.push('/addPost/')
+    },
     signOut () {
-      this.$firebase.auth().signOut().then(function () {
+      this.$firebase.auth().signOut().then(() => {
         // Sign-out successful.
         console.log('salio')
+        this.$store.state.user = null
       }).catch(function (error) {
         // An error happened.
         console.log('error al salir', error)
@@ -99,15 +101,16 @@ export default {
       }
     },
     clickLink (evt) {
-      console.log(evt)
-      let widthx = evt.target.closest('a').offsetWidth
-      let leftx = evt.target.closest('a').offsetLeft
-      this.leftPoint = leftx + (widthx / 2)
+      // let widthx = evt.target.closest('a').offsetWidth
+      // let leftx = evt.target.closest('a').offsetLeft
+      // this.leftPoint = leftx + (widthx / 2)
     },
     outLink () {
-      let widthx = this.$refs.links.querySelector('.router-link-active').offsetWidth
-      let leftx = this.$refs.links.querySelector('.router-link-active').offsetLeft
-      this.leftPoint = leftx + (widthx / 2)
+      this.$nextTick(() => {
+        // let widthx = this.$refs.links.querySelector('.router-link-active').offsetWidth
+        // let leftx = this.$refs.links.querySelector('.router-link-active').offsetLeft
+        // this.leftPoint = leftx + (widthx / 2)
+      })
     }
   }
 }
@@ -116,7 +119,6 @@ export default {
 @require '../config'
 .con-nav
   width 100%;
-  overflow hidden
   background transparent
   display flex
   align-items center;
@@ -132,6 +134,9 @@ export default {
   &.menuActive
     background rgb(34, 30, 51)
     box-shadow 0px 5px 20px 0px rgba(0,0,0,.1)
+    padding-right 0px
+    .nav-right
+      padding-right 0px
     .con-logo
       font-size 1rem !important
       padding-top 0px !important
@@ -162,22 +167,47 @@ export default {
     align-items center
     justify-content flex-end
     padding-right 10px
+    .vs-button
+      margin-right 10px
+      &.includeIcon
+        padding-top 10px
+        padding-bottom 10px
     .con-img-user
-      width 32px
-      height 32px
-      overflow hidden
+      width 36px
+      height 36px
       border-radius 5px
+      cursor pointer
+      position relative
+      .con-menu-user
+        position absolute
+        right 0px
+        bottom 0px
+        // background $fondo2
+        box-sizing border-box
+        transform translate(5px,90%)
+        display block
+        width 100px
+        // padding 5px
+        opacity 0
+        transition all .3s ease
+        button
+          width 100%
       img
         width 100%
-    button
-      margin 0px 5px
-      padding 7px 15px
-      border-radius 5px;
-      background $primary
-      color rgba(255,255,255,1)
-      transition all .3s ease
+        border-radius 5px
       &:hover
-        background rgba(255,255,255,.1)
+        .con-menu-user
+          opacity 1
+          transform translate(5px,99%)
+    // button
+    //   margin 0px 5px
+    //   padding 7px 15px
+    //   border-radius 5px;
+    //   background $primary
+    //   color rgba(255,255,255,1)
+    //   transition all .3s ease
+    //   &:hover
+    //     background rgba(255,255,255,.1)
   .links
     position relative
     display flex
@@ -244,6 +274,7 @@ export default {
         position relative
         &.material-icons
           padding-top 20px
+          font-size 24px
       &:after
         content ''
         width calc(100% - 16px);

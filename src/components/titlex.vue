@@ -60,6 +60,8 @@ export default {
   justify-content flex-start
   position relative
   width 100%
+  overflow hidden
+  clear both
   h3
     z-index 100
     position relative

@@ -7,6 +7,11 @@
       <menu-circles :tags="tags" />
       <posts :section="title" :posts="posts" />
       <Carbon />
+      <router-link class="btn-add-post" to="/addPost/">
+        <i class="material-icons">
+          add
+        </i>
+      </router-link>
     <!-- <router-view/> -->
   </div>
 </template>
@@ -66,17 +71,26 @@ export default {
       })
     }
   },
-  // computed: {
-
-  // },
   mounted () {
     let self = this
     var starCountRef = firebase.database().ref('posts/' + this.title.toLowerCase())
     starCountRef.on('value', function (snapshot) {
-      console.log('snapshot.val()>>', snapshot.val())
-      self.posts = snapshot.val()
-      self.getTags()
+      let posts = snapshot.val()
+      let reflikes = self.$firebase.database().ref('users/' + self.$store.state.user.uid).child('likes')
+
+      reflikes.on('value', function (snapshot) {
+        let likes = snapshot.val()
+        self.$store.state.likes = likes
+        for (const key in likes) {
+          if (posts.hasOwnProperty(key)) {
+            posts[key].isLike = true
+          }
+        }
+        self.posts = posts
+        self.getTags()
+      })
     })
+    document.querySelector('body').style = 'overflow: auto'
   },
   methods: {
     // filterPosts () {
@@ -131,4 +145,21 @@ export default {
 }
 </script>
 <style lang="stylus">
+@require '../config'
+.btn-add-post
+  position fixed
+  right 35px
+  bottom 35px
+  z-index 2000
+  background $primary
+  width 50px
+  height 50px
+  color rgb(255,255,255)
+  border-radius 50%
+  display flex
+  align-items center
+  justify-content center
+  box-shadow 0px 5px 15px 0px rgba(0,0,0,.4)
+  .material-icons
+    font-size 24px
 </style>

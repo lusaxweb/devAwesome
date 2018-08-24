@@ -13,14 +13,30 @@
         <div class="con-img-des">
 
         <div class="con-img-view">
-          <div class="img-view">
-            <img :src="post.src" alt="">
+          <div id="div-with-loading" class="img-view">
+            <img v-show="imageLoaded" :src="post.image" alt="">
+            <div class="loadingx"></div>
           </div>
+          <div class="con-similar-posts">
+            <ul>
+              <li
+                v-if="post !== $router.currentRoute.params.namePost && index < 5"
+                :key="index"
+                @click="openPost(morePosts[post], post)"
+                v-for="(post, index) in Object.keys(morePosts)">
+                <!-- hola soy similar :) -->
+                <!-- {{ post }} -->
+                <img :src="morePosts[post].miniImage" alt="">
+                <!-- {{ morePosts[post] }} -->
+              </li>
+            </ul>
+          </div>
+
         </div>
 
         <div class="con-description-view">
           <div class="con-user-view">
-            <div class="text-user">
+            <div v-if="post.user" class="text-user">
               <div class="con-img-user-view">
                 <img :src="post.user.src" alt="">
               </div>
@@ -32,7 +48,7 @@
           </div>
 
           <div class="con-interaction-view">
-            <button @click="addlike">
+            <button :class="{'disabledx':!$store.state.user, 'activeLike': getIsLike()}" @click="addlike">
               <i class="material-icons">
                 favorite
               </i>
@@ -44,7 +60,7 @@
               </a>
             </button>
             <button class="button-a">
-              <a target="_blank" :href="`${post.github}?ref=lusaxweb.github.io`" class="btn-follow">
+              <a target="_blank" :href="`${post.twitter}?ref=lusaxweb.github.io`" class="btn-follow">
               Twitter
               </a>
             </button>
@@ -101,18 +117,7 @@
           <!-- {{ post }} -->
            </div>
         </div>
-        <div class="con-similar-posts">
-            <ul>
-              <li
-                :key="index"
-                @click="openPost(morePosts[post], post)"
-                v-for="(post, index) in Object.keys(morePosts)">
-                <!-- hola soy similar :) -->
-                <img :src="morePosts[post].src" alt="">
-                <!-- {{ morePosts[post] }} -->
-              </li>
-            </ul>
-          </div>
+
       </div>
     </div>
   </transition>
@@ -127,61 +132,116 @@ export default {
     CarbonView
   },
   data: () => ({
+    imageLoaded: false,
     commentx: '',
     post: {},
-    postActive: false,
+    postActive: true,
     morePosts: {}
   }),
   mounted () {
-    console.log(this.$router.currentRoute.params)
+    // localStorage.removeItem('postViews')
+    this.$nextTick(() => {
+      this.$vs.loading({
+        container: '#div-with-loading',
+        scale: 0.8,
+        background: '#352F4E'
+      })
+    })
+
+    if (!localStorage.hasOwnProperty('postViews')) {
+      localStorage.postViews = '[]'
+    } else {
+      let arrayPostsViews = JSON.parse(localStorage.getItem('postViews'))
+      if (!arrayPostsViews.includes(this.$router.currentRoute.params.namePost)) {
+        arrayPostsViews.push(this.$router.currentRoute.params.namePost)
+        this.addView()
+      }
+      localStorage.setItem('postViews', JSON.stringify(arrayPostsViews))
+    }
+    // console.log(this.$router.currentRoute.params)
     this.getPost()
     this.getPosts()
   },
   methods: {
+    getIsLike () {
+      if (this.$store.state.likes) {
+        return this.$store.state.likes.hasOwnProperty(this.$router.currentRoute.params.namePost)
+      } else {
+        return false
+      }
+    },
+    addView () {
+      let post = this.post
+      this.$firebase.database().ref('posts/' + this.$router.currentRoute.params.nameSection).child(this.$router.currentRoute.params.namePost + '/views').set(post.views + 1)
+      this.uploadPost(post)
+    },
     addlike () {
       let post = this.post
-      this.$firebase.database().ref('posts/' + this.$router.currentRoute.name).child(post.namePost + '/likes').set(post.likes + 1)
-      this.uploadPost(post)
+      if (!this.$store.state.user) {
+        this.$vs.notify({
+          title: 'Necessary Login User',
+          text: 'Do you want to like this project? You can do it if you login',
+          color: 'danger'
+        })
+      } else if (this.getIsLike()) {
+        let userRef = this.$firebase.database().ref('users/' + this.$store.state.user.uid)
+        userRef.child('likes/' + this.$router.currentRoute.params.namePost).remove()
+        this.$firebase.database().ref('posts/' + this.$router.currentRoute.params.nameSection).child(this.$router.currentRoute.params.namePost + '/likes').set(post.likes - 1)
+      } else {
+        let userRef = this.$firebase.database().ref('users/' + this.$store.state.user.uid)
+        userRef.child('likes/' + this.$router.currentRoute.params.namePost).set(true)
+        this.$firebase.database().ref('posts/' + this.$router.currentRoute.params.nameSection).child(this.$router.currentRoute.params.namePost + '/likes').set(post.likes + 1)
+        this.uploadPost(post)
+      }
     },
     sendComment (post) {
       let self = this
 
-      this.$firebase.database().ref('posts/' + this.$router.currentRoute.name).child(post.namePost + '/comments').push({
+      this.$firebase.database().ref('posts/' + this.$router.currentRoute.params.nameSection).child(this.$router.currentRoute.params.namePost + '/comments').push({
         name: self.$store.state.user.displayName,
         src: self.$store.state.user.photoURL,
         comment: self.commentx
       })
+
       this.uploadPost(post)
       this.commentx = ''
     },
     uploadPost (post) {
-      this.$firebase.database().ref('posts/' + this.$router.currentRoute.name).child(post.namePost).on('value', (snapshot) => {
-        console.log(snapshot.val())
+      this.$firebase.database().ref('posts/' + this.$router.currentRoute.params.nameSection).child(this.$router.currentRoute.params.namePost).on('value', (snapshot) => {
         this.$store.state.view.post = {
           ...snapshot.val(),
-          namePost: post.namePost
+          namePost: this.$router.currentRoute.params.namePost
         }
       })
     },
     getPost () {
+      let self = this
       this.$firebase.database().ref('posts/' + this.$router.currentRoute.params.nameSection).child(this.$router.currentRoute.params.namePost).on('value', (snapshot) => {
-        console.log(snapshot.val())
         this.post = {
           ...snapshot.val(),
           namePost: this.$router.currentRoute.params.name
         }
         this.postActive = true
+        var img = new Image()
+
+        img.onload = function () {
+          // the image is ready
+          console.log('listo')
+          self.imageLoaded = true
+          self.$vs.loading.close('#div-with-loading > .con-vs-loading')
+        }
+        img.src = this.post.image
       })
     },
 
     getPosts () {
       this.$firebase.database().ref('posts/' + this.$router.currentRoute.params.nameSection).on('value', (snapshot) => {
-        console.log('>>>Posts>>', snapshot.val())
         this.morePosts = snapshot.val()
       })
     },
 
     openPost (post, namePost) {
+      this.imageLoaded = false
       post.namePost = namePost
       this.$router.push({
         path: `/view/${this.$router.currentRoute.params.nameSection}/${namePost}`
@@ -189,6 +249,15 @@ export default {
 
       this.getPost()
       this.getPosts()
+
+      var img = new Image()
+      let self = this
+      img.onload = function () {
+        // the image is ready
+        self.imageLoaded = true
+        self.$vs.loading.close('#div-with-loading > .con-vs-loading')
+      }
+      img.src = this.post.image
     },
 
     close () {
@@ -204,6 +273,30 @@ export default {
 
 <style lang="stylus">
 @require '../config'
+.disabledx
+  color rgba(255,255,255,.5) !important
+.loadingx
+  width 100%
+  height 100%
+  border-radius 10px
+  animation loading 3s ease infinite
+  position absolute
+  left 0px
+  top 0px
+
+@keyframes loading
+  0%
+    background $fondo
+    transform scale(1)
+  33%
+    background $fondo3
+    transform scale(.9)
+  66%
+    background $fondo2
+    transform scale(1.1)
+  100%
+    background $fondo
+    transform scale(1)
 
 .view-enter-active, .view-leave-active {
   transition: all .3s;
@@ -248,6 +341,7 @@ export default {
     padding-top 0px
     min-width 100%
     width 100%
+    // height 600px
     .con-img-des
       display flex
       align-items flex-start
@@ -258,7 +352,7 @@ export default {
   .con-img-view
     float left
     width 100%
-    max-width 600px
+    max-width 800px
     border-radius 8px;
     margin 10px
     margin-top 0px
@@ -271,7 +365,11 @@ export default {
       background $fondo2
       border-radius 8px
       transition all .3s ease
-      padding 20px
+      // padding 20px
+      padding-bottom 75%
+      position relative
+      .con-vs-loading
+        position absolute
       img
         border-radius 8px
         width 100%
@@ -281,11 +379,13 @@ export default {
         top 0px
         right 0px
         bottom 0px
+        z-index 300
+        position absolute
   .con-similar-posts
     position relative
     height auto;
     width 100%
-    max-width 970px
+    // max-width 1170px
     background $fondo2
     border-radius 8px
     transition all .3s ease
@@ -293,6 +393,7 @@ export default {
     margin auto
     padding 5px
     box-sizing border-box
+    margin-top 10px
     li
       width 25%
       float left
@@ -409,6 +510,9 @@ export default {
         align-items center
         box-sizing border-box
         justify-content center
+        &.activeLike
+          background $primary
+          border 2px solid $primary
         &.button-a
           padding 0px
           a
@@ -458,19 +562,24 @@ export default {
         align-items center
         justify-content center
         border-radius 10px;
-@media only screen and (max-width: 1050px)
+@media only screen and (max-width: 1270px)
+  .view
+    width 100% !important
+    min-width auto !important
+    max-width 900px !important
+    margin auto
   .con-img-des
     display block !important
-  .con-img-view, .con-description-view, .con-similar-posts
+  .con-img-view, .con-description-view
     width calc(100% - 20px) !important
     max-width calc(100% - 20px) !important
     margin 5px !important
 
 @media only screen and (max-width: 600px)
-  .img-view
-    padding 5px !important
-  .view
-    padding 0px 5px !important
+  // .img-view
+  //   padding 5px !important
+  // .view
+  //   padding 0px 5px !important
   .con-img-view, .con-description-view, .con-similar-posts
     width 100% !important
     max-width 100% !important

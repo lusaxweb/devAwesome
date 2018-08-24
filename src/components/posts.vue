@@ -5,35 +5,41 @@
         :key="index"
         v-for="(post,index) in Object.keys(posts)"
         class="post">
-        <div @click="openPost(posts[post], post)" class="con-img-post">
-          <img class="img-post" :src="posts[post].src" alt="">
-        </div>
-        <footer>
-          <div>
-          <h4>{{ posts[post].title }}</h4>
-          <p>{{ posts[post].description }}</p>
-          <!-- <span> {{ posts[post].tags }} </span> -->
-
+           <div @click="openPost(posts[post], post)" class="con-img-post">
+            <img class="img-post" :src="posts[post].miniImage" alt="">
           </div>
-          <div class="con-btns">
-          <button class="btn-download" @click="downloadsAdd(post,posts[post])">
-          <i class="material-icons">
-            get_app
-          </i>
-          <span>{{ posts[post].downloads }}</span>
+          <footer>
+            <div class="con-title-description">
+            <h4>{{ posts[post].title }}</h4>
+            <p>{{ posts[post].description }}</p>
+            <!-- <span> {{ posts[post].tags }} </span> -->
 
-          </button>
-          <button class="btn-like" @click="addlike(post,posts[post])">
-              <i class="material-icons">
-                favorite
-              </i>
-            <span>{{ posts[post].likes }}</span>
+            </div>
+            <div class="con-btns">
+            <button class="btn-link">
+              <a :href="`${posts[post].website}?ref=lusaxweb.github.io`">
+                <i class="material-icons">
+                  link
+                </i>
+              </a>
             </button>
-          </div>
-        </footer>
+            <button class="btn-download" @click="openPost(posts[post], post)">
+              <i class="material-icons">
+                remove_red_eye
+              </i>
+              <span>{{ posts[post].views }}</span>
+            </button>
+            <button :class="{'disabledx':!$store.state.user, 'activeLike': posts[post].isLike}" class="btn-like" @click="addlike(post,posts[post])">
+                <i class="material-icons">
+                  favorite
+                </i>
+              <span>{{ posts[post].likes }}</span>
+              </button>
+            </div>
+          </footer>
       </div>
-
     </transition-group>
+
   </div>
 </template>
 <script>
@@ -48,7 +54,14 @@ export default {
       type: String
     }
   },
+  data: () => ({
+    likes: []
+  }),
   methods: {
+    inclideLike (namePost) {
+      // console.log('this.$store.state.user>>>>>>>>>>>>>>',this.$store.state.user)
+      return false
+    },
     openPost (post, namePost) {
       post.namePost = namePost
       this.$router.push({
@@ -60,7 +73,22 @@ export default {
       this.$firebase.database().ref('posts/' + this.section.toLowerCase()).child(name + '/downloads').set(post.downloads + 1)
     },
     addlike (name, post) {
-      this.$firebase.database().ref('posts/' + this.section.toLowerCase()).child(name + '/likes').set(post.likes + 1)
+      if (!this.$store.state.user) {
+        this.$vs.notify({
+          title: 'Necessary Login User',
+          text: 'Do you want to like this project? You can do it if you login',
+          color: 'danger'
+        })
+      } else if (post.isLike) {
+        let userRef = this.$firebase.database().ref('users/' + this.$store.state.user.uid)
+        userRef.child('likes/' + name).remove()
+        this.$firebase.database().ref('posts/' + this.section.toLowerCase()).child(name + '/likes').set(post.likes - 1)
+      } else {
+        // console.log(this.$store.state.user.uid)
+        let userRef = this.$firebase.database().ref('users/' + this.$store.state.user.uid)
+        userRef.child('likes/' + name).set(true)
+        this.$firebase.database().ref('posts/' + this.section.toLowerCase()).child(name + '/likes').set(post.likes + 1)
+      }
     }
   }
 }
@@ -91,21 +119,32 @@ export default {
     color rgb(255,255,255)
     cursor pointer
     transition all .25s ease
+    .con-title-description
+      width calc(100% - 150px)
+      p
+        width 100%
+        display block
+        text-overflow:ellipsis
+        white-space:nowrap
+        overflow:hidden
     &:hover
       transform translate(0,5px)
       box-shadow 0px 0px 0px 0px rgba(0,0,0,.1) !important
+      background $fondo
       h4, p
         opacity 0
         transform translate(0,-10px)
       .con-img-post
-        transform scale(1.07) translate(0,10px)
-        box-shadow 0px 6px 20px 0px rgba(0,0,0,.1)
+        transform translate(0,20px) scale(1.1)
+        // transform scale(1.07) translate(0,10px)
+        box-shadow 0px 6px 20px 0px rgba(0,0,0,.3)
       .con-btns
         button
           span
             width auto
             opacity 1
             padding-left 4px
+            transform translate(0)
           i
             text-shadow 0px 4px 20px rgba(0,0,0,.5)
     footer
@@ -120,6 +159,9 @@ export default {
         position relative
         transition all .3s ease
         z-index 10
+        text-overflow:ellipsis
+        white-space:nowrap
+        overflow:hidden
       p
         transition all .3s ease
         font-size .6rem
@@ -130,6 +172,7 @@ export default {
         display flex
         align-items center
         justify-content center
+        transition all .3s ease
         button
           padding 8px
           border-radius 6px;
@@ -143,6 +186,23 @@ export default {
           box-shadow 0px 3px 15px 0px rgba(0,0,0,.05)
           transition all .25s ease
           z-index 200
+          &.activeLike
+            background $primary !important
+          &.disabledx
+            color rgba(255,255,255,.5)
+            // opacity .5 !important
+          &.btn-link
+            padding 0px !important
+            &:hover
+              background $morado
+            a
+              padding 8px
+              display flex
+              align-items center
+              justify-content center
+              padding-top 9px
+              padding-bottom 7px
+              color rgb(255,255,255)
           &:hover
             background $primary
           &.btn-download
@@ -154,20 +214,16 @@ export default {
           span
             position relative
             transition all .25s ease
-            // top -5px
-            // right -5px
-            // background $primary
-            // padding-left 3px
-            // padding-right 3px
-            // border-radius 3px
+            transform translate(10px)
             opacity 0
             width 0px
             padding-left 0px
             font-size .6rem
+            overflow hidden
     .con-img-post
       overflow hidden
       width calc(100% - 16px);
-      height auto;
+      height 0px;
       display flex
       align-items center
       justify-content center
@@ -180,12 +236,15 @@ export default {
       z-index 100
       backface-visibility visible
       background $fondo
+      padding-bottom 75%
       img
         z-index 10
         border-radius 6px
         width 100%
         backface-visibility visible
-        position relative
+        position absolute
+        left 0px
+        top 0px
         display block
         transform scale(1.3)
 

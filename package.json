@@ -1,5 +1,5 @@
 {
-  "name": "wall-space",
+  "name": "devAwesome",
   "version": "0.1.0",
   "private": false,
   "scripts": {
@@ -14,11 +14,13 @@
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
+    "vuesax": "^3.2.14",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.10",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.10",
+    "@vue/cli-plugin-pwa": "^3.0.1",
     "@vue/cli-service": "^3.0.0-rc.10",
     "@vue/eslint-config-standard": "^3.0.0-rc.10",
     "node-sass": "^4.9.0",

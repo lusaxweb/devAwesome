@@ -12,17 +12,17 @@ export default new Router({
       component: Home
     },
     {
-      path: '/frontend',
+      path: '/front-end',
       name: 'frontend',
       component: () => import('./views/Frontend.vue')
     },
     {
-      path: '/backend',
+      path: '/back-end',
       name: 'backend',
       component: () => import('./views/Backend.vue')
     },
     {
-      path: '/mobile',
+      path: '/mobile-app',
       name: 'mobile',
       component: () => import('./views/Mobile.vue')
     },
@@ -40,6 +40,12 @@ export default new Router({
       path: '/view/:nameSection/:namePost',
       name: 'view',
       component: () => import('./views/view.vue'),
+      props: true
+    },
+    {
+      path: '/addPost/',
+      name: 'addPost',
+      component: () => import('./views/AddPost.vue'),
       props: true
     }
   ]

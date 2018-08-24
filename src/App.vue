@@ -25,6 +25,7 @@ export default {
     sidebarx
   },
   mounted () {
+    let self = this
     window.addEventListener('scroll', this.scrollApp)
 
     this.$firebase.auth().onAuthStateChanged((user) => {
@@ -33,12 +34,18 @@ export default {
         console.log(user)
         this.$store.state.user = user
         let userRef = this.$firebase.database().ref('users/' + user.uid)
-        userRef.set({
+        userRef.update({
           name: user.displayName,
           email: user.email,
           uid: user.uid,
           emailVerified: user.emailVerified,
           photoURL: user.photoURL
+        })
+
+        let reflikes = self.$firebase.database().ref('users/' + self.$store.state.user.uid).child('likes')
+        reflikes.on('value', function (snapshot) {
+          let likes = snapshot.val()
+          self.$store.state.likes = likes
         })
       } else {
         console.log('>>>No user>>')
@@ -64,6 +71,31 @@ export default {
 </script>
 <style lang="stylus">
 @require './config'
+.con-chips input
+  background transparent
+  color rgb(255,255,255)
+
+.vs-select-options
+  background $fondo3 !important
+.vs-select-item-btn
+  background $fondo3 !important
+  color rgb(255,255,255) !important
+  border-top 1px solid $fondo3 !important
+  border-bottom 1px solid $fondo3 !important
+  &:hover
+    background $fondo2 !important
+  &.activex
+    background $primary !important
+.input-select
+  background $fondo2
+  color rgb(255,255,255)
+  padding 10px !important
+.input-select-label
+  text-align left !important
+  width 100% !important
+  color rgb(255,255,255) !important
+  display block
+  padding-bottom 5px
 
 *::-webkit-scrollbar
   width: 5px;
@@ -136,4 +168,9 @@ body
   width 100%
   height 100%
   background rgba(0,0,0,.5)
+
+for number in (1..10)
+  #carbonads_{number}
+    display none !important
+
 </style>

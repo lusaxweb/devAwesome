@@ -1,6 +1,6 @@
 <template>
   <div class="carbon">
-    <div key="carbonx" ref="carbon" id="carbon"></div>
+    <div key="carbonx" ref="carbonx" id="carbon"></div>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
       'id',
       `_carbonads_js`
     )
-    this.$refs.carbon.appendChild(script)
+    this.$refs.carbonx.appendChild(script)
   }
 }
 </script>
