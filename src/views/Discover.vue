@@ -3,7 +3,7 @@
       <!-- <button @click="changebd" >hola mundo</button> -->
       <!-- <button @click="download" >Download</button> -->
       <!-- <h2>Wallpapers</h2> -->
-      <titlex :title="title" />
+      <titlex title="Discover" />
       <menu-circles :tags="tags" />
       <posts :section="title" :posts="posts" />
       <Carbon />
@@ -44,9 +44,9 @@ export default {
   }),
   watch: {
     tagsActive () {
-      this.$firebase.database().ref('posts').orderByChild('section').off()
+      // this.$firebase.database().ref('posts').off()
       let self = this
-      let ref = this.$firebase.database().ref('posts').orderByChild('section').equalTo(this.title.toLowerCase())
+      let ref = this.$firebase.database().ref('posts')
       ref.on('value', function (snapshot) {
         let posts = snapshot.val()
         if (self.tagsActive.length > 0) {
@@ -66,7 +66,7 @@ export default {
 
           let objectPosts = {}
 
-          arrayPosts.reverse().forEach((item) => {
+          arrayPosts.forEach((item) => {
             objectPosts[item.key] = item
           })
           self.posts = self.reverseObject(objectPosts)
@@ -74,13 +74,14 @@ export default {
           self.posts = self.reverseObject(posts)
         }
       })
-      this.$firebase.database().ref('posts').orderByChild('section').off()
+      // this.$firebase.database().ref('posts').off()
     }
   },
   mounted () {
     let self = this
-    var starCountRef = firebase.database().ref('posts').orderByChild('section').equalTo(this.title.toLowerCase())
+    var starCountRef = firebase.database().ref('posts')
     starCountRef.on('value', function (snapshot) {
+      // let childRef = starCountRef.child(snapshot)
       let posts = snapshot.val()
       self.posts = self.reverseObject(posts)
       self.getTags()
@@ -102,6 +103,7 @@ export default {
         var value = object[keys[i]]
         newObject[keys[i]] = value
       }
+
       return newObject
     },
     getTags () {
@@ -111,7 +113,7 @@ export default {
         let tagsx = posts[key].tags.split(',')
         tagsx.forEach(item => {
           if (!tags.includes(item.trim())) {
-            tags.push(item.trim())
+            tags.unshift(item.trim())
           }
         })
       }

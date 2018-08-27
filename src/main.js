@@ -5,6 +5,7 @@ import store from './store'
 import './registerServiceWorker'
 import firebase from 'firebase'
 import 'material-design-icons/iconfont/material-icons.css'
+import '../public/icons/font/flaticon.css'
 import Vuesax from 'vuesax'
 // import 'vuesax/dist/vuesax.css'
 

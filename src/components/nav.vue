@@ -15,6 +15,7 @@
         </router-link>
       </div>
 
+      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/discover"><span>Discover</span></router-link>
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/front-end"><span>Front-end</span></router-link>
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/back-end"><span>Back-end</span></router-link>
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/mobile-app"><span>Mobile app</span></router-link>
@@ -26,11 +27,18 @@
       </router-link>
     </div>
     <div class="nav-right">
-      <vs-button @click="openUploadView" vs-color="success" vs-type="filled" vs-icon="add">Upload</vs-button>
-      <vs-button v-if="!$store.state.user" @click="logIn" vs-color="#603AFF" vs-type="filled">Log In</vs-button>
+      <vs-input v-if="searchActive" @keypress.enter.prevent="searchPosts" vs-color="success" vs-icon-after vs-icon="search" placeholder="Search" v-model="$store.state.search"/>
+      <vs-button class="upload-btn" vs-icon-after @click="openUploadView" vs-color="success" vs-type="filled" vs-icon="add">Upload</vs-button>
+      <vs-button class="btn-login" v-if="!$store.state.user" @click="logIn" vs-color="#603AFF" vs-type="filled">
+        <span class="text-btn-inter">Log In</span>
+        <i class="flaticon-github"></i>
+      </vs-button>
 
       <div v-if="$store.state.user" class="con-img-user">
         <img :src="$store.state.user.photoURL" alt="">
+        <i class="material-icons">
+          keyboard_arrow_down
+        </i>
         <div class="con-menu-user">
           <vs-button @click="signOut" vs-color="primary" vs-type="flat">Sign Out</vs-button>
         </div>
@@ -41,10 +49,16 @@
 <script>
 export default {
   data: () => ({
+    search: '',
     leftPoint: 0,
-    menuActive: false
+    menuActive: false,
+    searchActive: true
   }),
   watch: {
+    '$route': function () {
+      console.log('paso por aqui')
+      this.searchActive = this.$router.currentRoute.name !== 'search'
+    },
     menuActive () {
       setTimeout(() => {
         this.outLink()
@@ -58,6 +72,10 @@ export default {
     window.addEventListener('scroll', this.scrollApp)
   },
   methods: {
+    searchPosts () {
+      console.log(this.$router.currentRoute)
+      this.$router.push('/search/' + this.$store.state.search)
+    },
     openUploadView () {
       this.$router.push('/addPost/')
     },
@@ -65,6 +83,7 @@ export default {
       this.$firebase.auth().signOut().then(() => {
         // Sign-out successful.
         console.log('salio')
+        this.$store.state.likes = null
         this.$store.state.user = null
       }).catch(function (error) {
         // An error happened.
@@ -72,7 +91,9 @@ export default {
       })
     },
     logIn () {
-      var provider = new this.$firebase.auth.GoogleAuthProvider()
+      // var provider = new this.$firebase.auth.GoogleAuthProvider()
+      let self = this
+      var provider = new this.$firebase.auth.GithubAuthProvider()
       this.$firebase.auth().signInWithPopup(provider).then(function (result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         // var token = result.credential.accessToken;
@@ -80,6 +101,7 @@ export default {
         // var user = result.user;
         // // ...
         console.log('result', result.user.uid)
+        self.$store.state.user = result.user
       }).catch(function (error) {
         // Handle Errors here.
         // var errorCode = error.code;
@@ -117,6 +139,20 @@ export default {
 </script>
 <style lang="stylus">
 @require '../config'
+.vs-input
+  margin-right 7px
+.vs-inputx
+  background $fondo3
+  padding 8px !important
+  border 1px solid $fondo3 !important
+
+.input-span-placeholder
+  text-align left
+  color rgba(255,255,255,.3) !important
+
+.icon-inputx
+  color rgba(255,255,255,.3)
+
 .con-nav
   width 100%;
   background transparent
@@ -137,6 +173,7 @@ export default {
     padding-right 0px
     .nav-right
       padding-right 0px
+      margin-top 0px
     .con-logo
       font-size 1rem !important
       padding-top 0px !important
@@ -167,17 +204,32 @@ export default {
     align-items center
     justify-content flex-end
     padding-right 10px
+    margin-top 20px
+    .vs-button-text
+      display flex
+      align-items center
+      justify-content center
+      i
+        margin-left 7px
+        font-weight normal !important
     .vs-button
-      margin-right 10px
-      &.includeIcon
-        padding-top 10px
-        padding-bottom 10px
+      padding 8px 8px
+      margin-right 7px
+      font-weight bold
+      .vs-button-icon
+        font-size 1.3rem
+      &.btn-login
+        padding 6px 10px !important
+        padding-bottom 7px !important
     .con-img-user
-      width 36px
-      height 36px
       border-radius 5px
       cursor pointer
       position relative
+      display flex
+      align-items center
+      justify-content center
+      i
+        margin-left 2px
       .con-menu-user
         position absolute
         right 0px
@@ -193,7 +245,8 @@ export default {
         button
           width 100%
       img
-        width 100%
+        width 36px
+        height 36px
         border-radius 5px
       &:hover
         .con-menu-user
@@ -213,7 +266,7 @@ export default {
     display flex
     align-items center
     justify-content flex-start
-    padding-left 20px
+    padding-left 10px
     .btn-open-sidebar
       padding 5px
       display none
@@ -221,18 +274,20 @@ export default {
       justify-content center
       background transparent
       color rgb(255,255,255)
-      margin-right 20px
+      margin-right 10px
+      i
+        font-size 1.4rem
     .con-logo
       font-weight bold
       padding-top 20px
       letter-spacing 1px
-      margin-right 30px
+      margin-right 25px
       font-size 1.5rem
       transition all .3s ease
       img
         width 40px
       a
-        color rgb(255,255,255)
+        color rgb(255,255,255) !important
         padding 0px !important
         display flex
         align-items center
@@ -242,6 +297,7 @@ export default {
           padding-left 5px
           font-size 1.1rem
           padding-bottom 5px
+          color rgb(255,255,255) !important
     .punto
       position absolute
       display block
@@ -268,12 +324,12 @@ export default {
         padding-top 23px
         padding-bottom 12px
       span
-        padding-top 30px
+        padding-top 20px
         display block
         z-index 100
         position relative
         &.material-icons
-          padding-top 20px
+          padding-top 10px
           font-size 24px
       &:after
         content ''
@@ -291,7 +347,7 @@ export default {
       &.router-link-active:after
         height 100%
 
-@media only screen and (max-width: 800px)
+@media only screen and (max-width: 1160px)
   .con-nav
     padding 10px 5px
     .btn-open-sidebar
@@ -303,12 +359,41 @@ export default {
       display none !important
   .punto
     display none !important
-@media only screen and (max-width: 600px)
+@media only screen and (max-width: 700px)
+  .con-logo
+    margin-right 5px !important
   .nav-right
-    padding-right 0px !important
-
-@media only screen and (max-width: 400px)
+    .vs-con-input-label
+      margin-right 4px !important
+    .vs-button
+      margin-right 0px !important
+      padding 8px 6px !important
+    .upload-btn
+      margin-right 4px !important
+      .vs-button-text
+        display none !important
+    .vs-button-icon
+      margin-left 0px !important
+@media only screen and (max-width: 600px)
   .con-logo
     span
       display none !important
+@media only screen and (max-width: 600px)
+  .nav-right
+    padding-right 10px !important
+    .btn-login
+      .text-btn-inter
+        display none !important
+      .flaticon-github
+        margin-left 0px !important
+@media only screen and (max-width: 480px)
+  .nav-right
+    .vs-con-input-label
+      width auto
+    .vs-con-input
+      width 130px
+      margin-right 0px
+@media only screen and (max-width: 480px)
+  .nav-right
+    padding-right 0px !important
 </style>

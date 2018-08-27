@@ -25,13 +25,15 @@ export default {
     sidebarx
   },
   mounted () {
-    let self = this
     window.addEventListener('scroll', this.scrollApp)
 
     this.$firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in.
         console.log(user)
+        if (user.displayName === 'ldrovira' || user.displayName === 'ManuelRoviraDesign') {
+          this.$store.state.admin = true
+        }
         this.$store.state.user = user
         let userRef = this.$firebase.database().ref('users/' + user.uid)
         userRef.update({
@@ -42,13 +44,14 @@ export default {
           photoURL: user.photoURL
         })
 
-        let reflikes = self.$firebase.database().ref('users/' + self.$store.state.user.uid).child('likes')
-        reflikes.on('value', function (snapshot) {
-          let likes = snapshot.val()
-          self.$store.state.likes = likes
-        })
+        fetch(`https://api.github.com/search/users?q=${user.displayName}`)
+          .then(response => response.json())
+          .then(json => {
+            this.$store.state.githubUrl = json.items[0].html_url
+          })
       } else {
-        console.log('>>>No user>>')
+        this.$store.state.githubUrl = null
+        this.$store.state.admin = false
         // No user is signed in.
       }
     })

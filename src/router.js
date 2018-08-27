@@ -37,7 +37,7 @@ export default new Router({
       component: () => import('./views/Points.vue')
     },
     {
-      path: '/view/:nameSection/:namePost',
+      path: '/view/:namePost/',
       name: 'view',
       component: () => import('./views/view.vue'),
       props: true
@@ -46,6 +46,18 @@ export default new Router({
       path: '/addPost/',
       name: 'addPost',
       component: () => import('./views/AddPost.vue'),
+      props: true
+    },
+    {
+      path: '/search/:searching',
+      name: 'search',
+      component: () => import('./views/Search.vue'),
+      props: true
+    },
+    {
+      path: '/Discover',
+      name: 'discover',
+      component: () => import('./views/Discover.vue'),
       props: true
     }
   ]

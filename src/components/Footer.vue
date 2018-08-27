@@ -7,8 +7,9 @@
           Subscribe to receive emails and notifications of our news and new publications
         </p>
         <div class="con-input-suscribe">
-          <input placeholder="Email@gmail.com" type="text">
-          <button>Subscribe</button>
+          <input v-model="email" placeholder="Email@gmail.com" type="text">
+          <!-- <button></button> -->
+          <vs-button :disabled="!email" @click="subscribe" vs-color="success">Subscribe</vs-button>
         </div>
 
       </div>
@@ -41,29 +42,22 @@
 <script>
 export default {
   data: () => ({
+    email: '',
     uls: [
       {
         title: 'Social',
         items: [
           {
-            text: 'Github',
-            href: 'www.google.com'
-          },
-          {
-            text: 'Dribbble',
-            href: 'www.google.com'
-          },
-          {
-            text: 'Behance',
-            href: 'www.google.com'
-          },
-          {
             text: 'Twitter',
-            href: 'www.google.com'
+            href: 'https://twitter.com/DevAwesome_'
+          },
+          {
+            text: 'Github',
+            href: 'https://github.com/lusaxweb/devAwesome'
           },
           {
             text: 'Discord',
-            href: 'www.google.com'
+            href: 'https://discord.gg/VxacJRH'
           },
           {
             text: 'Facebook',
@@ -76,19 +70,15 @@ export default {
         items: [
           {
             text: 'Issues',
-            href: 'www.google.com'
+            href: 'https://github.com/lusaxweb/devAwesome/issues'
           },
           {
             text: 'Edit Page',
-            href: 'www.google.com'
+            href: 'https://github.com/lusaxweb/devAwesome/'
           },
           {
             text: 'Latest Releases',
-            href: 'www.google.com'
-          },
-          {
-            text: 'FAQ',
-            href: 'www.google.com'
+            href: 'https://github.com/lusaxweb/devAwesome/releases'
           }
         ]
       },
@@ -105,24 +95,32 @@ export default {
           },
           {
             text: 'Lusaxweb',
-            href: 'www.google.com'
+            href: 'http://www.lusaxweb.com/'
           },
           {
             text: 'Contact',
             href: 'www.google.com'
           },
           {
-            text: 'Chat',
-            href: 'www.google.com'
-          },
-          {
             text: 'Pull Request',
-            href: 'www.google.com'
+            href: 'https://github.com/lusaxweb/devAwesome/pulls'
           }
         ]
       }
     ]
-  })
+  }),
+  methods: {
+    subscribe () {
+      this.$firebase.database().ref('subscribe').push(this.email)
+      this.email = ''
+      this.$vs.notify({
+        title: 'Successful subscription',
+        text: 'Thank you very much for subscribing',
+        color: 'success',
+        icon: 'email'
+      })
+    }
+  }
 }
 </script>
 <style lang="stylus">
@@ -200,7 +198,7 @@ export default {
       align-items center
       justify-content center
       input
-        width 100%
+        width calc(100% - 90px)
         padding 4px
         background transparent
         border 0px

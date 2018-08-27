@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    admin: false,
+    githubUrl: '',
     likes: null,
     openSidebar: false,
     posts: [],

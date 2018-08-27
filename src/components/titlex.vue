@@ -1,7 +1,7 @@
 <template>
+      <!-- maxHeight: `${heightx}px`, -->
   <div
     :style="{
-      maxHeight: `${heightx}px`,
       opacity: opacityx
     }"
     class="con-title">
@@ -51,8 +51,8 @@ export default {
 }
 </script>
 <style lang="stylus">
+@require '../config'
 .con-title
-  height 18rem;
   padding-top 3rem
   font-size 2rem
   display flex
@@ -66,10 +66,15 @@ export default {
     z-index 100
     position relative
     letter-spacing 2px
-    font-size 9rem
-    color rgba(255,255,255,.02)
+    font-size 7rem
+    color rgba(0,0,0,.1)
     text-align left
-    transform translate(-5%)
+    transform translate(-4%)
+    text-overflow:ellipsis
+    white-space:nowrap
+    overflow:hidden
+    cursor default
+    user-select none
   .effect
     position absolute
     left 0px;
@@ -107,4 +112,19 @@ export default {
       left 78%
       background-image: linear-gradient(185deg, rgba(0,0,0,0) 0%, #9FACE6 100%);
       height 79%;
+
+@media only screen and (max-width: 800px)
+  .con-title
+    h3
+      font-size 6rem !important
+@media only screen and (max-width: 600px)
+  .con-title
+    max-height 150px !important
+    h3
+      font-size 2.5rem !important
+      text-align center
+      width 100%
+      transform translate(0)
+      color rgb(255,255,255)
+
 </style>

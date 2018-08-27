@@ -9,11 +9,11 @@
         </router-link>
       </div>
       <div class="menu-sidebar">
-        <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/front-end"><span>Front-end</span></router-link>
-        <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/back-end"><span>Back-end</span></router-link>
-        <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/mobile-app"><span>Mobile app</span></router-link>
-        <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/more"><span>More</span></router-link>
-        <router-link class="icon" @mouseout.native="outLink" @mouseover.native="clickLink" to="/points">
+        <router-link to="/front-end"><span>Front-end</span></router-link>
+        <router-link to="/back-end"><span>Back-end</span></router-link>
+        <router-link to="/mobile-app"><span>Mobile app</span></router-link>
+        <router-link to="/more"><span>More</span></router-link>
+        <router-link class="icon" to="/points">
           <span class="material-icons">
             more_horiz
           </span>
@@ -61,14 +61,15 @@ export default {
   max-width 300px;
   position fixed
   height 100%
-  background $fondo2
+  background $fondo3
   z-index 30000
   display none
   transform translate(-100%)
   transition all .3s ease
   .con-logo
       font-weight bold
-      padding 15px 0px
+      padding 7px 0px
+      padding-top 10px
       width 100%
       letter-spacing 1px
       font-size 1.5rem
@@ -82,6 +83,7 @@ export default {
         display flex
         align-items center
         justify-content center
+
         span
           display block
           padding-left 5px
@@ -90,17 +92,21 @@ export default {
   .menu-sidebar
     width 100%
     position relative
+    padding-top 10px
     a
       width 100%
       display block
       text-align left
       padding 15px 15px
       color rgb(255,255,255)
+      font-weight bold
+      .material-icons
+        font-size 1.5rem
 
 .activeSidebar
   transform translate(0) !important
 
-@media only screen and (max-width: 800px)
+@media only screen and (max-width: 1160px)
   .con-sidebar
     display block
 

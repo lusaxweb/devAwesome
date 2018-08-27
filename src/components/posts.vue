@@ -29,17 +29,43 @@
               </i>
               <span>{{ posts[post].views }}</span>
             </button>
-            <button :class="{'disabledx':!$store.state.user, 'activeLike': posts[post].isLike}" class="btn-like" @click="addlike(post,posts[post])">
+            <button :class="{'disabledx':!$store.state.user, 'activeLike': getActiveLike(posts[post])}" class="btn-like" @click="addlike(post, posts[post])">
                 <i class="material-icons">
                   favorite
                 </i>
-              <span>{{ posts[post].likes }}</span>
+              <span v-if="posts[post].likes" >{{ Object.keys(posts[post].likes).length }}</span>
               </button>
             </div>
           </footer>
       </div>
     </transition-group>
 
+    <div v-if="Object.keys(posts).length == 0" class="con-loading-posts">
+      <ul>
+        <li  :key="li" v-for="li in numberRamdom">
+          <div :style="`animation-delay: .${li}s`" class="card">
+            <div class="imgx"></div>
+            <ul class="ul-loading">
+              <li>
+                <i class="material-icons">
+                  link
+                </i>
+              </li>
+              <li>
+                <i class="material-icons">
+                  remove_red_eye
+                </i>
+              </li>
+              <li>
+                <i class="material-icons">
+                  favorite
+                </i>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -47,7 +73,7 @@
 export default {
   props: {
     posts: {
-      default: () => { return [] }
+      default: () => { return {} }
     },
     section: {
       default: null,
@@ -57,37 +83,38 @@ export default {
   data: () => ({
     likes: []
   }),
+  computed: {
+    numberRamdom () {
+      return Math.floor(Math.random() * (9 - 3 + 1) + 3) + 1
+    }
+  },
   methods: {
-    inclideLike (namePost) {
-      // console.log('this.$store.state.user>>>>>>>>>>>>>>',this.$store.state.user)
-      return false
+    getActiveLike (post) {
+      if (post.hasOwnProperty('likes') && this.$store.state.user) {
+        return post.likes.hasOwnProperty(this.$store.state.user.uid)
+      } else {
+        return false
+      }
     },
     openPost (post, namePost) {
       post.namePost = namePost
       this.$router.push({
-        path: `/view/${this.section.toLowerCase()}/${namePost}`
+        path: `/view/${namePost}`
       })
       document.querySelector('body').style = 'overflow: hidden'
     },
-    downloadsAdd (name, post) {
-      this.$firebase.database().ref('posts/' + this.section.toLowerCase()).child(name + '/downloads').set(post.downloads + 1)
-    },
-    addlike (name, post) {
+    addlike (name = 'perro', post) {
       if (!this.$store.state.user) {
         this.$vs.notify({
           title: 'Necessary Login User',
-          text: 'Do you want to like this project? You can do it if you login',
-          color: 'danger'
+          text: 'To be able to do this action you need a user in login',
+          color: 'danger',
+          icon: 'lock'
         })
-      } else if (post.isLike) {
-        let userRef = this.$firebase.database().ref('users/' + this.$store.state.user.uid)
-        userRef.child('likes/' + name).remove()
-        this.$firebase.database().ref('posts/' + this.section.toLowerCase()).child(name + '/likes').set(post.likes - 1)
+      } else if (this.getActiveLike(post)) {
+        this.$firebase.database().ref('posts').child(name + '/likes/' + this.$store.state.user.uid).remove()
       } else {
-        // console.log(this.$store.state.user.uid)
-        let userRef = this.$firebase.database().ref('users/' + this.$store.state.user.uid)
-        userRef.child('likes/' + name).set(true)
-        this.$firebase.database().ref('posts/' + this.section.toLowerCase()).child(name + '/likes').set(post.likes + 1)
+        this.$firebase.database().ref('posts').child(name + '/likes/' + this.$store.state.user.uid).set(true)
       }
     }
   }
@@ -95,6 +122,73 @@ export default {
 </script>
 <style lang="stylus">
 @require '../config'
+
+.con-loading-posts
+  position relative
+  width 100%
+  // background $primary
+  > ul
+    > li
+      width 100%
+      max-width calc(20% - 10px)
+      margin 5px
+      position relative
+      float left
+      .card
+        border-radius 10px
+        padding-bottom 75%
+        background $fondo2
+        display block
+        animation example ease infinite 2.5s
+        overflow hidden
+        .imgx
+          border-radius 10px
+          content ''
+          left 5px
+          top 5px
+          width calc(100% - 10px)
+          height 80%
+          background $fondo
+          position absolute
+        .ul-loading
+          position absolute
+          width 100%
+          display flex
+          justify-content flex-end
+          bottom 0px
+          &:after
+            border-radius 10px
+            content ''
+            position absolute
+            left 10px
+            top 10px
+            width 30%
+            height 5px
+            background $fondo
+          &:before
+            border-radius 10px
+            content ''
+            position absolute
+            left 10px
+            top 20px
+            width 50%
+            height 3px
+            background $fondo
+          li
+            padding 10px
+            display block
+            color $fondo
+            user-select none
+
+@keyframes example
+  0%
+    opacity 1
+  70%
+    opacity 0
+    // transform scale(.9)
+    transform scale(.9) translate(0, -20px)
+  100%
+    opacity 1
 
 .posts-enter-active, .posts-leave-active {
   transition: all ease .3s;
@@ -112,9 +206,9 @@ export default {
     background $fondo2
     border-radius 8px;
     width 100%;
-    max-width calc(20% - 20px);
+    max-width calc(20% - 14px);
     float left
-    margin 10px;
+    margin 7px;
     box-shadow 0px 6px 20px 0px rgba(0,0,0,.1)
     color rgb(255,255,255)
     cursor pointer
@@ -250,20 +344,47 @@ export default {
 
 @media only screen and (max-width: 1400px)
   .post
-    max-width calc(25% - 20px) !important
-
+    max-width calc(25% - 14px) !important
+  .con-loading-posts
+    li
+      max-width calc(25% - 14px) !important
 @media only screen and (max-width: 1200px)
   .post
-    max-width calc(33% - 20px) !important
-
+    max-width calc(33% - 14px) !important
+  .con-loading-posts
+    li
+      max-width calc(33% - 14px) !important
 @media only screen and (max-width: 850px)
   .post
-    max-width calc(50% - 20px) !important
-
+    max-width calc(50% - 14px) !important
+  .con-loading-posts
+    li
+      max-width calc(50% - 14px) !important
 @media only screen and (max-width: 600px)
+  .con-loading-posts
+    li
+      max-width 100% !important
+      margin 5px 0px !important
   .post
-    margin-left 20px !important
-    margin-right 20px !important
-    max-width calc(100% - 40px) !important
+    margin-left 0px !important
+    margin-right 0px !important
+    max-width 100% !important
+    background $fondo2 !important
+    h4, p
+        opacity 1 !important
+        transform translate(0,0) !important
+      .con-img-post
+        transform translate(0,0px) scale(1) !important
+        // transform scale(1.07) translate(0,10px)
+        box-shadow 0px 6px 20px 0px rgba(0,0,0,.3)
+      .con-btns
+        button
+          span
+            width auto !important
+            opacity 1 !important
+            padding-left 4px !important
+            transform translate(0) !important
+          i
+            text-shadow 0px 4px 20px rgba(0,0,0,.5) !important
 
 </style>

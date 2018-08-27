@@ -5,7 +5,7 @@
         chevron_left
       </i>
     </button>
-    <ul ref="ulx">
+    <ul v-show="tags.length != 0" ref="ulx">
       <li
         :key="tag"
         v-for="tag in tags"
@@ -21,6 +21,12 @@
         chevron_right
       </i>
     </button>
+
+    <div v-if="tags.length == 0" class="con-circles-loading">
+      <ul>
+        <li :style="`animation-delay: .${li}s`" :key="li" v-for="li in 5"></li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -109,13 +115,41 @@ export default {
 </script>
 <style lang="stylus">
 @require '../config'
+
+.con-circles-loading
+  width 100%
+  height 80px
+  position relative
+  ul
+    width auto
+    li
+      border-bottom 1px solid $fondo !important
+      animation circlesLoading ease infinite 1.2s
+      transition all .3s ease
+      &:after
+        background $primary !important
+      &:before
+        background $fondo !important
+
+@keyframes circlesLoading
+  0%
+    transform translate(0)
+  33%
+    transform translate(-10px, -10px)
+  50%
+    transform translate(0px, 10px)
+  66%
+    transform translate(10px, -10px)
+  100%
+    transform translate(0)
+
 .con-menu-circles
   width 100%
   position relative
-  padding-left 20px
-  padding-right 20px
+  padding-left 10px
+  padding-right 10px
   box-sizing border-box
-  max-height 90px
+  max-height 80px
   overflow hidden
   display flex
   align-items flex-start
@@ -142,12 +176,13 @@ export default {
   button
     padding-top 10px
     padding-bottom 30px
-    padding-left 0px
-    padding-right 0px
+    padding-left 10px
+    padding-right 10px
     background transparent
     color rgb(255,255,255)
     z-index 200
     transition all .25s ease
+    display block
     &.rightx
       background-image: linear-gradient(90deg, $fondo 0%, rgba(0,0,0,0) 100%);
     &.leftx
