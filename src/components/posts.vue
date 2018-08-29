@@ -5,6 +5,16 @@
         :key="index"
         v-for="(post,index) in Object.keys(posts)"
         class="post">
+
+        <button
+          @click="deletePost(posts[post], post)"
+          v-if="deletex"
+          class="btn-delete-item">
+            <i class="material-icons">
+              delete_forever
+            </i>
+          </button>
+
            <div @click="openPost(posts[post], post)" class="con-img-post">
             <img class="img-post" :src="posts[post].miniImage" alt="">
           </div>
@@ -72,6 +82,10 @@
 
 export default {
   props: {
+    deletex: {
+      default: false,
+      type: Boolean
+    },
     posts: {
       default: () => { return {} }
     },
@@ -85,10 +99,23 @@ export default {
   }),
   computed: {
     numberRamdom () {
-      return Math.floor(Math.random() * (9 - 3 + 1) + 3) + 1
+      return Math.floor(Math.random() * (8 - 3 + 1) + 3) + 1
     }
   },
   methods: {
+    deletePost (post, namePost) {
+      let self = this
+      this.$vs.dialog({
+        type: 'confirm',
+        color: 'danger',
+        title: `Confirm Deleted`,
+        text: 'You are sure to eliminate this Project, By doing so you will not be able to have it again and it will be eliminated',
+        accept: function () {
+          console.log('acepto eliminarlo', namePost)
+          self.$firebase.database().ref('posts').child(namePost).remove()
+        }
+      })
+    },
     getActiveLike (post) {
       if (post.hasOwnProperty('likes') && this.$store.state.user) {
         return post.likes.hasOwnProperty(this.$store.state.user.uid)
@@ -103,7 +130,7 @@ export default {
       })
       document.querySelector('body').style = 'overflow: hidden'
     },
-    addlike (name = 'perro', post) {
+    addlike (name, post) {
       if (!this.$store.state.user) {
         this.$vs.notify({
           title: 'Necessary Login User',
@@ -114,7 +141,9 @@ export default {
       } else if (this.getActiveLike(post)) {
         this.$firebase.database().ref('posts').child(name + '/likes/' + this.$store.state.user.uid).remove()
       } else {
-        this.$firebase.database().ref('posts').child(name + '/likes/' + this.$store.state.user.uid).set(true)
+        this.$firebase.database().ref('posts').child(name + '/likes/' + this.$store.state.user.uid).set({
+          uid: this.$store.state.user.uid
+        })
       }
     }
   }
@@ -136,7 +165,6 @@ export default {
       float left
       .card
         border-radius 10px
-        padding-bottom 75%
         background $fondo2
         display block
         animation example ease infinite 2.5s
@@ -144,24 +172,24 @@ export default {
         .imgx
           border-radius 10px
           content ''
-          left 5px
-          top 5px
-          width calc(100% - 10px)
+          left 7px
+          top 7px
+          width calc(100% - 14px)
           height 80%
           background $fondo
-          position absolute
+          position relative
+          padding-bottom 75%
         .ul-loading
-          position absolute
+          position relative
           width 100%
           display flex
           justify-content flex-end
-          bottom 0px
           &:after
             border-radius 10px
             content ''
             position absolute
             left 10px
-            top 10px
+            top 15px
             width 30%
             height 5px
             background $fondo
@@ -170,7 +198,7 @@ export default {
             content ''
             position absolute
             left 10px
-            top 20px
+            top 25px
             width 50%
             height 3px
             background $fondo
@@ -213,6 +241,25 @@ export default {
     color rgb(255,255,255)
     cursor pointer
     transition all .25s ease
+    position relative
+    .btn-delete-item
+      position absolute
+      top 15px
+      right 15px
+      width 35px
+      height 35px
+      z-index 1000
+      border-radius 5px
+      background $primary
+      color rgb(255,255,255)
+      transition all .25s ease
+      i
+        font-size 1.5rem
+      &:hover
+        ~.con-img-post
+          background $primary
+          img
+            opacity .5
     .con-title-description
       width calc(100% - 150px)
       p
@@ -225,6 +272,9 @@ export default {
       transform translate(0,5px)
       box-shadow 0px 0px 0px 0px rgba(0,0,0,.1) !important
       background $fondo
+      .btn-delete-item
+        top 22px
+        right 0%
       h4, p
         opacity 0
         transform translate(0,-10px)
@@ -341,6 +391,7 @@ export default {
         top 0px
         display block
         transform scale(1.3)
+        transition opacity .3s ease
 
 @media only screen and (max-width: 1400px)
   .post

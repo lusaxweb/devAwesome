@@ -9,6 +9,7 @@
         </router-link>
       </div>
       <div class="menu-sidebar">
+        <router-link @mouseout.native="outLink" @mouseover.native="clickLink" exact to="/"><span>Discover</span></router-link>
         <router-link to="/front-end"><span>Front-end</span></router-link>
         <router-link to="/back-end"><span>Back-end</span></router-link>
         <router-link to="/mobile-app"><span>Mobile app</span></router-link>

@@ -163,6 +163,7 @@ export default {
       this.goLess--
       this.getPost()
       this.getPosts()
+      this.changeAds()
     }
   },
   mounted () {
@@ -187,7 +188,7 @@ export default {
       this.$router.push('/search/' + tag)
     },
     changeAds () {
-      let _carbonads
+      // let _carbonads
       if (!document.querySelector('#carbonads')) return
       if (typeof _carbonads !== 'undefined') _carbonads.refresh()
     },
@@ -294,7 +295,7 @@ export default {
     },
 
     openPost (post, namePost) {
-      this.changeAds()
+
       this.imageLoaded = false
       post.namePost = namePost
       this.$router.push({

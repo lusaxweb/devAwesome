@@ -172,8 +172,17 @@ body
   height 100%
   background rgba(0,0,0,.5)
 
-for number in (1..10)
-  #carbonads_{number}
-    display none !important
+// for number in (1..10)
+//   #carbonads_{number}
+//     display none !important
+.vs-dialog
+  color rgb(255,255,255) !important
+  background $fondo2 !important
+  .vs-button-text
+    color rgb(255,255,255) !important
+  header
+    background $fondo3 !important
+    h3
+      font-weight normal !important
 
 </style>

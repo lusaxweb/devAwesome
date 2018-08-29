@@ -119,12 +119,13 @@ export default {
       font-size 6rem !important
 @media only screen and (max-width: 600px)
   .con-title
-    max-height 150px !important
     h3
-      font-size 2.5rem !important
+      font-size 2rem !important
       text-align center
       width 100%
       transform translate(0)
       color rgb(255,255,255)
+      padding-top 30px
+      padding-bottom 10px
 
 </style>

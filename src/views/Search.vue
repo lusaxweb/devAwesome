@@ -31,7 +31,7 @@ export default {
   },
   data: () => ({
     name: 'hola',
-    posts: null,
+    posts: [],
     tags: [],
     tagsActive: []
   }),
@@ -43,7 +43,6 @@ export default {
   mounted () {
     this.$nextTick(() => {
       this.searchPosts()
-      this.$refs.inputsearch.focus()
       this.$store.state.search = this.$router.currentRoute.params.searching
     })
     document.querySelector('body').style = 'overflow: auto'
@@ -95,7 +94,7 @@ export default {
         arrayPosts.forEach((item) => {
           objectPosts[item.key] = item
         })
-        self.posts = self.reverseObject(objectPosts)
+        self.posts = arrayPosts.length > 0 ? self.reverseObject(objectPosts) : null
       })
     },
     getTags () {

@@ -25,6 +25,8 @@ export default {
 @require '../config'
 /* #-carbonads */
 .carbonview
+  min-height 160px
+  position relative
   div[id*="carbonads"]
     --width: 160px
     --font-size: 13px

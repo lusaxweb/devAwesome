@@ -43,6 +43,7 @@
         <carbon />
       </div>
       <div class="con-mini-slide">
+        <h3>Last uploaded projects</h3>
         <div class="con-slides">
 
           <ul class="con-lines">
@@ -58,11 +59,12 @@
           </ul>
 
           <div
+            @click="openMiniSlidePost(slide.key)"
             :key="index"
             v-for="(slide, index) in miniSlides"
-            v-if="activeSlideMini == index"
+            v-show="activeSlideMini == index"
             class="slide">
-            <img :src="slide.src" alt="">
+            <img :src="slide.miniImage" alt="">
           </div>
         </div>
       </div>
@@ -80,42 +82,53 @@ export default {
     activeSlideMini: 0,
     slides: [
       {
-        src: 'https://firebasestorage.googleapis.com/v0/b/lusaxweb-assets.appspot.com/o/posts%2Fanimals-01_1x.png?alt=media&token=afcb3a74-ae89-44ac-b4df-07dcf618a268',
+        src: 'https://firebasestorage.googleapis.com/v0/b/lusaxweb-assets.appspot.com/o/slide%2Fwallpaper1.jpg?alt=media&token=0c36987e-e570-4d38-b9d2-0e7ff162f666',
         title: 'New Event For Vuejs',
         description: 'Already know HTML, CSS and JavaScript? Read the guide and start building things in no time!'
       },
       {
-        src: 'https://firebasestorage.googleapis.com/v0/b/lusaxweb-assets.appspot.com/o/posts%2Fico_realestate_landing_1x.jpg?alt=media&token=02e78cb5-900a-4769-b44b-33da10c846ae',
+        src: 'https://firebasestorage.googleapis.com/v0/b/lusaxweb-assets.appspot.com/o/slide%2Fwallpaper2.jpg?alt=media&token=d484ef73-5d9d-4261-9623-d05bfaba2359',
         title: 'nuevo slide',
         description: 'hola mundo'
       },
       {
-        src: 'https://firebasestorage.googleapis.com/v0/b/lusaxweb-assets.appspot.com/o/posts%2Fmanuelrovira-ui-ux-designer-lusaxweb-trend-2018-web-modern-flat-minmal-clean-manuel-rovira-yellow20_1x.png?alt=media&token=ba944af2-deb5-435a-89af-7e6dea6aa1d6',
+        src: 'https://firebasestorage.googleapis.com/v0/b/lusaxweb-assets.appspot.com/o/slide%2Fwallpaper3.jpg?alt=media&token=fbfc6c08-3746-4358-9660-a3d07c6ffb43',
         title: 'nuevo slide',
         description: 'hola mundo'
       }
     ],
-    miniSlides: [
-      {
-        src: 'https://firebasestorage.googleapis.com/v0/b/lusaxweb-assets.appspot.com/o/posts%2Fanimals-01_1x.png?alt=media&token=afcb3a74-ae89-44ac-b4df-07dcf618a268',
-        title: 'nuevo slide',
-        description: 'hola mundo'
-      },
-      {
-        src: 'https://firebasestorage.googleapis.com/v0/b/lusaxweb-assets.appspot.com/o/posts%2Fico_realestate_landing_1x.jpg?alt=media&token=02e78cb5-900a-4769-b44b-33da10c846ae',
-        title: 'nuevo slide',
-        description: 'hola mundo'
-      },
-      {
-        src: 'https://firebasestorage.googleapis.com/v0/b/lusaxweb-assets.appspot.com/o/posts%2Fmanuelrovira-ui-ux-designer-lusaxweb-trend-2018-web-modern-flat-minmal-clean-manuel-rovira-yellow20_1x.png?alt=media&token=ba944af2-deb5-435a-89af-7e6dea6aa1d6',
-        title: 'nuevo slide',
-        description: 'hola mundo'
-      }
-    ]
+    miniSlides: []
   }),
+  mounted () {
+    this.getItemsSlideMini()
+  },
   methods: {
+    openMiniSlidePost (key) {
+      this.$router.push({
+        path: `/view/${key}`
+      })
+      document.querySelector('body').style = 'overflow: hidden'
+    },
     changeMiniSlide (index) {
       this.activeSlideMini = index
+    },
+    getItemsSlideMini () {
+      let ref = this.$firebase.database().ref('posts')
+      ref.on('value', (snapshot) => {
+        let posts = snapshot.val()
+        let miniPosts = []
+        let index = 0
+        let lengthx = Object.keys(posts).length
+        for (const post in posts) {
+          if (index >= lengthx - 5) {
+            posts[post].key = post
+            miniPosts.unshift(posts[post])
+          }
+          index++
+        }
+        console.log('post slide mini', miniPosts)
+        this.miniSlides = miniPosts
+      })
     }
   }
 }
@@ -124,15 +137,14 @@ export default {
 @require '../config'
 .con-slide
   width 100%
-  height 600px
   display flex
   align-items center
   justify-content center
   padding 10px
+  overflow hidden
   .slides
     width calc(100% - 410px)
     margin-right 10px
-    height 100%
     position relative
     &:after
       content ''
@@ -144,15 +156,20 @@ export default {
       background: linear-gradient(0deg, alpha($fondo,1) 0%, rgba(0,0,0,0) 100%) !important
       z-index 150
       width 100%
+    .con-slides
+      position relative
+      display block
+      overflow hidden
+      height 600px
     .slide
       position absolute
       left 0px
       top 0px
       width 100%
-      height 100%
       background $fondo2
       overflow hidden
       border-radius 10px
+      height 100%
       .con-text
         position absolute
         bottom 50px
@@ -171,7 +188,7 @@ export default {
           font-size .8rem
           color rgba(255,255,255,.6)
       img
-        height 100%
+        min-width 100%
         position relative
         border-radius 10px
   .con-ads-mini-slide
@@ -188,12 +205,6 @@ export default {
       display flex
       align-items center
       justify-content center
-      div[id*="carbonads"]
-        height 200px
-        margin-bottom 0px !important
-        display flex
-        align-items center
-        justify-content center
     .con-mini-slide
       width 100%
       height calc(100% - 200px)
@@ -201,14 +212,16 @@ export default {
       .con-slides
         width 100%
         height 100%
-        background rgb(100,100,0)
         overflow hidden
         border-radius 10px
+        position relative
         .slide
           height 100%
+          cursor pointer
           img
-            height 100%
+            width 100%
             border-radius 10px
+            display block
 
 .con-lines
   width 100%
@@ -253,4 +266,31 @@ export default {
     &.activeLine
       background rgb(255,255,255)
 
+@media only screen and (max-width: 1160px)
+  .con-slide
+    display block
+    .slides, .con-ads-mini-slide
+      width 100% !important
+      flex-direction row
+  .con-ads-mini-slide
+    align-items center
+    justify-content center
+  .con-ads
+    width 50% !important
+  .con-mini-slide
+    width 50% !important
+    position relative
+@media only screen and (max-width: 850px)
+  .con-ads-mini-slide
+    flex-direction column !important
+  .con-ads, .con-mini-slide
+    width 80% !important
+    margin 0px 10%
+  .con-mini-slide
+    order 1
+  .con-ads
+    order 3
+@media only screen and (max-width: 600px)
+  .con-ads, .con-mini-slide
+    width 100% !important
 </style>

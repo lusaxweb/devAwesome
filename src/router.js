@@ -9,7 +9,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: () => import('./views/Discover.vue')
     },
     {
       path: '/front-end',
@@ -58,6 +58,18 @@ export default new Router({
       path: '/Discover',
       name: 'discover',
       component: () => import('./views/Discover.vue'),
+      props: true
+    },
+    {
+      path: '/myValued',
+      name: 'myValued',
+      component: () => import('./views/MyValued.vue'),
+      props: true
+    },
+    {
+      path: '/myProyects',
+      name: 'myProyects',
+      component: () => import('./views/MyProyects.vue'),
       props: true
     }
   ]

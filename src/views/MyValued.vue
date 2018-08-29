@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <titlex title="DevAwesome" />
-    <menu-circles :tags="tags" />
+    <titlex title="My Valued" />
+    <!-- <menu-circles :tags="tags" /> -->
     <posts :section="title" :posts="posts" />
     <Carbon />
   </div>
@@ -29,53 +29,44 @@ export default {
   },
   data: () => ({
     name: 'hola',
-    posts: [],
-    tags: [],
-    tagsActive: []
+    posts: []
   }),
-  watch: {
-    tagsActive () {
-      // this.$firebase.database().ref('posts').off()
-      let self = this
-      let ref = this.$firebase.database().ref('posts')
-      ref.on('value', function (snapshot) {
-        let posts = snapshot.val()
-        if (self.tagsActive.length > 0) {
-          let arrayPosts = []
-          for (const post in posts) {
-            posts[post].key = post
-            arrayPosts.push(posts[post])
-          }
-
-          arrayPosts = arrayPosts.filter((post) => {
-            let valid = false
-            self.tagsActive.forEach((tag) => {
-              valid = post.tags.toLowerCase().indexOf(tag.toLowerCase()) !== -1
-            })
-            return valid
-          })
-
-          let objectPosts = {}
-
-          arrayPosts.forEach((item) => {
-            objectPosts[item.key] = item
-          })
-          self.posts = self.reverseObject(objectPosts)
-        } else {
-          self.posts = self.reverseObject(posts)
-        }
-      })
-      // this.$firebase.database().ref('posts').off()
-    }
-  },
   mounted () {
     let self = this
     var starCountRef = firebase.database().ref('posts')
+    console.log(starCountRef)
     starCountRef.on('value', function (snapshot) {
       // let childRef = starCountRef.child(snapshot)
       let posts = snapshot.val()
-      self.posts = self.reverseObject(posts)
-      self.getTags()
+
+      let arrayPosts = []
+      for (const post in posts) {
+        posts[post].key = post
+        arrayPosts.push(posts[post])
+      }
+
+      arrayPosts = arrayPosts.filter((post) => {
+        console.log('post', post)
+        if (post.likes) {
+          return post.likes.hasOwnProperty(self.$store.state.user.uid)
+        } else {
+          return false
+        }
+      })
+
+      if (arrayPosts.length === 0) {
+        console.log('entro aqui en el null')
+        self.posts = {}
+        return
+      }
+
+      let objectPosts = {}
+
+      arrayPosts.forEach((item) => {
+        objectPosts[item.key] = item
+      })
+
+      self.posts = arrayPosts.length > 0 ? self.reverseObject(objectPosts) : {}
     })
     document.querySelector('body').style = 'overflow: auto'
 
@@ -96,19 +87,6 @@ export default {
       }
 
       return newObject
-    },
-    getTags () {
-      let posts = this.posts
-      let tags = []
-      for (const key in posts) {
-        let tagsx = posts[key].tags.split(',')
-        tagsx.forEach(item => {
-          if (!tags.includes(item.trim())) {
-            tags.unshift(item.trim())
-          }
-        })
-      }
-      this.tags = tags
     }
   }
 }

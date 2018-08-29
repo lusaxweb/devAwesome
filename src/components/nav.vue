@@ -15,7 +15,7 @@
         </router-link>
       </div>
 
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/discover"><span>Discover</span></router-link>
+      <router-link @mouseout.native="outLink" @mouseover.native="clickLink" exact to="/"><span>Discover</span></router-link>
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/front-end"><span>Front-end</span></router-link>
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/back-end"><span>Back-end</span></router-link>
       <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/mobile-app"><span>Mobile app</span></router-link>
@@ -27,7 +27,7 @@
       </router-link>
     </div>
     <div class="nav-right">
-      <vs-input v-if="searchActive" @keypress.enter.prevent="searchPosts" vs-color="success" vs-icon-after vs-icon="search" placeholder="Search" v-model="$store.state.search"/>
+      <vs-input @keypress.enter.prevent="searchPosts" vs-color="success" vs-icon-after vs-icon="search" placeholder="Search" v-model="$store.state.search"/>
       <vs-button class="upload-btn" vs-icon-after @click="openUploadView" vs-color="success" vs-type="filled" vs-icon="add">Upload</vs-button>
       <vs-button class="btn-login" v-if="!$store.state.user" @click="logIn" vs-color="#603AFF" vs-type="filled">
         <span class="text-btn-inter">Log In</span>
@@ -35,13 +35,32 @@
       </vs-button>
 
       <div v-if="$store.state.user" class="con-img-user">
-        <img :src="$store.state.user.photoURL" alt="">
-        <i class="material-icons">
-          keyboard_arrow_down
-        </i>
-        <div class="con-menu-user">
-          <vs-button @click="signOut" vs-color="primary" vs-type="flat">Sign Out</vs-button>
+        <div :class="{'activeMenu': dropDown}" class="img-user" @click="toggleDropDown" >
+          <img :src="$store.state.user.photoURL" alt="">
+          <i  class="material-icons">
+            keyboard_arrow_down
+          </i>
         </div>
+        <transition name="fade-menu-user">
+          <div v-if="dropDown" class="con-menu-user">
+            <h6> {{ $store.state.user.displayName }} </h6>
+            <ul>
+              <li>
+                <router-link exact to="/myValued"><span>My Valued</span></router-link>
+              </li>
+              <li>
+                <router-link exact to="/myProyects"><span>My Proyects</span></router-link>
+              </li>
+              <!-- <li>
+                <i class="material-icons">
+                  wb_sunny
+                </i>
+                light mode
+              </li> -->
+            </ul>
+            <vs-button @click="signOut" vs-color="primary" vs-icon="power_settings_new" vs-type="flat">Sign Out</vs-button>
+          </div>
+          </transition>
       </div>
     </div>
   </nav>
@@ -49,6 +68,7 @@
 <script>
 export default {
   data: () => ({
+    dropDown: false,
     search: '',
     leftPoint: 0,
     menuActive: false,
@@ -56,7 +76,6 @@ export default {
   }),
   watch: {
     '$route': function () {
-      console.log('paso por aqui')
       this.searchActive = this.$router.currentRoute.name !== 'search'
     },
     menuActive () {
@@ -72,9 +91,33 @@ export default {
     window.addEventListener('scroll', this.scrollApp)
   },
   methods: {
+    toggleDropDown () {
+      let self = this
+      self.dropDown = !self.dropDown
+      setTimeout(() => {
+        function closeDropDown (evt) {
+          if (evt.target.closest('.con-img-user')) {
+            // window.removeEventListener('click', closeDropDown)
+          } else {
+            self.dropDown = false
+            window.removeEventListener('click', closeDropDown)
+          }
+        }
+
+        window.addEventListener('click', closeDropDown)
+      }, 100)
+    },
     searchPosts () {
-      console.log(this.$router.currentRoute)
-      this.$router.push('/search/' + this.$store.state.search)
+      if (this.$store.state.search) {
+        this.$router.push('/search/' + this.$store.state.search)
+      } else {
+        this.$vs.notify({
+          title: 'worthless search',
+          text: 'The Search value can not be empty',
+          color: 'danger',
+          icon: 'search'
+        })
+      }
     },
     openUploadView () {
       this.$router.push('/addPost/')
@@ -139,6 +182,14 @@ export default {
 </script>
 <style lang="stylus">
 @require '../config'
+
+.fade-menu-user-enter-active, .fade-menu-user-leave-active
+  transition: opacity .5s;
+
+.fade-menu-user-enter, .fade-menu-user-leave-to
+  opacity: 0;
+  transform translate(-5px,calc(100% + 23px)) !important
+
 .vs-input
   margin-right 7px
 .vs-inputx
@@ -225,42 +276,56 @@ export default {
       border-radius 5px
       cursor pointer
       position relative
-      display flex
-      align-items center
-      justify-content center
+
+      .img-user
+        display flex
+        align-items center
+        justify-content center
+        &.activeMenu
+          i
+            transform rotate(180deg)
       i
         margin-left 2px
+        transition all .2s ease
       .con-menu-user
         position absolute
         right 0px
         bottom 0px
-        // background $fondo2
+        background $fondo3
         box-sizing border-box
-        transform translate(5px,90%)
+        transform translate(-5px,calc(100% + 13px))
         display block
         width 100px
-        // padding 5px
-        opacity 0
+        padding 5px
         transition all .3s ease
+        border-radius 5px
+        min-width 200px
+        box-shadow 0px 5px 20px 0px rgba(0,0,0,.1)
+        &:after
+          content ''
+          position absolute
+          right 25px
+          top -5px
+          transform rotate(45deg)
+          width 10px
+          height 10px
+          background inherit
+        ul
+          li
+            padding 5px
+            text-align left
+            font-size .8rem
+            a
+              color rgb(255,255,255)
+              transition all .25s ease
+            .router-link-active
+              color $primary !important
         button
           width 100%
       img
         width 36px
         height 36px
         border-radius 5px
-      &:hover
-        .con-menu-user
-          opacity 1
-          transform translate(5px,99%)
-    // button
-    //   margin 0px 5px
-    //   padding 7px 15px
-    //   border-radius 5px;
-    //   background $primary
-    //   color rgba(255,255,255,1)
-    //   transition all .3s ease
-    //   &:hover
-    //     background rgba(255,255,255,.1)
   .links
     position relative
     display flex
@@ -350,6 +415,8 @@ export default {
 @media only screen and (max-width: 1160px)
   .con-nav
     padding 10px 5px
+    .nav-right
+      margin-top 0px !important
     .btn-open-sidebar
       display flex !important
     .con-logo

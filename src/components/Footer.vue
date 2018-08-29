@@ -32,6 +32,14 @@
 
     </div>
 
+    <div class="con-values-site">
+      <ul>
+        <li>Proyects: 504</li>
+        <li>Valued: 8804</li>
+        <li>Views: 586604</li>
+      </ul>
+    </div>
+
     <div class="con-cinta">
       <p>
         © 2018 <a href="https://lusaxweb.com/">Lusaxweb</a>. All rights reserved
@@ -132,6 +140,19 @@ export default {
   padding-top 80px
   box-sizing border-box
   padding-bottom 0px
+  .con-values-site
+    display flex
+    align-items center
+    justify-content center
+
+    ul
+      border-top 1px solid $
+      display flex
+      align-items center
+      justify-content center
+      padding 10px
+      li
+        padding 10px
   .con-cinta
     padding 20px
     font-size .75rem

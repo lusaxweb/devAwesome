@@ -17,6 +17,6 @@ export default {
 <style lang="stylus">
 .home
   width 100%
-  padding-top 100px
+  padding-top 80px
   position relative
 </style>
