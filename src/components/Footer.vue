@@ -304,5 +304,11 @@ export default {
             padding-bottom 5px
           li
             padding 2px 0px
+@media only screen and (max-width: 600px)
+  .con-values-site
+    ul
+      flex-wrap wrap
+      li
+        font-size 1rem !important
 
 </style>

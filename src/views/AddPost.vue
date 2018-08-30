@@ -38,6 +38,7 @@
           :vs-danger="!upload.description && activeDangers"
           vs-danger-text="This value is required"
           class="inputx" vs-label="Description *" v-model="upload.description"/>
+
         <vs-input
           :vs-danger="!upload.website && activeDangers"
           vs-danger-text="This value is required"

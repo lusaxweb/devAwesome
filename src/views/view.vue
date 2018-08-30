@@ -68,6 +68,13 @@
             <button class="button-a">
               <a target="_blank" :href="`${post.github}?ref=lusaxweb.github.io`" class="btn-follow">
               Github
+              <span class="star">
+                <i class="material-icons">
+                  star
+                </i>
+                {{ star }}
+              </span>
+
               </a>
             </button>
             <button class="button-a">
@@ -149,6 +156,7 @@ export default {
     CarbonView
   },
   data: () => ({
+    star: 0,
     tags: [],
     goLess: -1,
     imageLoaded: false,
@@ -167,7 +175,6 @@ export default {
     }
   },
   mounted () {
-    // localStorage.removeItem('postViews')
     this.$nextTick(() => {
       this.$vs.loading({
         container: '#div-with-loading',
@@ -266,6 +273,9 @@ export default {
           ...post,
           namePost: this.$router.currentRoute.params.name
         }
+
+        self.getStars(post)
+
         var img = new Image()
 
         img.onload = function () {
@@ -294,8 +304,28 @@ export default {
       })
     },
 
-    openPost (post, namePost) {
+    getStars (post) {
+      console.log(post)
+      let github = post.github.replace('https://github.com/', '')
+      // https://github.com/vuejs/vue
+      fetch(`https://api.github.com/repos/${github}`)
+        .then(response => response.json())
+        .then(json => {
+          this.star = json.stargazers_count || 0
+        })
+    },
 
+    getTwitter () {
+
+      fetch(`https://api.twitter.com/1.1/users/show.json?screen_name=twitterdev`)
+        .then(response => response.json())
+        .then(json => {
+          console.log('twitrer', json)
+          // this.star = json.stargazers_count || 0
+        })
+    },
+
+    openPost (post, namePost) {
       this.imageLoaded = false
       post.namePost = namePost
       this.$router.push({
@@ -501,6 +531,7 @@ export default {
     transition all .3s ease
     overflow auto
     max-height calc(100% - 80px)
+
     .descriptionx
       text-align left
       padding 10px 12px
@@ -597,6 +628,21 @@ export default {
       align-items center
       flex-wrap wrap
       padding 10px 4px
+      .star
+        background $morado
+        font-weight bold
+        position absolute
+        font-size .6rem
+        padding 3px 5px
+        display flex
+        align-items center
+        justify-content center
+        border-radius 5px
+        top -17px
+        right -8px
+        box-shadow 0px 3px 10px 0px rgba(0,0,0,.1)
+        i
+          font-size .7rem !important
       button
         padding 8px 16px
         border-radius 6px
@@ -611,6 +657,7 @@ export default {
         box-sizing border-box
         justify-content center
         transition all .3s ease
+        position relative
         &:hover
           background rgba(255,255,255,.15)
           border 2px solid rgba(255,255,255,0)

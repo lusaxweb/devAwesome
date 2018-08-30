@@ -27,7 +27,7 @@
             </div>
             <div class="con-btns">
             <button class="btn-link">
-              <a :href="`${posts[post].website}?ref=lusaxweb.github.io`">
+              <a target="_blank" :href="`${posts[post].website}?ref=lusaxweb.github.io`">
                 <i class="material-icons">
                   link
                 </i>

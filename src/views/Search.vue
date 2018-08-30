@@ -167,4 +167,7 @@ export default {
     color $primary
     padding-left 5px
 
+@media only screen and (max-width: 7068px)
+  .input-search
+    font-size 3rem
 </style>

@@ -11,7 +11,10 @@
       <div class="con-logo">
         <router-link ref="btn1" to="/" exact>
           <img src="png/devAwesome.png" alt="">
-          <span>DevAwesome</span>
+          <span>
+            DevAwesome
+            <b class="beta">BETA</b>
+          </span>
         </router-link>
       </div>
 
@@ -237,6 +240,7 @@ export default {
   top 0px;
   left 0px;
   transition all .3s ease
+  background rgb(34, 30, 51)
   &.menuActive
     background rgb(34, 30, 51)
     box-shadow 0px 5px 20px 0px rgba(0,0,0,.1)
@@ -251,6 +255,7 @@ export default {
     .con-logo
       font-size 1rem !important
       padding-top 0px !important
+
     a
       padding-top 15px !important
       padding-bottom 15px !important
@@ -412,6 +417,13 @@ export default {
       margin-right 25px
       font-size 1.5rem
       transition all .3s ease
+      position relative
+      .beta
+        position absolute
+        background $primary
+        font-size .6rem
+        bottom -4px
+        right -4px
       img
         width 40px
       a

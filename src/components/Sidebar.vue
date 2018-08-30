@@ -2,7 +2,7 @@
   <div :class="{'activeSidebar': $store.state.openSidebar}" class="con-sidebar">
     <div ref="links" class="con-links-sidebar">
 
-      <div class="con-logo">
+      <div class="con-logo-sidebar">
         <router-link ref="btn1" to="/" exact>
           <img src="png/devAwesome.png" alt="">
           <span>DevAwesome</span>
@@ -14,11 +14,26 @@
         <router-link to="/back-end"><span>Back-end</span></router-link>
         <router-link to="/mobile-app"><span>Mobile app</span></router-link>
         <router-link to="/more"><span>More</span></router-link>
-        <router-link class="icon" to="/points">
+        <span class="btn-puntos">
           <span class="material-icons">
             more_horiz
           </span>
-        </router-link>
+        </span>
+
+        <ul class="sub-menu-ul">
+          <li>
+            <router-link exact to="/About/about"><span>About</span></router-link>
+          </li>
+          <li>
+            <router-link exact to="/About/creators"><span>Creators</span></router-link>
+          </li>
+          <li>
+            <router-link exact to="/About/sponsor"><span>Sponsor and Backers</span></router-link>
+          </li>
+          <li>
+            <router-link exact to="/About/afiliates"><span>Afiliates</span></router-link>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -67,7 +82,7 @@ export default {
   display none
   transform translate(-100%)
   transition all .3s ease
-  .con-logo
+  .con-logo-sidebar
       font-weight bold
       padding 7px 0px
       padding-top 10px
@@ -106,6 +121,10 @@ export default {
 
 .activeSidebar
   transform translate(0) !important
+
+.btn-puntos
+  span
+    font-size 2rem !important
 
 @media only screen and (max-width: 1160px)
   .con-sidebar

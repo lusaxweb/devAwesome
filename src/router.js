@@ -4,6 +4,11 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
+  scrollBehavior (to, from, savedPosition) {
+    if (to.name !== 'About') {
+      return { x: 0, y: 0 }
+    }
+  },
   routes: [
     {
       path: '/',
@@ -29,11 +34,6 @@ export default new Router({
       path: '/more',
       name: 'more',
       component: () => import('./views/More.vue')
-    },
-    {
-      path: '/points',
-      name: 'points',
-      component: () => import('./views/Points.vue')
     },
     {
       path: '/view/:namePost/',

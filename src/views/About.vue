@@ -284,6 +284,7 @@ export default {
     padding 40px 20px
     padding-bottom 100px
     padding-top 100px
+
     .creator
       background $fondo2
       border-radius 35px
@@ -360,6 +361,7 @@ export default {
       display flex
       align-items center
       justify-content center
+      flex-wrap wrap
     li
       width 180px
       height 180px
@@ -406,5 +408,16 @@ export default {
     .creator
       margin-bottom 60px !important
 
-
+@media only screen and (max-width: 1250px)
+  .con-creators
+    .creator
+      display block !important
+      .creator-img
+        width 100%
+        .img-creator
+          margin auto !important
+      .creator-btn
+        .text-creator
+          transform translate(0) !important
+          padding-bottom 50px
 </style>
