@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 
 Vue.use(Router)
 
@@ -70,6 +69,12 @@ export default new Router({
       path: '/myProyects',
       name: 'myProyects',
       component: () => import('./views/MyProyects.vue'),
+      props: true
+    },
+    {
+      path: '/About/:section',
+      name: 'About',
+      component: () => import('./views/About.vue'),
       props: true
     }
   ]

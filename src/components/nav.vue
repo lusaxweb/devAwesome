@@ -4,7 +4,7 @@
     <div ref="links" class="links">
       <button class="btn-open-sidebar" @click="$store.state.openSidebar = true">
         <i class="material-icons">
-        dehaze
+          dehaze
         </i>
       </button>
 
@@ -15,23 +15,42 @@
         </router-link>
       </div>
 
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink" exact to="/"><span>Discover</span></router-link>
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/front-end"><span>Front-end</span></router-link>
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/back-end"><span>Back-end</span></router-link>
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink"  to="/mobile-app"><span>Mobile app</span></router-link>
-      <router-link @mouseout.native="outLink" @mouseover.native="clickLink" to="/more"><span>More</span></router-link>
-      <router-link class="icon" @mouseout.native="outLink" @mouseover.native="clickLink" to="/points">
+      <router-link exact to="/"><span>Discover</span></router-link>
+      <router-link to="/front-end"><span>Front-end</span></router-link>
+      <router-link to="/back-end"><span>Back-end</span></router-link>
+      <router-link to="/mobile-app"><span>Mobile app</span></router-link>
+      <router-link to="/more"><span>More</span></router-link>
+      <a href="#" class="icon con-sub-menu">
         <span class="material-icons">
           more_horiz
         </span>
-      </router-link>
+
+        <ul class="sub-menu-ul">
+          <li>
+            <router-link exact to="/About/about"><span>About</span></router-link>
+          </li>
+          <li>
+            <router-link exact to="/About/creators"><span>Creators</span></router-link>
+          </li>
+          <li>
+            <router-link exact to="/About/sponsor"><span>Sponsor and Backers</span></router-link>
+          </li>
+          <li>
+            <router-link exact to="/About/afiliates"><span>Afiliates</span></router-link>
+          </li>
+          <!-- <li>
+            <router-link exact to="/About/brand"><span>Brand</span></router-link>
+          </li> -->
+        </ul>
+
+      </a>
     </div>
     <div class="nav-right">
       <vs-input @keypress.enter.prevent="searchPosts" vs-color="success" vs-icon-after vs-icon="search" placeholder="Search" v-model="$store.state.search"/>
       <vs-button class="upload-btn" vs-icon-after @click="openUploadView" vs-color="success" vs-type="filled" vs-icon="add">Upload</vs-button>
       <vs-button class="btn-login" v-if="!$store.state.user" @click="logIn" vs-color="#603AFF" vs-type="filled">
         <span class="text-btn-inter">Log In</span>
-        <i class="flaticon-github"></i>
+        <i class="flaticon-github-logo"></i>
       </vs-button>
 
       <div v-if="$store.state.user" class="con-img-user">
@@ -222,6 +241,10 @@ export default {
     background rgb(34, 30, 51)
     box-shadow 0px 5px 20px 0px rgba(0,0,0,.1)
     padding-right 0px
+    .con-sub-menu
+      &:hover
+        .sub-menu-ul
+          top 0% !important
     .nav-right
       padding-right 0px
       margin-top 0px
@@ -263,6 +286,7 @@ export default {
       i
         margin-left 7px
         font-weight normal !important
+        font-size 17px
     .vs-button
       padding 8px 8px
       margin-right 7px
@@ -332,6 +356,45 @@ export default {
     align-items center
     justify-content flex-start
     padding-left 10px
+    .con-sub-menu
+      border-radius 0px !important
+      > span
+        transition all .3s ease
+      &:hover
+        background $fondo3
+        > span
+          opacity 0
+          transform translate(0, -15px) scale(.7)
+        .sub-menu-ul
+          opacity 1
+          top 35%
+          visibility visible
+    > a
+      display block
+      position relative
+    .sub-menu-ul
+      position absolute
+      top 100%
+      left 0px
+      background $fondo3
+      padding 5px
+      text-align left
+      min-width 170px
+      opacity 0
+      transition all .25s ease
+      border-radius 6px
+      visibility hidden
+      box-shadow 0px 8px 20px 0px rgba(0,0,0,.05)
+
+      li
+        a
+          padding 10px !important
+          display block
+          transition all .25s ease
+          position relative
+          color rgb(255,255,255)
+          &:hover
+            color $primary
     .btn-open-sidebar
       padding 5px
       display none
@@ -388,7 +451,8 @@ export default {
       &.icon
         padding-top 23px
         padding-bottom 12px
-      span
+
+      > span
         padding-top 20px
         display block
         z-index 100

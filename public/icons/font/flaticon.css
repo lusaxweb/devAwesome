@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 24/04/2018 20:17
+  	Creation date: 29/08/2018 20:07
   	*/
 
 @font-face {
@@ -24,23 +24,14 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
   font-family: Flaticon;
-        font-size: 21px;
-font-style: normal;
+  font-size: inherit;
+  font-style: normal;
 }
 
-.flaticon-instagram:before { content: "\f100"; }
-.flaticon-dribbble:before { content: "\f101"; }
-.flaticon-paypal:before { content: "\f102"; }
-.flaticon-slack:before { content: "\f103"; }
-.flaticon-reddit:before { content: "\f104"; }
-.flaticon-twitch:before { content: "\f105"; }
-.flaticon-vimeo:before { content: "\f106"; }
-.flaticon-github:before { content: "\f107"; }
-.flaticon-behance:before { content: "\f108"; }
-.flaticon-pinterest:before { content: "\f109"; }
-.flaticon-snapchat:before { content: "\f10a"; }
-.flaticon-linkedin:before { content: "\f10b"; }
-.flaticon-googlePlus:before { content: "\f10c"; }
-.flaticon-youtube:before { content: "\f10d"; }
-.flaticon-twitter:before { content: "\f10e"; }
-.flaticon-facebook:before { content: "\f10f"; }
+.flaticon-twitter-logo-silhouette:before { content: "\f100"; }
+.flaticon-instagram-logo:before { content: "\f101"; }
+.flaticon-linkedin-logo:before { content: "\f102"; }
+.flaticon-github-logo:before { content: "\f103"; }
+.flaticon-facebook-logo:before { content: "\f104"; }
+.flaticon-dribbble-logo:before { content: "\f105"; }
+.flaticon-behance-logo:before { content: "\f106"; }
