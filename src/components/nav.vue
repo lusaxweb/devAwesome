@@ -421,9 +421,11 @@ export default {
       .beta
         position absolute
         background $primary
-        font-size .6rem
-        bottom -4px
-        right -4px
+        font-size .5rem
+        bottom -5px
+        right -5px
+        padding 1px 2px
+        border-radius 3px
       img
         width 40px
       a

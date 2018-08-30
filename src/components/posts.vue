@@ -261,7 +261,7 @@ export default {
           img
             opacity .5
     .con-title-description
-      width calc(100% - 150px)
+      width calc(100% - 120px)
       p
         width 100%
         display block
@@ -392,6 +392,7 @@ export default {
         display block
         transform scale(1.3)
         transition opacity .3s ease
+        background #fff
 
 @media only screen and (max-width: 1400px)
   .post

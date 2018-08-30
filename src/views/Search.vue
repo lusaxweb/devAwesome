@@ -85,7 +85,6 @@ export default {
         }
 
         arrayPosts = arrayPosts.filter((post) => {
-          console.log('post', post)
           return post.title.toLowerCase().indexOf(self.$router.currentRoute.params.searching.toLowerCase()) !== -1 || post.tags.toLowerCase().indexOf(self.$router.currentRoute.params.searching.toLowerCase()) !== -1
         })
 
@@ -100,7 +99,6 @@ export default {
     getTags () {
       let posts = this.posts
       let tags = []
-      console.log('posts>>', posts)
       for (const key in posts) {
         let tagsx = posts[key].tags.split(',')
         tagsx.forEach(item => {

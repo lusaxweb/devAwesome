@@ -54,10 +54,10 @@
           vs-danger-text="This value is required"
           class="inputx" placeholder="@myTwitter" vs-label="Twitter *" v-model="upload.twitter"/>
 
-        <vs-input
+        <!-- <vs-input
           :vs-danger="!upload.email && activeDangers"
           vs-danger-text="This value is required"
-          class="inputx" vs-label="E-mail *" v-model="upload.email"/>
+          class="inputx" vs-label="E-mail *" v-model="upload.email"/> -->
 
         <div :class="{'fileActive': image1, 'fileDanger': !image1 && activeDangers}" class="con-file">
           <input
@@ -181,7 +181,7 @@ export default {
         return
       }
 
-      if (!this.upload.title || !this.upload.description || !this.upload.website || !this.upload.github || !this.upload.twitter || !this.upload.email || this.tags.length === 0) {
+      if (!this.upload.title || !this.upload.description || !this.upload.website || !this.upload.github || !this.upload.twitter || this.tags.length === 0) {
         this.activeDangers = true
         this.$vs.notify({
           title: 'Missing fields to fill',

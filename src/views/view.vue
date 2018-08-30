@@ -299,7 +299,7 @@ export default {
     },
 
     getPosts () {
-      this.$firebase.database().ref('posts').on('value', (snapshot) => {
+      this.$firebase.database().ref('posts').limitToFirst(4).on('value', (snapshot) => {
         this.morePosts = snapshot.val()
       })
     },
@@ -370,8 +370,8 @@ export default {
     padding 6px 12px
     border-radius 20px
     background $fondo3
-    font-size .8rem
-    margin 0px 2px
+    font-size .7rem
+    margin 3px 2px
     display block
     float left
     cursor pointer
@@ -489,6 +489,7 @@ export default {
         bottom 0px
         z-index 300
         position absolute
+        background #fff
   .con-similar-posts
     position relative
     height auto;
@@ -519,6 +520,7 @@ export default {
         width 100%
         display block
         transition all .3s ease
+        background #fff
   .con-description-view
     float left
     width 350px

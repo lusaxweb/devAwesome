@@ -103,8 +103,8 @@ export default {
       for (const key in posts) {
         let tagsx = posts[key].tags.split(',')
         tagsx.forEach(item => {
-          if (!tags.includes(item.trim())) {
-            tags.unshift(item.trim())
+          if (!tags.includes(item.trim().toLowerCase())) {
+            tags.push(item.trim().toLowerCase())
           }
         })
       }
