@@ -8,21 +8,21 @@
         Sobre Nosotros
       </h3>
       <p>
-        DevAwesome Es una red creada por diseñadores y desarrolladores para programadores, nuestra finalidad es crear una comunidad donde se comparta lo mejor y en tendencia de la programacion para asi aumentar el crecimiento y aprendizaje
+        We are a curated list of everything related to development with a visual representation, our goal is to get the programmers to find the best for their projects and developments, the projects are purified by a minimum of 1000 stars in github and a critique to have the best projects in our network
       </p>
 
        <h3>
-        DevAwesome Se Actualiza en
+        DevAwesome Updated in
       </h3>
 
       <ul class="list">
-        <li>Nuevos Proyectos</li>
+        <li>New projects</li>
         <li>Frameworks</li>
         <li>Apps</li>
         <li>Open source</li>
         <li>Web Sites</li>
-        <li>Proyectos de Github Mas populares</li>
-        <li>Entre otros</li>
+        <li>Most popular Github projects</li>
+        <li>others</li>
       </ul>
     </section>
     <section ref="creators" class="creators-list" id="creators">
@@ -35,22 +35,22 @@
             </div>
             <ul>
               <li>
-                <a href="">
+                <a target="_blank" href="https://github.com/luisDanielRoviraContreras">
                   <i class="flaticon-github-logo"></i>
                 </a>
               </li>
               <li>
-                <a href="">
+                <a target="_blank" href="https://twitter.com/luisdfly">
                   <i class="flaticon-twitter-logo-silhouette"></i>
                 </a>
               </li>
-              <li>
-                <a href="">
+              <!-- <li>
+                <a target="_blank" href="">
                   <i class="flaticon-instagram-logo"></i>
                 </a>
-              </li>
+              </li> -->
               <li>
-                <a href="">
+                <a target="_blank" href="https://www.linkedin.com/in/luis-daniel-rovira-contreras/">
                   <i class="flaticon-linkedin-logo"></i>
                 </a>
               </li>
@@ -61,7 +61,11 @@
               <h3>Luis Daniel Rovira Contreras</h3>
               <p>Full-stack Frontend Developer</p>
             </div>
-            <button>Become a Patron</button>
+            <button>
+              <a target="_blank" href="https://www.patreon.com/luisdanielroviracontreras">
+                Become a Patron
+              </a>
+            </button>
           </div>
         </div>
         <div class="creator">
@@ -71,22 +75,32 @@
             </div>
             <ul>
               <li>
-                <a href="">
-                  <i class="flaticon-github-logo"></i>
+                <a target="_blank" href="https://dribbble.com/ManuelRovira">
+                  <i class="flaticon-dribbble-logo"></i>
                 </a>
               </li>
               <li>
-                <a href="">
+                <a target="_blank" href="https://www.behance.net/ManuelRovira">
+                  <i class="flaticon-behance-logo"></i>
+                </a>
+              </li>
+              <li>
+                <a target="_blank" href="https://twitter.com/ManuelRovira2">
                   <i class="flaticon-twitter-logo-silhouette"></i>
                 </a>
               </li>
               <li>
-                <a href="">
-                  <i class="flaticon-instagram-logo"></i>
+                <a target="_blank" href="https://github.com/ManuelRovira">
+                  <i class="flaticon-github-logo"></i>
                 </a>
               </li>
+              <!-- <li>
+                <a target="_blank" href="">
+                  <i class="flaticon-instagram-logo"></i>
+                </a>
+              </li> -->
               <li>
-                <a href="">
+                <a target="_blank" href="https://www.linkedin.com/in/manuel-rovira/">
                   <i class="flaticon-linkedin-logo"></i>
                 </a>
               </li>
@@ -97,7 +111,11 @@
               <h3>Manuel Rovira Contreras</h3>
               <p>Designer UX / UI</p>
             </div>
-            <button>Become a Patron</button>
+            <button>
+              <a target="_blank" href="https://www.patreon.com/user/creators?u=12909465">
+                Become a Patron
+              </a>
+            </button>
           </div>
         </div>
       </div>
@@ -276,6 +294,7 @@ export default {
       padding-bottom 0px
       position relative
       margin 20px
+      box-shadow 0px 5px 20px 0px rgba(0,0,0,.1)
 
       .creator-img
         ul
@@ -316,7 +335,6 @@ export default {
           p
             padding-left 10px
         button
-          padding 15px 40px
           background $morado
           color rgb(255,255,255)
           font-weight bold
@@ -324,6 +342,10 @@ export default {
           position absolute
           bottom 0px
           transform translate(0, 30%)
+          a
+            padding 15px 40px
+            display block
+            color rgb(255,255,255)
 
 .section-sponsor, .afiliates-section
   min-height 600px

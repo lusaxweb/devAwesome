@@ -122,6 +122,48 @@ export default {
       this.tags.splice(this.tags.indexOf(item), 1)
     },
     changeValueImage (evt, number) {
+      console.log('evt', evt)
+      let self = this
+      var file = evt.target.files[0]
+      var img = new Image()
+
+      img.onload = function () {
+        var sizes = {
+          width: this.width,
+          height: this.height
+        }
+        URL.revokeObjectURL(this.src)
+
+        // console.log('onload: sizes', sizes)
+        // console.log('onload: this', this)
+        let notValid = true
+        if (sizes.width === 400 && sizes.height === 300) {
+          notValid = false
+        } else if (sizes.width === 800 && sizes.height === 600) {
+          notValid = false
+        }
+
+        if (notValid) {
+          self.$vs.notify({
+            title: 'Image Size',
+            text: `The images can only have a size of 400x300 or 800x600 in the case that is needed, the added image has a size of (${sizes.width}x${sizes.height})`,
+            color: 'danger'
+          })
+
+          const inputx = self.$refs[`inputFile${number}`]
+          console.log('inputx', inputx)
+          inputx.type = 'text'
+          inputx.type = 'file'
+          self[`image${number}`] = false
+        }
+      }
+
+      var objectURL = URL.createObjectURL(file)
+
+      console.log('change: file', file)
+      console.log('change: objectURL', objectURL)
+      img.src = objectURL
+
       if (evt.target.value !== '') {
         this[`image${number}`] = true
       } else {
@@ -228,7 +270,7 @@ export default {
                     image: '',
                     user: {}
                   }
-                  self.image1 = self.image1 = null
+                  self.image1 = self.image2 = null
                   self.activeDangers = false
                   self.tags = []
                 })

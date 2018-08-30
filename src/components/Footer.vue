@@ -24,7 +24,8 @@
           <li
             :key="item.text"
             v-for="item in ul.items">
-            <a :href="item.href"> {{ item.text }} </a>
+            <router-link v-if="item.local" exact :to="item.href"> {{ item.text }} </router-link>
+            <a v-else target="_blank" :href="item.href"> {{ item.text }} </a>
           </li>
         </ul>
         </div>
@@ -54,7 +55,7 @@
         © 2018 <a href="https://lusaxweb.com/">Lusaxweb</a>. All rights reserved
       </p>
       <p>
-        Made with ♥ Lusaxweb from Manuel Rovira, Luis Rovira
+        Made with ♥ Lusaxweb from <a href="https://dribbble.com/ManuelRovira">Manuel Rovira</a> , <a href="https://github.com/luisDanielRoviraContreras">Luis Rovira</a>
       </p>
     </div>
   </footer>
@@ -78,11 +79,11 @@ export default {
           {
             text: 'Discord',
             href: 'https://discord.gg/VxacJRH'
-          },
-          {
-            text: 'Facebook',
-            href: 'www.google.com'
           }
+          // {
+          //   text: 'Facebook',
+          //   href: 'www.google.com'
+          // }
         ]
       },
       {
@@ -107,11 +108,13 @@ export default {
         items: [
           {
             text: 'Submit a proyect',
-            href: 'www.google.com'
+            href: '/addPost/',
+            local: true
           },
           {
             text: 'Donate',
-            href: 'www.google.com'
+            href: '/About/sponsor',
+            local: true
           },
           {
             text: 'Lusaxweb',
@@ -119,7 +122,7 @@ export default {
           },
           {
             text: 'Contact',
-            href: 'www.google.com'
+            href: 'mailto:dev.awesome.app@gmail.com'
           },
           {
             text: 'Pull Request',

@@ -14,7 +14,7 @@
 
         <div class="con-img-view">
           <div id="div-with-loading" class="img-view">
-            <a taget="_blank" :href="`${post.website}?ref=lusaxweb.github.io`">
+            <a target="_blank" :href="`${post.website}?ref=lusaxweb.github.io`">
               <img v-show="imageLoaded" :src="post.image" alt="">
               <div class="loadingx"></div>
             </a>
@@ -35,7 +35,7 @@
         <div class="con-description-view">
           <div class="con-user-view">
             <div v-if="post.user" class="text-user">
-              <a taget="_blank" :href="post.user.githubUrl">
+              <a target="_blank" :href="post.user.githubUrl">
                 <div class="con-img-user-view">
                   <img v-if="post.user.photoURL !== 'devAwesome'" :src="post.user.photoURL" alt="">
                   <img v-else class="devAwesome-logo" src="png/devAwesome.png" alt="">
@@ -71,15 +71,15 @@
               </a>
             </button>
             <button class="button-a">
-              <a target="_blank" :href="`${post.twitter}?ref=lusaxweb.github.io`" class="btn-follow">
+              <a target="_blank" :href="`https://twitter.com/${post.twitter}?ref=lusaxweb.github.io`" class="btn-follow">
               Twitter
               </a>
             </button>
-            <button class="btn-share">
+            <!-- <button class="btn-share">
               <i class="material-icons">
                 share
               </i>
-            </button>
+            </button> -->
           </div>
 
           <div class="con-values">
@@ -504,7 +504,7 @@ export default {
     .descriptionx
       text-align left
       padding 10px 12px
-      font-size .9rem
+      font-size .75rem
       color rgba(255,255,255,.9)
     .con-comments
       padding 10px
