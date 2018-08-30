@@ -12,22 +12,4 @@
 
 We are a curated list of everything related to development with a visual representation, our goal is to get the programmers to find the best for their projects and developments, the projects are purified by a minimum of 1000 stars in github and a critique to have the best projects in our network
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
