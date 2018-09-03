@@ -239,14 +239,19 @@ export default {
   padding 10px
   position relative
   height auto
+  background $fondo
   section
     z-index 200
     position relative
   h1
     padding 10px
     text-align center
+    color rgba(255,255,255,.8)
   h3
+    color rgba(255,255,255,.8)
     padding 10px
+  h2
+    color rgba(255,255,255,.8)
   ul.list
     border-left 2px solid $fondo2
     margin 10px
@@ -254,6 +259,7 @@ export default {
       padding 10px
       position relative
       padding-left 15px
+      color rgba(255,255,255,.8)
       &:after
         content ''
         left -4px
@@ -333,6 +339,7 @@ export default {
           transform translate(0, -65%)
           h3
             padding 10px
+            color rgba(255,255,255,.8)
           p
             padding-left 10px
         button
@@ -401,6 +408,7 @@ export default {
 .afiliates-section
   h2
     padding-bottom 30px
+    color rgba(255,255,255,.8)
 
 @media only screen and (max-width: 1250px)
   .con-creators
