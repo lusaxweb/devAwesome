@@ -75,6 +75,13 @@
               <li>
                 <router-link exact to="/myProyects"><span>My Proyects</span></router-link>
               </li>
+              <li>
+                  <i class="material-icons">
+                    {{this.$store.state.light? 'brightness_7' : 'brightness_5'}}
+                  </i>
+                  light mode
+                  <vs-switch @change="changeTheme" v-model="$store.state.light"/>
+              </li>
               <!-- <li>
                 <i class="material-icons">
                   wb_sunny
@@ -115,6 +122,20 @@ export default {
     window.addEventListener('scroll', this.scrollApp)
   },
   methods: {
+    changeTheme () {
+      if (!this.$store.state.light) {
+        document.documentElement.style.setProperty('--fondo', '#231F34')
+        document.documentElement.style.setProperty('--fondo2', '#2C2741')
+        document.documentElement.style.setProperty('--fondo3', '#352F4E')
+        document.documentElement.style.setProperty('--text-color', 'rgb(255,255,255)')
+      } else {
+        document.documentElement.style.setProperty('--fondo', 'rgb(240,240,240)')
+        document.documentElement.style.setProperty('--fondo2', 'rgb(255,255,255)')
+        document.documentElement.style.setProperty('--fondo3', 'rgb(230,230,230)')
+        document.documentElement.style.setProperty('--text-color', '#231F34')
+      }
+
+    },
     toggleDropDown () {
       let self = this
       self.dropDown = !self.dropDown
@@ -217,9 +238,9 @@ export default {
 .vs-input
   margin-right 7px
 .vs-inputx
-  background $fondo3
+  background var(--fondo3)
   padding 8px !important
-  border 1px solid $fondo3 !important
+  border 1px solid var(--fondo3) !important
 
 .input-span-placeholder
   text-align left
@@ -242,9 +263,9 @@ export default {
   top 0px;
   left 0px;
   transition all .3s ease
-  background rgb(34, 30, 51)
+  background var(--fondo)
   &.menuActive
-    background rgb(34, 30, 51)
+    background var(--fondo)
     box-shadow 0px 5px 20px 0px rgba(0,0,0,.1)
     padding-right 0px
     .con-sub-menu
@@ -254,6 +275,7 @@ export default {
     .nav-right
       padding-right 0px
       margin-top 0px
+
     .con-logo
       font-size 1rem !important
       padding-top 0px !important
@@ -273,7 +295,7 @@ export default {
         border-radius 0px !important
       &.router-link-active
         span
-          color $primary !important
+          color $primary
     .punto
       border-radius 0% 0% 0 0 !important
       width 30px !important;
@@ -322,9 +344,9 @@ export default {
         position absolute
         right 0px
         bottom 0px
-        background $fondo3
+        background var(--fondo3)
         box-sizing border-box
-        transform translate(-5px,calc(100% + 13px))
+        transform translate(-5px, calc(100% + 13px))
         display block
         width 100px
         padding 5px
@@ -332,6 +354,8 @@ export default {
         border-radius 5px
         min-width 200px
         box-shadow 0px 5px 20px 0px rgba(0,0,0,.1)
+        .vs-switch
+          border-radius 12px !important
         &:after
           content ''
           position absolute
@@ -346,8 +370,15 @@ export default {
             padding 5px
             text-align left
             font-size .8rem
+            display flex
+            align-items center
+            justify-content flex-start
+            i
+              margin-right 5px
+            .vs-switch
+              margin-left auto
             a
-              color rgb(255,255,255)
+              color var(--text-color)
               transition all .25s ease
             .router-link-active
               color $primary !important
@@ -368,7 +399,7 @@ export default {
       > span
         transition all .3s ease
       &:hover
-        background $fondo3
+        background var(--fondo3)
         > span
           opacity 0
           transform translate(0, -15px) scale(.7)
@@ -379,11 +410,13 @@ export default {
     > a
       display block
       position relative
+      &.router-link-active
+        color rgb(255,255,255) !important
     .sub-menu-ul
       position absolute
       top 100%
       left 0px
-      background $fondo3
+      background var(--fondo3)
       padding 5px
       text-align left
       min-width 170px
@@ -399,7 +432,7 @@ export default {
           display block
           transition all .25s ease
           position relative
-          color rgb(255,255,255)
+          color var(--text-color)
           &:hover
             color $primary
     .btn-open-sidebar
@@ -408,7 +441,7 @@ export default {
       align-items center
       justify-content center
       background transparent
-      color rgb(255,255,255)
+      color var(--text-color)
       margin-right 10px
       i
         font-size 1.4rem
@@ -428,10 +461,11 @@ export default {
         right -5px
         padding 1px 2px
         border-radius 3px
+        color rgb(255,255,255)
       img
         width 40px
       a
-        color rgb(255,255,255) !important
+        color var(--text-color) !important
         padding 0px !important
         display flex
         align-items center
@@ -441,7 +475,7 @@ export default {
           padding-left 5px
           font-size 1.1rem
           padding-bottom 5px
-          color rgb(255,255,255) !important
+          color var(--text-color)
     .punto
       position absolute
       display block
@@ -458,7 +492,7 @@ export default {
       display block
       float left
       font-size .75rem
-      color rgb(255,255,255)
+      color var(--text-color)
       transition all .3s ease
       border-radius 0px 0px 10px 10px
       position relative

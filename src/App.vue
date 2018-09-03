@@ -74,39 +74,54 @@ export default {
 </script>
 <style lang="stylus">
 @require './config'
+// $fondo = #231F34
+// $fondo2 = #2C2741
+// $fondo3 = #352F4E
+
+:root {
+  --fondo: $fondo
+  --fondo2: $fondo2
+  --fondo3: $fondo3
+  --text-color: rgb(255,255,255)
+}
+
 .con-chips input
   background transparent
   color rgb(255,255,255)
 
 .vs-select-options
-  background $fondo3 !important
+  background var(--fondo3) !important
 .vs-select-item-btn
-  background $fondo3 !important
-  color rgb(255,255,255) !important
-  border-top 1px solid $fondo3 !important
-  border-bottom 1px solid $fondo3 !important
+  background var(--fondo3) !important
+  color var(--text-color) !important
+  border-top 1px solid var(--fondo3) !important
+  border-bottom 1px solid var(--fondo3) !important
   &:hover
-    background $fondo2 !important
+    background var(--fondo2) !important
   &.activex
     background $primary !important
+    color rgb(255,255,255) !important
 .input-select
-  background $fondo2
-  color rgb(255,255,255)
+  background var(--fondo2)
+  color var(--text-color) !important
   padding 10px !important
 .input-select-label
   text-align left !important
   width 100% !important
-  color rgb(255,255,255) !important
+  color var(--text-color) !important
   display block
   padding-bottom 5px
+
+.input-span-placeholder
+  color var(--text-color) !important
 
 *::-webkit-scrollbar
   width: 5px;
   height: 5px;
-  background: $fondo
+  background: var(--fondo)
 
 *::-webkit-scrollbar-thumb
-  background: $fondo3
+  background: var(--fondo3)
   border-radius: 5px;
 
 *::-webkit-scrollbar-thumb:hover
@@ -147,15 +162,15 @@ button
   cursor pointer
 
 body
-  background $fondo
+  background var(--fondo)
 
 #app
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: rgb(255,255,255)
-  background $fondo
+  color: var(--text-color)
+  background var(--fondo)
   width 100%
   overflow auto
   overflow-x hidden
@@ -177,11 +192,11 @@ body
 //     display none !important
 .vs-dialog
   color rgb(255,255,255) !important
-  background $fondo2 !important
+  background var(--fondo2) !important
   .vs-button-text
     color rgb(255,255,255) !important
   header
-    background $fondo3 !important
+    background var(--fondo3) !important
     h3
       font-weight normal !important
 

@@ -182,7 +182,7 @@ export default {
     align-items center
     justify-content center
     ul
-      border-top 1px solid $fondo3
+      border-top 1px solid var(--fondo3)
       display flex
       align-items center
       justify-content center
@@ -195,7 +195,8 @@ export default {
         h5
           font-size 1rem !important
           font-weight normal !important
-          color rgba(255,255,255,.3)
+          color var(--text-color)
+          opacity .7
         span
           font-size 1.2rem
           color $verde
@@ -203,9 +204,12 @@ export default {
   .con-cinta
     padding 20px
     font-size .75rem
-    color rgba(255,255,255,.3)
+    color var(--text-color)
     a
-      color rgba(255,255,255,.8)
+      color var(--text-color)
+      text-decoration underline
+      &:hover
+        color $primary
   .con-uls
     width 100%
     display flex
@@ -220,7 +224,7 @@ export default {
         padding 50px
         padding-top 30px
         h5
-          color rgb(255,255,255)
+          color var(--text-color)
           text-align left
           padding-bottom 15px
           font-size .9rem
@@ -229,10 +233,12 @@ export default {
           padding 5px 0px
           font-size .8rem
           a
-            color rgba(255,255,255,.4)
+            color var(--text-color)
             transition all .2s ease
+            opacity .5
             &:hover
-              color rgba(255,255,255,1)
+              opacity 1
+              color var(--text-color)
   .con-suscribe
     padding 20px
     max-width 350px
@@ -259,7 +265,7 @@ export default {
       text-align left
     .con-input-suscribe
       width 100%;
-      background $fondo2
+      background var(--fondo2)
       padding 9px
       border-radius 6px
       display flex
@@ -270,9 +276,9 @@ export default {
         padding 4px
         background transparent
         border 0px
-        color rgb(255,255,255)
+        color var(--text-color)
         &::placeholder
-          color rgba(255,255,255,.2)
+          color var(--text-color)
           letter-spacing 0.5px
       button
         padding 10px 15px

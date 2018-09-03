@@ -292,7 +292,9 @@ export default {
 <style lang="stylus">
 @require '../config'
 .con-chips
-  background $fondo2
+  background var(--fondo2)
+  input
+    color var(--text-color)
 .con-vs-chip
   cursor default
   background $morado
@@ -324,7 +326,7 @@ export default {
   position relative
   left 0px
   top 0px
-  background $fondo
+  background var(--fondo)
   width 100%
   overflow auto
   padding-top 0px
@@ -345,7 +347,7 @@ export default {
   .con-file
     width calc(50% - 5px)
     height 150px
-    background $fondo2
+    background var(--fondo2)
     position relative
     float left
     display flex
@@ -365,7 +367,7 @@ export default {
       position absolute
       transform translate(-50%, -50%)
       font-size 6rem
-      color $fondo
+      color var(--fondo)
       transition all .25s ease
     label
       padding 10px
@@ -373,7 +375,7 @@ export default {
       text-align center
       z-index 10
       font-weight bold
-      color rgba(255,255,255,.5)
+      color var(--text-color)
       letter-spacing 1px
       transition all .25s ease
     input
@@ -397,7 +399,7 @@ export default {
       max-width 600px
       padding 20px 10px
       .vs-input-label
-        color rgba(255,255,255,.8) !important
+        color var(--text-color) !important
         padding-bottom 8px !important
         display block
       .inputx
@@ -406,9 +408,9 @@ export default {
         text-align left
       .vs-inputx
         padding 10px !important
-        background $fondo2 !important
+        background var(--fondo2) !important
         border 1px solid rgba(255,255,255,0) !important
       .input-span-placeholder
         text-align left
-        color rgba(255,255,255,.3) !important
+        color var(--text-color) !important
 </style>

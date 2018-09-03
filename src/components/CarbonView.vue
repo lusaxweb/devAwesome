@@ -39,7 +39,7 @@ export default {
     max-width: 400px;
     border-radius: 6px;
     text-align: center;
-    background: $fondo2 !important;
+    background: var(--fondo2) !important;
     font-size: var(--font-size);
     line-height: 1.5;
     position: relative;

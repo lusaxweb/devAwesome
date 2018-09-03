@@ -165,7 +165,7 @@ export default {
       float left
       .card
         border-radius 10px
-        background $fondo2
+        background var(--fondo2)
         display block
         animation example ease infinite 2.5s
         overflow hidden
@@ -176,7 +176,7 @@ export default {
           top 7px
           width calc(100% - 14px)
           height 80%
-          background $fondo
+          background var(--fondo)
           position relative
           padding-bottom 75%
         .ul-loading
@@ -192,7 +192,7 @@ export default {
             top 15px
             width 30%
             height 5px
-            background $fondo
+            background var(--fondo)
           &:before
             border-radius 10px
             content ''
@@ -201,11 +201,11 @@ export default {
             top 25px
             width 50%
             height 3px
-            background $fondo
+            background var(--fondo)
           li
             padding 10px
             display block
-            color $fondo
+            color var(--fondo)
             user-select none
 
 @keyframes example
@@ -231,14 +231,14 @@ export default {
   overflow hidden
   // height 2000px
   .post
-    background $fondo2
+    background var(--fondo2)
     border-radius 8px;
     width 100%;
     max-width calc(20% - 14px);
     float left
     margin 7px;
     box-shadow 0px 6px 20px 0px rgba(0,0,0,.1)
-    color rgb(255,255,255)
+    color var(--text-color)
     cursor pointer
     transition all .25s ease
     position relative
@@ -271,7 +271,7 @@ export default {
     &:hover
       transform translate(0,5px)
       box-shadow 0px 0px 0px 0px rgba(0,0,0,.1) !important
-      background $fondo
+      background var(--fondo)
       .btn-delete-item
         top 22px
         right 0%
@@ -320,8 +320,8 @@ export default {
         button
           padding 8px
           border-radius 6px;
-          background $fondo3
-          color rgb(255,255,255)
+          background var(--fondo3)
+          color var(--text-color)
           position relative
           margin 0px 3px
           display flex
@@ -332,6 +332,7 @@ export default {
           z-index 200
           &.activeLike
             background $primary !important
+            color rgb(255,255,255)
           &.disabledx
             color rgba(255,255,255,.5)
             // opacity .5 !important
@@ -339,6 +340,8 @@ export default {
             padding 0px !important
             &:hover
               background $morado
+              a
+                color rgb(255,255,255) !important
             a
               padding 8px
               display flex
@@ -346,9 +349,10 @@ export default {
               justify-content center
               padding-top 9px
               padding-bottom 7px
-              color rgb(255,255,255)
+              color var(--text-color)
           &:hover
             background $primary
+            color rgb(255,255,255)
           &.btn-download
             &:hover
               background $verde
@@ -371,7 +375,6 @@ export default {
       display flex
       align-items center
       justify-content center
-      background rgb(255,255,255)
       position relative
       margin 8px
       margin-bottom 3px
@@ -379,7 +382,7 @@ export default {
       transition all .25s ease
       z-index 100
       backface-visibility visible
-      background $fondo
+      background var(--fondo)
       padding-bottom 75%
       img
         z-index 10

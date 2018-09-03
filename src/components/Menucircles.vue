@@ -123,13 +123,13 @@ export default {
   ul
     width auto
     li
-      border-bottom 1px solid $fondo !important
+      border-bottom 1px solid var(--fondo) !important
       animation circlesLoading ease infinite 1.2s
       transition all .3s ease
       &:after
         background $primary !important
       &:before
-        background $fondo !important
+        background var(--fondo) !important
 
 @keyframes circlesLoading
   0%
@@ -157,7 +157,7 @@ export default {
       content ''
       position absolute
       left 0px
-      background linear-gradient(90deg, $fondo 60%, rgba(0,0,0,0) 100%);
+      background linear-gradient(90deg, var(--fondo) 60%, rgba(0,0,0,0) 100%);
       top 0px
       height 100%
       width 5%
@@ -167,7 +167,7 @@ export default {
       content ''
       position absolute
       right 0px
-      background linear-gradient(-90deg, $fondo 60%, rgba(0,0,0,0) 100%);
+      background linear-gradient(-90deg, var(--fondo) 60%, rgba(0,0,0,0) 100%);
       top 0px
       height 100%
       width 5%
@@ -179,14 +179,14 @@ export default {
     padding-left 10px
     padding-right 10px
     background transparent
-    color rgb(255,255,255)
+    color var(--text-color)
     z-index 200
     transition all .25s ease
     display block
     &.rightx
-      background-image: linear-gradient(90deg, $fondo 0%, rgba(0,0,0,0) 100%);
+      background-image: linear-gradient(90deg, var(--fondo) 0%, rgba(0,0,0,0) 100%);
     &.leftx
-      background-image: linear-gradient(-90deg, $fondo 0%, rgba(0,0,0,0) 100%);
+      background-image: linear-gradient(-90deg, var(--fondo) 0%, rgba(0,0,0,0) 100%);
     &:hover
       color $primary
 
@@ -214,17 +214,19 @@ export default {
       font-size .8rem
       cursor pointer
       position relative
-      color rgba(255,255,255,.23)
-      border-bottom 1px solid $fondo3
+      color var(--text-color)
+      border-bottom 1px solid var(--fondo3)
       transition all .25s ease
       user-select none
       text-transform capitalize
       &:hover
-        color rgba(255,255,255,1)
+        color var(--text-color)
+        font-weight bold
       &.activeTag
-        color rgba(255,255,255,1)
+        color var(--text-color)
+        font-weight bold
         &:after
-          background rgba(255,255,255,1) !important
+          background var(--text-color) !important
           transform scale(1.2) translate(-50%, 50%)
       &:last-child,&:first-child
         border-bottom 1px solid rgba(0,0,0,0)
@@ -234,7 +236,7 @@ export default {
           bottom -1px
           height 1px
           width 50%
-          background $fondo3
+          background var(--fondo3)
           position absolute
       &:first-child
         &:before
@@ -246,7 +248,7 @@ export default {
         height 6px
         border-radius 50%
         width 6px
-        background $fondo3
+        background var(--fondo3)
         position absolute
         transform translate(-50%, 50%)
         transition all .25s ease

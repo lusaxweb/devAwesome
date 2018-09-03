@@ -38,7 +38,7 @@ export default {
   border-radius: 6px;
   text-align: center;
   box-shadow: 0px 5px 20px 0px rgba(0,0,0,.1);
-  background: $fondo2 !important;
+  background: var(--fondo2) !important;
   font-size: var(--font-size);
   line-height: 1.5;
   position: relative;

@@ -368,7 +368,7 @@ export default {
   span
     padding 6px 12px
     border-radius 20px
-    background $fondo3
+    background var(--fondo3)
     font-size .7rem
     margin 3px 2px
     display block
@@ -377,6 +377,7 @@ export default {
     transition all .3s ease
     &:hover
       background $primary
+      color rgb(255,255,255)
     &:first-child
       margin-left 0px !important
 
@@ -393,16 +394,16 @@ export default {
 
 @keyframes loading
   0%
-    background $fondo
+    background var(--fondo)
     transform scale(1)
   33%
-    background $fondo3
+    background var(--fondo3)
     transform scale(.9)
   66%
-    background $fondo2
+    background var(--fondo2)
     transform scale(1.1)
   100%
-    background $fondo
+    background var(--fondo)
     transform scale(1)
 
 .view-enter-active, .view-leave-active {
@@ -420,7 +421,7 @@ export default {
   position fixed
   left 0px
   top 0px
-  background $fondo
+  background var(--fondo)
   width 100%
   height 100%
   z-index 20000
@@ -440,7 +441,9 @@ export default {
       justify-content center
       border-radius 6px
       background transparent
-      color rgb(255,255,255)
+      color var(--text-color)
+      i
+        font-size 1.5rem
   .view
     position relative
     padding 20px
@@ -469,7 +472,7 @@ export default {
       justify-content center
       height calc(100% - 240px)
       overflow hidden
-      background $fondo2
+      background var(--fondo2)
       border-radius 8px
       transition all .3s ease
       // padding 20px
@@ -501,7 +504,7 @@ export default {
     height auto;
     width 100%
     // max-width 1170px
-    background $fondo2
+    background var(--fondo2)
     border-radius 8px
     transition all .3s ease
     overflow hidden
@@ -530,7 +533,7 @@ export default {
   .con-description-view
     float left
     width 350px
-    background $fondo2
+    background var(--fondo2)
     border-radius 8px;
     margin 10px
     padding 10px
@@ -544,7 +547,7 @@ export default {
       text-align left
       padding 10px 12px
       font-size .75rem
-      color rgba(255,255,255,.9)
+      color var(--text-color)
     .con-comments
       padding 10px
       padding-top 0px
@@ -570,7 +573,7 @@ export default {
             border-bottom 1px solid rgba(255,255,255,0)
           >p
             font-size .7rem
-            color rgba(255,255,255,.5)
+            color var(--text-color)
             text-align left
             padding 5px 0px
           header
@@ -582,7 +585,7 @@ export default {
             h5
               font-size .75rem
               padding-left 5px
-              color rgb(255,255,255)
+              color var(--text-color)
             img
               width 35px;
               height 35px;
@@ -594,14 +597,14 @@ export default {
         width 100%
         max-height 80px
         resize none
-        background $fondo3
+        background var(--fondo3)
         border-radius 6px
         border 0px
         padding 10px
-        color rgb(255,255,255)
+        color var(--text-color)
         font-size .75rem
         &::placeholder
-          color rgba(255,255,255,.15)
+          color var(--text-color)
 
     .con-values
       width 100%
@@ -622,7 +625,7 @@ export default {
           display flex
           align-items center
           justify-content center
-          color rgba(255,255,255,.35)
+          color var(--text-color)
           user-select none
           cursor default
           i
@@ -649,6 +652,7 @@ export default {
         top -17px
         right -8px
         box-shadow 0px 3px 10px 0px rgba(0,0,0,.1)
+        color rgb(255,255,255)
         i
           font-size .7rem !important
       button
@@ -667,6 +671,7 @@ export default {
         transition all .3s ease
         position relative
         &:hover
+          color var(--fondo3)
           background rgba(255,255,255,.15)
           border 2px solid rgba(255,255,255,0)
         &.activeLike
@@ -677,7 +682,7 @@ export default {
           a
             padding 8px 16px
             display block
-            color rgb(255,255,255)
+            color var(--text-color)
 
         i
           font-size 1.1rem
@@ -715,7 +720,7 @@ export default {
       p
         padding-left 10px
         font-size .8rem
-        color rgba(255,255,255,.6)
+        color var(--text-color)
       .con-img-user-view
         overflow hidden
         width 40px

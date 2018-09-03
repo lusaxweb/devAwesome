@@ -45,4 +45,11 @@ export default {
   .selectx
     max-width 200px
     margin 7px
+
+@media only screen and (max-width: 600px)
+  .con-select-filter
+    flex-wrap wrap
+    .selectx
+      max-width 100%
+      width 100%
 </style>
