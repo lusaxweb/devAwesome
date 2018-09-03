@@ -5,6 +5,8 @@
 
     <menu-circles :tags="tags" />
     <posts :section="title" :posts="posts" />
+
+    <vs-button class="btn-more" @click="maxPosts += 10" vs-color="#603aff" vs-type="filled">Load More Proyects ...</vs-button>
     <Carbon />
   </div>
 </template>
@@ -35,25 +37,103 @@ export default {
     name: 'hola',
     posts: [],
     tags: [],
-    tagsActive: []
+    tagsActive: [],
+    maxPosts: 10
   }),
   computed: {
     explore () {
       return this.$store.state.filters.explore
+    },
+    section () {
+      return this.$store.state.filters.section
+    },
+    lenguaje () {
+      return this.$store.state.filters.lenguaje
     }
   },
   watch: {
+    maxPosts () {
+      this.getPosts()
+    },
     explore () {
-      console.log(this.$store.state.filters.explore)
+      this.maxPosts = 4
+      this.getPosts()
+    },
+    section () {
+      this.maxPosts = 4
+      this.getPosts()
+    },
+    lenguaje () {
+      this.maxPosts = 4
+      this.getPosts()
+    },
+    tagsActive () {
+      // this.$firebase.database().ref('posts').off()
+      let self = this
+      let ref = this.$firebase.database().ref('posts')
+      if (this.$store.state.filters.section) {
+        ref = firebase.database().ref('posts').orderByChild('section').equalTo(this.$store.state.filters.section.toLowerCase())
+      } else {
+        ref = firebase.database().ref('posts')
+      }
+      ref.on('value', function (snapshot) {
+        let posts = snapshot.val()
+        if (self.tagsActive.length > 0) {
+          let arrayPosts = []
+          for (const post in posts) {
+            posts[post].key = post
+            arrayPosts.push(posts[post])
+          }
+
+          let validArray = []
+          arrayPosts = arrayPosts.forEach((post, index) => {
+            self.tagsActive.forEach((tag) => {
+              if (post.tags.toLowerCase().indexOf(tag.toLowerCase()) !== -1) {
+                if (index < self.maxPosts) {
+                  validArray.push(post)
+                }
+              }
+            })
+          })
+
+          let objectPosts = {}
+
+          validArray.forEach((item) => {
+            objectPosts[item.key] = item
+          })
+          self.posts = self.reverseObject(objectPosts)
+        } else {
+          self.posts = self.reverseObject(posts)
+        }
+      })
+      // this.$firebase.database().ref('posts').off()
+    }
+  },
+  mounted () {
+    this.getPosts()
+    document.querySelector('body').style = 'overflow: auto'
+
+    this.$nextTick(() => {
+      this.$store.state.openSidebar = false
+    })
+  },
+  methods: {
+    getPosts () {
       let self = this
       let explore = this.$store.state.filters.explore
       var starCountRef = firebase.database().ref('posts')
+      if (this.$store.state.filters.section) {
+        starCountRef = firebase.database().ref('posts').orderByChild('section').equalTo(this.$store.state.filters.section.toLowerCase())
+      } else {
+        starCountRef = firebase.database().ref('posts')
+      }
 
       if (explore === 'viewed') {
         starCountRef.on('value', function (snapshot) {
           let posts = snapshot.val()
 
           var sortable = []
+
           for (var vehicle in posts) {
             sortable.push([vehicle, posts[vehicle]])
           }
@@ -63,11 +143,13 @@ export default {
           })
 
           let postsOrder = {}
-          sortable.forEach((item) => {
-            postsOrder[item[0]] = item[1]
-          })
-          // console.log(sortable)
-          // self.posts = self.reverseObject(posts)
+          for (let index = 0; index < sortable.length; index++) {
+            if (index >= self.maxPosts) {
+              break
+            }
+            const element = sortable[index]
+            postsOrder[element[0]] = element[1]
+          }
           self.posts = postsOrder
           self.getTags()
         })
@@ -76,7 +158,11 @@ export default {
           let posts = snapshot.val()
 
           var sortable = []
+          let index = 0
           for (var vehicle in posts) {
+            if (index >= self.maxPosts) {
+              break
+            }
             sortable.push([vehicle, posts[vehicle]])
           }
 
@@ -91,71 +177,42 @@ export default {
           })
 
           let postsOrder = {}
-          sortable.forEach((item) => {
-            postsOrder[item[0]] = item[1]
-          })
+          for (let index = 0; index < sortable.length; index++) {
+            if (index >= self.maxPosts) {
+              break
+            }
+            const element = sortable[index]
+            postsOrder[element[0]] = element[1]
+          }
           // console.log(sortable)
           // self.posts = self.reverseObject(posts)
           self.posts = postsOrder
           self.getTags()
         })
       } else if (explore === 'recent') {
+        if (this.$store.state.filters.section) {
+          starCountRef = firebase.database().ref('posts').orderByChild('section').equalTo(this.$store.state.filters.section.toLowerCase()).limitToLast(self.maxPosts)
+        } else {
+          starCountRef = firebase.database().ref('posts').limitToLast(self.maxPosts)
+        }
         starCountRef.on('value', function (snapshot) {
           let posts = snapshot.val()
-          self.posts = self.reverseObject(posts)
+          if (self.$store.state.filters.lenguaje) {
+            let postFilter = {}
+            for (const key in posts) {
+              let post = posts[key]
+              if (post.lenguaje === self.$store.state.filters.lenguaje) {
+                postFilter[key] = post
+              }
+            }
+            self.posts = postFilter
+          } else {
+            self.posts = self.reverseObject(posts)
+          }
           self.getTags()
         })
       }
     },
-    tagsActive () {
-      // this.$firebase.database().ref('posts').off()
-      let self = this
-      let ref = this.$firebase.database().ref('posts')
-      ref.on('value', function (snapshot) {
-        let posts = snapshot.val()
-        if (self.tagsActive.length > 0) {
-          let arrayPosts = []
-          for (const post in posts) {
-            posts[post].key = post
-            arrayPosts.push(posts[post])
-          }
-
-          arrayPosts = arrayPosts.filter((post) => {
-            let valid = false
-            self.tagsActive.forEach((tag) => {
-              valid = post.tags.toLowerCase().indexOf(tag.toLowerCase()) !== -1
-            })
-            return valid
-          })
-
-          let objectPosts = {}
-
-          arrayPosts.forEach((item) => {
-            objectPosts[item.key] = item
-          })
-          self.posts = self.reverseObject(objectPosts)
-        } else {
-          self.posts = self.reverseObject(posts)
-        }
-      })
-      // this.$firebase.database().ref('posts').off()
-    }
-  },
-  mounted () {
-    let self = this
-    var starCountRef = firebase.database().ref('posts')
-    starCountRef.on('value', function (snapshot) {
-      let posts = snapshot.val()
-      self.posts = self.reverseObject(posts)
-      self.getTags()
-    })
-    document.querySelector('body').style = 'overflow: auto'
-
-    this.$nextTick(() => {
-      this.$store.state.openSidebar = false
-    })
-  },
-  methods: {
     reverseObject (object) {
       var newObject = {}
       var keys = []
@@ -203,4 +260,7 @@ export default {
   box-shadow 0px 5px 15px 0px rgba(0,0,0,.4)
   .material-icons
     font-size 24px
+.btn-more
+  margin 30px
+  margin-bottom 60px
 </style>

@@ -46,7 +46,7 @@ export default new Vuex.Store({
       {text: 'C++', value: 'c++'},
       {text: 'Java', value: 'java'},
       {text: 'Kotlin', value: 'kotlin'},
-      {text: 'Larabel', value: 'larabel'},
+      {text: 'Laravel', value: 'larabel'},
       {text: 'Polymer', value: 'polymer'},
       {text: 'Backbone', value: 'backbone'},
       {text: 'Ember', value: 'ember'},

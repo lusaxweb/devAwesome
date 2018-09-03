@@ -4,8 +4,9 @@
       placeholder="Section"
       vs-color="#FF3A4E"
       class="selectx"
-      v-model="$store.state.filters.action"
+      v-model="$store.state.filters.section"
       >
+        <vs-select-item :vs-value="null" vs-text="none" />
         <vs-select-item :key="index" :vs-value="item.value" :vs-text="item.text" v-for="(item,index) in $store.state.sections" />
     </vs-select>
     <vs-select
@@ -14,9 +15,9 @@
       class="selectx"
       v-model="$store.state.filters.lenguaje"
       >
+        <vs-select-item :vs-value="null" vs-text="none" />
         <vs-select-item :key="index" :vs-value="item.value" :vs-text="item.text" v-for="(item,index) in $store.state.lenguajes" />
     </vs-select>
-    {{$store.state.filters.explore}}
     <vs-select
       placeholder="Explore"
       vs-color="#FF3A4E"

@@ -15,7 +15,7 @@
         <div class="con-img-view">
           <div id="div-with-loading" class="img-view">
             <a target="_blank" :href="`${post.website}?ref=lusaxweb.github.io`">
-              <img v-show="imageLoaded" :src="post.image" alt="">
+              <img :class="{'imageLoaded':imageLoaded}" v-show="imageLoaded" :src="post.image" alt="">
               <div class="loadingx"></div>
             </a>
           </div>
@@ -316,7 +316,6 @@ export default {
     },
 
     getTwitter () {
-
       fetch(`https://api.twitter.com/1.1/users/show.json?screen_name=twitterdev`)
         .then(response => response.json())
         .then(json => {
@@ -478,6 +477,10 @@ export default {
       position relative
       .con-vs-loading
         position absolute
+        z-index 200
+        .effects
+          z-index 200
+
       img
         border-radius 8px
         width 100%
@@ -489,7 +492,10 @@ export default {
         bottom 0px
         z-index 300
         position absolute
-        background #fff
+        background transparent
+        z-index 100
+        &.imageLoaded
+          background #fff
   .con-similar-posts
     position relative
     height auto;
