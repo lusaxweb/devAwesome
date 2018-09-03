@@ -19,10 +19,12 @@
       </div>
 
       <router-link exact to="/"><span>Discover</span></router-link>
-      <router-link to="/front-end"><span>Front-end</span></router-link>
-      <router-link to="/back-end"><span>Back-end</span></router-link>
-      <router-link to="/mobile-app"><span>Mobile app</span></router-link>
-      <router-link to="/more"><span>More</span></router-link>
+      <router-link exact to="/developers"><span>Developers</span></router-link>
+
+      <!-- <router-link to="/front-end"><span>Front-end</span></router-link> -->
+      <!-- <router-link to="/back-end"><span>Back-end</span></router-link> -->
+      <!-- <router-link to="/mobile-app"><span>Mobile app</span></router-link> -->
+      <!-- <router-link to="/more"><span>More</span></router-link> -->
       <a href="#" class="icon con-sub-menu">
         <span class="material-icons">
           more_horiz

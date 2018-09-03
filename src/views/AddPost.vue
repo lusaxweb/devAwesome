@@ -9,10 +9,18 @@
           vs-color="#FF3A4E"
           vs-label="Section *"
           class="selectx"
-          label="Figuras"
           v-model="upload.section"
           >
-            <vs-select-item :key="index" :vs-value="item.value" :vs-text="item.text" v-for="(item,index) in sections" />
+            <vs-select-item :key="index" :vs-value="item.value" :vs-text="item.text" v-for="(item,index) in this.$store.state.sections" />
+        </vs-select>
+
+        <vs-select
+          vs-color="#FF3A4E"
+          vs-label="Lenguaje Or Framework *"
+          class="selectx"
+          v-model="upload.lenguaje"
+          >
+            <vs-select-item :key="index" :vs-value="item.value" :vs-text="item.text" v-for="(item,index) in this.$store.state.lenguajes" />
         </vs-select>
 
         <label class="label-tags" for="">Tags *</label>
@@ -93,15 +101,8 @@ export default {
     tags: [],
     image1: false,
     image2: false,
-    sections: [
-      {text: 'Front-end', value: 'front-end'},
-      {text: 'Back-end', value: 'back-end'},
-      {text: 'Back-end', value: 'back-end'},
-      {text: 'Movile-app', value: 'movile-app'},
-      {text: 'More', value: 'more'}
-    ],
     upload: {
-      section: 'Front-end',
+      section: 'front-end',
       title: '',
       description: '',
       website: '',
@@ -115,7 +116,10 @@ export default {
       email: '',
       miniImage: '',
       image: '',
-      user: {}
+      user: {},
+      likesNumber: 0,
+      timestamp: new Date(),
+      lenguaje: 'javascript'
     }
   }),
   methods: {
@@ -172,6 +176,8 @@ export default {
       }
     },
     uploadx () {
+      this.upload.timestamp = Date.now()
+
       if (!this.$store.state.user) {
         this.$vs.notify({
           title: 'Necessary Login User',
@@ -181,7 +187,7 @@ export default {
         return
       }
 
-      if (!this.upload.title || !this.upload.description || !this.upload.website || !this.upload.github || !this.upload.twitter || this.tags.length === 0) {
+      if (!this.upload.title || !this.upload.description || !this.upload.website || !this.upload.github || !this.upload.twitter || this.tags.length === 0 || !this.upload.lenguaje) {
         this.activeDangers = true
         this.$vs.notify({
           title: 'Missing fields to fill',

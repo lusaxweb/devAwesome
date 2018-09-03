@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <titlex title="DevAwesome" />
+    <filters/>
+
     <menu-circles :tags="tags" />
     <posts :section="title" :posts="posts" />
     <Carbon />
@@ -11,6 +13,7 @@ import Carbon from '../components/Carbon.vue'
 import posts from '../components/posts.vue'
 import titlex from '../components/titlex.vue'
 import menuCircles from '../components/Menucircles.vue'
+import filters from '../components/filters.vue'
 
 import firebase from 'firebase'
 
@@ -19,7 +22,8 @@ export default {
     posts,
     titlex,
     menuCircles,
-    Carbon
+    Carbon,
+    filters
   },
   props: {
     title: {
@@ -33,7 +37,76 @@ export default {
     tags: [],
     tagsActive: []
   }),
+  computed: {
+    explore () {
+      return this.$store.state.filters.explore
+    }
+  },
   watch: {
+    explore () {
+      console.log(this.$store.state.filters.explore)
+      let self = this
+      let explore = this.$store.state.filters.explore
+      var starCountRef = firebase.database().ref('posts')
+
+      if (explore === 'viewed') {
+        starCountRef.on('value', function (snapshot) {
+          let posts = snapshot.val()
+
+          var sortable = []
+          for (var vehicle in posts) {
+            sortable.push([vehicle, posts[vehicle]])
+          }
+
+          sortable.sort(function (a, b) {
+            return b[1].views - a[1].views
+          })
+
+          let postsOrder = {}
+          sortable.forEach((item) => {
+            postsOrder[item[0]] = item[1]
+          })
+          // console.log(sortable)
+          // self.posts = self.reverseObject(posts)
+          self.posts = postsOrder
+          self.getTags()
+        })
+      } else if (explore === 'valued') {
+        starCountRef.on('value', function (snapshot) {
+          let posts = snapshot.val()
+
+          var sortable = []
+          for (var vehicle in posts) {
+            sortable.push([vehicle, posts[vehicle]])
+          }
+
+          sortable.sort(function (a, b) {
+            if (!b[1].hasOwnProperty('likes')) {
+              b[1].likes = {}
+            }
+            if (!a[1].hasOwnProperty('likes')) {
+              a[1].likes = {}
+            }
+            return Object.keys(b[1].likes).length - Object.keys(a[1].likes).length
+          })
+
+          let postsOrder = {}
+          sortable.forEach((item) => {
+            postsOrder[item[0]] = item[1]
+          })
+          // console.log(sortable)
+          // self.posts = self.reverseObject(posts)
+          self.posts = postsOrder
+          self.getTags()
+        })
+      } else if (explore === 'recent') {
+        starCountRef.on('value', function (snapshot) {
+          let posts = snapshot.val()
+          self.posts = self.reverseObject(posts)
+          self.getTags()
+        })
+      }
+    },
     tagsActive () {
       // this.$firebase.database().ref('posts').off()
       let self = this
@@ -72,7 +145,6 @@ export default {
     let self = this
     var starCountRef = firebase.database().ref('posts')
     starCountRef.on('value', function (snapshot) {
-      // let childRef = starCountRef.child(snapshot)
       let posts = snapshot.val()
       self.posts = self.reverseObject(posts)
       self.getTags()
