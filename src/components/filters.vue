@@ -26,6 +26,36 @@
       >
         <vs-select-item :key="index" :vs-value="item.value" :vs-text="item.text" v-for="(item,index) in $store.state.explores" />
     </vs-select>
+
+    <div class="con-display">
+      <button>
+        <i class="material-icons">
+          dashboard
+        </i>
+      </button>
+      <ul>
+        <li :class="{'active-display': $store.state.display == 1}" @click="$store.state.display = 1">
+          <i class="material-icons">
+            view_module
+          </i>
+        </li>
+        <li :class="{'active-display': $store.state.display == 2}" @click="$store.state.display = 2">
+          <i class="material-icons">
+            view_comfy
+          </i>
+        </li>
+        <li :class="{'active-display': $store.state.display == 3}" @click="$store.state.display = 3">
+          <i class="material-icons">
+            view_list
+          </i>
+        </li>
+        <li :class="{'active-display': $store.state.display == 4}" @click="$store.state.display = 4">
+          <i class="material-icons">
+            view_headline
+          </i>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -36,6 +66,7 @@ export default {
 }
 </script>
 <style lang="stylus">
+@require '../config'
 .con-select-filter
   width 100%
   padding 30px 30px
@@ -45,6 +76,56 @@ export default {
   .selectx
     max-width 200px
     margin 7px
+  .con-display
+    margin-left auto
+    position relative
+    &:hover
+      button
+        background var(--fondo3)
+        border-radius 5px 5px 0px 0px
+      ul
+        visibility visible !important
+        opacity 1 !important
+        transform translate(0) scale(1) !important
+    button
+      padding 8px
+      display flex
+      align-items center
+      position relative
+      justify-content center
+      background var(--fondo2)
+      border-radius 5px
+      color var(--text-color)
+
+    ul
+      display flex
+      align-items center
+      justify-content center
+      background var(--fondo3)
+      border-radius 5px 0px 5px 5px
+      position absolute
+      right 0px
+      visibility hidden
+      opacity 0
+      transition all .3s ease
+      transform translate(0, -10px)
+      li
+        padding 5px
+        display flex
+        align-items center
+        justify-content center
+        cursor pointer
+        transition all .2s ease
+        border-radius 5px
+        &:hover
+          background $morado !important
+          color rgb(255,255,255)
+        &.active-display
+          background $morado
+          transform scale(1.1)
+          color rgb(255,255,255)
+    i
+      font-size 1.7rem
 
 @media only screen and (max-width: 600px)
   .con-select-filter

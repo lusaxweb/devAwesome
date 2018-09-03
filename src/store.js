@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    display: 1,
     light: false,
     likesNumber: 0,
     viewsNumber: 0,

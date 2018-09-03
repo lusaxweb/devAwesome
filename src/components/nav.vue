@@ -75,7 +75,7 @@
               <li>
                 <router-link exact to="/myProyects"><span>My Proyects</span></router-link>
               </li>
-              <li>
+              <li class="btn-switchx">
                   <i class="material-icons">
                     {{this.$store.state.light? 'brightness_7' : 'brightness_5'}}
                   </i>
@@ -123,17 +123,26 @@ export default {
   },
   methods: {
     changeTheme () {
-      if (!this.$store.state.light) {
-        document.documentElement.style.setProperty('--fondo', '#231F34')
-        document.documentElement.style.setProperty('--fondo2', '#2C2741')
-        document.documentElement.style.setProperty('--fondo3', '#352F4E')
-        document.documentElement.style.setProperty('--text-color', 'rgb(255,255,255)')
-      } else {
-        document.documentElement.style.setProperty('--fondo', 'rgb(240,240,240)')
-        document.documentElement.style.setProperty('--fondo2', 'rgb(255,255,255)')
-        document.documentElement.style.setProperty('--fondo3', 'rgb(230,230,230)')
-        document.documentElement.style.setProperty('--text-color', '#231F34')
-      }
+      this.$vs.loading({
+        background: '#352F4E'
+      })
+      setTimeout(()=>{
+        if (!this.$store.state.light) {
+          document.documentElement.style.setProperty('--fondo', '#231F34')
+          document.documentElement.style.setProperty('--fondo2', '#2C2741')
+          document.documentElement.style.setProperty('--fondo3', '#352F4E')
+          document.documentElement.style.setProperty('--text-color', 'rgb(255,255,255)')
+        } else {
+          document.documentElement.style.setProperty('--fondo', 'rgb(244,244,244)')
+          document.documentElement.style.setProperty('--fondo2', 'rgb(255,255,255)')
+          document.documentElement.style.setProperty('--fondo3', 'rgb(230,230,230)')
+          document.documentElement.style.setProperty('--text-color', '#231F34')
+        }
+        setTimeout(()=>{
+          this.$vs.loading.close()
+        }, 300)
+      }, 300)
+
 
     },
     toggleDropDown () {
@@ -370,9 +379,10 @@ export default {
             padding 5px
             text-align left
             font-size .8rem
-            display flex
-            align-items center
-            justify-content flex-start
+            &.btn-switchx
+              display flex
+              align-items center
+              justify-content flex-start
             i
               margin-right 5px
             .vs-switch

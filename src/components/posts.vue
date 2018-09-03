@@ -4,6 +4,7 @@
       <div
         :key="index"
         v-for="(post,index) in Object.keys(posts)"
+        :class="[`post-display-${displayx}`]"
         class="post">
 
         <button
@@ -19,7 +20,7 @@
             <img class="img-post" :src="posts[post].miniImage" alt="">
           </div>
           <footer>
-            <div class="con-title-description">
+            <div @click="openPost(posts[post], post)" class="con-title-description">
             <h4>{{ posts[post].title }}</h4>
             <p>{{ posts[post].description }}</p>
             <!-- <span> {{ posts[post].tags }} </span> -->
@@ -92,14 +93,28 @@ export default {
     section: {
       default: null,
       type: String
-    }
+    },
+
   },
   data: () => ({
-    likes: []
+    likes: [],
+    displayx: 1,
   }),
+  created () {
+    this.displayx = this.$store.state.display
+  },
   computed: {
+    display () {
+      return this.$store.state.display
+    },
     numberRamdom () {
       return Math.floor(Math.random() * (8 - 3 + 1) + 3) + 1
+    }
+  },
+  watch: {
+    display () {
+      console.log('this.$store.state.display', this.$store.state.display)
+      this.displayx = this.$store.state.display
     }
   },
   methods: {
@@ -261,14 +276,14 @@ export default {
           img
             opacity .5
     .con-title-description
-      width calc(100% - 120px)
+      width calc(100% - 140px)
       p
         width 100%
         display block
         text-overflow:ellipsis
         white-space:nowrap
         overflow:hidden
-    &:hover
+    &:hover:not(.post-display-3):not(.post-display-4)
       transform translate(0,5px)
       box-shadow 0px 0px 0px 0px rgba(0,0,0,.1) !important
       background var(--fondo)
@@ -358,7 +373,7 @@ export default {
               background $verde
           i
             font-size 1.05rem
-
+            text-shadow 0px 4px 20px rgba(0,0,0,.5)
           span
             position relative
             transition all .25s ease
@@ -368,6 +383,10 @@ export default {
             padding-left 0px
             font-size .6rem
             overflow hidden
+            width auto
+            opacity 1
+            padding-left 4px
+            transform translate(0)
     .con-img-post
       overflow hidden
       width calc(100% - 16px);
@@ -397,24 +416,60 @@ export default {
         transition opacity .3s ease
         background #fff
 
+.post-display-2
+  max-width calc(14.28% - 14px) !important
+  footer
+    flex-direction column
+    .con-title-description
+      width 100% !important
+    .con-btns
+      padding-top 10px
+.post-display-3
+  max-width calc(50% - 14px) !important
+  display flex
+  align-items center
+  justify-content flex-start
+  footer
+    width calc(100% - 130px)
+  .con-img-post
+    width 100px !important
+    padding-bottom 75px !important
+    margin 10px !important
+
+.post-display-4
+  max-width calc(80% - 14px) !important
+  margin-left 10% !important
+  display flex
+  align-items center
+  justify-content flex-start
+  footer
+    width 100%
+  .con-img-post
+    display none !important
+
 @media only screen and (max-width: 1400px)
-  .post
+  .post:not(.post-display-3):not(.post-display-4)
     max-width calc(25% - 14px) !important
   .con-loading-posts
     li
       max-width calc(25% - 14px) !important
 @media only screen and (max-width: 1200px)
-  .post
+  .post:not(.post-display-3):not(.post-display-4)
     max-width calc(33% - 14px) !important
   .con-loading-posts
     li
       max-width calc(33% - 14px) !important
 @media only screen and (max-width: 850px)
-  .post
+  .post:not(.post-display-3):not(.post-display-4)
     max-width calc(50% - 14px) !important
   .con-loading-posts
     li
       max-width calc(50% - 14px) !important
+  .post-display-3
+    max-width calc(100% - 14px) !important
+  .post-display-4
+    max-width calc(100% - 14px) !important
+    margin-left 0px !important
 @media only screen and (max-width: 600px)
   .con-loading-posts
     li
@@ -424,7 +479,7 @@ export default {
     margin-left 0px !important
     margin-right 0px !important
     max-width 100% !important
-    background $fondo2 !important
+    background var(--fondo2) !important
     h4, p
         opacity 1 !important
         transform translate(0,0) !important
