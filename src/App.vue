@@ -83,6 +83,7 @@ export default {
   --fondo2: $fondo2
   --fondo3: $fondo3
   --text-color: rgb(255,255,255)
+  --text-alpha: rgba(255,255,255,.6)
 }
 
 .con-chips input
@@ -108,12 +109,12 @@ export default {
 .input-select-label
   text-align left !important
   width 100% !important
-  color var(--text-color) !important
+  color var(--text-alpha) !important
   display block
   padding-bottom 5px
 
 .input-span-placeholder
-  color var(--text-color) !important
+  color var(--text-alpha) !important
 
 *::-webkit-scrollbar
   width: 5px;

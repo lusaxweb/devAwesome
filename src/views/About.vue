@@ -1,6 +1,6 @@
 <template>
   <div class="con-about">
-    <figurex />
+    <figurex v-if="!$store.state.light" />
     <section ref="about" class="section-about" id="about">
       <h1>About</h1>
 
@@ -239,27 +239,27 @@ export default {
   padding 10px
   position relative
   height auto
-  background $fondo
+  background var(--fondo)
   section
     z-index 200
     position relative
   h1
     padding 10px
     text-align center
-    color rgba(255,255,255,.8)
+    color var(--text-color)
   h3
-    color rgba(255,255,255,.8)
+    color var(--text-color)
     padding 10px
   h2
-    color rgba(255,255,255,.8)
+    color var(--text-color)
   ul.list
-    border-left 2px solid $fondo2
+    border-left 2px solid var(--fondo2)
     margin 10px
     li
       padding 10px
       position relative
       padding-left 15px
-      color rgba(255,255,255,.8)
+      color var(--text-color)
       &:after
         content ''
         left -4px
@@ -268,7 +268,7 @@ export default {
         height 6px
         position absolute
         border-radius 50%
-        background rgba(255,255,255,.4)
+        background var(--fondo3)
   .section-about
     width 100%
     padding 10px
@@ -278,7 +278,7 @@ export default {
     padding-top 100px
     p
       padding 10px
-      color rgba(255,255,255,.8)
+      color var(--text-alpha)
 .creators-list
   padding-top 100px
   .con-creators
@@ -292,7 +292,7 @@ export default {
     padding-top 100px
 
     .creator
-      background $fondo2
+      background var(--fondo2)
       border-radius 35px
       display flex
       align-items center
@@ -313,11 +313,12 @@ export default {
               margin 0px 2px
               a
                 padding 6px 10px
-                color rgb(255,255,255)
+                color var(--text-color)
                 border-radius 10px
                 transition all .25s ease
                 &:hover
                   background $primary
+                  color rgb(255,255,255)
                 i
                   font-size .8rem !important
 
@@ -339,12 +340,12 @@ export default {
           transform translate(0, -65%)
           h3
             padding 10px
-            color rgba(255,255,255,.8)
+            color var(--text-color)
           p
             padding-left 10px
         button
           background $morado
-          color rgb(255,255,255)
+          color rgb(255,255,255) !important
           font-weight bold
           border-radius 8px
           position absolute
@@ -362,7 +363,7 @@ export default {
     width 100%
     h3
       font-size 1rem
-      color rgba(255,255,255,.3)
+      color var(--text-alpha)
       margin-top 50px
     ul
       display flex
@@ -373,23 +374,26 @@ export default {
       width 180px
       height 180px
       border-radius 10px
-      border 1px dashed rgba(255,255,255,.2)
+      border 1px dashed var(--text-alpha)
       position relative
       display block
       display flex
       align-items center
       justify-content center
       margin 15px
-      color rgba(255,255,255,.6)
+      color var(--text-color)
       cursor pointer
       transition all .25s ease
       &:hover
+        color rgb(255,255,255)
         background $primary
         border 1px solid $primary
+        i
+          color rgb(255,255,255)
       i
         font-size 1.5rem
         transition all .25s ease
-        color rgba(255,255,255,1)
+        color var(--text-color)
       img
         width 100%
       &.isActive
@@ -408,7 +412,7 @@ export default {
 .afiliates-section
   h2
     padding-bottom 30px
-    color rgba(255,255,255,.8)
+    color var(--text-color)
 
 @media only screen and (max-width: 1250px)
   .con-creators

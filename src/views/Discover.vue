@@ -118,6 +118,7 @@ export default {
     })
   },
   methods: {
+
     getPosts () {
       let self = this
       let explore = this.$store.state.filters.explore

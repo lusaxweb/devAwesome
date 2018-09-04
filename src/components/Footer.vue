@@ -204,7 +204,7 @@ export default {
   .con-cinta
     padding 20px
     font-size .75rem
-    color var(--text-color)
+    color var(--text-alpha)
     a
       color var(--text-color)
       text-decoration underline
@@ -263,6 +263,7 @@ export default {
       padding 17px 0px
       font-size .75rem
       text-align left
+      color var(--text-alpha)
     .con-input-suscribe
       width 100%;
       background var(--fondo2)

@@ -16,26 +16,6 @@ export default new Router({
       component: () => import('./views/Discover.vue')
     },
     {
-      path: '/front-end',
-      name: 'frontend',
-      component: () => import('./views/Frontend.vue')
-    },
-    {
-      path: '/back-end',
-      name: 'backend',
-      component: () => import('./views/Backend.vue')
-    },
-    {
-      path: '/mobile-app',
-      name: 'mobile',
-      component: () => import('./views/Mobile.vue')
-    },
-    {
-      path: '/more',
-      name: 'more',
-      component: () => import('./views/More.vue')
-    },
-    {
       path: '/view/:namePost/',
       name: 'view',
       component: () => import('./views/view.vue'),
@@ -75,6 +55,18 @@ export default new Router({
       path: '/About/:section',
       name: 'About',
       component: () => import('./views/About.vue'),
+      props: true
+    },
+    {
+      path: '/edit/:namePost/',
+      name: 'edit',
+      component: () => import('./views/edit.vue'),
+      props: true
+    },
+    {
+      path: '/topics',
+      name: 'topics',
+      component: () => import('./views/topics.vue'),
       props: true
     }
   ]

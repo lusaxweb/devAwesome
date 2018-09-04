@@ -1,6 +1,6 @@
 <template>
   <div class="con-add-Post">
-    <titlex title="Upload" />
+    <titlex title="Edit Proyect" />
     <div class="con-inputs">
       <div class="contiene-inputs">
         <vs-input :vs-danger="!upload.title && activeDangers" vs-danger-text="This value is required" class="inputx" placeholder="My awesome project Title" vs-label="Project Title *" v-model="upload.title"/>
@@ -76,6 +76,7 @@
           <i class="material-icons">
             {{ image1?'done':'photo_size_select_large'}}
           </i>
+          <img :src="upload.miniImage" alt="">
         </div>
         <div :class="{'fileActive': image2, 'fileDanger': !image2 && activeDangers}" class="con-file con-file2">
           <input @change="changeValueImage($event ,2)" ref="inputFile2" type="file">
@@ -83,6 +84,7 @@
           <i class="material-icons">
             {{ image2?'done':'panorama'}}
           </i>
+          <img :src="upload.image" alt="">
         </div>
         <!-- <button @click="uploadx">Prueba</button> -->
         <vs-button @click="uploadx" class="btn-upload" vs-color="success" vs-type="filled">Upload Proyect</vs-button>
@@ -122,7 +124,23 @@ export default {
       lenguaje: 'javascript'
     }
   }),
+  created () {
+    this.getPost()
+  },
   methods: {
+    getPost () {
+      let self = this
+      this.$firebase.database().ref('posts').child(this.$router.currentRoute.params.namePost).on('value', (snapshot) => {
+        let post = snapshot.val()
+        let tags = post.tags.split(',')
+        console.log(tags)
+        self.upload = {
+          ...post,
+          namePost: this.$router.currentRoute.params.namePost
+        }
+        self.tags = tags
+      })
+    },
     remove (item) {
       this.tags.splice(this.tags.indexOf(item), 1)
     },
@@ -198,93 +216,65 @@ export default {
         return
       }
 
-      this.$vs.loading({
-        background: '#231F34'
-      })
-      let githubUrl = null
-      let user = null
+      // this.$vs.loading({
+      //   background: '#231F34'
+      // })
 
-      fetch(`https://api.github.com/search/users?q=${this.$store.state.user.displayName}`)
-        .then(response => response.json())
-        .then(json => {
-          // this.contribuitorsx.push(json)
-          githubUrl = json.items[0].html_url
-          console.log(githubUrl)
-          // https://api.github.com/search/users?q=ldrovira
+      // this.upload.tags = this.tags.join()
+      var self = this
+      var file = this.$refs.inputFile1.files[0]
+      if (file && self.$refs.inputFile2.files[0]) {
+        var ref = this.$firebase.storage().ref('posts/' + file.name)
+        ref.put(file).then(function (snapshot) {
+          ref.getDownloadURL().then(function (url) {
+            self.upload.miniImage = url
 
-          if (this.$store.state.user.displayName === 'ldrovira' || this.$store.state.user.displayName === 'ManuelRoviraDesign') {
-            user = {
-              displayName: 'DevAwesome',
-              email: 'dev.awesome.app@gmail.com',
-              photoURL: 'devAwesome',
-              uid: 'devAwesome',
-              githubUrl: 'https://github.com/lusaxweb/devAwesome'
-            }
-          } else {
-            user = {
-              displayName: this.$store.state.user.displayName,
-              email: this.$store.state.user.email,
-              photoURL: this.$store.state.user.photoURL,
-              uid: this.$store.state.user.uid,
-              githubUrl: githubUrl
-            }
-          }
-
-          this.upload.user = user
-          console.log('Subiendo', this.$store.state.user)
-          this.upload.tags = this.tags.join()
-          var self = this
-          var file = this.$refs.inputFile1.files[0]
-          var ref = this.$firebase.storage().ref('posts/' + file.name)
-          ref.put(file).then(function (snapshot) {
-            ref.getDownloadURL().then(function (url) {
-              console.log('url', url)
-              self.upload.miniImage = url
-
-              var file2 = self.$refs.inputFile2.files[0]
-              var ref2 = self.$firebase.storage().ref('posts/' + file2.name)
-              ref2.put(file2).then(function (snapshot) {
-                ref2.getDownloadURL().then(function (url2) {
-                  console.log('url2>>>', url2)
-                  self.upload.image = url2
-                  console.log('Uploaded a blob or file!')
-                  console.log('posts/' + self.upload.section.toLowerCase())
-
-                  self.$firebase.database().ref('posts/').push({
-                    ...self.upload
-                  })
-                  self.$vs.loading.close()
-                  self.$vs.notify({
-                    title: 'Successful Upload',
-                    text: 'The project was successfully upgraded',
-                    color: 'success',
-                    icon: 'cloud_done'
-                  })
-                  self.upload = {
-                    section: 'Front-end',
-                    title: '',
-                    description: '',
-                    website: '',
-                    twitter: '',
-                    github: '',
-                    active: false,
-                    likes: {},
-                    views: 0,
-                    outstanding: false,
-                    tags: '',
-                    email: '',
-                    miniImage: '',
-                    image: '',
-                    user: {}
-                  }
-                  self.image1 = self.image2 = null
-                  self.activeDangers = false
-                  self.tags = []
-                })
+            var file2 = self.$refs.inputFile2.files[0]
+            var ref2 = self.$firebase.storage().ref('posts/' + file2.name)
+            ref2.put(file2).then(function (snapshot) {
+              ref2.getDownloadURL().then(function (url2) {
+                self.upload.image = url2
+                self.updateData()
               })
             })
           })
         })
+      } else if (file) {
+        var refx = this.$firebase.storage().ref('posts/' + file.name)
+        refx.put(file).then(function (snapshot) {
+          refx.getDownloadURL().then(function (url) {
+            self.upload.miniImage = url
+            self.updateData()
+          })
+        })
+      } else if (self.$refs.inputFile2.files[0]) {
+        var file2 = self.$refs.inputFile2.files[0]
+        var ref2 = self.$firebase.storage().ref('posts/' + file2.name)
+        ref2.put(file2).then(function (snapshot) {
+          ref2.getDownloadURL().then(function (url2) {
+            self.upload.image = url2
+            self.updateData()
+          })
+        })
+      } else {
+        console.log('no hay que actualizar imagenes')
+        this.updateData()
+        // this.$vs.loading.close()
+      }
+    },
+    updateData () {
+      this.$firebase.database().ref('posts/' + this.$router.currentRoute.params.namePost).set({
+        ...this.upload
+      })
+
+      console.log('paso !')
+
+      this.$vs.notify({
+        title: 'Successful Update Proyect',
+        text: 'The project was successfully Update',
+        color: 'success',
+        icon: 'cloud_done'
+      })
     }
   }
 }
@@ -356,7 +346,13 @@ export default {
     margin 14px 0px
     margin-right 5px
     border-radius 5px
-
+    overflow hidden
+    img
+      width 100%
+      position absolute
+      left 0px
+      top 0px
+      opacity .5
     &.con-file2
       margin-right 0px !important
       margin-left 5px !important
@@ -412,5 +408,5 @@ export default {
         border 1px solid rgba(255,255,255,0) !important
       .input-span-placeholder
         text-align left
-        color var(--text-alpha) !important
+        color var(--text-color) !important
 </style>

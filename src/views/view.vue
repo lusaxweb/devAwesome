@@ -315,15 +315,6 @@ export default {
         })
     },
 
-    getTwitter () {
-      fetch(`https://api.twitter.com/1.1/users/show.json?screen_name=twitterdev`)
-        .then(response => response.json())
-        .then(json => {
-          console.log('twitrer', json)
-          // this.star = json.stargazers_count || 0
-        })
-    },
-
     openPost (post, namePost) {
       this.imageLoaded = false
       post.namePost = namePost
@@ -671,7 +662,7 @@ export default {
         transition all .3s ease
         position relative
         &:hover
-          color var(--fondo3)
+          color rgb(255,255,255)
           background rgba(255,255,255,.15)
           border 2px solid rgba(255,255,255,0)
         &.activeLike

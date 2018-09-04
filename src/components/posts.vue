@@ -7,6 +7,12 @@
         :class="[`post-display-${displayx}`]"
         class="post">
 
+        <button v-if="$store.state.admin" @click="openEditPost(posts[post], post)" class="edit-post-btn">
+          <i class="material-icons">
+            edit
+          </i>
+        </button>
+
         <button
           @click="deletePost(posts[post], post)"
           v-if="deletex"
@@ -145,6 +151,12 @@ export default {
       })
       document.querySelector('body').style = 'overflow: hidden'
     },
+    openEditPost (post, namePost) {
+      post.namePost = namePost
+      this.$router.push({
+        path: `/edit/${namePost}`
+      })
+    },
     addlike (name, post) {
       if (!this.$store.state.user) {
         this.$vs.notify({
@@ -166,6 +178,20 @@ export default {
 </script>
 <style lang="stylus">
 @require '../config'
+
+// user - admin
+
+.edit-post-btn
+  position absolute
+  top 15px
+  right 15px
+  z-index 1000
+  padding 7px
+  border-radius 5px
+  background $verde
+  color rgb(255,255,255)
+  i
+    font-size 1.3rem
 
 .con-loading-posts
   position relative

@@ -1,6 +1,6 @@
 <template>
   <div class="carbon">
-    <div key="carbonx" ref="carbonx" id="carbon"></div>
+    <div key="carbonx" ref="carbonx"></div>
   </div>
 </template>
 

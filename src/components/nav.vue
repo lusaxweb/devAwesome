@@ -19,7 +19,8 @@
       </div>
 
       <router-link exact to="/"><span>Discover</span></router-link>
-      <router-link exact to="/developers"><span>Developers</span></router-link>
+      <router-link exact to="/topics"><span>Topics</span></router-link>
+      <!-- <router-link exact to="/developers"><span>Developers</span></router-link> -->
 
       <!-- <router-link to="/front-end"><span>Front-end</span></router-link> -->
       <!-- <router-link to="/back-end"><span>Back-end</span></router-link> -->
@@ -126,24 +127,24 @@ export default {
       this.$vs.loading({
         background: '#352F4E'
       })
-      setTimeout(()=>{
+      setTimeout(() => {
         if (!this.$store.state.light) {
           document.documentElement.style.setProperty('--fondo', '#231F34')
           document.documentElement.style.setProperty('--fondo2', '#2C2741')
           document.documentElement.style.setProperty('--fondo3', '#352F4E')
           document.documentElement.style.setProperty('--text-color', 'rgb(255,255,255)')
+          document.documentElement.style.setProperty('--text-alpha', 'rgba(255,255,255,.6)')
         } else {
-          document.documentElement.style.setProperty('--fondo', 'rgb(244,244,244)')
+          document.documentElement.style.setProperty('--fondo', 'rgb(250,250,250)')
           document.documentElement.style.setProperty('--fondo2', 'rgb(255,255,255)')
           document.documentElement.style.setProperty('--fondo3', 'rgb(230,230,230)')
-          document.documentElement.style.setProperty('--text-color', '#231F34')
+          document.documentElement.style.setProperty('--text-color', 'rgb(35, 31, 52)')
+          document.documentElement.style.setProperty('--text-alpha', 'rgba(35, 31, 52, .6)')
         }
-        setTimeout(()=>{
+        setTimeout(() => {
           this.$vs.loading.close()
         }, 300)
       }, 300)
-
-
     },
     toggleDropDown () {
       let self = this
