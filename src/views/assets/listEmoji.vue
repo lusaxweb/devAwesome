@@ -413,7 +413,567 @@ export default {
       {
         emoji: '✊',
         text: ':fist:'
-      }
+      },
+      {
+        emoji: '✌️',
+        text: ':v:'
+      },
+      {
+        emoji: '👋',
+        text: ':wave:'
+      },
+      {
+        emoji: '✋',
+        text: ':hand: | :raised_hand:'
+      },
+      {
+        emoji: '👐',
+        text: ':open_hands:'
+      },
+      {
+        emoji: '☝️',
+        text: ':point_up:'
+      },
+      {
+        emoji: '👇',
+        text: ':point_down:'
+      },
+      {
+        emoji: '👈',
+        text: ':point_left:'
+      },
+      {
+        emoji: '👉',
+        text: ':point_right:'
+      },
+      {
+        emoji: '🙌',
+        text: ':raised_hands:'
+      },
+      {
+        emoji: '🙏',
+        text: ':pray:'
+      },
+      {
+        emoji: '👆',
+        text: ':point_up_2:'
+      },
+      {
+        emoji: '👏',
+        text: ':point_up_2:'
+      },
+      {
+        emoji: '💪',
+        text: ':muscle:'
+      },
+      {
+        emoji: '🤘',
+        text: ':metal:'
+      },
+      {
+        emoji: '🖕',
+        text: ':fu:'
+      },
+      {
+        emoji: '🚶',
+        text: ':walking:'
+      },
+      {
+        emoji: '🏃',
+        text: ':runner: | :running:'
+      },
+      {
+        emoji: '👫',
+        text: ':couple:'
+      },
+      {
+        emoji: '👪',
+        text: ':family:'
+      },
+      {
+        emoji: '👪',
+        text: ':family:'
+      },
+      {
+        emoji: '👬',
+        text: ':two_men_holding_hands:'
+      },
+      {
+        emoji: '👭',
+        text: ':two_women_holding_hands:'
+      },
+      {
+        emoji: '💃',
+        text: ':dancer:'
+      },
+      {
+        emoji: '👯',
+        text: ':dancers:'
+      },
+      {
+        emoji: '🙆',
+        text: ':ok_woman:'
+      },
+      {
+        emoji: '🙅',
+        text: ':no_good:'
+      },
+      {
+        emoji: '💁',
+        text: ':information_desk_person:'
+      },
+      {
+        emoji: '🙋',
+        text: ':raising_hand:'
+      },
+      {
+        emoji: '👰',
+        text: ':bride_with_veil:'
+      },
+      {
+        emoji: '🙎',
+        text: ':person_with_pouting_face:'
+      },
+      {
+        emoji: '🙍',
+        text: ':person_frowning:'
+      },
+      {
+        emoji: '🙇',
+        text: ':bow:'
+      },
+      {
+        emoji: '💑',
+        text: ':couple_with_heart:'
+      },
+      {
+        emoji: '💆',
+        text: ':massage:'
+      },
+      {
+        emoji: '💇',
+        text: ':haircut:'
+      },
+      {
+        emoji: '💅',
+        text: ':nail_care:'
+      },
+      {
+        emoji: '👦',
+        text: ':boy:'
+      },
+      {
+        emoji: '👧',
+        text: ':girl:'
+      },
+      {
+        emoji: '👩',
+        text: ':woman:'
+      },
+      {
+        emoji: '👨',
+        text: ':man:'
+      },
+      {
+        emoji: '👶',
+        text: ':baby:'
+      },
+      {
+        emoji: '👵',
+        text: ':older_woman:'
+      },
+      {
+        emoji: '👴',
+        text: ':older_woman:'
+      },
+      {
+        emoji: '👴',
+        text: ':older_man:'
+      },
+      {
+        emoji: '👱',
+        text: ':person_with_blond_hair:'
+      },
+      {
+        emoji: '👲',
+        text: ':man_with_gua_pi_mao:'
+      },
+      {
+        emoji: '👳',
+        text: ':man_with_turban:'
+      },
+      {
+        emoji: '👷',
+        text: ':construction_worker:'
+      },
+      {
+        emoji: '👮',
+        text: ':cop:'
+      },
+      {
+        emoji: '👼',
+        text: ':angel:'
+      },
+      {
+        emoji: '👸',
+        text: ':princess:'
+      },
+      {
+        emoji: '😺',
+        text: ':smiley_cat:'
+      },
+      {
+        emoji: '😸',
+        text: ':smile_cat:'
+      },
+      {
+        emoji: '😻',
+        text: ':heart_eyes_cat:'
+      },
+      {
+        emoji: '😽',
+        text: ':kissing_cat:'
+      },
+      {
+        emoji: '😼',
+        text: ':smirk_cat:'
+      },
+      {
+        emoji: '🙀',
+        text: ':scream_cat:'
+      },
+      {
+        emoji: '😿',
+        text: ':crying_cat_face:'
+      },
+      {
+        emoji: '😹',
+        text: ':joy_cat:'
+      },
+      {
+        emoji: '😾',
+        text: ':pouting_cat:'
+      },
+      {
+        emoji: '👹',
+        text: ':japanese_ogre:'
+      },
+      {
+        emoji: '👺',
+        text: ':japanese_goblin:'
+      },
+      {
+        emoji: '🙈',
+        text: ':see_no_evil:'
+      },
+      {
+        emoji: '🙉',
+        text: ':hear_no_evil:'
+      },
+      {
+        emoji: '🙊',
+        text: ':speak_no_evil:'
+      },
+      {
+        emoji: '💂',
+        text: ':guardsman:'
+      },
+      {
+        emoji: '💀',
+        text: ':skull:'
+      },
+      {
+        emoji: '🐾',
+        text: ':feet:'
+      },
+      {
+        emoji: '👄',
+        text: ':lips:'
+      },
+      {
+        emoji: '💋',
+        text: ':kiss:'
+      },
+      {
+        emoji: '💧',
+        text: ':droplet:'
+      },
+      {
+        emoji: '👂',
+        text: ':ear:'
+      },
+      {
+        emoji: '👀',
+        text: ':eyes:'
+      },
+      {
+        emoji: '👃',
+        text: ':nose:'
+      },
+      {
+        emoji: '👅',
+        text: ':tongue:'
+      },
+      {
+        emoji: '💌',
+        text: ':love_letter:'
+      },
+      {
+        emoji: '👤',
+        text: ':bust_in_silhouette:'
+      },
+      {
+        emoji: '👥',
+        text: ':busts_in_silhouette:'
+      },
+      {
+        emoji: '💬',
+        text: ':speech_balloon:'
+      },
+      {
+        emoji: '💭',
+        text: ':thought_balloon:'
+      },
+      {
+        emoji: '☀️',
+        text: ':sunny:'
+      },
+      {
+        emoji: '☔️',
+        text: ':umbrella:'
+      },
+      {
+        emoji: '☁️',
+        text: ':cloud:'
+      },
+      {
+        emoji: '❄️',
+        text: ':snowflake:'
+      },
+      {
+        emoji: '⛄️',
+        text: ':snowman:'
+      },
+      {
+        emoji: '⚡️',
+        text: ':zap:'
+      },
+      {
+        emoji: '🌀',
+        text: ':cyclone:'
+      },
+      {
+        emoji: '🌁',
+        text: ':foggy:'
+      },
+      {
+        emoji: '🌊',
+        text: ':ocean:'
+      },
+      {
+        emoji: '🐱',
+        text: ':cat:'
+      },
+      {
+        emoji: '🐶',
+        text: ':dog:'
+      },
+      {
+        emoji: '🐭',
+        text: ':mouse:'
+      },
+      {
+        emoji: '🐹',
+        text: ':hamster:'
+      },
+      {
+        emoji: '🐰',
+        text: ':rabbit:'
+      },
+      {
+        emoji: '🐺',
+        text: ':wolf:'
+      },
+      {
+        emoji: '🐸',
+        text: ':frog:'
+      },
+      {
+        emoji: '🐯',
+        text: ':tiger:'
+      },
+      {
+        emoji: '🐨',
+        text: ':koala:'
+      },
+      {
+        emoji: '🐻',
+        text: ':bear:'
+      },
+      {
+        emoji: '🐷',
+        text: ':pig:'
+      },
+      {
+        emoji: '🐽',
+        text: ':pig_nose:'
+      },
+      {
+        emoji: '🐮',
+        text: ':cow:'
+      },
+      {
+        emoji: '🐗',
+        text: ':boar:'
+      },
+      {
+        emoji: '🐵',
+        text: ':monkey_face:'
+      },
+      {
+        emoji: '🐒',
+        text: ':monkey:'
+      },
+      {
+        emoji: '🐴',
+        text: ':horse:'
+      },
+      {
+        emoji: '🐎',
+        text: ':racehorse:'
+      },
+      {
+        emoji: '🐫',
+        text: ':camel:'
+      },
+      {
+        emoji: '🐑',
+        text: ':sheep:'
+      },
+      {
+        emoji: '🐘',
+        text: ':elephant:'
+      },
+      {
+        emoji: '🐼',
+        text: ':panda_face:'
+      },
+      {
+        emoji: '🐍',
+        text: ':snake:'
+      },
+      {
+        emoji: '🐦',
+        text: ':bird:'
+      },
+      {
+        emoji: '🐤',
+        text: ':baby_chick:'
+      },
+      {
+        emoji: '🐥',
+        text: ':hatched_chick:'
+      },
+      {
+        emoji: '🐣',
+        text: ':hatching_chick:'
+      },
+      {
+        emoji: '🐔',
+        text: ':chicken:'
+      },
+      {
+        emoji: '🐧',
+        text: ':penguin:'
+      },
+      {
+        emoji: '🐢',
+        text: ':turtle:'
+      },
+      {
+        emoji: '🐛',
+        text: ':bug:'
+      },
+      {
+        emoji: '🐝',
+        text: ':honeybee:'
+      },
+      {
+        emoji: '🐜',
+        text: ':ant:'
+      },
+      {
+        emoji: '🐞',
+        text: ':beetle:'
+      },
+      {
+        emoji: '🐌',
+        text: ':snail:'
+      },
+      {
+        emoji: '🐙',
+        text: ':octopus:'
+      },
+      {
+        emoji: '🐠',
+        text: ':tropical_fish:'
+      },
+      {
+        emoji: '🐟',
+        text: ':fish:'
+      },
+      {
+        emoji: '🐳',
+        text: ':whale:'
+      },
+      {
+        emoji: '🐋',
+        text: ':whale2:'
+      },
+      {
+        emoji: '🐬',
+        text: ':dolphin:'
+      },
+      {
+        emoji: '🐄',
+        text: ':cow2:'
+      },
+      {
+        emoji: '🐏',
+        text: ':ram:'
+      },
+      {
+        emoji: '🐀',
+        text: ':rat:'
+      },
+      {
+        emoji: '🐃',
+        text: ':water_buffalo:'
+      },
+      {
+        emoji: '🐅',
+        text: ':tiger2:'
+      },
+      {
+        emoji: '🐇',
+        text: ':rabbit2:'
+      },
+      {
+        emoji: '🐉',
+        text: ':dragon:'
+      },
+      {
+        emoji: '🐐',
+        text: ':goat:'
+      },
+      {
+        emoji: '🐓',
+        text: ':rooster:'
+      },
+      {
+        emoji: '🐕',
+        text: ':dog2:'
+      },
 
     ]
   })
@@ -493,4 +1053,3 @@ export default {
           transform scale(1)
           opacity 1
 </style>
-
