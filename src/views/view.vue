@@ -22,7 +22,6 @@
           <div class="con-similar-posts">
             <ul>
               <li
-                v-if="post !== $router.currentRoute.params.namePost && index < 5"
                 :key="index"
                 @click="openPost(morePosts[post], post)"
                 v-for="(post, index) in Object.keys(morePosts)">
@@ -299,8 +298,39 @@ export default {
     },
 
     getPosts () {
-      this.$firebase.database().ref('posts').limitToFirst(4).on('value', (snapshot) => {
-        this.morePosts = snapshot.val()
+      this.$firebase.database().ref('posts').on('value', (snapshot) => {
+        // this.morePosts = snapshot.val()
+        let arrayPosts = []
+        var numeroPosts = Object.keys(snapshot.val()).length
+        snapshot.forEach(element => {
+          console.log(element.val())
+          arrayPosts.push({key: element.key, ...element.val()})
+        })
+        let numeros = []
+        for (let index = 0; index < 4; index++) {
+          let numero = Math.floor(Math.random() * numeroPosts)
+          if (!numeros.includes(numero)) {
+            numeros.push(numero)
+          } else {
+            numeros.push(Math.floor(Math.random() * numeroPosts))
+          }
+        }
+
+        let ultimatePosts = []
+
+        numeros.forEach((item) => {
+          ultimatePosts.push(arrayPosts[item])
+        })
+
+        console.log(ultimatePosts)
+
+        let objectPosts = {}
+
+        ultimatePosts.forEach((item) => {
+          objectPosts[item.key] = item
+        })
+
+        this.morePosts = objectPosts
       })
     },
 
@@ -336,10 +366,10 @@ export default {
     },
 
     close () {
-      // this.$router.push({
-      //   path: `/${this.$router.currentRoute.params.prev}${this.$router.currentRoute.params.prevSearch ? `/${this.$router.currentRoute.params.prevSearch}` : null}`
-      // })
-      this.$router.go(this.goLess)
+      this.$router.push({
+        path: '/'
+      })
+      // this.$router.go(this.goLess)
       this.$store.state.view.active = false
       document.querySelector('body').style = 'overflow: auto'
     }

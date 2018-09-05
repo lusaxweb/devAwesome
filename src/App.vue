@@ -115,6 +115,8 @@ export default {
 
 .input-span-placeholder
   color var(--text-alpha) !important
+.icon-inputx
+  color var(--text-alpha) !important
 
 *::-webkit-scrollbar
   width: 5px;

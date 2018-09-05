@@ -68,6 +68,12 @@ export default new Router({
       name: 'topics',
       component: () => import('./views/topics.vue'),
       props: true
+    },
+    {
+      path: '/assets',
+      name: 'assets',
+      component: () => import('./views/Assets.vue'),
+      props: true
     }
   ]
 })

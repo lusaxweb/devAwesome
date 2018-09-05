@@ -6,7 +6,7 @@
         <div class="repo" v-if="repo != 'ads'">
           <header>
             <h3>
-              <span>{{ index + 1 }}</span>
+              <span>{{ repo.index }}</span>
               {{repo.name}}
             </h3>
             <div class="con-links">
@@ -82,6 +82,10 @@ export default {
         .then(json => {
           console.log(json)
           let items = json.items
+          items.map((item, index) => {
+            item.index = index + 1
+          })
+          console.log(items)
           items.splice(10, 0, 'ads')
           self.repos = items
         })

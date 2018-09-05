@@ -20,6 +20,7 @@
 
       <router-link exact to="/"><span>Discover</span></router-link>
       <router-link exact to="/topics"><span>Topics</span></router-link>
+      <router-link exact to="/assets"><span>Assets</span></router-link>
       <!-- <router-link exact to="/developers"><span>Developers</span></router-link> -->
 
       <!-- <router-link to="/front-end"><span>Front-end</span></router-link> -->

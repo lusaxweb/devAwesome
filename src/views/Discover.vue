@@ -56,15 +56,15 @@ export default {
       this.getPosts()
     },
     explore () {
-      this.maxPosts = 4
+      this.maxPosts = 10
       this.getPosts()
     },
     section () {
-      this.maxPosts = 4
+      this.maxPosts = 10
       this.getPosts()
     },
     lenguaje () {
-      this.maxPosts = 4
+      this.maxPosts = 10
       this.getPosts()
     },
     tagsActive () {
