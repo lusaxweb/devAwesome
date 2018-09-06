@@ -974,6 +974,2414 @@ export default {
         emoji: '🐕',
         text: ':dog2:'
       },
+      {
+        emoji: '🐖',
+        text: ':pig2:'
+      },
+      {
+        emoji: '🐁',
+        text: ':mouse2:'
+      },
+      {
+        emoji: '🐂',
+        text: ':ox:'
+      },
+      {
+        emoji: '🐲',
+        text: ':dragon_face:'
+      },
+      {
+        emoji: '🐡',
+        text: ':blowfish:'
+      },
+      {
+        emoji: '🐊',
+        text: ':crocodile:'
+      },
+      {
+        emoji: '🐪',
+        text: ':dromedary_camel:'
+      },
+      {
+        emoji: '🐆',
+        text: ':leopard:'
+      },
+      {
+        emoji: '🐈',
+        text: ':cat2:'
+      },
+      {
+        emoji: '🐩',
+        text: ':poodle:'
+      },
+      {
+        emoji: '🐾',
+        text: ':paw_prints:'
+      },
+      {
+        emoji: '💐',
+        text: ':bouquet:'
+      },
+      {
+        emoji: '🌸',
+        text: ':cherry_blossom:'
+      },
+      {
+        emoji: '🌷',
+        text: ':tulip:'
+      },
+      {
+        emoji: '🍀',
+        text: ':four_leaf_clover:'
+      },
+      {
+        emoji: '🌹',
+        text: ':rose:'
+      },
+      {
+        emoji: '🌻',
+        text: ':sunflower:'
+      },
+      {
+        emoji: '🌺',
+        text: ':hibiscus:'
+      },
+      {
+        emoji: '🍁',
+        text: ':maple_leaf:'
+      },
+      {
+        emoji: '🍃',
+        text: ':leaves:'
+      },
+      {
+        emoji: '🍂',
+        text: ':fallen_leaf:'
+      },
+      {
+        emoji: '🌿',
+        text: ':herb:'
+      },
+      {
+        emoji: '🍄',
+        text: ':mushroom:'
+      },
+      {
+        emoji: '🌵',
+        text: ':cactus:'
+      },
+      {
+        emoji: '🌴',
+        text: ':palm_tree:'
+      },
+      {
+        emoji: '🌲',
+        text: ':evergreen_tree:'
+      },
+      {
+        emoji: '🌳',
+        text: ':deciduous_tree:'
+      },
+      {
+        emoji: '🌰',
+        text: ':chestnut:'
+      },
+      {
+        emoji: '🌱',
+        text: ':seedling:'
+      },
+      {
+        emoji: '🌼',
+        text: ':blossom:'
+      },
+      {
+        emoji: '🌾',
+        text: ':ear_of_rice:'
+      },
+      {
+        emoji: '🐚',
+        text: ':shell:'
+      },
+      {
+        emoji: '🌐',
+        text: ':globe_with_meridians:'
+      },
+      {
+        emoji: '🌞',
+        text: ':sun_with_face:'
+      },
+      {
+        emoji: '🌝',
+        text: ':full_moon_with_face:'
+      },
+      {
+        emoji: '🌚',
+        text: ':new_moon_with_face:'
+      },
+      {
+        emoji: '🌑',
+        text: ':new_moon:'
+      },
+      {
+        emoji: '🌒',
+        text: ':waxing_crescent_moon:'
+      },
+      {
+        emoji: '🌓',
+        text: ':first_quarter_moon:'
+      },
+      {
+        emoji: '🌔',
+        text: ':waxing_gibbous_moon:'
+      },
+      {
+        emoji: '🌕',
+        text: ':full_moon:'
+      },
+      {
+        emoji: '🌖',
+        text: ':waning_gibbous_moon:'
+      },
+      {
+        emoji: '🌗',
+        text: ':last_quarter_moon:'
+      },
+      {
+        emoji: '🌘',
+        text: ':waning_crescent_moon:'
+      },
+      {
+        emoji: '🌜',
+        text: ':last_quarter_moon_with_face:'
+      },
+      {
+        emoji: '🌛',
+        text: ':first_quarter_moon_with_face:'
+      },
+      {
+        emoji: '🌔',
+        text: ':moon:'
+      },
+      {
+        emoji: '🌍',
+        text: ':earth_africa:'
+      },
+      {
+        emoji: '🌎',
+        text: ':earth_americas:'
+      },
+      {
+        emoji: '🌏',
+        text: ':earth_asia:'
+      },
+      {
+        emoji: '🌋',
+        text: ':volcano:'
+      },
+      {
+        emoji: '🌌',
+        text: ':milky_way:'
+      },
+      {
+        emoji: '⛅️',
+        text: ':partly_sunny:'
+      },
+      {
+        emoji: '🎍',
+        text: ':bamboo:'
+      },
+      {
+        emoji: '💝',
+        text: ':gift_heart:'
+      },
+      {
+        emoji: '🎎',
+        text: ':dolls:'
+      },
+      {
+        emoji: '🎒',
+        text: ':school_satchel:'
+      },
+      {
+        emoji: '🎓',
+        text: ':mortar_board:'
+      },
+      {
+        emoji: '🎏',
+        text: ':flags:'
+      },
+      {
+        emoji: '🎆',
+        text: ':fireworks:'
+      },
+      {
+        emoji: '🎇',
+        text: ':sparkler:'
+      },
+      {
+        emoji: '🎐',
+        text: ':wind_chime:'
+      },
+      {
+        emoji: '🎑',
+        text: ':rice_scene:'
+      },
+      {
+        emoji: '🎃',
+        text: ':jack_o_lantern:'
+      },
+      {
+        emoji: '👻',
+        text: ':ghost:'
+      },
+      {
+        emoji: '🎅',
+        text: ':santa:'
+      },
+      {
+        emoji: '🎄',
+        text: ':christmas_tree:'
+      },
+      {
+        emoji: '🎁',
+        text: ':gift:'
+      },
+      {
+        emoji: '🔔',
+        text: ':bell:'
+      },
+      {
+        emoji: '🔕',
+        text: ':no_bell:'
+      },
+      {
+        emoji: '🎋',
+        text: ':tanabata_tree:'
+      },
+      {
+        emoji: '🎉',
+        text: ':tada:'
+      },
+      {
+        emoji: '🎊',
+        text: ':confetti_ball:'
+      },
+      {
+        emoji: '🎈',
+        text: ':balloon:'
+      },
+      {
+        emoji: '🔮',
+        text: ':crystal_ball:'
+      },
+      {
+        emoji: '💿',
+        text: ':cd:'
+      },
+      {
+        emoji: '📀',
+        text: ':dvd:'
+      },
+      {
+        emoji: '💾',
+        text: ':floppy_disk:'
+      },
+      {
+        emoji: '📷',
+        text: ':camera:'
+      },
+      {
+        emoji: '📹',
+        text: ':video_camera:'
+      },
+      {
+        emoji: '🎥',
+        text: ':movie_camera:'
+      },
+      {
+        emoji: '💻',
+        text: ':computer:'
+      },
+      {
+        emoji: '📺',
+        text: ':tv:'
+      },
+      {
+        emoji: '📱',
+        text: ':iphone:'
+      },
+      {
+        emoji: '☎️',
+        text: ':telephone: | :phone:'
+      },
+      {
+        emoji: '📞',
+        text: ':telephone_receiver:'
+      },
+      {
+        emoji: '📟',
+        text: ':pager:'
+      },
+      {
+        emoji: '📠',
+        text: ':fax:'
+      },
+      {
+        emoji: '💽',
+        text: ':minidisc:'
+      },
+      {
+        emoji: '📼',
+        text: ':vhs:'
+      },
+      {
+        emoji: '🔉',
+        text: ':sound:'
+      },
+      {
+        emoji: '🔈',
+        text: ':speaker:'
+      },
+      {
+        emoji: '🔇',
+        text: ':mute:'
+      },
+      {
+        emoji: '📢',
+        text: ':loudspeaker:'
+      },
+      {
+        emoji: '📣',
+        text: ':mega:'
+      },
+      {
+        emoji: '⌛️',
+        text: ':hourglass:'
+      },
+      {
+        emoji: '⏳',
+        text: ':hourglass_flowing_sand:'
+      },
+      {
+        emoji: '⏰',
+        text: ':alarm_clock:'
+      },
+      {
+        emoji: '⌚️',
+        text: ':watch:'
+      },
+      {
+        emoji: '📻',
+        text: ':radio:'
+      },
+      {
+        emoji: '📡',
+        text: ':satellite:'
+      },
+      {
+        emoji: '➿',
+        text: ':loop:'
+      },
+      {
+        emoji: '🔍',
+        text: ':mag:'
+      },
+      {
+        emoji: '🔎',
+        text: ':mag_right:'
+      },
+      {
+        emoji: '🔓',
+        text: ':unlock:'
+      },
+      {
+        emoji: '🔒',
+        text: ':lock:'
+      },
+      {
+        emoji: '🔏',
+        text: ':lock_with_ink_pen:'
+      },
+      {
+        emoji: '🔐',
+        text: ':closed_lock_with_key:'
+      },
+      {
+        emoji: '🔑',
+        text: ':key:'
+      },
+      {
+        emoji: '💡',
+        text: ':bulb:'
+      },
+      {
+        emoji: '🔦',
+        text: ':flashlight:'
+      },
+      {
+        emoji: '🔆',
+        text: ':high_brightness:'
+      },
+      {
+        emoji: '🔅',
+        text: ':low_brightness:'
+      },
+      {
+        emoji: '🔌',
+        text: ':electric_plug:'
+      },
+      {
+        emoji: '🔋',
+        text: ':battery:'
+      },
+      {
+        emoji: '📲',
+        text: ':calling:'
+      },
+      {
+        emoji: '✉️',
+        text: ':email:'
+      },
+      {
+        emoji: '📫',
+        text: ':mailbox:'
+      },
+      {
+        emoji: '📮',
+        text: ':postbox:'
+      },
+      {
+        emoji: '🛀',
+        text: ':bath:'
+      },
+      {
+        emoji: '🛁',
+        text: ':bathtub:'
+      },
+      {
+        emoji: '🚿',
+        text: ':shower:'
+      },
+      {
+        emoji: '🚽',
+        text: ':toilet:'
+      },
+      {
+        emoji: '🔧',
+        text: ':wrench:'
+      },
+      {
+        emoji: '🔩',
+        text: ':nut_and_bolt:'
+      },
+      {
+        emoji: '🔨',
+        text: ':hammer:'
+      },
+      {
+        emoji: '💺',
+        text: ':seat:'
+      },
+      {
+        emoji: '💰',
+        text: ':moneybag:'
+      },
+      {
+        emoji: '💴',
+        text: ':yen:'
+      },
+      {
+        emoji: '💵',
+        text: ':dollar:'
+      },
+      {
+        emoji: '💷',
+        text: ':pound:'
+      },
+      {
+        emoji: '💶',
+        text: ':euro:'
+      },
+      {
+        emoji: '💳',
+        text: ':credit_card:'
+      },
+      {
+        emoji: '💸',
+        text: ':money_with_wings:'
+      },
+      {
+        emoji: '📧',
+        text: ':e-mail:'
+      },
+      {
+        emoji: '📥',
+        text: ':inbox_tray:'
+      },
+      {
+        emoji: '📤',
+        text: ':outbox_tray:'
+      },
+      {
+        emoji: '✉️',
+        text: ':envelope:'
+      },
+      {
+        emoji: '📨',
+        text: ':incoming_envelope:'
+      },
+      {
+        emoji: '📯',
+        text: ':postal_horn:'
+      },
+      {
+        emoji: '📪',
+        text: ':mailbox_closed:'
+      },
+      {
+        emoji: '📬',
+        text: ':mailbox_with_mail:'
+      },
+      {
+        emoji: '📭',
+        text: ':mailbox_with_no_mail:'
+      },
+      {
+        emoji: '🚪',
+        text: ':door:'
+      },
+      {
+        emoji: '🚬',
+        text: ':smoking:'
+      },
+      {
+        emoji: '💣',
+        text: ':bomb:'
+      },
+      {
+        emoji: '🔫',
+        text: ':gun:'
+      },
+      {
+        emoji: '🔪',
+        text: ':hocho:'
+      },
+      {
+        emoji: '💊',
+        text: ':pill:'
+      },
+      {
+        emoji: '💉',
+        text: ':syringe:'
+      },
+      {
+        emoji: '📄',
+        text: ':page_facing_up:'
+      },
+      {
+        emoji: '📃',
+        text: ':page_with_curl:'
+      },
+      {
+        emoji: '📑',
+        text: ':bookmark_tabs:'
+      },
+      {
+        emoji: '📊',
+        text: ':bar_chart:'
+      },
+      {
+        emoji: '📈',
+        text: ':chart_with_upwards_trend:'
+      },
+      {
+        emoji: '📉',
+        text: ':chart_with_downwards_trend:'
+      },
+      {
+        emoji: '📜',
+        text: ':scroll:'
+      },
+      {
+        emoji: '📋',
+        text: ':clipboard:'
+      },
+      {
+        emoji: '📆',
+        text: ':calendar:'
+      },
+      {
+        emoji: '📅',
+        text: ':date:'
+      },
+      {
+        emoji: '📇',
+        text: ':card_index:'
+      },
+      {
+        emoji: '📁',
+        text: ':file_folder:'
+      },
+      {
+        emoji: '📂',
+        text: ':open_file_folder:'
+      },
+      {
+        emoji: '✂️',
+        text: ':scissors:'
+      },
+      {
+        emoji: '📌',
+        text: ':pushpin:'
+      },
+      {
+        emoji: '📎',
+        text: ':paperclip:'
+      },
+      {
+        emoji: '✒️',
+        text: ':black_nib:'
+      },
+      {
+        emoji: '✏️',
+        text: ':pencil2:'
+      },
+      {
+        emoji: '📏',
+        text: ':straight_ruler:'
+      },
+      {
+        emoji: '📐',
+        text: ':triangular_ruler:'
+      },
+      {
+        emoji: '📕',
+        text: ':closed_book:'
+      },
+      {
+        emoji: '📗',
+        text: ':green_book:'
+      },
+      {
+        emoji: '📘',
+        text: ':blue_book:'
+      },
+      {
+        emoji: '📙',
+        text: ':orange_book:'
+      },
+      {
+        emoji: '📓',
+        text: ':notebook:'
+      },
+      {
+        emoji: '📔',
+        text: ':notebook_with_decorative_cover:'
+      },
+      {
+        emoji: '📒',
+        text: ':ledger:'
+      },
+      {
+        emoji: '📚',
+        text: ':books:'
+      },
+      {
+        emoji: '🔖',
+        text: ':bookmark:'
+      },
+      {
+        emoji: '📛',
+        text: ':name_badge:'
+      },
+      {
+        emoji: '🔬',
+        text: ':microscope:'
+      },
+      {
+        emoji: '🔭',
+        text: ':telescope:'
+      },
+      {
+        emoji: '📰',
+        text: ':newspaper:'
+      },
+      {
+        emoji: '🏈',
+        text: ':football:'
+      },
+      {
+        emoji: '🏀',
+        text: ':basketball:'
+      },
+      {
+        emoji: '⚽️',
+        text: ':soccer:'
+      },
+      {
+        emoji: '⚾️',
+        text: ':baseball:'
+      },
+      {
+        emoji: '🎾',
+        text: ':tennis:'
+      },
+      {
+        emoji: '🎱',
+        text: ':8ball:'
+      },
+      {
+        emoji: '🏉',
+        text: ':rugby_football:'
+      },
+      {
+        emoji: '🎳',
+        text: ':bowling:'
+      },
+      {
+        emoji: '⛳️',
+        text: ':golf:'
+      },
+      {
+        emoji: '🚵',
+        text: ':mountain_bicyclist:'
+      },
+      {
+        emoji: '🚴',
+        text: ':bicyclist:'
+      },
+      {
+        emoji: '🏇',
+        text: ':horse_racing:'
+      },
+      {
+        emoji: '🏂',
+        text: ':snowboarder:'
+      },
+      {
+        emoji: '🏊',
+        text: ':swimmer:'
+      },
+      {
+        emoji: '🏄',
+        text: ':surfer:'
+      },
+      {
+        emoji: '🎿',
+        text: ':ski:'
+      },
+      {
+        emoji: '♠️',
+        text: ':spades:'
+      },
+      {
+        emoji: '♥️',
+        text: ':hearts:'
+      },
+      {
+        emoji: '♣️',
+        text: ':clubs:'
+      },
+      {
+        emoji: '♦️',
+        text: ':diamonds:'
+      },
+      {
+        emoji: '💎',
+        text: ':gem:'
+      },
+      {
+        emoji: '💍',
+        text: ':ring:'
+      },
+      {
+        emoji: '🏆',
+        text: ':trophy:'
+      },
+      {
+        emoji: '🎼',
+        text: ':musical_score:'
+      },
+      {
+        emoji: '🎹',
+        text: ':musical_keyboard:'
+      },
+      {
+        emoji: '🎻',
+        text: ':violin:'
+      },
+      {
+        emoji: '👾',
+        text: ':space_invader:'
+      },
+      {
+        emoji: '🎮',
+        text: ':video_game:'
+      },
+      {
+        emoji: '🃏',
+        text: ':black_joker:'
+      },
+      {
+        emoji: '🎴',
+        text: ':flower_playing_cards:'
+      },
+      {
+        emoji: '🎲',
+        text: ':game_die:'
+      },
+      {
+        emoji: '🎯',
+        text: ':dart:'
+      },
+      {
+        emoji: '🀄️',
+        text: ':mahjong:'
+      },
+      {
+        emoji: '🎬',
+        text: ':clapper:'
+      },
+      {
+        emoji: '📝',
+        text: ':memo: | :pencil:'
+      },
+      {
+        emoji: '📖',
+        text: ':book:'
+      },
+      {
+        emoji: '🎨',
+        text: ':art:'
+      },
+      {
+        emoji: '🎤',
+        text: ':microphone:'
+      },
+      {
+        emoji: '🎧',
+        text: ':headphones:'
+      },
+      {
+        emoji: '🎺',
+        text: ':trumpet:'
+      },
+      {
+        emoji: '🎷',
+        text: ':saxophone:'
+      },
+      {
+        emoji: '🎸',
+        text: ':guitar:'
+      },
+      {
+        emoji: '👞',
+        text: ':shoe:'
+      },
+      {
+        emoji: '👡',
+        text: ':sandal:'
+      },
+      {
+        emoji: '👠',
+        text: ':high_heel:'
+      },
+      {
+        emoji: '💄',
+        text: ':lipstick:'
+      },
+      {
+        emoji: '👢',
+        text: ':boot:'
+      },
+      {
+        emoji: '👕',
+        text: ':shirt: | :tshirt:'
+      },
+      {
+        emoji: '👔',
+        text: ':necktie:'
+      },
+      {
+        emoji: '👚',
+        text: ':womans_clothes:'
+      },
+      {
+        emoji: '👗',
+        text: ':dress:'
+      },
+      {
+        emoji: '🎽',
+        text: ':running_shirt_with_sash:'
+      },
+      {
+        emoji: '👖',
+        text: ':jeans:'
+      },
+      {
+        emoji: '👘',
+        text: ':kimono:'
+      },
+      {
+        emoji: '👙',
+        text: ':bikini:'
+      },
+      {
+        emoji: '🎀',
+        text: ':ribbon:'
+      },
+      {
+        emoji: '🎩',
+        text: ':tophat:'
+      },
+      {
+        emoji: '👑',
+        text: ':crown:'
+      },
+      {
+        emoji: '👒',
+        text: ':womans_hat:'
+      },
+      {
+        emoji: '👞',
+        text: ':mans_shoe:'
+      },
+      {
+        emoji: '🌂',
+        text: ':closed_umbrella:'
+      },
+      {
+        emoji: '💼',
+        text: ':briefcase:'
+      },
+      {
+        emoji: '👜',
+        text: ':handbag:'
+      },
+      {
+        emoji: '👝',
+        text: ':pouch:'
+      },
+      {
+        emoji: '👛',
+        text: ':purse:'
+      },
+      {
+        emoji: '👓',
+        text: ':eyeglasses:'
+      },
+      {
+        emoji: '🎣',
+        text: ':fishing_pole_and_fish:'
+      },
+      {
+        emoji: '☕️',
+        text: ':coffee:'
+      },
+      {
+        emoji: '🍵',
+        text: ':tea:'
+      },
+      {
+        emoji: '🍶',
+        text: ':sake:'
+      },
+      {
+        emoji: '🍼',
+        text: ':baby_bottle:'
+      },
+      {
+        emoji: '🍺',
+        text: ':beer:'
+      },
+      {
+        emoji: '🍻',
+        text: ':beers:'
+      },
+      {
+        emoji: '🍸',
+        text: ':cocktail:'
+      },
+      {
+        emoji: '🍹',
+        text: ':tropical_drink:'
+      },
+      {
+        emoji: '🍷',
+        text: ':wine_glass:'
+      },
+      {
+        emoji: '🍴',
+        text: ':fork_and_knife:'
+      },
+      {
+        emoji: '🍕',
+        text: ':pizza:'
+      },
+      {
+        emoji: '🍔',
+        text: ':hamburger:'
+      },
+      {
+        emoji: '🍟',
+        text: ':fries:'
+      },
+      {
+        emoji: '🍗',
+        text: ':poultry_leg:'
+      },
+      {
+        emoji: '🍖',
+        text: ':meat_on_bone:'
+      },
+      {
+        emoji: '🍝',
+        text: ':spaghetti:'
+      },
+      {
+        emoji: '🍛',
+        text: ':curry:'
+      },
+      {
+        emoji: '🍤',
+        text: ':fried_shrimp:'
+      },
+      {
+        emoji: '🍱',
+        text: ':bento:'
+      },
+      {
+        emoji: '🍣',
+        text: ':sushi:'
+      },
+      {
+        emoji: '🍥',
+        text: ':fish_cake:'
+      },
+      {
+        emoji: '🍙',
+        text: ':rice_ball:'
+      },
+      {
+        emoji: '🍘',
+        text: ':rice_cracker:'
+      },
+      {
+        emoji: '🍚',
+        text: ':rice:'
+      },
+      {
+        emoji: '🍜',
+        text: ':ramen:'
+      },
+      {
+        emoji: '🍲',
+        text: ':stew:'
+      },
+      {
+        emoji: '🍢',
+        text: ':oden:'
+      },
+      {
+        emoji: '🍡',
+        text: ':dango:'
+      },
+      {
+        emoji: '🥚',
+        text: ':egg:'
+      },
+      {
+        emoji: '🍞',
+        text: ':bread:'
+      },
+      {
+        emoji: '🍩',
+        text: ':doughnut:'
+      },
+      {
+        emoji: '🍮',
+        text: ':custard:'
+      },
+      {
+        emoji: '🍦',
+        text: ':icecream:'
+      },
+      {
+        emoji: '🍨',
+        text: ':ice_cream:'
+      },
+      {
+        emoji: '🍧',
+        text: ':shaved_ice:'
+      },
+      {
+        emoji: '🎂',
+        text: ':birthday:'
+      },
+      {
+        emoji: '🍰',
+        text: ':cake:'
+      },
+      {
+        emoji: '🍧',
+        text: ':shaved_ice:'
+      },
+      {
+        emoji: '🎂',
+        text: ':birthday:'
+      },
+      {
+        emoji: '🍰',
+        text: ':cake:'
+      },
+      {
+        emoji: '🍪',
+        text: ':cookie:'
+      },
+      {
+        emoji: '🍫',
+        text: ':chocolate_bar:'
+      },
+      {
+        emoji: '🍬',
+        text: ':candy:'
+      },
+      {
+        emoji: '🍭',
+        text: ':lollipop:'
+      },
+      {
+        emoji: '🍯',
+        text: ':honey_pot:'
+      },
+      {
+        emoji: '🍎',
+        text: ':apple:'
+      },
+      {
+        emoji: '🍏',
+        text: ':green_apple:'
+      },
+      {
+        emoji: '🍊',
+        text: ':tangerine:'
+      },
+      {
+        emoji: '🍋',
+        text: ':lemon:'
+      },
+      {
+        emoji: '🍒',
+        text: ':cherries:'
+      },
+      {
+        emoji: '🍇',
+        text: ':grapes:'
+      },
+      {
+        emoji: '🍉',
+        text: ':watermelon:'
+      },
+      {
+        emoji: '🍓',
+        text: ':strawberry:'
+      },
+      {
+        emoji: '🍑',
+        text: ':peach:'
+      },
+      {
+        emoji: '🍈',
+        text: ':melon:'
+      },
+      {
+        emoji: '🍌',
+        text: ':banana:'
+      },
+      {
+        emoji: '🍐',
+        text: ':pear:'
+      },
+      {
+        emoji: '🍍',
+        text: ':pineapple:'
+      },
+      {
+        emoji: '🍠',
+        text: ':sweet_potato:'
+      },
+      {
+        emoji: '🍆',
+        text: ':eggplant:'
+      },
+      {
+        emoji: '🍅',
+        text: ':tomato:'
+      },
+      {
+        emoji: '🌽',
+        text: ':corn:'
+      },
+      {
+        emoji: '🏠',
+        text: ':house:'
+      },
+      {
+        emoji: '🏡',
+        text: ':house_with_garden:'
+      },
+      {
+        emoji: '🏫',
+        text: ':school:'
+      },
+      {
+        emoji: '🏢',
+        text: ':office:'
+      },
+      {
+        emoji: '🏣',
+        text: ':post_office:'
+      },
+      {
+        emoji: '🏥',
+        text: ':hospital:'
+      },
+      {
+        emoji: '🏢',
+        text: ':office:'
+      },
+      {
+        emoji: '🏣',
+        text: ':post_office:'
+      },
+      {
+        emoji: '🏥',
+        text: ':hospital:'
+      },
+      {
+        emoji: '🏦',
+        text: ':bank:'
+      },
+      {
+        emoji: '🏪',
+        text: ':convenience_store:'
+      },
+      {
+        emoji: '🏩',
+        text: ':love_hotel:'
+      },
+      {
+        emoji: '🏨',
+        text: ':hotel:'
+      },
+      {
+        emoji: '💒',
+        text: ':wedding:'
+      },
+      {
+        emoji: '⛪️',
+        text: ':church:'
+      },
+      {
+        emoji: '🏬',
+        text: ':department_store:'
+      },
+      {
+        emoji: '🏤',
+        text: ':european_post_office:'
+      },
+      {
+        emoji: '🌇',
+        text: ':city_sunrise:'
+      },
+      {
+        emoji: '🌆',
+        text: ':city_sunset:'
+      },
+      {
+        emoji: '🏯',
+        text: ':japanese_castle:'
+      },
+      {
+        emoji: '🏰',
+        text: ':european_castle:'
+      },
+      {
+        emoji: '⛺️',
+        text: ':tent:'
+      },
+      {
+        emoji: '🏭',
+        text: ':factory:'
+      },
+      {
+        emoji: '🗼',
+        text: ':tokyo_tower:'
+      },
+      {
+        emoji: '🗾',
+        text: ':japan:'
+      },
+      {
+        emoji: '🗻',
+        text: ':mount_fuji:'
+      },
+      {
+        emoji: '🌄',
+        text: ':sunrise_over_mountains:'
+      },
+      {
+        emoji: '🌅',
+        text: ':sunrise:'
+      },
+      {
+        emoji: '🌠',
+        text: ':stars:'
+      },
+      {
+        emoji: '🗽',
+        text: ':statue_of_liberty:'
+      },
+      {
+        emoji: '🌉',
+        text: ':bridge_at_night:'
+      },
+      {
+        emoji: '🎠',
+        text: ':carousel_horse:'
+      },
+      {
+        emoji: '🌈',
+        text: ':rainbow:'
+      },
+      {
+        emoji: '🎡',
+        text: ':ferris_wheel:'
+      },
+      {
+        emoji: '⛲️',
+        text: ':fountain:'
+      },
+      {
+        emoji: '🎢',
+        text: ':roller_coaster:'
+      },
+      {
+        emoji: '🚢',
+        text: ':ship:'
+      },
+      {
+        emoji: '🚤',
+        text: ':speedboat:'
+      },
+      {
+        emoji: '⛵️',
+        text: ':boat: | :sailboat:'
+      },
+      {
+        emoji: '🚣',
+        text: ':rowboat:'
+      },
+      {
+        emoji: '⚓️',
+        text: ':anchor:'
+      },
+      {
+        emoji: '🚀',
+        text: ':rocket:'
+      },
+      {
+        emoji: '✈️',
+        text: ':airplane:'
+      },
+      {
+        emoji: '🚁',
+        text: ':helicopter:'
+      },
+      {
+        emoji: '🚀',
+        text: ':rocket:'
+      },
+      {
+        emoji: '✈️',
+        text: ':airplane:'
+      },
+      {
+        emoji: '🚁',
+        text: ':helicopter:'
+      },
+      {
+        emoji: '🚂',
+        text: ':steam_locomotive:'
+      },
+      {
+        emoji: '🚊',
+        text: ':tram:'
+      },
+      {
+        emoji: '🚞',
+        text: ':mountain_railway:'
+      },
+      {
+        emoji: '🚲',
+        text: ':bike:'
+      },
+      {
+        emoji: '🚡',
+        text: ':aerial_tramway:'
+      },
+      {
+        emoji: '🚟',
+        text: ':suspension_railway:'
+      },
+      {
+        emoji: '🚠',
+        text: ':mountain_cableway:'
+      },
+      {
+        emoji: '🚜',
+        text: ':tractor:'
+      },
+      {
+        emoji: '🚙',
+        text: ':blue_car:'
+      },
+      {
+        emoji: '🚘',
+        text: ':oncoming_automobile:'
+      },
+      {
+        emoji: '🚗',
+        text: ':car: | :red_car:'
+      },
+      {
+        emoji: '🚕',
+        text: ':taxi:'
+      },
+      {
+        emoji: '🚖',
+        text: ':oncoming_taxi:'
+      },
+      {
+        emoji: '🚛',
+        text: ':articulated_lorry:'
+      },
+      {
+        emoji: '🚌',
+        text: ':bus:'
+      },
+      {
+        emoji: '🚍',
+        text: ':oncoming_bus:'
+      },
+      {
+        emoji: '🚨',
+        text: ':rotating_light:'
+      },
+      {
+        emoji: '🚓',
+        text: ':police_car:'
+      },
+      {
+        emoji: '🚔',
+        text: ':oncoming_police_car:'
+      },
+      {
+        emoji: '🚒',
+        text: ':fire_engine:'
+      },
+      {
+        emoji: '🚑',
+        text: ':ambulance:'
+      },
+      {
+        emoji: '🚐',
+        text: ':minibus:'
+      },
+      {
+        emoji: '🚚',
+        text: ':truck:'
+      },
+      {
+        emoji: '🚋',
+        text: ':train:'
+      },
+      {
+        emoji: '🚉',
+        text: ':station:'
+      },
+      {
+        emoji: '🚆',
+        text: ':train2:'
+      },
+      {
+        emoji: '🚅',
+        text: ':bullettrain_front:'
+      },
+      {
+        emoji: '🚄',
+        text: ':bullettrain_side:'
+      },
+      {
+        emoji: '🚈',
+        text: ':light_rail:'
+      },
+      {
+        emoji: '🚝',
+        text: ':monorail:'
+      },
+      {
+        emoji: '🚃',
+        text: ':railway_car:'
+      },
+      {
+        emoji: '🚎',
+        text: ':trolleybus:'
+      },
+      {
+        emoji: '🎫',
+        text: ':ticket:'
+      },
+      {
+        emoji: '⛽️',
+        text: ':fuelpump:'
+      },
+      {
+        emoji: '🚦',
+        text: ':vertical_traffic_light:'
+      },
+      {
+        emoji: '🚥',
+        text: ':traffic_light:'
+      },
+      {
+        emoji: '⚠️',
+        text: ':warning:'
+      },
+      {
+        emoji: '🚧',
+        text: ':construction:'
+      },
+      {
+        emoji: '🔰',
+        text: ':beginner:'
+      },
+      {
+        emoji: '🏧',
+        text: ':atm:'
+      },
+      {
+        emoji: '🎰',
+        text: ':slot_machine:'
+      },
+      {
+        emoji: '🚏',
+        text: ':busstop:'
+      },
+      {
+        emoji: '💈',
+        text: ':barber:'
+      },
+      {
+        emoji: '♨️',
+        text: ':hotsprings:'
+      },
+      {
+        emoji: '🏁',
+        text: ':busstop:'
+      },
+      {
+        emoji: '🎌',
+        text: ':crossed_flags:'
+      },
+      {
+        emoji: '🏮',
+        text: ':izakaya_lantern:'
+      },
+      {
+        emoji: '🗿',
+        text: ':moyai:'
+      },
+      {
+        emoji: '🎪',
+        text: ':circus_tent:'
+      },
+      {
+        emoji: '🎭',
+        text: ':performing_arts:'
+      },
+      {
+        emoji: '📍',
+        text: ':round_pushpin:'
+      },
+      {
+        emoji: '🚩',
+        text: ':triangular_flag_on_post:'
+      },
+      {
+        emoji: '1️⃣',
+        text: ':one:'
+      },
+      {
+        emoji: '2️⃣',
+        text: ':two:'
+      },
+      {
+        emoji: '3️⃣',
+        text: ':three:'
+      },
+      {
+        emoji: '4️⃣',
+        text: ':four:'
+      },
+      {
+        emoji: '5️⃣',
+        text: ':five:'
+      },
+      {
+        emoji: '6️⃣',
+        text: ':six:'
+      },
+      {
+        emoji: '7️⃣',
+        text: ':seven:'
+      },
+      {
+        emoji: '8️⃣',
+        text: ':eight:'
+      },
+      {
+        emoji: '9️⃣',
+        text: ':nine:'
+      },
+      {
+        emoji: '🔟',
+        text: ':keycap_ten:'
+      },
+      {
+        emoji: '🔢',
+        text: ':1234:'
+      },
+      {
+        emoji: '0️⃣',
+        text: ':zero:'
+      },
+      {
+        emoji: '#️⃣',
+        text: ':hash:'
+      },
+      {
+        emoji: '🔣',
+        text: ':symbols:'
+      },
+      {
+        emoji: '◀️',
+        text: ':arrow_backward:'
+      },
+      {
+        emoji: '⬇️',
+        text: ':arrow_down:'
+      },
+      {
+        emoji: '▶️',
+        text: ':arrow_forward:'
+      },
+      {
+        emoji: '⬅️',
+        text: ':arrow_left:'
+      },
+      {
+        emoji: '🔠',
+        text: ':capital_abcd:'
+      },
+      {
+        emoji: '🔡',
+        text: ':abcd:'
+      },
+      {
+        emoji: '🔤',
+        text: ':abc:'
+      },
+      {
+        emoji: '↙️',
+        text: ':arrow_lower_left:'
+      },
+      {
+        emoji: '↘️',
+        text: ':arrow_lower_right:'
+      },
+      {
+        emoji: '➡️',
+        text: ':arrow_right:'
+      },
+      {
+        emoji: '⬆️',
+        text: ':arrow_up:'
+      },
+      {
+        emoji: '↖️',
+        text: ':arrow_upper_left:'
+      },
+      {
+        emoji: '↗️',
+        text: ':arrow_upper_right:'
+      },
+      {
+        emoji: '⏬',
+        text: ':arrow_double_down:'
+      },
+      {
+        emoji: '⏫',
+        text: ':arrow_double_up:'
+      },
+      {
+        emoji: '🔽',
+        text: ':arrow_down_small:'
+      },
+      {
+        emoji: '⤵️',
+        text: ':arrow_heading_down:'
+      },
+      {
+        emoji: '⤴️',
+        text: ':arrow_heading_up:'
+      },
+      {
+        emoji: '↩️',
+        text: ':leftwards_arrow_with_hook:'
+      },
+      {
+        emoji: '↪️',
+        text: ':arrow_right_hook:'
+      },
+      {
+        emoji: '↔️',
+        text: ':left_right_arrow:'
+      },
+      {
+        emoji: '↕️',
+        text: ':arrow_up_down:'
+      },
+      {
+        emoji: '🔼',
+        text: ':arrow_up_small:'
+      },
+      {
+        emoji: '🔃',
+        text: ':arrows_clockwise:'
+      },
+      {
+        emoji: '🔄',
+        text: ':arrows_counterclockwise:'
+      },
+      {
+        emoji: '⏪',
+        text: ':rewind:'
+      },
+      {
+        emoji: '⏩',
+        text: ':fast_forward:'
+      },
+      {
+        emoji: 'ℹ️',
+        text: ':information_source:'
+      },
+      {
+        emoji: '🆗',
+        text: ':ok:'
+      },
+      {
+        emoji: '🔀',
+        text: ':twisted_rightwards_arrows:'
+      },
+      {
+        emoji: '🔁',
+        text: ':repeat:'
+      },
+      {
+        emoji: '🔂',
+        text: ':repeat_one:'
+      },
+      {
+        emoji: '🆕',
+        text: ':new:'
+      },
+      {
+        emoji: '🔝',
+        text: ':top:'
+      },
+      {
+        emoji: '🆙',
+        text: ':up:'
+      },
+      {
+        emoji: '🆒',
+        text: ':cool:'
+      },
+      {
+        emoji: '🆓',
+        text: ':free:'
+      },
+      {
+        emoji: '🆖',
+        text: ':ng:'
+      },
+      {
+        emoji: '🎦',
+        text: ':cinema:'
+      },
+      {
+        emoji: '🈁',
+        text: ':koko:'
+      },
+      {
+        emoji: '📶',
+        text: ':signal_strength:'
+      },
+      {
+        emoji: '🈹',
+        text: ':u5272:'
+      },
+      {
+        emoji: '🈴',
+        text: ':u5408:'
+      },
+      {
+        emoji: '🈺',
+        text: ':u55b6:'
+      },
+      {
+        emoji: '🈯️',
+        text: ':u6307:'
+      },
+      {
+        emoji: '🈷️',
+        text: ':u6708:'
+      },
+      {
+        emoji: '🈶',
+        text: ':u6709:'
+      },
+      {
+        emoji: '🈵',
+        text: ':u6e80:'
+      },
+      {
+        emoji: '🈚️',
+        text: ':u7121:'
+      },
+      {
+        emoji: '🈸',
+        text: ':u7533:'
+      },
+      {
+        emoji: '🈳',
+        text: ':u7a7a:'
+      },
+      {
+        emoji: '🈲',
+        text: ':u7981:'
+      },
+      {
+        emoji: '🈂️',
+        text: ':sa:'
+      },
+      {
+        emoji: '🚻',
+        text: ':restroom:'
+      },
+      {
+        emoji: '🚹',
+        text: ':mens:'
+      },
+      {
+        emoji: '🚺',
+        text: ':womens:'
+      },
+      {
+        emoji: '🚼',
+        text: ':baby_symbol:'
+      },
+      {
+        emoji: '🚭',
+        text: ':no_smoking:'
+      },
+      {
+        emoji: '🅿️',
+        text: ':parking:'
+      },
+      {
+        emoji: '♿️',
+        text: ':wheelchair:'
+      },
+      {
+        emoji: '🚇',
+        text: ':metro:'
+      },
+      {
+        emoji: '🛄',
+        text: ':baggage_claim:'
+      },
+      {
+        emoji: '🉑',
+        text: ':accept:'
+      },
+      {
+        emoji: '🚾',
+        text: ':wc:'
+      },
+      {
+        emoji: '🚰',
+        text: ':potable_water:'
+      },
+      {
+        emoji: '🚮',
+        text: ':put_litter_in_its_place:'
+      },
+      {
+        emoji: '㊙️',
+        text: ':secret:'
+      },
+      {
+        emoji: '㊗️',
+        text: ':congratulations:'
+      },
+      {
+        emoji: 'Ⓜ️',
+        text: ':m:'
+      },
+      {
+        emoji: '🛂',
+        text: ':passport_control:'
+      },
+      {
+        emoji: '🛅',
+        text: ':left_luggage:'
+      },
+      {
+        emoji: '🛃',
+        text: ':customs:'
+      },
+      {
+        emoji: '🉐',
+        text: ':ideograph_advantage:'
+      },
+      {
+        emoji: '🆑',
+        text: ':cl:'
+      },
+      {
+        emoji: '🆘',
+        text: ':sos:'
+      },
+      {
+        emoji: '🆔',
+        text: ':id:'
+      },
+      {
+        emoji: '🚫',
+        text: ':no_entry_sign:'
+      },
+      {
+        emoji: '🔞',
+        text: ':underage:'
+      },
+      {
+        emoji: '📵',
+        text: ':no_mobile_phones:'
+      },
+      {
+        emoji: '🚯',
+        text: ':do_not_litter:'
+      },
+      {
+        emoji: '🚱',
+        text: ':non-potable_water:'
+      },
+      {
+        emoji: '🚳',
+        text: ':no_bicycles:'
+      },
+      {
+        emoji: '🚷',
+        text: ':no_pedestrians:'
+      },
+      {
+        emoji: '🚸',
+        text: ':children_crossing:'
+      },
+      {
+        emoji: '⛔️',
+        text: ':no_entry:'
+      },
+      {
+        emoji: '✳️',
+        text: ':eight_spoked_asterisk:'
+      },
+      {
+        emoji: '✴️',
+        text: ':eight_pointed_black_star:'
+      },
+      {
+        emoji: '💟',
+        text: ':heart_decoration:'
+      },
+      {
+        emoji: '🆚',
+        text: ':vs:'
+      },
+      {
+        emoji: '📳',
+        text: ':vibration_mode:'
+      },
+      {
+        emoji: '📴',
+        text: ':mobile_phone_off:'
+      },
+      {
+        emoji: '💹',
+        text: ':chart:'
+      },
+      {
+        emoji: '💱',
+        text: ':currency_exchange:'
+      },
+      {
+        emoji: '♈️',
+        text: ':aries:'
+      },
+      {
+        emoji: '♉️',
+        text: ':taurus:'
+      },
+      {
+        emoji: '♊️',
+        text: ':gemini:'
+      },
+      {
+        emoji: '♋️',
+        text: ':cancer:'
+      },
+      {
+        emoji: '♌️',
+        text: ':leo:'
+      },
+      {
+        emoji: '♍️',
+        text: ':virgo:'
+      },
+      {
+        emoji: '♎️',
+        text: ':libra:'
+      },
+      {
+        emoji: '♏️',
+        text: ':scorpius:'
+      },
+      {
+        emoji: '♐️',
+        text: ':sagittarius:'
+      },
+      {
+        emoji: '♑️',
+        text: ':capricorn:'
+      },
+      {
+        emoji: '♒️',
+        text: ':aquarius:'
+      },
+      {
+        emoji: '♓️',
+        text: ':pisces:'
+      },
+      {
+        emoji: '⛎',
+        text: ':ophiuchus:'
+      },
+      {
+        emoji: '🔯',
+        text: ':six_pointed_star:'
+      },
+      {
+        emoji: '❎',
+        text: ':negative_squared_cross_mark:'
+      },
+      {
+        emoji: '🅰️',
+        text: ':a:'
+      },
+      {
+        emoji: '🅱️',
+        text: ':b:'
+      },
+      {
+        emoji: '🆎',
+        text: ':ab:'
+      },
+      {
+        emoji: '🅾️',
+        text: ':o2:'
+      },
+      {
+        emoji: '💠',
+        text: ':diamond_shape_with_a_dot_inside:'
+      },
+      {
+        emoji: '♻️',
+        text: ':recycle:'
+      },
+      {
+        emoji: '🔚',
+        text: ':end:'
+      },
+      {
+        emoji: '🔛',
+        text: ':on:'
+      },
+      {
+        emoji: '🔜',
+        text: ':soon:'
+      },
+      {
+        emoji: '🕐',
+        text: ':clock1:'
+      },
+      {
+        emoji: '🕜',
+        text: ':clock130:'
+      },
+      {
+        emoji: '🕙',
+        text: ':clock10:'
+      },
+      {
+        emoji: '🕥',
+        text: ':clock1030:'
+      },
+      {
+        emoji: '🕚',
+        text: ':clock11:'
+      },
+      {
+        emoji: '🕦',
+        text: ':clock1130:'
+      },
+      {
+        emoji: '🕛',
+        text: ':clock12:'
+      },
+      {
+        emoji: '🕧',
+        text: ':clock1230:'
+      },
+      {
+        emoji: '🕑',
+        text: ':clock2:'
+      },
+      {
+        emoji: '🕝',
+        text: ':clock230:'
+      },
+      {
+        emoji: '🕒',
+        text: ':clock3:'
+      },
+      {
+        emoji: '🕞',
+        text: ':clock330:'
+      },
+      {
+        emoji: '🕓',
+        text: ':clock4:'
+      },
+      {
+        emoji: '🕟',
+        text: ':clock430:'
+      },
+      {
+        emoji: '🕔',
+        text: ':clock5:'
+      },
+      {
+        emoji: '🕠',
+        text: ':clock530:'
+      },
+      {
+        emoji: '🕕',
+        text: ':clock6:'
+      },
+      {
+        emoji: '🕡',
+        text: ':clock630:'
+      },
+      {
+        emoji: '🕖',
+        text: ':clock7:'
+      },
+      {
+        emoji: '🕢',
+        text: ':clock730:'
+      },
+      {
+        emoji: '🕗',
+        text: ':clock8:'
+      },
+      {
+        emoji: '🕣',
+        text: ':clock830:'
+      },
+      {
+        emoji: '🕘',
+        text: ':clock9:'
+      },
+      {
+        emoji: '🕤',
+        text: ':clock930:'
+      },
+      {
+        emoji: '💲',
+        text: ':heavy_dollar_sign:'
+      },
+      {
+        emoji: '©️',
+        text: ':copyright:'
+      },
+      {
+        emoji: '®️',
+        text: ':registered:'
+      },
+      {
+        emoji: '™️',
+        text: ':tm:'
+      },
+      {
+        emoji: '❌',
+        text: ':x:'
+      },
+      {
+        emoji: '❗️',
+        text: ':heavy_exclamation_mark:'
+      },
+      {
+        emoji: '‼️',
+        text: ':bangbang:'
+      },
+      {
+        emoji: '⁉️',
+        text: ':interrobang:'
+      },
+      {
+        emoji: '⭕️',
+        text: ':o:'
+      },
+      {
+        emoji: '✖️',
+        text: ':heavy_multiplication_x:'
+      },
+      {
+        emoji: '➕',
+        text: ':heavy_plus_sign:'
+      },
+      {
+        emoji: '➖',
+        text: ':heavy_minus_sign:'
+      },
+      {
+        emoji: '➗',
+        text: ':heavy_division_sign:'
+      },
+      {
+        emoji: '💮',
+        text: ':white_flower:'
+      },
+      {
+        emoji: '💯',
+        text: ':100:'
+      },
+      {
+        emoji: '✔️',
+        text: ':heavy_check_mark:'
+      },
+      {
+        emoji: '☑️',
+        text: ':ballot_box_with_check:'
+      },
+      {
+        emoji: '🔘',
+        text: ':radio_button:'
+      },
+      {
+        emoji: '🔗',
+        text: ':link:'
+      },
+      {
+        emoji: '➰',
+        text: ':curly_loop:'
+      },
+      {
+        emoji: '〰️',
+        text: ':wavy_dash:'
+      },
+      {
+        emoji: '〽️',
+        text: ':part_alternation_mark:'
+      },
+      {
+        emoji: '🔱',
+        text: ':trident:'
+      },
+      {
+        emoji: '✅',
+        text: ':white_check_mark:'
+      },
+      {
+        emoji: '🔲',
+        text: ':black_square_button:'
+      },
+      {
+        emoji: '🔳',
+        text: ':white_square_button:'
+      },
+      {
+        emoji: '⚫️',
+        text: ':black_circle:'
+      },
+      {
+        emoji: '⚪️',
+        text: ':white_circle:'
+      },
+      {
+        emoji: '🔴',
+        text: ':red_circle:'
+      },
+      {
+        emoji: '🔵',
+        text: ':large_blue_circle:'
+      },
+      {
+        emoji: '🔷',
+        text: ':large_blue_diamond:'
+      },
+      {
+        emoji: '🔶',
+        text: ':large_orange_diamond:'
+      },
+      {
+        emoji: '🔹',
+        text: ':small_blue_diamond:'
+      },
+      {
+        emoji: '🔸',
+        text: ':small_orange_diamond:'
+      },
+      {
+        emoji: '🔺',
+        text: ':small_red_triangle:'
+      },
+      {
+        emoji: '🔻',
+        text: ':small_red_triangle_down:'
+      }
 
     ]
   })
