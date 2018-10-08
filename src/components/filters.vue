@@ -6,7 +6,7 @@
       class="selectx"
       v-model="$store.state.filters.section"
       >
-        <vs-select-item :vs-value="null" vs-text="none" />
+        <vs-select-item :vs-value="null" vs-text="All" />
         <vs-select-item :key="index" :vs-value="item.value" :vs-text="item.text" v-for="(item,index) in $store.state.sections" />
     </vs-select>
     <vs-select
@@ -15,7 +15,7 @@
       class="selectx"
       v-model="$store.state.filters.lenguaje"
       >
-        <vs-select-item :vs-value="null" vs-text="none" />
+        <vs-select-item :vs-value="null" vs-text="All" />
         <vs-select-item :key="index" :vs-value="item.value" :vs-text="item.text" v-for="(item,index) in $store.state.lenguajes" />
     </vs-select>
     <vs-select
@@ -70,6 +70,7 @@ export default {
 .con-select-filter
   width 100%
   padding 30px 30px
+  padding-top 0px
   display flex
   align-items center
   justify-content flex-start

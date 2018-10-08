@@ -35,6 +35,11 @@ export default {
     tags: [],
     tagsActive: []
   }),
+  computed: {
+    isRoot () {
+      return this.$store.state.user ? (this.$store.state.user.displayName === 'ldrovira' || this.$store.state.user.displayName === 'ManuelRoviraDesign') : false
+    }
+  },
   watch: {
     '$route.params.searching': function () {
       this.searchPosts()
@@ -69,7 +74,9 @@ export default {
       }
       for (var i = keys.length - 1; i >= 0; i--) {
         var value = object[keys[i]]
-        newObject[keys[i]] = value
+        if (self.isRoot ? true : value.active) {
+          newObject[keys[i]] = value
+        }
       }
       return newObject
     },

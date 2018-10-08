@@ -87,7 +87,7 @@ div[id*="carbonads"] a:hover {
   display: block;
   margin: 0 auto;
   max-width: var(--width) !important;
-  width: var(--width);
+  width: 130px;
   height: auto;
   border-radius 6px
 }
@@ -97,6 +97,7 @@ div[id*="carbonads"] a:hover {
   align-items: center;
   justify-content: center;
   padding: 10px;
+  font-size .67rem
 }
 
 .carbon-poweredby {

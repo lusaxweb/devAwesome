@@ -127,9 +127,30 @@ export default {
       animation circlesLoading ease infinite 1.2s
       transition all .3s ease
       &:after
+        animation colors ease infinite 4.8s
         background $primary !important
       &:before
         background var(--fondo) !important
+
+@keyframes colors
+  0%
+    background $primary
+  24%
+    background $primary
+  25%
+    background $morado
+  49%
+    background $morado
+  50%
+    background $verde
+  74%
+    background $verde
+  75%
+    background $amarillo
+  99%
+    background $amarillo
+  100%
+    background $primary
 
 @keyframes circlesLoading
   0%

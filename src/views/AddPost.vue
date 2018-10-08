@@ -47,27 +47,27 @@
           vs-danger-text="This value is required"
           class="inputx" vs-label="Description *" v-model="upload.description"/>
 
+        <!-- <vs-checkbox v-model="codeIframe">Demo: <b>codepen</b> | <b>jsfiddle</b> | <b>codesandbox</b> | <b>jsbin</b></vs-checkbox> -->
+
         <vs-input
           :vs-danger="!upload.website && activeDangers"
           vs-danger-text="This value is required"
           class="inputx" placeholder="https://myProyect.com" vs-label="Demo or Project URL *" v-model="upload.website"/>
 
         <vs-input
-          :vs-danger="!upload.github && activeDangers"
           vs-danger-text="This value is required"
-          class="inputx" placeholder="https://github.com/myTeam/proyect" vs-label="Github-URL *" v-model="upload.github"/>
+          class="inputx" placeholder="https://github.com/myTeam/proyect" vs-label="Github-URL" v-model="upload.github"/>
 
         <vs-input
-          :vs-danger="!upload.twitter && activeDangers"
           vs-danger-text="This value is required"
-          class="inputx" placeholder="@myTwitter" vs-label="Twitter *" v-model="upload.twitter"/>
+          class="inputx" placeholder="@proyectTwitter" vs-label="Twitter" v-model="upload.twitter"/>
 
         <!-- <vs-input
           :vs-danger="!upload.email && activeDangers"
           vs-danger-text="This value is required"
           class="inputx" vs-label="E-mail *" v-model="upload.email"/> -->
 
-        <div :class="{'fileActive': image1, 'fileDanger': !image1 && activeDangers}" class="con-file">
+        <div v-if="isRoot" :class="{'fileActive': image1, 'fileDanger': !image1 && activeDangers}" class="con-file">
           <input
             ref="inputFile1"
             @change="changeValueImage($event ,1)"
@@ -77,7 +77,7 @@
             {{ image1?'done':'photo_size_select_large'}}
           </i>
         </div>
-        <div :class="{'fileActive': image2, 'fileDanger': !image2 && activeDangers}" class="con-file con-file2">
+        <div v-if="isRoot" :class="{'fileActive': image2, 'fileDanger': !image2 && activeDangers}" class="con-file con-file2">
           <input @change="changeValueImage($event ,2)" ref="inputFile2" type="file">
           <label for="">Image 800 x 600</label>
           <i class="material-icons">
@@ -88,26 +88,31 @@
         <vs-button @click="uploadx" class="btn-upload" vs-color="success" vs-type="filled">Upload Proyect</vs-button>
       </div>
     </div>
+    <Carbon />
   </div>
 </template>
 <script>
 import titlex from '../components/titlex.vue'
+import Carbon from '../components/Carbon.vue'
 export default {
   components: {
-    titlex
+    titlex,
+    Carbon
   },
   data: () => ({
     activeDangers: false,
     tags: [],
     image1: false,
     image2: false,
+    codeIframe: false,
     upload: {
+      iframe: '',
       section: 'front-end',
       title: '',
       description: '',
       website: '',
-      twitter: '',
-      github: '',
+      twitter: null,
+      github: null,
       active: false,
       likes: {},
       views: 0,
@@ -122,6 +127,11 @@ export default {
       lenguaje: 'javascript'
     }
   }),
+  computed: {
+    isRoot () {
+      return this.$store.state.user ? (this.$store.state.user.displayName === 'ldrovira' || this.$store.state.user.displayName === 'ManuelRoviraDesign') : false
+    }
+  },
   methods: {
     remove (item) {
       this.tags.splice(this.tags.indexOf(item), 1)
@@ -145,6 +155,8 @@ export default {
         if (sizes.width === 400 && sizes.height === 300) {
           notValid = false
         } else if (sizes.width === 800 && sizes.height === 600) {
+          notValid = false
+        } else if (sizes.width === 1200 && sizes.height === 800) {
           notValid = false
         }
 
@@ -187,7 +199,7 @@ export default {
         return
       }
 
-      if (!this.upload.title || !this.upload.description || !this.upload.website || !this.upload.github || !this.upload.twitter || this.tags.length === 0 || !this.upload.lenguaje) {
+      if (!this.upload.title || !this.upload.description || !this.upload.website || this.tags.length === 0 || !this.upload.lenguaje) {
         this.activeDangers = true
         this.$vs.notify({
           title: 'Missing fields to fill',
@@ -212,7 +224,7 @@ export default {
           console.log(githubUrl)
           // https://api.github.com/search/users?q=ldrovira
 
-          if (this.$store.state.user.displayName === 'ldrovira' || this.$store.state.user.displayName === 'ManuelRoviraDesign') {
+          if (this.isRoot) {
             user = {
               displayName: 'DevAwesome',
               email: 'dev.awesome.app@gmail.com',
@@ -233,64 +245,80 @@ export default {
           this.upload.user = user
           console.log('Subiendo', this.$store.state.user)
           this.upload.tags = this.tags.join()
-          var self = this
-          var file = this.$refs.inputFile1.files[0]
-          var ref = this.$firebase.storage().ref('posts/' + file.name)
-          ref.put(file).then(function (snapshot) {
-            ref.getDownloadURL().then(function (url) {
-              console.log('url', url)
-              self.upload.miniImage = url
 
-              var file2 = self.$refs.inputFile2.files[0]
-              var ref2 = self.$firebase.storage().ref('posts/' + file2.name)
-              ref2.put(file2).then(function (snapshot) {
-                ref2.getDownloadURL().then(function (url2) {
-                  console.log('url2>>>', url2)
-                  self.upload.image = url2
-                  console.log('Uploaded a blob or file!')
-                  console.log('posts/' + self.upload.section.toLowerCase())
+          if (this.isRoot) {
+            this.submitPostImages()
+          } else {
+            this.submitPost()
+          }
+        })
+    },
+    submitPostImages () {
+      var self = this
+      var file = this.$refs.inputFile1.files[0]
+      var ref = this.$firebase.storage().ref('posts/' + file.name)
+      ref.put(file).then(function (snapshot) {
+        ref.getDownloadURL().then(function (url) {
+          console.log('url', url)
+          self.upload.miniImage = url
 
-                  self.$firebase.database().ref('posts/').push({
-                    ...self.upload
-                  })
-                  self.$vs.loading.close()
-                  self.$vs.notify({
-                    title: 'Successful Upload',
-                    text: 'The project was successfully upgraded',
-                    color: 'success',
-                    icon: 'cloud_done'
-                  })
-                  self.upload = {
-                    section: 'Front-end',
-                    title: '',
-                    description: '',
-                    website: '',
-                    twitter: '',
-                    github: '',
-                    active: false,
-                    likes: {},
-                    views: 0,
-                    outstanding: false,
-                    tags: '',
-                    email: '',
-                    miniImage: '',
-                    image: '',
-                    user: {}
-                  }
-                  self.image1 = self.image2 = null
-                  self.activeDangers = false
-                  self.tags = []
-                })
-              })
+          var file2 = self.$refs.inputFile2.files[0]
+          var ref2 = self.$firebase.storage().ref('posts/' + file2.name)
+          ref2.put(file2).then(function (snapshot) {
+            ref2.getDownloadURL().then(function (url2) {
+              console.log('url2>>>', url2)
+              self.upload.image = url2
+              console.log('Uploaded a blob or file!')
+              console.log('posts/' + self.upload.section.toLowerCase())
+
+              self.submitPost()
             })
           })
         })
+      })
+    },
+    submitPost () {
+      var self = this
+      self.$firebase.database().ref('posts/').push({
+        ...self.upload
+      })
+      self.$vs.loading.close()
+      self.$vs.notify({
+        title: 'Successful Upload',
+        text: 'The project was successfully upgraded',
+        color: 'success',
+        icon: 'cloud_done'
+      })
+      self.upload = {
+        section: 'Front-end',
+        title: '',
+        description: '',
+        website: '',
+        twitter: '',
+        github: '',
+        active: false,
+        likes: {},
+        views: 0,
+        outstanding: false,
+        tags: '',
+        email: '',
+        miniImage: '',
+        image: '',
+        user: {}
+      }
+      self.image1 = self.image2 = null
+      self.activeDangers = false
+      self.tags = []
     }
   }
 }
 </script>
 <style lang="stylus">
 @require '../config'
+
+.con-vs-checkbox
+  justify-content flex-start !important
+
 .con-chips
   background var(--fondo2)
   input

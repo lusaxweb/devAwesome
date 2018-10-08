@@ -4,9 +4,6 @@
     <section ref="about" class="section-about" id="about">
       <h1>About</h1>
 
-      <h3>
-        Sobre Nosotros
-      </h3>
       <p>
         We are a curated list of everything related to development with a visual representation, our goal is to get the programmers to find the best for their projects and developments, the projects are purified by a minimum of 1000 stars in github and a critique to have the best projects in our network
       </p>
@@ -206,18 +203,23 @@
 
     </section>
     <!-- <h2>Brand</h2> -->
-
+    <Carbon />
     <!-- <figurex footerx /> -->
   </div>
 </template>
 <script>
 import figurex from '../components/figure.vue'
+import Carbon from '../components/Carbon.vue'
 export default {
   components: {
-    figurex
+    figurex,
+    Carbon
   },
   mounted () {
     this.changeScrollTop()
+    this.$nextTick(() => {
+      this.$store.state.openSidebar = false
+    })
   },
   watch: {
     '$route.params.section': function () {

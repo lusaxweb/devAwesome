@@ -3,6 +3,9 @@
     <titlex title="Edit Proyect" />
     <div class="con-inputs">
       <div class="contiene-inputs">
+        <label for="active">Active</label>
+        <vs-switch v-model="upload.active"/>
+
         <vs-input :vs-danger="!upload.title && activeDangers" vs-danger-text="This value is required" class="inputx" placeholder="My awesome project Title" vs-label="Project Title *" v-model="upload.title"/>
 
         <vs-select
@@ -53,12 +56,10 @@
           class="inputx" placeholder="https://myProyect.com" vs-label="Demo or Project URL *" v-model="upload.website"/>
 
         <vs-input
-          :vs-danger="!upload.github && activeDangers"
           vs-danger-text="This value is required"
           class="inputx" placeholder="https://github.com/myTeam/proyect" vs-label="Github-URL *" v-model="upload.github"/>
 
         <vs-input
-          :vs-danger="!upload.twitter && activeDangers"
           vs-danger-text="This value is required"
           class="inputx" placeholder="@myTwitter" vs-label="Twitter *" v-model="upload.twitter"/>
 
@@ -205,7 +206,7 @@ export default {
         return
       }
 
-      if (!this.upload.title || !this.upload.description || !this.upload.website || !this.upload.github || !this.upload.twitter || this.tags.length === 0 || !this.upload.lenguaje) {
+      if (!this.upload.title || !this.upload.description || !this.upload.website || this.tags.length === 0 || !this.upload.lenguaje) {
         this.activeDangers = true
         this.$vs.notify({
           title: 'Missing fields to fill',

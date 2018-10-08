@@ -7,15 +7,24 @@
       </li>
     </ul>
     <list-emoji />
+
+    <Carbon />
   </div>
 </template>
 <script>
 import titlex from '../components/titlex.vue'
+import Carbon from '../components/Carbon.vue'
 import listEmoji from './assets/listEmoji.vue'
 export default {
   components: {
     titlex,
-    listEmoji
+    listEmoji,
+    Carbon
+  },
+  created () {
+    this.$nextTick(() => {
+      this.$store.state.openSidebar = false
+    })
   }
 }
 </script>

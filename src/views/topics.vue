@@ -55,6 +55,9 @@ export default {
   }),
   created () {
     this.topics()
+    this.$nextTick(() => {
+      this.$store.state.openSidebar = false
+    })
   },
   watch: {
     page () {
@@ -86,7 +89,7 @@ export default {
             item.index = index + 1
           })
           console.log(items)
-          items.splice(10, 0, 'ads')
+          items.splice(this.page - 10, 0, 'ads')
           self.repos = items
         })
     }

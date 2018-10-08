@@ -4,7 +4,7 @@
       <div
         :key="index"
         v-for="(post,index) in Object.keys(posts)"
-        :class="[`post-display-${displayx}`]"
+        :class="[`post-display-${displayx}`, {'postInactive': !posts[post].active }]"
         class="post">
 
         <button v-if="$store.state.admin" @click="openEditPost(posts[post], post)" class="edit-post-btn">
@@ -24,6 +24,17 @@
 
            <div @click="openPost(posts[post], post)" class="con-img-post">
             <img class="img-post" :src="posts[post].miniImage" alt="">
+
+            <button class="open-text">
+              <i class="material-icons">
+                speaker_notes
+              </i>
+            </button>
+
+            <div class="con-textx">
+              <h4>{{ posts[post].title }}</h4>
+              <p>{{ getTextCort(posts[post].description) }}</p>
+            </div>
           </div>
           <footer>
             <div @click="openPost(posts[post], post)" class="con-title-description">
@@ -99,12 +110,11 @@ export default {
     section: {
       default: null,
       type: String
-    },
-
+    }
   },
   data: () => ({
     likes: [],
-    displayx: 1,
+    displayx: 1
   }),
   created () {
     this.displayx = this.$store.state.display
@@ -124,6 +134,10 @@ export default {
     }
   },
   methods: {
+    getTextCort (text) {
+      let newText = text.slice(0, 300) + (text.length > 300 ? ' ...' : '')
+      return newText
+    },
     deletePost (post, namePost) {
       let self = this
       this.$vs.dialog({
@@ -283,6 +297,56 @@ export default {
     cursor pointer
     transition all .25s ease
     position relative
+    .open-text
+      position absolute
+      left 2%
+      top 2%
+      z-index 200
+      width 30px
+      height 30px
+      border-radius 7px
+      display flex
+      align-items center
+      justify-content center
+      font-size 1.3rem
+      background var(--fondo3)
+      color var(--text-color)
+      opacity 0
+      visibility hidden
+      transition all .25s ease
+      &:hover
+        left 3%
+        top 3%
+        ~ .con-textx
+          opacity 1
+          visibility visible
+          transform scale(1)
+    .con-textx
+      z-index 100
+      position absolute
+      left 2.5%
+      top 2.5%
+      background var(--fondo3)
+      backface-visibility visible
+      height 95%
+      // overflow auto
+      width 95%
+      opacity 0
+      visibility hidden
+      transition all .25s ease
+      border-radius 10px
+      transform scale(0)
+      transform-origin left top
+      // background-color: transparent
+      // background-image: linear-gradient(180deg, var(--fondo2) 25%, transparent 100%);
+      h4
+        padding 10px
+      p
+        font-size .65rem
+        text-align left
+        padding 8px
+    &.postInactive
+      background $primary !important
     .btn-delete-item
       position absolute
       top 15px
@@ -313,12 +377,16 @@ export default {
       transform translate(0,5px)
       box-shadow 0px 0px 0px 0px rgba(0,0,0,.1) !important
       background var(--fondo)
+      .open-text
+        opacity 1
+        visibility visible
       .btn-delete-item
         top 22px
         right 0%
-      h4, p
-        opacity 0
-        transform translate(0,-10px)
+      footer
+        h4, p
+          opacity 0
+          transform translate(0,-10px)
       .con-img-post
         transform translate(0,20px) scale(1.1)
         // transform scale(1.07) translate(0,10px)
@@ -440,7 +508,7 @@ export default {
         display block
         transform scale(1.3)
         transition opacity .3s ease
-        background #fff
+        // background #fff
 
 .post-display-2
   max-width calc(14.28% - 14px) !important
@@ -497,15 +565,26 @@ export default {
     max-width calc(100% - 14px) !important
     margin-left 0px !important
 @media only screen and (max-width: 600px)
+  .con-posts
+    padding 20px !important
   .con-loading-posts
     li
       max-width 100% !important
       margin 5px 0px !important
-  .post
+  .post:not(.post-display-4):not(.post-display-3)
     margin-left 0px !important
     margin-right 0px !important
     max-width 100% !important
     background var(--fondo2) !important
+  .post-display-3
+    footer
+      flex-direction column !important
+      align-items flex-start !important
+      justify-content flex-start !important
+      .con-title-description
+        width 100% !important
+      .con-btns
+        margin-top 5px
     h4, p
         opacity 1 !important
         transform translate(0,0) !important

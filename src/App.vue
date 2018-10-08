@@ -6,6 +6,7 @@
     id="app">
     <div v-if="$store.state.openSidebar" @click="$store.state.openSidebar = false" class="dark">
     </div>
+    <!-- <bubbles /> -->
     <navx />
     <sidebarx />
     <div class="con-app">
@@ -18,15 +19,22 @@
 import navx from './components/nav.vue'
 import footerx from './components/Footer.vue'
 import sidebarx from './components/Sidebar.vue'
+import bubbles from './components/bubbles.vue'
 export default {
   components: {
     navx,
     footerx,
-    sidebarx
+    sidebarx,
+    bubbles
   },
   mounted () {
     // this.getHot()
-    window.addEventListener('scroll', this.scrollApp)
+    /*
+    * s
+    * scroll efect
+    * s
+    */
+    // window.addEventListener('scroll', this.scrollApp)
 
     this.$firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -71,12 +79,12 @@ export default {
     },
     scrollApp (evt) {
       let posts = document.querySelectorAll('.post')
-      let scrollTopx = document.documentElement.scrollTop
+      // let scrollTopx = document.documentElement.scrollTop
       // if (st > lastScrollTop) {
       posts.forEach(item => {
         let img = item.querySelector('img')
         let top = item.getBoundingClientRect().top
-        let percent = -((scrollTopx - top - 50) / 28)
+        let percent = -((top) / 24)
         percent = -(percent)
         img.style.transform = `translate(0,${percent.toFixed()}px) scale(1.3)`
       })

@@ -66,7 +66,7 @@ export default {
     z-index 100
     position relative
     letter-spacing 2px
-    font-size 7rem
+    font-size 6rem
     color rgba(0,0,0,.1)
     text-align left
     transform translate(-4%)

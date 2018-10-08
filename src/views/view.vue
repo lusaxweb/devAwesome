@@ -13,11 +13,18 @@
         <div class="con-img-des">
 
         <div class="con-img-view">
-          <div id="div-with-loading" class="img-view">
-            <a target="_blank" :href="`${post.website}?ref=lusaxweb.github.io`">
-              <img :class="{'imageLoaded':imageLoaded}" v-show="imageLoaded" :src="post.image" alt="">
-              <div class="loadingx"></div>
-            </a>
+          <div class="content-view">
+            <div v-if="readmeActive" class="readmex" v-html="readme"></div>
+            <div id="div-with-loading" class="img-view">
+              <a target="_blank" :href="`${post.website}?ref=lusaxweb.github.io`">
+                <img :class="{'imageLoaded':imageLoaded}" v-show="imageLoaded" :src="post.image" alt="">
+                <div class="loadingx"></div>
+              </a>
+            </div>
+
+            <footer class="footer-content">
+              <button v-if="readme" @click="readmeActive =! readmeActive" >Readme</button>
+            </footer>
           </div>
           <div class="con-similar-posts">
             <ul>
@@ -64,7 +71,7 @@
               </i>
               Like
             </button>
-            <button class="button-a">
+            <button v-if="post.github" class="button-a">
               <a target="_blank" :href="`${post.github}?ref=lusaxweb.github.io`" class="btn-follow">
               Github
               <span class="star">
@@ -76,7 +83,7 @@
 
               </a>
             </button>
-            <button class="button-a">
+            <button v-if="post.twitter" class="button-a">
               <a target="_blank" :href="`https://twitter.com/${post.twitter}?ref=lusaxweb.github.io`" class="btn-follow">
               Twitter
               </a>
@@ -148,6 +155,9 @@
 
 <script>
 import CarbonView from '../components/CarbonView.vue'
+// import hljs from 'highlight.js/lib/index.js'
+// import 'highlight.js/styles/default.css'
+// import 'vuesax/dist/vuesax.css'
 
 export default {
   name: 'viewx',
@@ -163,7 +173,9 @@ export default {
     post: {},
     postActive: true,
     morePosts: {},
-    namePost: ''
+    namePost: '',
+    readme: null,
+    readmeActive: false
   }),
   watch: {
     '$route.params.namePost': function () {
@@ -171,10 +183,12 @@ export default {
       this.getPost()
       this.getPosts()
       this.changeAds()
+      this.readmeActive = false
     }
   },
   mounted () {
     this.$nextTick(() => {
+
       this.$vs.loading({
         container: '#div-with-loading',
         scale: 0.8,
@@ -303,7 +317,6 @@ export default {
         let arrayPosts = []
         var numeroPosts = Object.keys(snapshot.val()).length
         snapshot.forEach(element => {
-          console.log(element.val())
           arrayPosts.push({key: element.key, ...element.val()})
         })
         let numeros = []
@@ -327,7 +340,9 @@ export default {
         let objectPosts = {}
 
         ultimatePosts.forEach((item) => {
-          objectPosts[item.key] = item
+          if (item.active) {
+            objectPosts[item.key] = item
+          }
         })
 
         this.morePosts = objectPosts
@@ -335,13 +350,31 @@ export default {
     },
 
     getStars (post) {
-      console.log(post)
+      if (!post.github) {
+        return
+      }
       let github = post.github.replace('https://github.com/', '')
       // https://github.com/vuejs/vue
+      // let readme = null
       fetch(`https://api.github.com/repos/${github}`)
         .then(response => response.json())
         .then(json => {
           this.star = json.stargazers_count || 0
+        })
+
+      fetch(`https://api.github.com/repos/${github}/readme`, {
+        headers: {
+          'Accept': 'application/vnd.github.html'
+        }
+      })
+        .then((res) => {
+          return res.text()
+        })
+        .then((data) => {
+
+          this.readme = data
+          // console.log(hljs)
+          // hljs.initHighlighting()
         })
     },
 
@@ -379,6 +412,68 @@ export default {
 
 <style lang="stylus">
 @require '../config'
+
+.content-view
+  position relative
+  .footer-content
+    position absolute
+    bottom 0px
+    left 0px
+    padding 0px 10px 0px 10px
+    z-index 200
+    width 100%
+    button
+      padding 10px
+      background $morado
+      color rgb(255,255,255)
+      border-radius 15px 15px 0px 0px
+      position relative
+
+.readmex
+  width 100%
+  height 100%
+  position absolute
+  background var(--fondo2)
+  overflow auto
+  z-index 200
+  text-align left
+  padding 10px
+  font-size .8rem
+  border-radius 8px
+  table
+    width 100%
+    background var(--fondo3)
+    padding 10px
+    thead
+      border 1px solid var(--text-color) !important
+      background var(--fondo)
+  details
+    padding 10px
+
+  h1, h2, h3, h4, h5, h6
+    padding 10px
+    a
+      margin-right 10px
+    svg
+      fill var(--text-color)
+  a
+    color var(--text-color)
+    font-weight bold
+    &:hover
+      text-decoration: underline;
+  ul
+    padding 10px 30px
+    li
+      list-style-type disc
+      padding 2px 0px
+      color var(--text-color)
+  p
+    padding 10px
+    color var(--text-color)
+  pre
+    background var(--fondo)
+    border-radius 10px
+    padding 10px
 
 .con-tags
   width 100%

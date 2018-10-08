@@ -9,11 +9,15 @@
         </router-link>
       </div>
       <div class="menu-sidebar">
-        <router-link @mouseout.native="outLink" @mouseover.native="clickLink" exact to="/"><span>Discover</span></router-link>
-        <router-link to="/front-end"><span>Front-end</span></router-link>
-        <router-link to="/back-end"><span>Back-end</span></router-link>
-        <router-link to="/mobile-app"><span>Mobile app</span></router-link>
-        <router-link to="/more"><span>More</span></router-link>
+        <!-- <router-link @mouseout.native="outLink" @mouseover.native="clickLink" exact to="/"><span>Discover</span></router-link> -->
+
+        <router-link exact to="/"><span>Discover</span></router-link>
+        <router-link exact to="/topics"><span>Topics</span></router-link>
+        <router-link exact to="/assets"><span>Assets</span></router-link>
+        <!-- <router-link to="/front-end"><span>Front-end</span></router-link> -->
+        <!-- <router-link to="/back-end"><span>Back-end</span></router-link> -->
+        <!-- <router-link to="/mobile-app"><span>Mobile app</span></router-link> -->
+        <!-- <router-link to="/more"><span>More</span></router-link> -->
         <span class="btn-puntos">
           <span class="material-icons">
             more_horiz

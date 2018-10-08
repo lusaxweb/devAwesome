@@ -41,6 +41,9 @@ export default {
     maxPosts: 10
   }),
   computed: {
+    isRoot () {
+      return this.$store.state.user ? (this.$store.state.user.displayName === 'ldrovira' || this.$store.state.user.displayName === 'ManuelRoviraDesign') : false
+    },
     explore () {
       return this.$store.state.filters.explore
     },
@@ -52,6 +55,9 @@ export default {
     }
   },
   watch: {
+    '$store.state.user': function () {
+      this.getPosts()
+    },
     maxPosts () {
       this.getPosts()
     },
@@ -72,9 +78,9 @@ export default {
       let self = this
       let ref = this.$firebase.database().ref('posts')
       if (this.$store.state.filters.section) {
-        ref = firebase.database().ref('posts').orderByChild('section').equalTo(this.$store.state.filters.section.toLowerCase())
+        ref = firebase.database().ref('posts').orderByChild('section').equalTo(this.$store.state.filters.section.toLowerCase()).limitToLast(self.maxPosts)
       } else {
-        ref = firebase.database().ref('posts')
+        ref = firebase.database().ref('posts').limitToLast(self.maxPosts)
       }
       ref.on('value', function (snapshot) {
         let posts = snapshot.val()
@@ -89,18 +95,21 @@ export default {
           arrayPosts = arrayPosts.forEach((post, index) => {
             self.tagsActive.forEach((tag) => {
               if (post.tags.toLowerCase().indexOf(tag.toLowerCase()) !== -1) {
-                if (index < self.maxPosts) {
-                  validArray.push(post)
-                }
+                // if (index < self.maxPosts) {
+                validArray.push(post)
+                // }
               }
             })
           })
 
           let objectPosts = {}
 
-          validArray.forEach((item) => {
-            objectPosts[item.key] = item
+          validArray.forEach((item, index) => {
+            if (index < self.maxPosts) {
+              objectPosts[item.key] = item
+            }
           })
+
           self.posts = self.reverseObject(objectPosts)
         } else {
           self.posts = self.reverseObject(posts)
@@ -122,6 +131,7 @@ export default {
     getPosts () {
       let self = this
       let explore = this.$store.state.filters.explore
+      let lenguaje = this.$store.state.filters.lenguaje
       var starCountRef = firebase.database().ref('posts')
       if (this.$store.state.filters.section) {
         starCountRef = firebase.database().ref('posts').orderByChild('section').equalTo(this.$store.state.filters.section.toLowerCase())
@@ -149,7 +159,11 @@ export default {
               break
             }
             const element = sortable[index]
-            postsOrder[element[0]] = element[1]
+            if (self.isRoot ? true : element[1].active) {
+              if (lenguaje ? element[1].lenguaje === lenguaje : true) {
+                postsOrder[element[0]] = element[1]
+              }
+            }
           }
           self.posts = postsOrder
           self.getTags()
@@ -183,7 +197,11 @@ export default {
               break
             }
             const element = sortable[index]
-            postsOrder[element[0]] = element[1]
+            if (self.isRoot ? true : element[1].active) {
+              if (lenguaje ? element[1].lenguaje === lenguaje : true) {
+                postsOrder[element[0]] = element[1]
+              }
+            }
           }
           // console.log(sortable)
           // self.posts = self.reverseObject(posts)
@@ -203,7 +221,11 @@ export default {
             for (const key in posts) {
               let post = posts[key]
               if (post.lenguaje === self.$store.state.filters.lenguaje) {
-                postFilter[key] = post
+                if (self.isRoot ? true : post.active) {
+                  if (lenguaje ? post.lenguaje === lenguaje : true) {
+                    postFilter[key] = post
+                  }
+                }
               }
             }
             self.posts = postFilter
@@ -222,7 +244,9 @@ export default {
       }
       for (var i = keys.length - 1; i >= 0; i--) {
         var value = object[keys[i]]
-        newObject[keys[i]] = value
+        if (this.isRoot ? true : value.active) {
+          newObject[keys[i]] = value
+        }
       }
 
       return newObject
