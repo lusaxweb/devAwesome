@@ -20,6 +20,7 @@ export default new Vuex.Store({
       active: false
     },
     user: null,
+    tags: [],
     tagsActive: [],
     filters: {
       section: '',

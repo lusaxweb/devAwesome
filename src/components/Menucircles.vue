@@ -5,15 +5,17 @@
         chevron_left
       </i>
     </button>
+    <!-- {{ tags }} -->
     <ul v-show="tags.length != 0" ref="ulx">
       <li
-        :key="tag"
+        :key="tag.tag"
         v-for="tag in tags"
         @click="addTag(tag)"
         :class="{
           'activeTag':isActive(tag)
         }">
-        {{ tag }}
+        <span>{{ tag.count }}</span>
+        {{ tag.tag }}
       </li>
     </ul>
     <button v-if="activeArrows" class="leftx" @click="scrollmove()">
@@ -41,18 +43,12 @@ Math.easeInOutQuad = function (t, b, c, d) {
   return -c / 2 * (t * (t - 2) - 1) + b
 }
 export default {
-  props: {
-    tags: {
-      type: [Object, Array]
-    }
-  },
   data: () => ({
-    activeArrows: false,
-    tagsActive: []
+    activeArrows: true
   }),
-  watch: {
-    tagsActive () {
-      this.$parent.tagsActive = this.tagsActive
+  computed: {
+    tags () {
+      return this.$store.state.tags
     }
   },
   updated () {
@@ -78,15 +74,17 @@ export default {
   },
   methods: {
     addTag (tag) {
-      if (this.tagsActive.includes(tag)) {
-        let index = this.tagsActive.indexOf(tag)
-        this.tagsActive.splice(index, 1)
+      let arrayTags = JSON.stringify([...this.$store.state.tagsActive])
+      if (arrayTags.indexOf(JSON.stringify(tag)) !== -1) {
+        let index = this.$store.state.tagsActive.indexOf(tag)
+        this.$store.state.tagsActive.splice(index, 1)
       } else {
-        this.tagsActive.push(tag)
+        this.$store.state.tagsActive.push(tag)
       }
     },
     isActive (tag) {
-      return this.tagsActive.includes(tag)
+      let arrayTags = JSON.stringify([...this.$store.state.tagsActive])
+      return (arrayTags.indexOf(JSON.stringify(tag)) !== -1)
     },
     scrollmove () {
       this.scrollTo(this.$refs.ulx, this.$refs.ulx.scrollLeft + this.$refs.ulx.clientWidth / 1.5, 300)
@@ -170,7 +168,7 @@ export default {
   padding-left 10px
   padding-right 10px
   box-sizing border-box
-  max-height 80px
+  max-height 70px
   overflow hidden
   display flex
   align-items flex-start
@@ -221,14 +219,14 @@ export default {
     white-space: nowrap
     overflow-x auto
     overflow-y hidden
-    padding-bottom 40px
+    padding-bottom 30px
     transition all .3s ease
     z-index 100
     position relative
 
     li
       display inline-block
-      padding 30px
+      padding 25px
       padding-top 15px
       padding-left 20px
       padding-right 20px
@@ -240,14 +238,36 @@ export default {
       transition all .25s ease
       user-select none
       text-transform capitalize
+      opacity .5
+      backface-visibility hidden
+      span
+        position absolute
+        background var(--fondo3)
+        top 7px
+        right 9px
+        padding 0px 4px
+        font-size .6rem
+        border-radius 4px
+        transition all .25s ease
+        // opacity .5
       &:hover
-        color var(--text-color)
-        font-weight bold
+        // color $primary
+        opacity 1
+        // font-weight bold
+        span
+          // background $primary
+          opacity 1
+          color rgb(255,255,255)
       &.activeTag
-        color var(--text-color)
-        font-weight bold
+        // color var(--text-color)
+        color $primary
+        opacity 1 !important
+        span
+          background $primary
+          color rgb(255,255,255)
         &:after
-          background var(--text-color) !important
+          // background var(--text-color) !important
+          background $primary
           transform scale(1.2) translate(-50%, 50%)
       &:last-child,&:first-child
         border-bottom 1px solid rgba(0,0,0,0)

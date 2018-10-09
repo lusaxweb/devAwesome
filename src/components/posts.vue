@@ -3,6 +3,7 @@
     <transition-group name="posts">
       <div
         :key="index"
+        v-if="index < $parent.maxPosts"
         v-for="(post,index) in Object.keys(posts)"
         :class="[`post-display-${displayx}`, {'postInactive': !posts[post].active }]"
         class="post">
@@ -329,7 +330,7 @@ export default {
       background var(--fondo3)
       backface-visibility visible
       height 95%
-      // overflow auto
+      overflow hidden
       width 95%
       opacity 0
       visibility hidden
@@ -337,6 +338,7 @@ export default {
       border-radius 10px
       transform scale(0)
       transform-origin left top
+      padding-bottom 5px
       // background-color: transparent
       // background-image: linear-gradient(180deg, var(--fondo2) 25%, transparent 100%);
       h4
@@ -345,6 +347,7 @@ export default {
         font-size .65rem
         text-align left
         padding 8px
+        padding-top 0px
     &.postInactive
       background $primary !important
     .btn-delete-item
@@ -496,7 +499,7 @@ export default {
       z-index 100
       backface-visibility visible
       background var(--fondo)
-      padding-bottom 75%
+      padding-bottom calc(75% - 16px)
       img
         z-index 10
         border-radius 6px
@@ -506,7 +509,7 @@ export default {
         left 0px
         top 0px
         display block
-        transform scale(1.3)
+        // transform scale(1.3)
         transition opacity .3s ease
         // background #fff
 

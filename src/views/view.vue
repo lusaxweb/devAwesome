@@ -645,7 +645,7 @@ export default {
         width 100%
         display block
         transition all .3s ease
-        background #fff
+        // background #fff
   .con-description-view
     float left
     width 350px
