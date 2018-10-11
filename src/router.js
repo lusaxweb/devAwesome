@@ -10,9 +10,11 @@ export default new Router({
     }
   },
   routes: [
+    { path: '/v', redirect: '/view' },
     {
       path: '/',
       name: 'home',
+      // props: true,
       component: () => import('./views/Discover.vue')
     },
     {

@@ -28,6 +28,7 @@ export default {
     bubbles
   },
   mounted () {
+
     // this.getHot()
     /*
     * s
@@ -104,6 +105,7 @@ export default {
   --fondo3: $fondo3
   --text-color: rgb(255,255,255)
   --text-alpha: rgba(255,255,255,.6)
+  --text-alpha2: rgba(255,255,255,.2)
 }
 
 .con-chips input
@@ -126,25 +128,40 @@ export default {
   background var(--fondo2)
   color var(--text-color) !important
   padding 10px !important
+  border 0px !important
 .input-select-label
   text-align left !important
   width 100% !important
-  color var(--text-alpha) !important
+  color var(--text-color) !important
   display block
   padding-bottom 5px
-
+  margin-top 6px
+.icon-select
+  right 10px !important
+.x-global
+  padding 10px !important
 .input-span-placeholder
-  color var(--text-alpha) !important
+  color var(--text-alpha2) !important
+  padding-left .7rem !important
 .icon-inputx
-  color var(--text-alpha) !important
+  color var(--text-alpha2) !important
+
+.con-chips
+  box-shadow none !important
+  input
+    padding 6px 9px !important
+
+input
+  &::placeholder
+    color var(--text-alpha2) !important
 
 *::-webkit-scrollbar
   width: 5px;
   height: 5px;
-  background: var(--fondo)
+  background: var(--fondo3)
 
 *::-webkit-scrollbar-thumb
-  background: var(--fondo3)
+  background: var(--fondo2)
   border-radius: 5px;
 
 *::-webkit-scrollbar-thumb:hover

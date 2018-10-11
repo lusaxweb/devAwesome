@@ -3,7 +3,7 @@
     <div v-if="postActive" class="con-view">
       <header>
         <h3>{{ post.title }}</h3>
-        <button @click="close()">
+        <button class="btn-close" @click="close()">
           <i class="material-icons">
             clear
           </i>
@@ -30,11 +30,19 @@
             <ul>
               <li
                 :key="index"
+                v-if="index < maxSimilar"
+                :title="morePosts[post].title"
                 @click="openPost(morePosts[post], post)"
                 v-for="(post, index) in Object.keys(morePosts)">
                 <img :src="morePosts[post].miniImage" alt="">
               </li>
             </ul>
+
+            <button class="expand-similar-btn" @click="maxSimilar == 4 ? maxSimilar = 12 : maxSimilar = 4">
+              <i class="material-icons">
+                {{ maxSimilar == 4 ? 'add' : 'remove' }}
+              </i>
+            </button>
           </div>
         </div>
 
@@ -88,11 +96,11 @@
               Twitter
               </a>
             </button>
-            <!-- <button class="btn-share">
+            <button @click="copyLink" title="Copy Link" class="btn-share">
               <i class="material-icons">
-                share
+                link
               </i>
-            </button> -->
+            </button>
           </div>
 
           <div class="con-values">
@@ -116,7 +124,6 @@
             <h5>Comments</h5>
             <div class="add-comment">
               <textarea
-                :disabled="!$store.state.user"
                 v-model="commentx"
                 @keypress.enter.prevent="sendComment(post)"
                 placeholder="Your comment"></textarea>
@@ -175,8 +182,14 @@ export default {
     morePosts: {},
     namePost: '',
     readme: null,
-    readmeActive: false
+    readmeActive: false,
+    maxSimilar: 4
   }),
+  computed: {
+    getUrlTwitter () {
+      return 'http://twitter.com/home?status=https://lusaxweb.github.io/devAwesome/#view/-LOHXwbw4sWDwftqxGiH'
+    }
+  },
   watch: {
     '$route.params.namePost': function () {
       this.goLess--
@@ -204,13 +217,42 @@ export default {
     this.$firebase.database().ref('posts').off()
   },
   methods: {
+    copyLink () {
+      let link = 'https://lusaxweb.github.io/devAwesome/#' + this.$router.currentRoute.fullPath
+      let textTitle = this.post.title
+      // Crea un campo de texto "oculto"
+      var aux = document.createElement('input')
+      aux.classList.add('no-input')
+      // Asigna el contenido del elemento especificado al valor del campo
+      aux.setAttribute('value', link)
+
+      // Añade el campo a la página
+      document.body.appendChild(aux)
+
+      // Selecciona el contenido del campo
+      aux.select()
+
+      // Copia el texto seleccionado
+      document.execCommand('copy')
+
+      // Elimina el campo de la página
+      document.body.removeChild(aux)
+      this.$vs.notify({
+        title: 'Link copied',
+        text: textTitle,
+        color: 'success',
+        icon: 'link'
+      })
+    },
     openTag (tag) {
       this.$router.push('/search/' + tag)
     },
     changeAds () {
       // let _carbonads
-      if (!document.querySelector('#carbonads')) return
-      if (typeof _carbonads !== 'undefined') _carbonads.refresh()
+      this.$nextTick(() => {
+        if (!document.querySelector('#carbonads')) return
+        if (typeof _carbonads !== 'undefined') _carbonads.refresh()
+      })
     },
     getActiveLike (post) {
       if (post.hasOwnProperty('likes')) {
@@ -265,10 +307,9 @@ export default {
           comment: self.commentx,
           githubUrl: this.$store.state.githubUrl
         })
+        this.uploadPost(post)
+        this.commentx = ''
       }
-
-      this.uploadPost(post)
-      this.commentx = ''
     },
     uploadPost (post) {
       this.$firebase.database().ref('posts').child(this.$router.currentRoute.params.namePost).on('value', (snapshot) => {
@@ -310,36 +351,43 @@ export default {
         self.tags = post.tags.split(',')
       })
     },
+    shuffle (array) {
+      var currentIndex = array.length
+      var temporaryValue
+      var randomIndex
 
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex)
+        currentIndex -= 1
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex]
+        array[currentIndex] = array[randomIndex]
+        array[randomIndex] = temporaryValue
+      }
+
+      return array
+    },
     getPosts () {
       this.$firebase.database().ref('posts').on('value', (snapshot) => {
         // this.morePosts = snapshot.val()
         let arrayPosts = []
         var numeroPosts = Object.keys(snapshot.val()).length
         snapshot.forEach(element => {
-          arrayPosts.push({key: element.key, ...element.val()})
-        })
-        let numeros = []
-        for (let index = 0; index < 4; index++) {
-          let numero = Math.floor(Math.random() * numeroPosts)
-          if (!numeros.includes(numero)) {
-            numeros.push(numero)
-          } else {
-            numeros.push(Math.floor(Math.random() * numeroPosts))
+          if (element.val().active && this.$router.currentRoute.params.namePost !== element.key) {
+            arrayPosts.push({key: element.key, ...element.val()})
           }
-        }
-
-        let ultimatePosts = []
-
-        numeros.forEach((item) => {
-          ultimatePosts.push(arrayPosts[item])
         })
 
-        console.log(ultimatePosts)
+        let shuffle = this.shuffle(arrayPosts)
+
+        shuffle = shuffle.slice(0, 12)
 
         let objectPosts = {}
 
-        ultimatePosts.forEach((item) => {
+        shuffle.forEach((item) => {
           if (item.active) {
             objectPosts[item.key] = item
           }
@@ -373,8 +421,6 @@ export default {
         .then((data) => {
 
           this.readme = data
-          // console.log(hljs)
-          // hljs.initHighlighting()
         })
     },
 
@@ -428,6 +474,10 @@ export default {
       color rgb(255,255,255)
       border-radius 15px 15px 0px 0px
       position relative
+      transition all .25s ease
+      box-shadow 0px 0px 0px -2px alpha($morado, 0)
+      &:hover
+        box-shadow 0px 5px 10px -2px alpha($morado, .6)
 
 .readmex
   width 100%
@@ -549,17 +599,20 @@ export default {
     align-items center
     justify-content space-between
     padding-right 30px
-    button
-      width 50px
-      height 50px
+    button.btn-close
+      width 45px
+      height 45px
       display flex
       align-items center
       justify-content center
       border-radius 6px
       background transparent
       color var(--text-color)
+      transition all .25s ease
+      &:hover
+        background var(--fondo2)
       i
-        font-size 1.5rem
+        font-size 1.4rem
   .view
     position relative
     padding 20px
@@ -623,23 +676,45 @@ export default {
     background var(--fondo2)
     border-radius 8px
     transition all .3s ease
-    overflow hidden
+    // overflow hidden
     margin auto
     padding 5px
     box-sizing border-box
     margin-top 10px
+    .expand-similar-btn
+      position absolute
+      bottom -10px
+      left 50%
+      transform translate(-50%)
+      width 40px
+      height 40px
+      display flex
+      align-items center
+      justify-content center
+      border-radius 50%
+      background $primary
+      color rgb(255,255,255)
+      box-shadow 0px 0px 0px -2px alpha($primary, 0)
+      transition all .25s ease
+      &:hover
+        box-shadow 0px 5px 10px -2px alpha($primary, .6)
+    ul
+      display flex
+      align-items center
+      justify-content center
+      flex-wrap wrap
     li
       width 25%
-      float left
       border-radius 8px
       overflow hidden
       padding 5px
       cursor pointer
+      display block
       position relative
+      transition all .25s ease
       &:hover
         box-shadow 0px 5px 20px 0px rgba(0,0,0,.1)
-        img
-          transform scale(1.1)
+        opacity .6
       img
         border-radius 8px
         width 100%
@@ -665,7 +740,7 @@ export default {
       font-size .75rem
       color var(--text-color)
     .con-comments
-      padding 10px
+      padding 8px
       padding-top 0px
       position relative
       display block
@@ -675,7 +750,7 @@ export default {
         justify-content flex-start
         flex-direction column
         button
-          margin-top 5px
+          margin-top 8px
       .comments
         width 100%
         overflow auto
@@ -812,6 +887,26 @@ export default {
           i
             margin-right 0px
 
+        &.btn-share
+          &:hover
+            ul
+              opacity 1
+              visibility visible
+          ul
+            opacity 0
+            visibility hidden
+            position: absolute
+            top 0px
+            transform translate(0, -100%)
+            transition all .25s ease
+            padding 5px
+            li
+              padding 10px
+              background var(--fondo)
+              margin 2px 0px
+              border-radius 4px
+              &:hover
+                background $success
     .con-user-view
       display flex
       align-items center
@@ -824,6 +919,11 @@ export default {
         color rgb(255,255,255)
         font-weight bold
         font-size .9rem
+        opacity 1
+        transition all .25s ease
+        box-shadow 0px 0px 0px 0px alpha($verde, 0)
+        &:hover
+          box-shadow 0px 5px 10px -2px alpha($verde, .5)
       .text-user
         width 100%
         a

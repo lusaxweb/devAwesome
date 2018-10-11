@@ -9,7 +9,7 @@
       </button>
 
       <div class="con-logo">
-        <router-link ref="btn1" to="/" exact>
+        <router-link @click.native="clickHome" ref="btn1" to="/" exact>
           <img src="png/devAwesome.png" alt="">
           <span>
             DevAwesome
@@ -18,7 +18,7 @@
         </router-link>
       </div>
 
-      <router-link exact to="/"><span>Discover</span></router-link>
+      <router-link @click.native="clickHome" exact to="/"><span>Discover</span></router-link>
       <router-link exact to="/topics"><span>Topics</span></router-link>
       <router-link exact to="/assets"><span>Assets</span></router-link>
       <!-- <router-link exact to="/developers"><span>Developers</span></router-link> -->
@@ -54,11 +54,13 @@
     </div>
     <div class="nav-right">
       <vs-input @keypress.enter.prevent="searchPosts" vs-color="success" vs-icon-after vs-icon="search" placeholder="Search" v-model="$store.state.search"/>
-      <vs-button class="upload-btn" vs-icon-after @click="openUploadView" vs-color="success" vs-type="filled" vs-icon="add">Upload</vs-button>
+      <vs-button class="upload-btn" vs-icon-after @click="openUploadView" vs-color="success" vs-type="filled" vs-icon="add">Add a Project</vs-button>
       <vs-button class="btn-login" v-if="!$store.state.user" @click="logIn" vs-color="#603AFF" vs-type="filled">
         <span class="text-btn-inter">Log In</span>
         <i class="flaticon-github-logo"></i>
       </vs-button>
+
+      <btnApps />
 
       <div v-if="$store.state.user" class="con-img-user">
         <div :class="{'activeMenu': dropDown}" class="img-user" @click="toggleDropDown" >
@@ -78,11 +80,11 @@
                 <router-link exact to="/myProyects"><span>My Proyects</span></router-link>
               </li>
               <li class="btn-switchx">
-                  <i class="material-icons">
+                  <!-- <i class="material-icons">
                     {{this.$store.state.light? 'brightness_7' : 'brightness_5'}}
-                  </i>
-                  light mode
-                  <vs-switch @change="changeTheme" v-model="$store.state.light"/>
+                  </i> -->
+                  Light mode
+                  <vs-switch @change="changeTheme" v-model="$store.state.light" vs-icon-off="brightness_3" vs-icon-on="brightness_7"  />
               </li>
               <!-- <li>
                 <i class="material-icons">
@@ -95,11 +97,17 @@
           </div>
           </transition>
       </div>
+
+
     </div>
   </nav>
 </template>
 <script>
+import btnApps from './btnApps.vue'
 export default {
+  components: {
+    btnApps
+  },
   data: () => ({
     dropDown: false,
     search: '',
@@ -124,6 +132,9 @@ export default {
     window.addEventListener('scroll', this.scrollApp)
   },
   methods: {
+    clickHome () {
+      this.$store.state.clickHome++
+    },
     changeTheme () {
       this.$vs.loading({
         background: '#352F4E'
@@ -135,12 +146,14 @@ export default {
           document.documentElement.style.setProperty('--fondo3', '#352F4E')
           document.documentElement.style.setProperty('--text-color', 'rgb(255,255,255)')
           document.documentElement.style.setProperty('--text-alpha', 'rgba(255,255,255,.6)')
+          document.documentElement.style.setProperty('--text-alpha2', 'rgba(255,255,255, .2)')
         } else {
-          document.documentElement.style.setProperty('--fondo', 'rgb(250,250,250)')
+          document.documentElement.style.setProperty('--fondo', '#f6f9fc')
           document.documentElement.style.setProperty('--fondo2', 'rgb(255,255,255)')
           document.documentElement.style.setProperty('--fondo3', 'rgb(230,230,230)')
           document.documentElement.style.setProperty('--text-color', 'rgb(35, 31, 52)')
           document.documentElement.style.setProperty('--text-alpha', 'rgba(35, 31, 52, .6)')
+          document.documentElement.style.setProperty('--text-alpha2', 'rgba(35, 31, 52, .2)')
         }
         setTimeout(() => {
           this.$vs.loading.close()
@@ -319,6 +332,9 @@ export default {
     justify-content flex-end
     padding-right 10px
     margin-top 20px
+    .upload-btn
+      .vs-button-icon
+        font-size 1.1rem !important
     .vs-button-text
       display flex
       align-items center
@@ -329,7 +345,7 @@ export default {
         font-size 17px
     .vs-button
       padding 8px 8px
-      margin-right 7px
+      margin-right 5px
       font-weight bold
       .vs-button-icon
         font-size 1.3rem
@@ -364,9 +380,24 @@ export default {
         transition all .3s ease
         border-radius 5px
         min-width 200px
-        box-shadow 0px 5px 20px 0px rgba(0,0,0,.1)
+        box-shadow 0px 5px 18px 0px rgba(0,0,0,.04)
+        .vs-button
+          padding 6px !important
+          margin-top 10px
+          .vs-button-text
+            font-size .6rem !important
+          .vs-button-icon
+            font-size .9rem !important
         .vs-switch
           border-radius 12px !important
+          height 18px
+          width 30px !important
+          &.vs-switch-active
+            .vs-circle-switch
+              margin-left: calc(100% - 18px)
+          .vs-circle-switch
+            height 14px !important
+            width 14px !important
         &:after
           content ''
           position absolute
@@ -376,17 +407,23 @@ export default {
           width 10px
           height 10px
           background inherit
+        h6
+          margin-bottom 10px
         ul
           li
             padding 5px
             text-align left
-            font-size .8rem
+            font-size .7rem
+            &:hover
+              a
+                color $primary
             &.btn-switchx
               display flex
               align-items center
               justify-content flex-start
             i
               margin-right 5px
+              font-size .9rem
             .vs-switch
               margin-left auto
             a
@@ -499,7 +536,7 @@ export default {
       bottom 4px
       transition all .2s ease
     > a
-      padding 18px 20px
+      padding 14px 20px
       // margin 0px 5px
       display block
       float left
@@ -511,8 +548,8 @@ export default {
       font-weight bold
       letter-spacing 0.5px
       &.icon
-        padding-top 23px
-        padding-bottom 12px
+        padding-top 21px
+        padding-bottom 10px
 
       > span
         padding-top 20px
@@ -552,22 +589,28 @@ export default {
       display none !important
   .punto
     display none !important
-@media only screen and (max-width: 700px)
-  .con-logo
-    margin-right 5px !important
-  .nav-right
-    .vs-con-input-label
-      margin-right 4px !important
-    .vs-button
-      margin-right 0px !important
-      padding 8px 6px !important
-    .upload-btn
-      margin-right 4px !important
-      .vs-button-text
-        display none !important
-    .vs-button-icon
-      margin-left 0px !important
-@media only screen and (max-width: 600px)
+@media only screen and (max-width: 750px)
+  .con-nav
+    .con-logo
+      margin-right 5px !important
+    .nav-right
+      .vs-con-input-label
+        margin-right 4px !important
+      .vs-button
+        margin-right 0px !important
+        padding 8px 6px !important
+        border-radius 0px !important
+      .btn-apps
+        border-radius 0px 5px 5px 0px !important
+      .upload-btn
+        border-radius 5px 0px 0px 5px !important
+        .vs-button-icon
+          font-size 1.3rem !important
+        .vs-button-text
+          display none !important
+      .vs-button-icon
+        margin-left 0px !important
+@media only screen and (max-width: 650px)
   .con-logo
     span
       display none !important
@@ -577,7 +620,7 @@ export default {
     .btn-login
       .text-btn-inter
         display none !important
-      .flaticon-github
+      .flaticon-github-logo
         margin-left 0px !important
 @media only screen and (max-width: 480px)
   .nav-right

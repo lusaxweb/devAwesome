@@ -31,18 +31,18 @@ export default {
 <style lang="stylus">
 .ul-assets
   width 100%
-  padding 10px
+  // padding 10px
   display flex
   align-items center
   justify-content center
   flex-wrap wrap
   li
     cursor pointer
-    padding 10px
+    padding 20px 10px
     background var(--fondo2)
-    height 400px
-    width 400px
-    border-radius 10px
+    height auto
+    width 100%
+    // border-radius 10px
     display flex
     align-items center
     justify-content center

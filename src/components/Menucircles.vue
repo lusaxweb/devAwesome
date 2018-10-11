@@ -26,7 +26,7 @@
 
     <div v-if="tags.length == 0" class="con-circles-loading">
       <ul>
-        <li :style="`animation-delay: .${li}s`" :key="li" v-for="li in 5"></li>
+        <li class="loading-li" :style="`animation-delay: .${li}s`" :key="li" v-for="li in 5"></li>
       </ul>
     </div>
   </div>
@@ -73,7 +73,13 @@ export default {
     })
   },
   methods: {
+    changeAds () {
+      // let _carbonads
+      if (!document.querySelector('#carbonads')) return
+      if (typeof _carbonads !== 'undefined') _carbonads.refresh()
+    },
     addTag (tag) {
+      this.changeAds()
       let arrayTags = JSON.stringify([...this.$store.state.tagsActive])
       if (arrayTags.indexOf(JSON.stringify(tag)) !== -1) {
         let index = this.$store.state.tagsActive.indexOf(tag)
@@ -172,6 +178,7 @@ export default {
   overflow hidden
   display flex
   align-items flex-start
+  z-index 200
   &:after
       content ''
       position absolute
@@ -240,6 +247,8 @@ export default {
       text-transform capitalize
       opacity .5
       backface-visibility hidden
+      &.loading-li
+        opacity 1 !important
       span
         position absolute
         background var(--fondo3)

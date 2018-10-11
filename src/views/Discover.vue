@@ -3,10 +3,10 @@
     <titlex title="DevAwesome" />
     <filters/>
     <menu-circles />
-    <posts :section="title" :posts="posts" />
+    <posts :section="title" :posts="postsCarbon" />
 
     <vs-button class="btn-more" @click="maxPosts += 10" vs-color="#603aff" vs-type="filled">Load More Proyects ...</vs-button>
-    <Carbon />
+
   </div>
 </template>
 <script>
@@ -35,10 +35,33 @@ export default {
   data: () => ({
     name: 'hola',
     posts: [],
-    maxPosts: 10,
-    baseMaxPosts: 10
+    maxPosts: 15,
+    baseMaxPosts: 15
   }),
   computed: {
+    postsCarbon () {
+      let posts = this.posts
+      let arrayPosts = []
+      for (const key in posts) {
+        arrayPosts.push({
+          key,
+          ...posts[key]
+        })
+      }
+      // let indexCarbon = this.maxPosts - (this.maxPosts / 2)
+      // if (arrayPosts.length > 0) {
+      //   arrayPosts.splice(this.maxPosts - 4, 0, {carbon: true, key: this.maxPosts - 4})
+      // }
+
+      let postObject = {}
+
+      arrayPosts.forEach((item) => {
+        postObject[item.key] = item
+      })
+
+      console.log('arrayPosts', postObject)
+      return postObject
+    },
     isRoot () {
       return this.$store.state.user ? (this.$store.state.user.displayName === 'ldrovira' || this.$store.state.user.displayName === 'ManuelRoviraDesign') : false
     },
@@ -53,11 +76,25 @@ export default {
     }
   },
   watch: {
+    '$store.state.clickHome': function () {
+      this.getPosts()
+      this.$store.state.tagsActive = []
+      this.$store.state.filters.section = null
+      this.$store.state.filters.lenguaje = null
+      this.$store.state.filters.explore = 'recent'
+    },
+    '$store.state.filters.section': function () {
+      this.$store.state.filters.lenguaje = null
+      this.$store.state.tagsActive = []
+    },
+    '$store.state.filters.lenguaje': function () {
+      this.$store.state.tagsActive = []
+    },
     '$store.state.user': function () {
       this.getPosts()
     },
     maxPosts () {
-      // this.getPosts()
+      this.getPosts()
     },
     explore () {
       this.maxPosts = this.baseMaxPosts
@@ -77,7 +114,6 @@ export default {
     }
   },
   mounted () {
-
     this.getTags()
 
     this.getPosts()
@@ -88,6 +124,13 @@ export default {
     })
   },
   methods: {
+    changeAds () {
+      // let _carbonads
+      this.$nextTick(() => {
+        if (!document.querySelector('#carbonads')) return
+        if (typeof _carbonads !== 'undefined') _carbonads.refresh()
+      })
+    },
     getPostsTagsActive () {
       this.maxPosts = this.baseMaxPosts
       // this.$firebase.database().ref('posts').off()
@@ -131,6 +174,7 @@ export default {
       })
     },
     getPosts () {
+      this.changeAds()
       if (this.$store.state.tagsActive.length !== 0) {
         this.getPostsTagsActive()
         return
@@ -138,12 +182,10 @@ export default {
       console.log('paso por get posts')
       let self = this
       let explore = this.$store.state.filters.explore
-      let lenguaje = this.$store.state.filters.lenguaje
+      let lenguaje = this.$store.state.filters.lenguaje ? this.$store.state.filters.lenguaje.toLowerCase() : null
       var starCountRef = firebase.database().ref('posts')
       if (this.$store.state.filters.section) {
         starCountRef = firebase.database().ref('posts').orderByChild('section').equalTo(this.$store.state.filters.section.toLowerCase())
-      } else {
-        starCountRef = firebase.database().ref('posts')
       }
 
       if (explore === 'viewed') {
@@ -167,7 +209,7 @@ export default {
             // }
             const element = sortable[index]
             if (self.isRoot ? true : element[1].active) {
-              if (lenguaje ? element[1].lenguaje === lenguaje : true) {
+              if (lenguaje ? element[1].lenguaje.toLowerCase() === lenguaje : true) {
                 postsOrder[element[0]] = element[1]
               }
             }
@@ -205,7 +247,8 @@ export default {
             // }
             const element = sortable[index]
             if (self.isRoot ? true : element[1].active) {
-              if (lenguaje ? element[1].lenguaje === lenguaje : true) {
+              console.log(element[1].lenguaje)
+              if (lenguaje ? element[1].lenguaje.toLowerCase() === lenguaje : true) {
                 postsOrder[element[0]] = element[1]
               }
             }
@@ -216,18 +259,18 @@ export default {
           // self.getTags()
         })
       } else if (explore === 'recent') {
-        if (this.$store.state.filters.section) {
-          starCountRef = firebase.database().ref('posts').orderByChild('section').equalTo(this.$store.state.filters.section.toLowerCase()).limitToLast(self.maxPosts)
-        } else {
-          starCountRef = firebase.database().ref('posts').limitToLast(self.maxPosts)
-        }
+        // if (this.$store.state.filters.section) {
+        //   starCountRef = firebase.database().ref('posts').orderByChild('section').equalTo(this.$store.state.filters.section.toLowerCase()).limitToLast(self.maxPosts)
+        // } else {
+        //   starCountRef = firebase.database().ref('posts').limitToLast(self.maxPosts)
+        // }
         starCountRef.on('value', function (snapshot) {
           let posts = snapshot.val()
           if (self.$store.state.filters.lenguaje) {
             let postFilter = {}
             for (const key in posts) {
               let post = posts[key]
-              if (post.lenguaje === self.$store.state.filters.lenguaje) {
+              if (post.lenguaje === self.$store.state.filters.lenguaje.toLowerCase()) {
                 if (self.isRoot ? true : post.active) {
                   if (lenguaje ? post.lenguaje === lenguaje : true) {
                     postFilter[key] = post

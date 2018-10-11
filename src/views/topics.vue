@@ -5,10 +5,12 @@
       <li  :key="index" v-for="(repo, index) in repos">
         <div class="repo" v-if="repo != 'ads'">
           <header>
+          <a target="_blank" :href="repo.html_url">
             <h3>
               <span>{{ repo.index }}</span>
               {{repo.name}}
             </h3>
+          </a>
             <div class="con-links">
               <a target="_blank" :href="repo.html_url">Github</a>
               <a v-if="repo.homepage" target="_blank" :href="repo.homepage">Page</a>
@@ -25,7 +27,7 @@
 
           <footer>
             <div  class="con-tags-list">
-              <span :key="index" v-for="(tag,index) in repo.topics">{{ tag }}</span>
+              <span @click="openTag(tag)" :key="index" v-for="(tag,index) in repo.topics">{{ tag }}</span>
             </div>
 
             <div class="con-license" v-if="repo.license">
@@ -65,6 +67,9 @@ export default {
     }
   },
   methods: {
+    openTag (tag) {
+      this.$router.push('/search/' + tag)
+    },
     topics () {
       let self = this
       var myHeaders = new Headers()
@@ -99,18 +104,20 @@ export default {
 <style lang="stylus">
 @require '../config'
 .topic
+  ul
+    padding 0px 10px
   .repo
     background var(--fondo3)
     border-radius 10px
-    padding 10px
+    padding 5px
     max-width 1000px
-    margin 12px auto
+    margin 10px auto
     transition all .2s ease
     &:hover
       box-shadow 0px 5px 20px 0px rgba(0,0,0,.1)
-      transform translate(0, -5px)
+      transform translate(0, -4px)
     header
-      padding 10px
+      padding 5px
       padding-bottom 0px
       display flex
       align-items center
@@ -133,8 +140,8 @@ export default {
             background $verde
             color rgb(255,255,255)
       h3
-        font-size 1.4rem
-        font-weight normal
+        font-size 1.2rem
+        font-weight normal !important
         text-transform capitalize
         color var(--text-color)
 
@@ -162,6 +169,11 @@ export default {
         cursor pointer
         font-weight bold
         color rgb(255,255,255)
+        opacity 1
+        transition all .25s ease
+        box-shadow 0px 0px 0px -2px alpha($morado, 0)
+        &:hover
+          box-shadow 0px 5px 10px -2px alpha($morado, .6)
         i
           padding 5px
           background rgba(0,0,0,.1)
@@ -176,8 +188,8 @@ export default {
   footer
     .con-license
       width 100%
-      font-size .7rem
-      color rgba(255,255,255,.4)
+      font-size .6rem
+      color var(--text-alpha2)
       text-align right
       padding-right 10px
     .con-tags-list
@@ -188,11 +200,14 @@ export default {
       flex-wrap wrap
       padding 0px !important
       span
-        padding 3px 9px
+        padding 2px 8px
         border-radius 20px
         background var(--fondo)
         margin 3px
-        font-size .7rem
+        font-size .6rem
         cursor pointer
         text-transform capitalize
+        transition all .25s ease
+        &:hover
+          background $primary
 </style>

@@ -3,69 +3,73 @@
     <transition-group name="posts">
       <div
         :key="index"
-        v-if="index < $parent.maxPosts"
+        v-if="$parent.maxPosts? index < $parent.maxPosts : true"
         v-for="(post,index) in Object.keys(posts)"
         :class="[`post-display-${displayx}`, {'postInactive': !posts[post].active }]"
         class="post">
-
-        <button v-if="$store.state.admin" @click="openEditPost(posts[post], post)" class="edit-post-btn">
-          <i class="material-icons">
-            edit
-          </i>
-        </button>
-
-        <button
-          @click="deletePost(posts[post], post)"
-          v-if="deletex"
-          class="btn-delete-item">
+        <div class="con-carbon" v-if="$parent.maxPosts - 8 == index">
+          <Carbon />
+        </div>
+        <div v-else >
+          <button v-if="$store.state.admin" @click="openEditPost(posts[post], post)" class="edit-post-btn">
             <i class="material-icons">
-              delete_forever
+              edit
             </i>
           </button>
 
-           <div @click="openPost(posts[post], post)" class="con-img-post">
-            <img class="img-post" :src="posts[post].miniImage" alt="">
-
-            <button class="open-text">
+          <button
+            @click="deletePost(posts[post], post)"
+            v-if="deletex"
+            class="btn-delete-item">
               <i class="material-icons">
-                speaker_notes
+                delete_forever
               </i>
             </button>
 
-            <div class="con-textx">
-              <h4>{{ posts[post].title }}</h4>
-              <p>{{ getTextCort(posts[post].description) }}</p>
-            </div>
-          </div>
-          <footer>
-            <div @click="openPost(posts[post], post)" class="con-title-description">
-            <h4>{{ posts[post].title }}</h4>
-            <p>{{ posts[post].description }}</p>
-            <!-- <span> {{ posts[post].tags }} </span> -->
+            <div @click="openPost(posts[post], post)" class="con-img-post">
+              <img class="img-post" :src="posts[post].miniImage" alt="">
 
-            </div>
-            <div class="con-btns">
-            <button class="btn-link">
-              <a target="_blank" :href="`${posts[post].website}?ref=lusaxweb.github.io`">
+              <button class="open-text">
                 <i class="material-icons">
-                  link
+                  speaker_notes
                 </i>
-              </a>
-            </button>
-            <button class="btn-download" @click="openPost(posts[post], post)">
-              <i class="material-icons">
-                remove_red_eye
-              </i>
-              <span>{{ posts[post].views }}</span>
-            </button>
-            <button :class="{'disabledx':!$store.state.user, 'activeLike': getActiveLike(posts[post])}" class="btn-like" @click="addlike(post, posts[post])">
-                <i class="material-icons">
-                  favorite
-                </i>
-              <span v-if="posts[post].likes" >{{ Object.keys(posts[post].likes).length }}</span>
               </button>
+
+              <div class="con-textx">
+                <h4>{{ posts[post].title }}</h4>
+                <p>{{ getTextCort(posts[post].description) }}</p>
+              </div>
             </div>
-          </footer>
+            <footer>
+              <div @click="openPost(posts[post], post)" class="con-title-description">
+              <h4>{{ posts[post].title }}</h4>
+              <p>{{ posts[post].description }}</p>
+              <!-- <span> {{ posts[post].tags }} </span> -->
+
+              </div>
+              <div class="con-btns">
+              <button class="btn-link">
+                <a target="_blank" :href="`${posts[post].website}?ref=lusaxweb.github.io`">
+                  <i class="material-icons">
+                    link
+                  </i>
+                </a>
+              </button>
+              <button class="btn-download" @click="openPost(posts[post], post)">
+                <i class="material-icons">
+                  remove_red_eye
+                </i>
+                <span>{{ posts[post].views }}</span>
+              </button>
+              <button :class="{'disabledx':!$store.state.user, 'activeLike': getActiveLike(posts[post])}" class="btn-like" @click="addlike(post, posts[post])">
+                  <i class="material-icons">
+                    favorite
+                  </i>
+                <span v-if="posts[post].likes" >{{ Object.keys(posts[post].likes).length }}</span>
+                </button>
+              </div>
+            </footer>
+          </div>
       </div>
     </transition-group>
 
@@ -98,8 +102,11 @@
   </div>
 </template>
 <script>
-
+import Carbon from '../components/CarbonPosts.vue'
 export default {
+  components: {
+    Carbon
+  },
   props: {
     deletex: {
       default: false,
@@ -191,7 +198,7 @@ export default {
   }
 }
 </script>
-<style lang="stylus">
+<style lang="stylus" scoped>
 @require '../config'
 
 // user - admin

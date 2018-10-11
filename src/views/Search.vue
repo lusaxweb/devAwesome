@@ -92,7 +92,8 @@ export default {
         }
 
         arrayPosts = arrayPosts.filter((post) => {
-          return post.title.toLowerCase().indexOf(self.$router.currentRoute.params.searching.toLowerCase()) !== -1 || post.tags.toLowerCase().indexOf(self.$router.currentRoute.params.searching.toLowerCase()) !== -1
+          let postString = JSON.stringify(post)
+          return postString.toLowerCase().indexOf(self.$router.currentRoute.params.searching.toLowerCase()) !== -1 || post.tags.toLowerCase().indexOf(self.$router.currentRoute.params.searching.toLowerCase()) !== -1
         })
 
         let objectPosts = {}

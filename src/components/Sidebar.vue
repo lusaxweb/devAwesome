@@ -81,7 +81,7 @@ export default {
   max-width 300px;
   position fixed
   height 100%
-  background $fondo3
+  background var(--fondo)
   z-index 30000
   display none
   transform translate(-100%)
@@ -117,9 +117,10 @@ export default {
       width 100%
       display block
       text-align left
-      padding 15px 15px
+      padding 10px
       color rgb(255,255,255)
       font-weight bold
+      font-size .8rem
       .material-icons
         font-size 1.5rem
 

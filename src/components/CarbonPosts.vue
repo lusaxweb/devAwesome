@@ -1,5 +1,5 @@
 <template>
-  <div class="carbon">
+  <div class="carbon carbonPosts">
     <div key="carbonx" ref="carbonx"></div>
   </div>
 </template>
@@ -29,6 +29,29 @@ export default {
 </script>
 <style lang="stylus" >
 @require '../config'
+
+.con-carbon
+    padding-top calc(75% + 37px)
+    position relative
+  .carbonPosts
+    position absolute
+    top 0px
+    height 100%
+    width 100%
+    > div
+      height 100%
+      width 100%
+    #carbonads
+      height 100%
+      width 100%
+    .carbon-wrap
+      height calc(100% - 20px)
+      flex-direction column
+      .carbon-img
+        max-width 200px !important
+      img
+        max-width 200px !important
+        width 200px !important
 
 /* #-carbonads */
 .carbon div[id*="carbonads"] {

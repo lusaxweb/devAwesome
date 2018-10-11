@@ -176,9 +176,9 @@
 
       </div>
 
-      <vs-button class="btn-patron" vs-color="#f96854" vs-type="filled">
+      <a class="btn-patron">
         Become a Patron
-      </vs-button>
+      </a>
     </section>
 
     <section ref="afiliates" class="afiliates-section">
@@ -353,6 +353,10 @@ export default {
           position absolute
           bottom 0px
           transform translate(0, 30%)
+          box-shadow 0px 0px 0px -2px alpha($morado, 0)
+          transition all .25s ease
+          &:hover
+            box-shadow 0px 5px 10px -2px alpha($morado, .6)
           a
             padding 15px 40px
             display block
@@ -410,6 +414,16 @@ export default {
   font-weight bold
   padding 12px 25px
   margin-top 30px
+  background #f96854
+  border-radius 8px
+  margin-top 20px
+  display inline-block
+  cursor pointer
+  opacity 1
+  transition all .25s ease
+  box-shadow 0px 0px 0px -2px alpha(#f96854, 0)
+  &:hover
+    box-shadow 0px 6px 15px -5px alpha(#f96854, .6)
 
 .afiliates-section
   h2

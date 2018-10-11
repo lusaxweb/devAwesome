@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    clickHome: 0,
     display: 1,
     light: false,
     likesNumber: 0,

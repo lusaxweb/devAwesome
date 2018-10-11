@@ -235,7 +235,7 @@ export default {
           a
             color var(--text-color)
             transition all .2s ease
-            opacity .5
+            opacity .3
             &:hover
               opacity 1
               color var(--text-color)

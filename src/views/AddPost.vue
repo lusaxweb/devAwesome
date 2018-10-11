@@ -137,7 +137,6 @@ export default {
       this.tags.splice(this.tags.indexOf(item), 1)
     },
     changeValueImage (evt, number) {
-      console.log('evt', evt)
       let self = this
       var file = evt.target.files[0]
       var img = new Image()
@@ -149,8 +148,6 @@ export default {
         }
         URL.revokeObjectURL(this.src)
 
-        // console.log('onload: sizes', sizes)
-        // console.log('onload: this', this)
         let notValid = true
         if (sizes.width === 400 && sizes.height === 300) {
           notValid = false
@@ -168,7 +165,6 @@ export default {
           })
 
           const inputx = self.$refs[`inputFile${number}`]
-          console.log('inputx', inputx)
           inputx.type = 'text'
           inputx.type = 'file'
           self[`image${number}`] = false
@@ -177,8 +173,6 @@ export default {
 
       var objectURL = URL.createObjectURL(file)
 
-      console.log('change: file', file)
-      console.log('change: objectURL', objectURL)
       img.src = objectURL
 
       if (evt.target.value !== '') {
@@ -221,7 +215,6 @@ export default {
         .then(json => {
           // this.contribuitorsx.push(json)
           githubUrl = json.items[0].html_url
-          console.log(githubUrl)
           // https://api.github.com/search/users?q=ldrovira
 
           if (this.isRoot) {
@@ -243,7 +236,6 @@ export default {
           }
 
           this.upload.user = user
-          console.log('Subiendo', this.$store.state.user)
           this.upload.tags = this.tags.join()
 
           if (this.isRoot) {
@@ -259,17 +251,13 @@ export default {
       var ref = this.$firebase.storage().ref('posts/' + file.name)
       ref.put(file).then(function (snapshot) {
         ref.getDownloadURL().then(function (url) {
-          console.log('url', url)
           self.upload.miniImage = url
 
           var file2 = self.$refs.inputFile2.files[0]
           var ref2 = self.$firebase.storage().ref('posts/' + file2.name)
           ref2.put(file2).then(function (snapshot) {
             ref2.getDownloadURL().then(function (url2) {
-              console.log('url2>>>', url2)
               self.upload.image = url2
-              console.log('Uploaded a blob or file!')
-              console.log('posts/' + self.upload.section.toLowerCase())
 
               self.submitPost()
             })
@@ -440,5 +428,5 @@ export default {
         border 1px solid rgba(255,255,255,0) !important
       .input-span-placeholder
         text-align left
-        color var(--text-alpha) !important
+        // color var(--text-alpha) !important
 </style>

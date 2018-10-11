@@ -69,14 +69,15 @@ export default {
 @require '../config'
 .con-select-filter
   width 100%
-  padding 30px 30px
+  padding 20px 20px
   padding-top 0px
   display flex
   align-items center
   justify-content flex-start
+  z-index 500
   .selectx
     max-width 200px
-    margin 7px
+    margin 4px
   .con-display
     margin-left auto
     position relative
@@ -88,6 +89,7 @@ export default {
         visibility visible !important
         opacity 1 !important
         transform translate(0) scale(1) !important
+
     button
       padding 8px
       display flex
@@ -110,6 +112,7 @@ export default {
       opacity 0
       transition all .3s ease
       transform translate(0, -10px)
+      z-index 500
       li
         padding 5px
         display flex

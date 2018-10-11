@@ -7,17 +7,23 @@
 <script>
 export default {
   mounted () {
-    const script = document.createElement('script')
-    script.setAttribute('type', 'text/javascript')
-    script.setAttribute(
-      'src',
-      `//cdn.carbonads.com/carbon.js?serve=CK7DC27J&placement=lusaxwebgithubio`
-    )
-    script.setAttribute(
-      'id',
-      `_carbonads_js`
-    )
-    this.$refs.carbonview.appendChild(script)
+    this.$nextTick(() => {
+      const script = document.createElement('script')
+      script.setAttribute('type', 'text/javascript')
+      script.setAttribute(
+        'src',
+        `//cdn.carbonads.com/carbon.js?serve=CK7DC27J&placement=lusaxwebgithubio`
+      )
+      script.setAttribute(
+        'id',
+        `_carbonads_js`
+      )
+      setTimeout(() => {
+        if (!document.querySelector('#_carbonads_js')) {
+          this.$refs.carbonview.appendChild(script)
+        }
+      }, 300)
+    })
   }
 }
 </script>

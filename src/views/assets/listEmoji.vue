@@ -3387,7 +3387,6 @@ export default {
   }),
   methods: {
     copy (text) {
-      console.log(text)
       // Crea un campo de texto "oculto"
       var aux = document.createElement('input')
       aux.classList.add('no-input')
@@ -3405,6 +3404,13 @@ export default {
 
       // Elimina el campo de la página
       document.body.removeChild(aux)
+
+      this.$vs.notify({
+        title: 'Emoji copied ',
+        text: '( ' + text + ' )',
+        color: 'success',
+        icon: 'check_circle'
+      })
     }
   }
 }
@@ -3420,7 +3426,7 @@ export default {
   padding 10px
   ul
     width 100%
-    max-width 800px
+    max-width 900px
     background var(--fondo)
     display flex
     align-items center
@@ -3457,6 +3463,9 @@ export default {
         transform scale(.4)
         transition all .2s ease
         opacity 0
+        box-shadow 0px 0px 0px -2px alpha($morado, .6)
+        &:hover
+          box-shadow 0px 5px 10px -2px alpha($morado, .6)
         i
           font-size .9rem
           width 100%
