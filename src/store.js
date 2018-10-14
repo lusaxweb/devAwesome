@@ -31,7 +31,7 @@ export default new Vuex.Store({
     sections: [
       {text: 'Front-end', value: 'front-end'},
       {text: 'Back-end', value: 'back-end'},
-      {text: 'Movile-app', value: 'movile-app'},
+      {text: 'Mobile-app', value: 'mobile-app'},
       {text: 'More', value: 'more'}
     ],
     lenguajes: [
@@ -70,7 +70,18 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
-
+    addPostLike (state, name, idx) {
+      // const key = keyForService(serviceData)
+      // Vue.set(services, key, serviceData)
+      Vue.set(state.posts[name].likes, state.user.uid, {
+        uid: state.user.uid
+      })
+    },
+    removePostLike (state, post) {
+      let likes = {...state.posts[post].likes}
+      delete likes[state.user.uid]
+      state.posts[post].likes = likes
+    }
   },
   actions: {
 

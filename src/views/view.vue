@@ -194,7 +194,7 @@ export default {
     '$route.params.namePost': function () {
       this.goLess--
       this.getPost()
-      this.getPosts()
+      // this.getPosts()
       this.changeAds()
       this.readmeActive = false
     }
@@ -312,7 +312,7 @@ export default {
       }
     },
     uploadPost (post) {
-      this.$firebase.database().ref('posts').child(this.$router.currentRoute.params.namePost).on('value', (snapshot) => {
+      this.$firebase.database().ref('posts').child(this.$router.currentRoute.params.namePost).once('value', (snapshot) => {
         this.$store.state.view.post = {
           ...snapshot.val(),
           namePost: this.$router.currentRoute.params.namePost
@@ -321,7 +321,7 @@ export default {
     },
     getPost () {
       let self = this
-      this.$firebase.database().ref('posts').child(this.$router.currentRoute.params.namePost).on('value', (snapshot) => {
+      this.$firebase.database().ref('posts').child(this.$router.currentRoute.params.namePost).once('value', (snapshot) => {
         let post = snapshot.val()
         this.post = {
           ...post,
@@ -371,7 +371,7 @@ export default {
       return array
     },
     getPosts () {
-      this.$firebase.database().ref('posts').on('value', (snapshot) => {
+      this.$firebase.database().ref('posts').once('value', (snapshot) => {
         // this.morePosts = snapshot.val()
         let arrayPosts = []
         var numeroPosts = Object.keys(snapshot.val()).length
@@ -432,7 +432,6 @@ export default {
       })
 
       this.getPost()
-      this.getPosts()
 
       var img = new Image()
       let self = this

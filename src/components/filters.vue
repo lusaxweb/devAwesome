@@ -10,7 +10,7 @@
         <vs-select-item :key="index" :vs-value="item.value" :vs-text="item.text" v-for="(item,index) in $store.state.sections" />
     </vs-select>
     <vs-select
-      placeholder="Lenguaje or Framework"
+      placeholder="Lenguage or Framework"
       vs-color="#FF3A4E"
       class="selectx"
       v-model="$store.state.filters.lenguaje"

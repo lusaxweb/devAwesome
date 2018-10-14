@@ -8,5 +8,11 @@ module.exports = {
     msTileColor: '#231F34',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black'
+  },
+  configureWebpack: {
+    output: {
+      filename: `[name].[hash]${require('./package.json').version}.js`,
+      chunkFilename: `[name].[hash]${require('./package.json').version}.js`
+    }
   }
 }

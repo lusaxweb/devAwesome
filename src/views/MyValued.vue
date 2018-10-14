@@ -36,9 +36,10 @@ export default {
     var starCountRef = firebase.database().ref('posts')
     console.log(starCountRef)
     starCountRef.on('value', function (snapshot) {
+
       // let childRef = starCountRef.child(snapshot)
       let posts = snapshot.val()
-
+      delete posts.undefined
       let arrayPosts = []
       for (const post in posts) {
         posts[post].key = post

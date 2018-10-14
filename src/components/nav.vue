@@ -43,7 +43,7 @@
             <router-link exact to="/About/sponsor"><span>Sponsor and Backers</span></router-link>
           </li>
           <li>
-            <router-link exact to="/About/afiliates"><span>Afiliates</span></router-link>
+            <router-link exact to="/About/afiliates"><span>Affiliates</span></router-link>
           </li>
           <!-- <li>
             <router-link exact to="/About/brand"><span>Brand</span></router-link>
@@ -77,7 +77,7 @@
                 <router-link exact to="/myValued"><span>My Valued</span></router-link>
               </li>
               <li>
-                <router-link exact to="/myProyects"><span>My Proyects</span></router-link>
+                <router-link exact to="/myProyects"><span>My Projects</span></router-link>
               </li>
               <li class="btn-switchx">
                   <!-- <i class="material-icons">

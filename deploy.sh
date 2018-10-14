@@ -3,6 +3,13 @@
 # abort on errors
 set -e
 
+# change version
+
+git add -A
+git commit -m 'pre-deploy'
+
+npm version patch
+
 # build
 npm run build
 

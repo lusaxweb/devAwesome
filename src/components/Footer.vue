@@ -79,6 +79,14 @@ export default {
           {
             text: 'Discord',
             href: 'https://discord.gg/VxacJRH'
+          },
+          {
+            text: 'Behance',
+            href: 'https://www.behance.net/ManuelRovira'
+          },
+          {
+            text: 'Dribbble',
+            href: 'https://dribbble.com/ManuelRovira'
           }
           // {
           //   text: 'Facebook',
@@ -107,7 +115,7 @@ export default {
         title: 'More',
         items: [
           {
-            text: 'Submit a proyect',
+            text: 'Submit a project',
             href: '/addPost/',
             local: true
           },

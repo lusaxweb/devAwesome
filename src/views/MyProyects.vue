@@ -2,7 +2,7 @@
   <div id="app">
     <titlex title="My Proyects" />
     <!-- <menu-circles :tags="tags" /> -->
-    <posts :section="title" :posts="posts" :deletex="true" />
+    <posts :section="title" :posts="posts" />
     <Carbon />
   </div>
 </template>
@@ -50,6 +50,7 @@ export default {
       starCountRef.on('value', function (snapshot) {
         // let childRef = starCountRef.child(snapshot)
         let posts = snapshot.val()
+        delete posts.undefined
         self.posts = posts || {}
       })
       document.querySelector('body').style = 'overflow: auto'

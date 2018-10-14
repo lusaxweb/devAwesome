@@ -85,7 +85,7 @@
           </i>
         </div>
         <!-- <button @click="uploadx">Prueba</button> -->
-        <vs-button @click="uploadx" class="btn-upload" vs-color="success" vs-type="filled">Upload Proyect</vs-button>
+        <vs-button @click="uploadx" class="btn-upload" vs-color="success" vs-type="filled">Upload Project</vs-button>
       </div>
     </div>
     <Carbon />

@@ -12,6 +12,16 @@
     <div class="con-app">
       <router-view/>
     </div>
+    <!-- <div class="con-ups">
+      <h3>Ups! we are currently in maintenance
+          <br>
+      WOW thanks to your visits we are making a change of servers
+          <br>
+          <br>
+
+      Thanks for your understanding and support
+      </h3>
+    </div> -->
     <footerx />
   </div>
 </template>
@@ -107,6 +117,15 @@ export default {
   --text-alpha: rgba(255,255,255,.6)
   --text-alpha2: rgba(255,255,255,.2)
 }
+
+.con-ups
+  width 100%
+  height 600px
+  display flex
+  align-items center
+  justify-content center
+  font-weight normal
+  font-size 1.3rem
 
 .con-chips input
   background transparent

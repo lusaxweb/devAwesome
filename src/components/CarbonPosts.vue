@@ -41,7 +41,7 @@ export default {
     > div
       height 100%
       width 100%
-    #carbonads
+    div[id*="carbonads"]
       height 100%
       width 100%
     .carbon-wrap
@@ -58,6 +58,9 @@ export default {
   --width: 160px;
   --font-size: 13px;
 }
+
+#carbonads_1,#carbonads_2
+  display none
 
 .carbon div[id*="carbonads"] {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;

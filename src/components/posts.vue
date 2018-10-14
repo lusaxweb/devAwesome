@@ -4,21 +4,24 @@
       <div
         :key="index"
         v-if="$parent.maxPosts? index < $parent.maxPosts : true"
-        v-for="(post,index) in Object.keys(posts)"
-        :class="[`post-display-${displayx}`, {'postInactive': !posts[post].active }]"
+        v-for="(post,index) in Object.keys(this.$store.state.posts)"
+        :class="[`post-display-${displayx}`, {'postInactive': !$store.state.posts[post].active }]"
         class="post">
-        <div class="con-carbon" v-if="$parent.maxPosts - 8 == index">
+        <div class="con-carbon" v-if="$parent.maxPosts - 12 == index">
           <Carbon />
         </div>
+        <div class="con-anuncio" v-else-if="$parent.maxPosts - 4 == index">
+          <announcements />
+        </div>
         <div v-else >
-          <button v-if="$store.state.admin" @click="openEditPost(posts[post], post)" class="edit-post-btn">
+          <button v-if="$store.state.admin" @click="openEditPost($store.state.posts[post], post)" class="edit-post-btn">
             <i class="material-icons">
               edit
             </i>
           </button>
 
           <button
-            @click="deletePost(posts[post], post)"
+            @click="deletePost($store.state.posts[post], post)"
             v-if="deletex"
             class="btn-delete-item">
               <i class="material-icons">
@@ -26,8 +29,8 @@
               </i>
             </button>
 
-            <div @click="openPost(posts[post], post)" class="con-img-post">
-              <img class="img-post" :src="posts[post].miniImage" alt="">
+            <div @click="openPost($store.state.posts[post], post)" class="con-img-post">
+              <img class="img-post" :src="$store.state.posts[post].miniImage" alt="">
 
               <button class="open-text">
                 <i class="material-icons">
@@ -36,36 +39,36 @@
               </button>
 
               <div class="con-textx">
-                <h4>{{ posts[post].title }}</h4>
-                <p>{{ getTextCort(posts[post].description) }}</p>
+                <h4>{{ $store.state.posts[post].title }}</h4>
+                <p>{{ getTextCort($store.state.posts[post].description) }}</p>
               </div>
             </div>
             <footer>
-              <div @click="openPost(posts[post], post)" class="con-title-description">
-              <h4>{{ posts[post].title }}</h4>
-              <p>{{ posts[post].description }}</p>
-              <!-- <span> {{ posts[post].tags }} </span> -->
+              <div @click="openPost($store.state.posts[post], post)" class="con-title-description">
+              <h4>{{ $store.state.posts[post].title }}</h4>
+              <p>{{ $store.state.posts[post].description }}</p>
+              <!-- <span> {{ $store.state.posts[post].tags }} </span> -->
 
               </div>
               <div class="con-btns">
               <button class="btn-link">
-                <a target="_blank" :href="`${posts[post].website}?ref=lusaxweb.github.io`">
+                <a target="_blank" :href="`${$store.state.posts[post].website}?ref=lusaxweb.github.io`">
                   <i class="material-icons">
                     link
                   </i>
                 </a>
               </button>
-              <button class="btn-download" @click="openPost(posts[post], post)">
+              <button class="btn-download" @click="openPost($store.state.posts[post], post)">
                 <i class="material-icons">
                   remove_red_eye
                 </i>
-                <span>{{ posts[post].views }}</span>
+                <span>{{ $store.state.posts[post].views }}</span>
               </button>
-              <button :class="{'disabledx':!$store.state.user, 'activeLike': getActiveLike(posts[post])}" class="btn-like" @click="addlike(post, posts[post])">
+              <button :class="{'disabledx':!$store.state.user, 'activeLike': getActiveLike($store.state.posts[post])}" class="btn-like" @click="addlike(post, $store.state.posts[post])">
                   <i class="material-icons">
                     favorite
                   </i>
-                <span v-if="posts[post].likes" >{{ Object.keys(posts[post].likes).length }}</span>
+                <span v-if="$store.state.posts[post].likes" >{{ Object.keys($store.state.posts[post].likes).length }}</span>
                 </button>
               </div>
             </footer>
@@ -73,7 +76,7 @@
       </div>
     </transition-group>
 
-    <div v-if="Object.keys(posts).length == 0" class="con-loading-posts">
+    <div v-if="Object.keys($store.state.posts).length == 0" class="con-loading-posts">
       <ul>
         <li  :key="li" v-for="li in numberRamdom">
           <div :style="`animation-delay: .${li}s`" class="card">
@@ -102,19 +105,21 @@
   </div>
 </template>
 <script>
+import announcements from '../components/announcements.vue'
 import Carbon from '../components/CarbonPosts.vue'
 export default {
   components: {
-    Carbon
+    Carbon,
+    announcements
   },
   props: {
     deletex: {
       default: false,
       type: Boolean
     },
-    posts: {
-      default: () => { return {} }
-    },
+    // posts: {
+    //   default: () => { return {} }
+    // },
     section: {
       default: null,
       type: String
@@ -137,7 +142,6 @@ export default {
   },
   watch: {
     display () {
-      console.log('this.$store.state.display', this.$store.state.display)
       this.displayx = this.$store.state.display
     }
   },
@@ -154,7 +158,6 @@ export default {
         title: `Confirm Deleted`,
         text: 'You are sure to eliminate this Project, By doing so you will not be able to have it again and it will be eliminated',
         accept: function () {
-          console.log('acepto eliminarlo', namePost)
           self.$firebase.database().ref('posts').child(namePost).remove()
         }
       })
@@ -180,6 +183,8 @@ export default {
       })
     },
     addlike (name, post) {
+      let idx = this.$store.state.user.uid
+
       if (!this.$store.state.user) {
         this.$vs.notify({
           title: 'Necessary Login User',
@@ -188,12 +193,15 @@ export default {
           icon: 'lock'
         })
       } else if (this.getActiveLike(post)) {
+        this.$store.commit('removePostLike', name, idx)
         this.$firebase.database().ref('posts').child(name + '/likes/' + this.$store.state.user.uid).remove()
       } else {
+        this.$store.commit('addPostLike', name, 'idx')
         this.$firebase.database().ref('posts').child(name + '/likes/' + this.$store.state.user.uid).set({
           uid: this.$store.state.user.uid
         })
       }
+      // this.$set(this.$store.state.posts[post.key], 'likes', newPost.likes)
     }
   }
 }
