@@ -126,7 +126,6 @@ export default {
           }
           index++
         }
-        console.log('post slide mini', miniPosts)
         this.miniSlides = miniPosts
       })
     }

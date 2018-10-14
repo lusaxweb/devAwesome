@@ -194,12 +194,11 @@ export default {
     signOut () {
       this.$firebase.auth().signOut().then(() => {
         // Sign-out successful.
-        console.log('salio')
         this.$store.state.likes = null
         this.$store.state.user = null
       }).catch(function (error) {
         // An error happened.
-        console.log('error al salir', error)
+        console.log('error', error)
       })
     },
     logIn () {
@@ -212,7 +211,6 @@ export default {
         // // The signed-in user info.
         // var user = result.user;
         // // ...
-        console.log('result', result.user.uid)
         self.$store.state.user = result.user
       }).catch(function (error) {
         // Handle Errors here.

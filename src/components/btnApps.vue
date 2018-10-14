@@ -55,7 +55,6 @@ export default {
       if (!evt.target.closest('.con-btn-apps')) {
         this.active = false
       }
-      // console.log(sthisbtnapps)
     }
   }
 }

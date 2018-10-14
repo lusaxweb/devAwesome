@@ -229,7 +229,6 @@ export default {
   methods: {
     changeScrollTop () {
       let sec = this.$router.currentRoute.params.section
-      console.log('this.$refs[sec].clientTop>', this.$refs[sec].offsetTop)
       window.scrollTo(0, this.$refs[sec].offsetTop)
     }
   }
