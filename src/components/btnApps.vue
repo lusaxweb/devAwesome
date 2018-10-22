@@ -74,7 +74,7 @@ export default {
     background var(--fondo2)
     color var(--text-color)
     display flex
-    align-content center
+    align-items center
     justify-content center
 
     i
