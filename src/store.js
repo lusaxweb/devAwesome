@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    articles: [],
+    openUpload: false,
     clickHome: 0,
     display: 1,
     light: false,

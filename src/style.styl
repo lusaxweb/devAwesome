@@ -38,3 +38,203 @@ $vs-colors := {
 
 @import '~vuesax/dist/styles/index.styl'
 
+
+.text-description-input
+  text-align right
+  font-size .65rem
+  width 100%
+  padding 5px
+  color var(--text-alpha)
+
+.con-vs-checkbox
+  justify-content flex-start !important
+
+.con-chips
+  background var(--fondo2)
+  input
+    color var(--text-color)
+.con-vs-chip
+  cursor default
+  background $morado
+  span
+    color rgb(255,255,255) !important
+.chips-danger
+  .no-items
+    border 1px solid rgb(255, 71, 87)
+
+.label-tags
+  width 100%
+  text-align left
+  display block
+  font-size .9rem
+  padding 5px
+  padding-left 8px
+
+.span-text-validationx
+  padding: 2px 4px;
+  padding-bottom: 4px;
+  display: block;
+  font-size .6rem
+  text-align left
+  color rgb(255, 71, 87)
+
+.selectx
+  width 100%
+.con-add-Post
+  position relative
+  left 0px
+  top 0px
+  background var(--fondo)
+  width 100%
+  overflow auto
+  padding-top 0px
+  .fileDanger
+    border 1px solid rgb(255, 71, 87) !important
+    label
+      color rgb(255, 71, 87) !important
+  .fileActive
+    i
+      color $verde !important
+      font-size 4rem !important
+      top 40% !important
+    label
+      color $verde !important
+      font-size .7rem !important
+      padding-top 60px !important
+      font-weight normal
+  .con-file
+    width calc(50% - 5px)
+    height 150px
+    background var(--fondo2)
+    position relative
+    float left
+    display flex
+    align-items center
+    justify-content center
+    margin 14px 0px
+    margin-right 5px
+    border-radius 5px
+
+    &.con-file2
+      margin-right 0px !important
+      margin-left 5px !important
+    i
+      display block
+      left 50%
+      top 50%
+      position absolute
+      transform translate(-50%, -50%)
+      font-size 6rem
+      color var(--fondo)
+      transition all .25s ease
+    label
+      padding 10px
+      display block
+      text-align center
+      z-index 10
+      font-weight bold
+      color var(--text-color)
+      letter-spacing 1px
+      transition all .25s ease
+    input
+      top 0px
+      left 0px
+      position absolute
+      width 100%
+      height 100%
+      opacity 0
+      z-index 100
+      cursor pointer
+
+.btn-upload
+  width 100%
+.con-inputs
+  display flex
+  align-items center
+  justify-content center
+.contiene-inputs
+  width 100%
+  max-width 600px
+  padding 20px 10px
+.vs-input-label
+  color var(--text-color) !important
+  padding-bottom 8px !important
+  display block
+.inputx
+  width 100%
+  margin 12px 0px
+  text-align left
+.con-app
+  .vs-input-primary
+    .vs-inputx
+      border 1px solid rgba(255,255,255,0) !important
+    &:focus
+      border 1px solid rgba(255,255,255,0) !important
+.vs-inputx
+  padding 10px !important
+  background var(--fondo2) !important
+  border 1px solid rgba(255,255,255,0) !important
+
+  &:focus
+    border 1px solid rgba(255,255,255,0) !important
+.input-span-placeholder
+  text-align left
+        // color var(--text-alpha) !important
+
+
+.con-htmlx
+  text-align left
+  max-width 1000px
+  margin 0px auto
+  background #f6f9fc
+  border-radius 10px
+  color rgba(0,0,0,.8)
+  min-height 525px
+  overflow hidden
+  .warning
+    padding 10px
+    background rgba(255,229,100,.3)
+    border-left 3px solid rgba(255,229,100,1)
+  img
+    margin auto
+    margin-bottom: 15px
+    margin-top: 15px
+    display block
+    border-radius 5px
+    max-width 100%
+    clear both
+    position relative
+  p
+    font-size .95rem
+    padding 0px 10px
+    position relative
+    display: block
+  a
+    color $morado
+  h1,h2,h3,h4,h5,h6
+    padding 10px
+    padding-left: 15px
+
+
+  ul
+    padding 15px
+    padding-left 50px
+  li
+    list-style disc
+    padding 4px
+pre
+  padding 20px
+  margin-top 10px
+  margin-bottom 10px
+  background var(--fondo3)
+  font-size .9rem
+  color rgb(255,255,255)
+p>code
+  background rgba(255,255,255,.05)
+  padding 1px 5px
+  border-radius 4px
+  color rgba(255,255,255,.4)
+
+
+
+

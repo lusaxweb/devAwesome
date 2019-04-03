@@ -203,17 +203,23 @@
 
     </section>
     <!-- <h2>Brand</h2> -->
-    <Carbon />
+    <!-- <Carbon /> -->
+    <CodeFundView
+            propertyId="8aed6e67-5cf6-4217-a805-d1713785b7e5"
+           />
     <!-- <figurex footerx /> -->
   </div>
 </template>
 <script>
 import figurex from '../components/figure.vue'
 import Carbon from '../components/Carbon.vue'
+import CodeFundView from '../components/CodeFundView.vue'
+
 export default {
   components: {
     figurex,
-    Carbon
+    Carbon,
+    CodeFundView
   },
   mounted () {
     this.changeScrollTop()

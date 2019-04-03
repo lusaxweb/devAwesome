@@ -1,6 +1,22 @@
 <template>
   <div class="topic">
     <titlex title="Topics Github" />
+
+    <ul :style="{'border-bottom': `2px solid ${colorx}` }" class="filters">
+      <li :class="{'active': colorx == 'rgb(255,255,255)'}" class="allx" @click="topics(), colorx = 'rgb(255,255,255)'">
+        <img :src="`filters/github.png`" />
+      </li>
+      <li
+        :class="{'active': filter.color == colorx}"
+        :key="index"
+        v-for="(filter, index) in filters"
+        :style="{'border': `2px solid ${filter.color}`}"
+        @click="getTopicsFilter(filter.filter), colorx = filter.color" >
+        <!-- {{ filter.name }} -->
+        <img :src="`filters/${filter.filter}.png`" />
+      </li>
+    </ul>
+
     <ul>
       <li  :key="index" v-for="(repo, index) in repos">
         <div class="repo" v-if="repo != 'ads'">
@@ -36,7 +52,10 @@
           </footer>
         </div>
         <div v-else>
-          <Carbon />
+          <!-- <Carbon /> -->
+          <CodeFundView
+            propertyId="8aed6e67-5cf6-4217-a805-d1713785b7e5"
+           />
         </div>
       </li>
     </ul>
@@ -46,14 +65,35 @@
 <script>
 import titlex from '../components/titlex.vue'
 import Carbon from '../components/Carbon.vue'
+import CodeFundView from '../components/CodeFundView.vue'
 export default {
   components: {
     titlex,
-    Carbon
+    Carbon,
+    CodeFundView
   },
   data: () => ({
+    colorx: 'rgb(255,255,255)',
     repos: [],
-    page: 20
+    page: 20,
+    filterx: null,
+    filters: [
+      {
+        name: 'Vuejs',
+        color: '#41b883',
+        filter: 'vue',
+      },
+      {
+        name: 'Reactjs',
+        color: '#61dafb',
+        filter: 'react'
+      },
+      {
+        name: 'Angularjs',
+        color: '#dd1b16',
+        filter: 'angular'
+      },
+    ]
   }),
   created () {
     this.topics()
@@ -62,15 +102,23 @@ export default {
     })
   },
   watch: {
+    colorx () {
+      this.page = 20
+    },
     page () {
-      this.topics()
+      if (this.filterx) {
+        this.getTopicsFilter(this.filterx)
+      } else {
+        this.topics()
+      }
     }
   },
   methods: {
     openTag (tag) {
       this.$router.push('/search/' + tag)
     },
-    topics () {
+    getTopicsFilter (filter) {
+      this.filterx = filter
       let self = this
       var myHeaders = new Headers()
 
@@ -83,9 +131,41 @@ export default {
         mode: 'cors',
         cache: 'default'
       }
+
+      let url = `https://api.github.com/search/repositories?q=topic:${filter}&stars:>0&sort=stars&order=desc&per_page=${this.page}`
+
+      fetch(url, miInit)
+        .then(response => response.json())
+        .then(json => {
+          console.log(json)
+          let items = json.items
+          items.map((item, index) => {
+            item.index = index + 1
+          })
+          console.log(items)
+          items.splice(this.page - 10, 0, 'ads')
+          self.repos = items
+        })
+    },
+    topics () {
+      this.filterx = null
+      let self = this
+      var myHeaders = new Headers()
+
+      myHeaders.append('Accept', 'application/vnd.github.mercy-preview+json')
+      myHeaders.append('Content-Type', 'text/plain')
+
+      var miInit = {
+        method: 'GET',
+        headers: myHeaders,
+        mode: 'cors',
+        cache: 'default'
+      }
+
+      let url = `https://api.github.com/search/repositories?q=stars:>0&sort=stars&order=desc&per_page=${this.page}`
       // search/repositories
-      // fetch(`https://api.github.com/search/topics?q=vue`, miInit)
-      fetch(`https://api.github.com/search/repositories?q=stars:>0&sort=stars&order=desc&per_page=${this.page}`, miInit)
+
+      fetch(url, miInit)
         .then(response => response.json())
         .then(json => {
           console.log(json)
@@ -104,6 +184,35 @@ export default {
 <style lang="stylus">
 @require '../config'
 .topic
+  .filters
+    width 100%
+    display flex
+    align-items center
+    justify-content center
+    border-bottom 3px
+    li
+      padding 10px
+      display flex
+      align-items center
+      justify-content center
+      margin 0px 5px
+      font-size .8rem
+      border-radius 12px
+      cursor pointer
+      margin-bottom 8px
+      transition all .25s ease
+      opacity .5
+      &:hover
+        opacity 1
+      img
+        width 30px
+      &.active
+        border-radius 12px 12px 0px 0px
+        transform translate(0, 10px)
+        opacity 1
+      &.allx
+        border 2px solid rgb(255,255,255)
+
   ul
     padding 0px 10px
   .repo

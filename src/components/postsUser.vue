@@ -2,21 +2,12 @@
   <div class="con-posts">
     <transition-group name="posts">
       <div
-        v-if="$parent.maxPosts? index < $parent.maxPosts : true"
         :key="index"
-        v-for="(post,index) in Object.keys(this.posts)"
-        :class="[`post-display-${displayx}`, {'postInactive': !posts[post].active }]"
+        v-if="$parent.maxPosts? index < $parent.maxPosts : true"
+        v-for="(post,index) in Object.keys(posts)"
+        :class="[{'postInactive': !posts[post].active }]"
         class="post">
-        <div class="con-carbon" v-if="$parent.maxPosts - 12 == index">
-          <CodeFund
-            propertyId="8aed6e67-5cf6-4217-a805-d1713785b7e5"
-           />
-           <!-- <Carbon /> -->
-        </div>
-        <div class="con-anuncio" v-else-if="$parent.maxPosts - 4 == index && $store.state.display !== 3 && $store.state.display !== 4">
-          <announcements />
-        </div>
-        <div class="con-postx" v-else >
+        <div class="con-postx">
           <button v-if="$store.state.admin" @click="openEditPost(posts[post], post)" class="edit-post-btn">
             <i class="material-icons">
               edit
@@ -43,7 +34,7 @@
 
               <div class="con-textx">
                 <h4>{{ posts[post].title }}</h4>
-                <p>{{ getTextCort(posts[post].description) }}</p>
+                <!-- <p>{{ getTextCort(posts[post].description) }}</p> -->
               </div>
             </div>
             <footer>
@@ -212,7 +203,7 @@ export default {
   }
 }
 </script>
-<style lang="stylus" scoped>
+<style lang="stylus">
 @require '../config'
 
 // user - admin
@@ -311,7 +302,7 @@ export default {
     background var(--fondo2)
     border-radius 8px;
     width 100%;
-    max-width calc(20% - 14px);
+    max-width calc(33% - 14px);
     float left
     margin 7px;
     box-shadow 0px 6px 20px 0px rgba(0,0,0,.1)
@@ -606,17 +597,17 @@ export default {
 
 @media only screen and (max-width: 1400px)
   .post:not(.post-display-3):not(.post-display-4)
-    max-width calc(25% - 14px) !important
+    max-width calc(33% - 12px) !important
   .con-loading-posts
     li
-      max-width calc(25% - 14px) !important
+      max-width calc(33% - 12px) !important
+// @media only screen and (max-width: 1200px)
+//   .post:not(.post-display-3):not(.post-display-4)
+//     max-width calc(33% - 14px) !important
+//   .con-loading-posts
+//     li
+//       max-width calc(33% - 14px) !important
 @media only screen and (max-width: 1200px)
-  .post:not(.post-display-3):not(.post-display-4)
-    max-width calc(33% - 14px) !important
-  .con-loading-posts
-    li
-      max-width calc(33% - 14px) !important
-@media only screen and (max-width: 850px)
   .post:not(.post-display-3):not(.post-display-4)
     max-width calc(50% - 14px) !important
   .con-loading-posts
@@ -627,7 +618,7 @@ export default {
   .post-display-4
     max-width calc(100% - 14px) !important
     margin-left 0px !important
-@media only screen and (max-width: 600px)
+@media only screen and (max-width: 900px)
   .con-posts
     padding 20px !important
   .con-loading-posts

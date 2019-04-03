@@ -8,6 +8,11 @@
 export default {
   mounted () {
     this.$nextTick(() => {
+      var elem = document.getElementById('_carbonads_projs')
+      if (elem) {
+        elem.parentNode.removeChild(elem)
+      }
+
       const script = document.createElement('script')
       script.setAttribute('type', 'text/javascript')
       script.setAttribute(
@@ -19,10 +24,8 @@ export default {
         `_carbonads_js`
       )
       setTimeout(() => {
-        if (!document.querySelector('#_carbonads_js')) {
-          this.$refs.carbonx.appendChild(script)
-        }
-      }, 300)
+        this.$refs.carbonx.appendChild(script)
+      }, 500)
     })
   }
 }
@@ -170,7 +173,6 @@ div[id*="carbonads"] a:hover {
     margin-bottom: 0;
     padding: 8px 20px;
     text-align: left;
-    max-width: calc(100% - 130px - 3em);
   }
   .carbon-poweredby {
     left: 130px;

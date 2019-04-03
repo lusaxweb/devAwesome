@@ -185,6 +185,7 @@ export default {
   box-sizing border-box
   padding-bottom 0px
   z-index 500
+  background var(--fondo)
   .con-values-site
     display flex
     align-items center

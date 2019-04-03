@@ -76,6 +76,28 @@ export default new Router({
       name: 'assets',
       component: () => import('./views/Assets.vue'),
       props: true
+    },
+    {
+      path: '/articles',
+      name: 'articles',
+      component: () => import('./views/articles/articles.vue')
+    },
+    {
+      path: '/addPostBlog',
+      name: 'addPostBlog',
+      component: () => import('./views/addblog.vue')
+    },
+    {
+      path: '/article/:nameArticle/',
+      name: 'addPostBlog',
+      component: () => import('./views/articles/articleView.vue'),
+      props: true
+    },
+    {
+      path: '/user/:user/',
+      name: 'user',
+      component: () => import('./views/user/user.vue'),
+      props: true
     }
   ]
 })

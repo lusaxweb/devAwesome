@@ -18,7 +18,8 @@
         </router-link>
       </div>
 
-      <router-link @click.native="clickHome" exact to="/"><span>Discover</span></router-link>
+      <router-link @click.native="clickHome" exact to="/"><span>Projects</span></router-link>
+      <router-link to="/articles"><span class="new">Articles</span> </router-link>
       <router-link exact to="/topics"><span>Topics</span></router-link>
       <router-link exact to="/assets"><span>Assets</span></router-link>
       <!-- <router-link exact to="/developers"><span>Developers</span></router-link> -->
@@ -54,7 +55,7 @@
     </div>
     <div class="nav-right">
       <vs-input @keypress.enter.prevent="searchPosts" vs-color="success" vs-icon-after vs-icon="search" placeholder="Search" v-model="$store.state.search"/>
-      <vs-button class="upload-btn" vs-icon-after @click="openUploadView" vs-color="success" vs-type="filled" vs-icon="add">Add a Project</vs-button>
+      <vs-button class="upload-btn" vs-icon-after @click="openUpload" vs-color="success" vs-type="filled" vs-icon="add">Add</vs-button>
       <vs-button class="btn-login" v-if="!$store.state.user" @click="logIn" vs-color="#603AFF" vs-type="filled">
         <span class="text-btn-inter">Log In</span>
         <i class="flaticon-github-logo"></i>
@@ -71,8 +72,13 @@
         </div>
         <transition name="fade-menu-user">
           <div v-if="dropDown" class="con-menu-user">
-            <h6> {{ $store.state.user.displayName }} </h6>
+            <h6>
+              {{ $store.state.user.displayName }}
+            </h6>
             <ul>
+              <li>
+                <router-link exact :to="`/user/${$store.state.user.uid}`"><span>Profile of DevAwesome</span></router-link>
+              </li>
               <li>
                 <router-link exact to="/myValued"><span>My Valued</span></router-link>
               </li>
@@ -188,6 +194,9 @@ export default {
         })
       }
     },
+    openUpload () {
+      this.$store.state.openUpload = true
+    },
     openUploadView () {
       this.$router.push('/addPost/')
     },
@@ -212,6 +221,12 @@ export default {
         // var user = result.user;
         // // ...
         self.$store.state.user = result.user
+
+
+
+        if (result.user.displayName === 'ldrovira' || result.user.displayName === 'ManuelRoviraDesign' || result.user.email == 'luisrovirac@gmail.com' || this.$store.state.user.email === 'chait7conrom@gmail.com') {
+          self.$store.state.admin = true
+        }
       }).catch(function (error) {
         // Handle Errors here.
         // var errorCode = error.code;
@@ -249,6 +264,19 @@ export default {
 </script>
 <style lang="stylus">
 @require '../config'
+
+.new
+  position relative
+  &:after
+    content: 'New'
+    position absolute
+    right -10px
+    top 5px
+    font-size .5rem
+    background $verde
+    padding 1px 5px
+    border-radius 7px
+    color rgb(255,255,255) !important
 
 .fade-menu-user-enter-active, .fade-menu-user-leave-active
   transition: opacity .5s;
@@ -290,6 +318,9 @@ export default {
     background var(--fondo)
     box-shadow 0px 5px 20px 0px rgba(0,0,0,.1)
     padding-right 0px
+    .new
+      &:after
+        top -14px
     .con-sub-menu
       &:hover
         .sub-menu-ul
@@ -305,6 +336,7 @@ export default {
     a
       padding-top 15px !important
       padding-bottom 15px !important
+
       &.icon
         padding-top 12px !important
         padding-bottom 10px !important

@@ -3,7 +3,7 @@
     <titlex title="Upload" />
     <div class="con-inputs">
       <div class="contiene-inputs">
-        <vs-input :vs-danger="!upload.title && activeDangers" vs-danger-text="This value is required" class="inputx" placeholder="My awesome project Title" vs-label="Project Title *" v-model="upload.title"/>
+        <vs-input  :vs-danger="!upload.title && activeDangers" vs-danger-text="This value is required" class="inputx" placeholder="My awesome project Title" vs-label="Project Title *" v-model="upload.title"/>
 
         <vs-select
           vs-color="#FF3A4E"
@@ -38,9 +38,14 @@
           </vs-chip>
         </vs-chips>
 
+
         <span v-if="tags.length == 0 && activeDangers" class="span-text-validationx">
           This value is required
         </span>
+
+        <p class="text-description-input">
+          After typing the tag press the <b> Enter </b> key to add it
+        </p>
 
         <vs-input
           :vs-danger="!upload.description && activeDangers"
@@ -88,16 +93,21 @@
         <vs-button @click="uploadx" class="btn-upload" vs-color="success" vs-type="filled">Upload Project</vs-button>
       </div>
     </div>
-    <Carbon />
+    <!-- <Carbon /> -->
+    <CodeFundView
+      propertyId="8aed6e67-5cf6-4217-a805-d1713785b7e5"
+      />
   </div>
 </template>
 <script>
 import titlex from '../components/titlex.vue'
 import Carbon from '../components/Carbon.vue'
+import CodeFundView from '../components/CodeFundView.vue'
 export default {
   components: {
     titlex,
-    Carbon
+    Carbon,
+    CodeFundView
   },
   data: () => ({
     activeDangers: false,
@@ -129,7 +139,7 @@ export default {
   }),
   computed: {
     isRoot () {
-      return this.$store.state.user ? (this.$store.state.user.displayName === 'ldrovira' || this.$store.state.user.displayName === 'ManuelRoviraDesign') : false
+      return this.$store.state.user ? (this.$store.state.user.displayName === 'ldrovira' || this.$store.state.user.displayName === 'ManuelRoviraDesign' || this.$store.state.user.email === 'luisrovirac@gmail.com' || this.$store.state.user.email === 'chait7conrom@gmail.com') : false
     }
   },
   methods: {
@@ -182,7 +192,7 @@ export default {
       }
     },
     uploadx () {
-      this.upload.timestamp = Date.now()
+      // this.upload.timestamp = Date.now()
 
       if (!this.$store.state.user) {
         this.$vs.notify({
@@ -304,129 +314,5 @@ export default {
 <style lang="stylus">
 @require '../config'
 
-.con-vs-checkbox
-  justify-content flex-start !important
 
-.con-chips
-  background var(--fondo2)
-  input
-    color var(--text-color)
-.con-vs-chip
-  cursor default
-  background $morado
-  span
-    color rgb(255,255,255) !important
-.chips-danger
-  .no-items
-    border 1px solid rgb(255, 71, 87)
-
-.label-tags
-  width 100%
-  text-align left
-  display block
-  font-size .9rem
-  padding 5px
-  padding-left 8px
-
-.span-text-validationx
-  padding: 2px 4px;
-  padding-bottom: 4px;
-  display: block;
-  font-size .6rem
-  text-align left
-  color rgb(255, 71, 87)
-
-.selectx
-  width 100%
-.con-add-Post
-  position relative
-  left 0px
-  top 0px
-  background var(--fondo)
-  width 100%
-  overflow auto
-  padding-top 0px
-  .fileDanger
-    border 1px solid rgb(255, 71, 87) !important
-    label
-      color rgb(255, 71, 87) !important
-  .fileActive
-    i
-      color $verde !important
-      font-size 4rem !important
-      top 40% !important
-    label
-      color $verde !important
-      font-size .7rem !important
-      padding-top 60px !important
-      font-weight normal
-  .con-file
-    width calc(50% - 5px)
-    height 150px
-    background var(--fondo2)
-    position relative
-    float left
-    display flex
-    align-items center
-    justify-content center
-    margin 14px 0px
-    margin-right 5px
-    border-radius 5px
-
-    &.con-file2
-      margin-right 0px !important
-      margin-left 5px !important
-    i
-      display block
-      left 50%
-      top 50%
-      position absolute
-      transform translate(-50%, -50%)
-      font-size 6rem
-      color var(--fondo)
-      transition all .25s ease
-    label
-      padding 10px
-      display block
-      text-align center
-      z-index 10
-      font-weight bold
-      color var(--text-color)
-      letter-spacing 1px
-      transition all .25s ease
-    input
-      top 0px
-      left 0px
-      position absolute
-      width 100%
-      height 100%
-      opacity 0
-      z-index 100
-      cursor pointer
-
-  .btn-upload
-    width 100%
-  .con-inputs
-    display flex
-    align-items center
-    justify-content center
-    .contiene-inputs
-      width 100%
-      max-width 600px
-      padding 20px 10px
-      .vs-input-label
-        color var(--text-color) !important
-        padding-bottom 8px !important
-        display block
-      .inputx
-        width 100%
-        margin 12px 0px
-        text-align left
-      .vs-inputx
-        padding 10px !important
-        background var(--fondo2) !important
-        border 1px solid rgba(255,255,255,0) !important
-      .input-span-placeholder
-        text-align left
-        // color var(--text-alpha) !important
 </style>

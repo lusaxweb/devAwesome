@@ -7,6 +7,10 @@
 <script>
 export default {
   mounted () {
+    var elem = document.getElementById('_carbonads_projs')
+    if (elem) {
+      elem.parentNode.removeChild(elem)
+    }
     this.$nextTick(() => {
       const script = document.createElement('script')
       script.setAttribute('type', 'text/javascript')
@@ -18,11 +22,9 @@ export default {
         'id',
         `_carbonads_js`
       )
-      setTimeout(() => {
-        if (!document.querySelector('#_carbonads_js')) {
-          this.$refs.carbonx.appendChild(script)
-        }
-      }, 300)
+      if (!document.querySelector('#_carbonads_js')) {
+        this.$refs.carbonx.appendChild(script)
+      }
     })
   }
 }

@@ -7,9 +7,12 @@
     <div v-if="$store.state.openSidebar" @click="$store.state.openSidebar = false" class="dark">
     </div>
     <!-- <bubbles /> -->
-    <navx />
+    <navx :class="{'blurx': $store.state.openUpload}" />
     <sidebarx />
-    <div class="con-app">
+
+    <openUpload />
+
+    <div :class="{'blurx': $store.state.openUpload}" class="con-app">
       <router-view/>
     </div>
     <!-- <div class="con-ups">
@@ -22,10 +25,11 @@
       Thanks for your understanding and support
       </h3>
     </div> -->
-    <footerx />
+    <footerx :class="{'blurx': $store.state.openUpload}" />
   </div>
 </template>
 <script>
+import openUpload from './components/openUpload.vue'
 import navx from './components/nav.vue'
 import footerx from './components/Footer.vue'
 import sidebarx from './components/Sidebar.vue'
@@ -35,8 +39,31 @@ export default {
     navx,
     footerx,
     sidebarx,
-    bubbles
+    bubbles,
+    openUpload
   },
+  data: () => ({
+    user: {
+      bio: '',
+      skills: [],
+      email: '',
+      views: 0,
+      likes: 0,
+      followers: {},
+      follow: {},
+      web: '',
+      cover: '',
+      social: {
+        twitter: '',
+        facebook: '',
+        linkedin: '',
+        github: '',
+        instagram: '',
+        codepen: '',
+        medium: ''
+      }
+    }
+  }),
   mounted () {
 
     // this.getHot()
@@ -51,22 +78,44 @@ export default {
       if (user) {
         // User is signed in.
         console.log(user)
-        if (user.displayName === 'ldrovira' || user.displayName === 'ManuelRoviraDesign') {
+        console.log(user.email == 'luisrovirac@gmail.com')
+
+        if (user.displayName === 'ldrovira' || user.displayName === 'ManuelRoviraDesign' || user.email === 'luisrovirac@gmail.com' || this.$store.state.user.email === 'chait7conrom@gmail.com') {
           this.$store.state.admin = true
+          console.log('entro aqui', this.$store.state.admin)
         }
         this.$store.state.user = user
-        let userRef = this.$firebase.database().ref('users/' + user.uid)
-        userRef.update({
-          name: user.displayName,
-          email: user.email,
-          uid: user.uid,
-          emailVerified: user.emailVerified,
-          photoURL: user.photoURL
+
+        this.$firebase.database().ref('users').once('value', snap => {
+          let users = snap.val()
+          let userRef = this.$firebase.database().ref('users/' + user.uid)
+          if (!users.hasOwnProperty(user.uid)) {
+            userRef.update({
+              ...this.user,
+              name: user.displayName,
+              email: user.email,
+              uid: user.uid,
+              emailVerified: user.emailVerified,
+              photoURL: user.photoURL
+            })
+          } else {
+            let userRef = this.$firebase.database().ref('users/' + user.uid)
+            userRef.once('value', snap => {
+              let bduser = snap.val()
+              this.user = {
+                ...this.user,
+                ...bduser
+              }
+              userRef.update(this.user)
+            })
+          }
         })
 
-        fetch(`https://api.github.com/search/users?q=${user.displayName}`)
+        fetch(`https://api.github.com/search/users?q=${user.displayName || user.email}`)
           .then(response => response.json())
           .then(json => {
+            let userRef = this.$firebase.database().ref('users/' + user.uid + '/githubUrl')
+            userRef.set(json.items[0].html_url)
             this.$store.state.githubUrl = json.items[0].html_url
           })
       } else {
@@ -117,6 +166,9 @@ export default {
   --text-alpha: rgba(255,255,255,.6)
   --text-alpha2: rgba(255,255,255,.2)
 }
+
+.blurx
+  filter blur(10px)
 
 .con-ups
   width 100%
@@ -177,10 +229,10 @@ input
 *::-webkit-scrollbar
   width: 5px;
   height: 5px;
-  background: var(--fondo3)
+  background: var(--fondo)
 
 *::-webkit-scrollbar-thumb
-  background: var(--fondo2)
+  background: rgba(255,255,255, .2)
   border-radius: 5px;
 
 *::-webkit-scrollbar-thumb:hover
@@ -209,9 +261,10 @@ input
   padding 0px
   list-style none
   outline none
-  text-decoration none
   font-family OpenSans
   box-sizing border-box
+  a
+    text-decoration none
 
 h1,h2,h3,h4,h5,h6
   font-family Poppins-semi-bold !important
@@ -258,5 +311,8 @@ body
     background var(--fondo3) !important
     h3
       font-weight normal !important
+
+
+
 
 </style>

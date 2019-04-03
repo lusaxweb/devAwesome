@@ -91,13 +91,21 @@
         <vs-button @click="uploadx" class="btn-upload" vs-color="success" vs-type="filled">Update Proyect</vs-button>
       </div>
     </div>
+    <!-- <Carbon /> -->
+    <CodeFundView
+            propertyId="8aed6e67-5cf6-4217-a805-d1713785b7e5"
+           />
   </div>
 </template>
 <script>
 import titlex from '../components/titlex.vue'
+import Carbon from '../components/Carbon.vue'
+import CodeFundView from '../components/CodeFundView.vue'
 export default {
   components: {
-    titlex
+    titlex,
+    CodeFundView,
+    Carbon
   },
   data: () => ({
     activeDangers: false,

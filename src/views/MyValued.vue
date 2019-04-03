@@ -3,7 +3,10 @@
     <titlex title="My Valued" />
     <!-- <menu-circles :tags="tags" /> -->
     <posts :section="title" :posts="posts" />
-    <Carbon />
+    <!-- <Carbon /> -->
+    <CodeFundView
+            propertyId="8aed6e67-5cf6-4217-a805-d1713785b7e5"
+           />
   </div>
 </template>
 <script>
@@ -11,7 +14,7 @@ import Carbon from '../components/Carbon.vue'
 import posts from '../components/posts.vue'
 import titlex from '../components/titlex.vue'
 import menuCircles from '../components/Menucircles.vue'
-
+import CodeFundView from '../components/CodeFundView.vue'
 import firebase from 'firebase'
 
 export default {
@@ -19,7 +22,8 @@ export default {
     posts,
     titlex,
     menuCircles,
-    Carbon
+    Carbon,
+    CodeFundView
   },
   props: {
     title: {

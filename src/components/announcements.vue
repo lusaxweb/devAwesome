@@ -49,7 +49,15 @@ export default {
   data: () => ({
     ramdom: 1
   }),
+  watch: {
+    '$store.state.posts': function () {
+      this.ramdom = this.numeroAleatorio(1, 4)
+    }
+  },
   mounted () {
+    this.ramdom = this.numeroAleatorio(1, 4)
+  },
+  updated () {
     this.ramdom = this.numeroAleatorio(1, 4)
   },
   methods: {

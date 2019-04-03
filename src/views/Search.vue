@@ -7,7 +7,10 @@
     <div class="no-coincidence" v-else>
       No results were found
     </div>
-    <Carbon />
+    <!-- <Carbon /> -->
+    <CodeFundView
+            propertyId="8aed6e67-5cf6-4217-a805-d1713785b7e5"
+           />
   </div>
 </template>
 <script>
@@ -15,13 +18,14 @@ import Carbon from '../components/Carbon.vue'
 import posts from '../components/posts.vue'
 import titlex from '../components/titlex.vue'
 import menuCircles from '../components/Menucircles.vue'
-
+import CodeFundView from '../components/CodeFundView.vue'
 export default {
   components: {
     posts,
     titlex,
     menuCircles,
-    Carbon
+    Carbon,
+    CodeFundView
   },
   props: {
     title: {
@@ -37,7 +41,7 @@ export default {
   }),
   computed: {
     isRoot () {
-      return this.$store.state.user ? (this.$store.state.user.displayName === 'ldrovira' || this.$store.state.user.displayName === 'ManuelRoviraDesign') : false
+      return this.$store.state.user ? (this.$store.state.user.displayName === 'ldrovira' || this.$store.state.user.displayName === 'ManuelRoviraDesign' || this.$store.state.user.email === 'luisrovirac@gmail.com' || this.$store.state.user.email === 'chait7conrom@gmail.com') : false
     }
   },
   watch: {
@@ -102,7 +106,7 @@ export default {
         arrayPosts.forEach((item) => {
           objectPosts[item.key] = item
         })
-        self.posts = arrayPosts.length > 0 ? self.reverseObject(objectPosts) : null
+        self.$store.state.posts = self.posts = arrayPosts.length > 0 ? self.reverseObject(objectPosts) : null
       })
     },
     getTags () {

@@ -1,6 +1,16 @@
 <template>
   <transition name="view">
     <div v-if="postActive" class="con-view">
+      <button title="Prev Post" @click="prevPost" class="prev-btn" >
+        <i class="material-icons">
+          chevron_left
+        </i>
+      </button>
+      <button title="Next Post" @click="nextPost" class="next-btn" >
+        <i class="material-icons">
+          chevron_right
+        </i>
+      </button>
       <header>
         <h3>{{ post.title }}</h3>
         <button class="btn-close" @click="close()">
@@ -23,7 +33,7 @@
             </div>
 
             <footer class="footer-content">
-              <button v-if="readme" @click="readmeActive =! readmeActive" >Readme</button>
+              <button v-if="post.github" @click="getReadme(post) ,readmeActive =! readmeActive" >Readme</button>
             </footer>
           </div>
           <div class="con-similar-posts">
@@ -49,13 +59,23 @@
         <div class="con-description-view">
           <div class="con-user-view">
             <div v-if="post.user" class="text-user">
-              <a target="_blank" :href="post.user.githubUrl">
+
+              <router-link v-if="post.user.photoURL !== 'devAwesome'" :to="`/user/${post.user.uid}`">
+                <div class="con-img-user-view">
+                  <img v-if="post.user.photoURL !== 'devAwesome'" :src="post.user.photoURL" alt="">
+                  <img v-else class="devAwesome-logo" src="png/devAwesome.png" alt="">
+                </div>
+                <p>{{ post.user.displayName }}</p>
+              </router-link>
+
+              <a v-else target="_blank" :href="post.user.githubUrl">
                 <div class="con-img-user-view">
                   <img v-if="post.user.photoURL !== 'devAwesome'" :src="post.user.photoURL" alt="">
                   <img v-else class="devAwesome-logo" src="png/devAwesome.png" alt="">
                 </div>
                 <p>{{ post.user.displayName }}</p>
               </a>
+
             </div>
             <a target="_blank" :href="`${post.website}?ref=lusaxweb.github.io`" class="btn-follow">
               WebSite
@@ -119,7 +139,10 @@
               </li>
             </ul>
           </div>
-          <Carbon-view />
+          <!-- <Carbon-view /> -->
+          <CodeFundView
+            v-if="renderComponent"
+           />
           <div class="con-comments">
             <h5>Comments</h5>
             <div class="add-comment">
@@ -161,7 +184,9 @@
 </template>
 
 <script>
+
 import CarbonView from '../components/CarbonView.vue'
+import CodeFundView from '../components/CodeFundView.vue'
 // import hljs from 'highlight.js/lib/index.js'
 // import 'highlight.js/styles/default.css'
 // import 'vuesax/dist/vuesax.css'
@@ -169,9 +194,11 @@ import CarbonView from '../components/CarbonView.vue'
 export default {
   name: 'viewx',
   components: {
-    CarbonView
+    CarbonView,
+    CodeFundView
   },
   data: () => ({
+    renderComponent: true,
     star: 0,
     tags: [],
     goLess: -1,
@@ -200,6 +227,7 @@ export default {
     }
   },
   mounted () {
+
     this.$nextTick(() => {
 
       this.$vs.loading({
@@ -217,6 +245,39 @@ export default {
     this.$firebase.database().ref('posts').off()
   },
   methods: {
+    forceRerender () {
+      // Remove my-component from the DOM
+      this.renderComponent = false
+
+      // If you like promises better you can
+      // also use nextTick this way
+      this.$nextTick().then(() => {
+        // Add the component back in
+        this.renderComponent = true
+      })
+    },
+    prevPost () {
+      // console.log('hola mundo', Object.values(this.$store.state.posts))
+      let keys = Object.keys(this.$store.state.posts)
+      let index = keys.indexOf(this.$router.currentRoute.params.namePost)
+
+      if (index > 0) {
+        let newKey = keys[index - 1]
+        let postx = this.$store.state.posts[newKey]
+        this.openPost(postx, newKey)
+      }
+    },
+    nextPost () {
+      // console.log('hola mundo', Object.values(this.$store.state.posts))
+      let keys = Object.keys(this.$store.state.posts)
+      let index = keys.indexOf(this.$router.currentRoute.params.namePost)
+
+      if (index < keys.length) {
+        let newKey = keys[index + 1]
+        let postx = this.$store.state.posts[newKey]
+        this.openPost(postx, newKey)
+      }
+    },
     copyLink () {
       let link = 'https://lusaxweb.github.io/devAwesome/#' + this.$router.currentRoute.fullPath
       let textTitle = this.post.title
@@ -252,6 +313,7 @@ export default {
       this.$nextTick(() => {
         if (!document.querySelector('#carbonads')) return
         if (typeof _carbonads !== 'undefined') _carbonads.refresh()
+        // _codefund.serve()
       })
     },
     getActiveLike (post) {
@@ -321,7 +383,8 @@ export default {
     },
     getPost () {
       let self = this
-      this.$firebase.database().ref('posts').child(this.$router.currentRoute.params.namePost).once('value', (snapshot) => {
+      this.$firebase.database().ref('posts').child(this.$router.currentRoute.params.namePost).on('value', (snapshot) => {
+        this.forceRerender()
         let post = snapshot.val()
         this.post = {
           ...post,
@@ -374,7 +437,6 @@ export default {
       this.$firebase.database().ref('posts').once('value', (snapshot) => {
         // this.morePosts = snapshot.val()
         let arrayPosts = []
-        var numeroPosts = Object.keys(snapshot.val()).length
         snapshot.forEach(element => {
           if (element.val().active && this.$router.currentRoute.params.namePost !== element.key) {
             arrayPosts.push({key: element.key, ...element.val()})
@@ -409,10 +471,16 @@ export default {
         .then(json => {
           this.star = json.stargazers_count || 0
         })
+    },
 
+    getReadme (post) {
+      if (!post.github) {
+        return
+      }
+      let github = post.github.replace('https://github.com/', '')
       fetch(`https://api.github.com/repos/${github}/readme`, {
         headers: {
-          'Accept': 'application/vnd.github.html'
+          'Accept': 'application/vnd.github.html',
         }
       })
         .then((res) => {
@@ -457,6 +525,28 @@ export default {
 
 <style lang="stylus">
 @require '../config'
+
+.prev-btn
+  position absolute
+  left 0px
+  top 20%
+  background $morado
+  padding 10px
+  cursor pointer
+  color rgb(255,255,255)
+  border-radius 0px 10px 10px 0px
+  z-index 500
+
+.next-btn
+  z-index 500
+  position absolute
+  right 0px
+  top 20%
+  background $morado
+  padding 10px
+  cursor pointer
+  color rgb(255,255,255)
+  border-radius 10px 0px 0px 10px
 
 .content-view
   position relative

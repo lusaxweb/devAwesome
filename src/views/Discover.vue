@@ -62,7 +62,7 @@ export default {
       return postObject
     },
     isRoot () {
-      return this.$store.state.user ? (this.$store.state.user.displayName === 'ldrovira' || this.$store.state.user.displayName === 'ManuelRoviraDesign') : false
+      return this.$store.state.user ? (this.$store.state.user.displayName === 'ldrovira' || this.$store.state.user.displayName === 'ManuelRoviraDesign' || this.$store.state.user.email === 'luisrovirac@gmail.com' || this.$store.state.user.email === 'chait7conrom@gmail.com') : false
     },
     explore () {
       return this.$store.state.filters.explore
@@ -75,6 +75,9 @@ export default {
     }
   },
   watch: {
+    '$store.state.display': function () {
+      this.getPosts()
+    },
     '$store.state.clickHome': function () {
       this.getPosts()
       this.$store.state.tagsActive = []
@@ -85,9 +88,11 @@ export default {
     '$store.state.filters.section': function () {
       this.$store.state.filters.lenguaje = null
       this.$store.state.tagsActive = []
+      this.getPosts()
     },
     '$store.state.filters.lenguaje': function () {
       this.$store.state.tagsActive = []
+      this.getPosts()
     },
     '$store.state.user': function () {
       this.getPosts()
@@ -142,7 +147,7 @@ export default {
       } else {
         ref = firebase.database().ref('posts')
       }
-      ref.once('value', function (snapshot) {
+      ref.on('value', function (snapshot) {
         let posts = snapshot.val()
         delete posts.undefined
 
@@ -191,7 +196,7 @@ export default {
       }
 
       if (explore === 'viewed') {
-        starCountRef.once('value', function (snapshot) {
+        starCountRef.on('value', function (snapshot) {
           let posts = snapshot.val()
           delete posts.undefined
           var sortable = []
@@ -220,7 +225,7 @@ export default {
           // self.getTags()
         })
       } else if (explore === 'valued') {
-        starCountRef.once('value', function (snapshot) {
+        starCountRef.on('value', function (snapshot) {
           let posts = snapshot.val()
           delete posts.undefined
           var sortable = []
@@ -264,7 +269,7 @@ export default {
         // } else {
         //   starCountRef = firebase.database().ref('posts').limitToLast(self.maxPosts)
         // }
-        starCountRef.once('value', function (snapshot) {
+        starCountRef.on('value', function (snapshot) {
           let posts = snapshot.val()
           delete posts.undefined
 

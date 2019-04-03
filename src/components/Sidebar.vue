@@ -11,7 +11,8 @@
       <div class="menu-sidebar">
         <!-- <router-link @mouseout.native="outLink" @mouseover.native="clickLink" exact to="/"><span>Discover</span></router-link> -->
 
-        <router-link exact to="/"><span>Discover</span></router-link>
+        <router-link exact to="/"><span>Proyects</span></router-link>
+        <router-link exact to="/articles"><span class="newx">Articles</span> </router-link>
         <router-link exact to="/topics"><span>Topics</span></router-link>
         <router-link exact to="/assets"><span>Assets</span></router-link>
         <!-- <router-link to="/front-end"><span>Front-end</span></router-link> -->
@@ -76,6 +77,20 @@ export default {
 </script>
 <style lang="stylus">
 @require '../config'
+
+.newx
+  position relative
+  &:after
+    content: 'New'
+    position absolute
+    right 0px
+    top 5px
+    font-size .5rem
+    background $verde
+    padding 1px 5px
+    border-radius 7px
+    color rgb(255,255,255) !important
+
 .con-sidebar
   width 100%
   max-width 300px;
@@ -121,6 +136,14 @@ export default {
       color rgb(255,255,255)
       font-weight bold
       font-size .8rem
+      transition all .25s ease
+      border-left 0px solid $primary
+      &:hover
+        border-left 3px solid $primary
+        color $primary
+      span
+        width 100%
+        display block
       .material-icons
         font-size 1.5rem
 
