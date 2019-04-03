@@ -2,7 +2,7 @@
   <div class="codefund codefund-posts">
     <div v-if="ads" ref="codefund" class="codefundx">
 
-      <a :href="ads.impressionUrl">
+      <a target="_black" :href="ads.campaignUrl">
         <img :src="ads.images[2].url" alt="">
         <h6>{{ ads.headline }}</h6>
         <p>
@@ -56,6 +56,7 @@ export default {
       fetch('https://codefund.app/properties/124/funder.json')
         .then(response => response.json())
         .then(json => {
+          console.log(json)
           this.ads = json
         })
     }

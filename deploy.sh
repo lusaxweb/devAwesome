@@ -23,3 +23,9 @@ git commit -m 'deploy'
 git push -f git@github.com:lusaxweb/devAwesome.git master:gh-pages
 
 cd -
+
+git add .
+
+git commit -m 'deploy'
+
+git push
