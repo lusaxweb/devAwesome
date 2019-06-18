@@ -1,0 +1,53 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 29/08/2018 20:07
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-twitter-logo-silhouette:before { content: "\f100"; }
+.flaticon-instagram-logo:before { content: "\f101"; }
+.flaticon-linkedin-logo:before { content: "\f102"; }
+.flaticon-github-logo:before { content: "\f103"; }
+.flaticon-facebook-logo:before { content: "\f104"; }
+.flaticon-dribbble-logo:before { content: "\f105"; }
+.flaticon-behance-logo:before { content: "\f106"; }
+    
+    $font-Flaticon-twitter-logo-silhouette: "\f100";
+    $font-Flaticon-instagram-logo: "\f101";
+    $font-Flaticon-linkedin-logo: "\f102";
+    $font-Flaticon-github-logo: "\f103";
+    $font-Flaticon-facebook-logo: "\f104";
+    $font-Flaticon-dribbble-logo: "\f105";
+    $font-Flaticon-behance-logo: "\f106";
